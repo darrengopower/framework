@@ -1,0 +1,80 @@
+{
+    "require": {
+        "php": ">=5.5.9",
+        "ext-mbstring": "*",
+        "ext-openssl": "*",
+        "illuminate/auth": "5.1.*",
+        "illuminate/bus": "5.1.*",
+        "illuminate/broadcasting": "5.1.*",
+        "illuminate/cache": "5.1.*",
+        "illuminate/config": "5.1.*",
+        "illuminate/console": "5.1.*",
+        "illuminate/container": "5.1.*",
+        "illuminate/contracts": "5.1.*",
+        "illuminate/cookie": "5.1.*",
+        "illuminate/database": "5.1.*",
+        "illuminate/encryption": "5.1.*",
+        "illuminate/events": "5.1.*",
+        "illuminate/filesystem": "5.1.*",
+        "illuminate/hashing": "5.1.*",
+        "illuminate/http": "5.1.*",
+        "illuminate/log": "5.1.*",
+        "illuminate/mail": "5.1.*",
+        "illuminate/pagination": "5.1.*",
+        "illuminate/pipeline": "5.1.*",
+        "illuminate/queue": "5.1.*",
+        "illuminate/redis": "5.1.*",
+        "illuminate/routing": "5.1.*",
+        "illuminate/session": "5.1.*",
+        "illuminate/support": "5.1.*",
+        "illuminate/translation": "5.1.*",
+        "illuminate/validation": "5.1.*",
+        "illuminate/view": "5.1.*",
+        "classpreloader/classpreloader": "~2.0",
+        "danielstjules/stringy": "~1.8",
+        "doctrine/inflector": "~1.0",
+        "jeremeamia/superclosure": "~2.0",
+        "league/flysystem": "~1.0",
+        "monolog/monolog": "~1.11",
+        "mtdowling/cron-expression": "~1.0",
+        "nesbot/carbon": "~1.19",
+        "psy/psysh": "~0.5.1",
+        "swiftmailer/swiftmailer": "~5.1",
+        "symfony/console": "2.7.*",
+        "symfony/css-selector": "2.7.*",
+        "symfony/debug": "2.7.*",
+        "symfony/dom-crawler": "2.7.*",
+        "symfony/finder": "2.7.*",
+        "symfony/http-foundation": "2.7.*",
+        "symfony/http-kernel": "2.7.*",
+        "symfony/process": "2.7.*",
+        "symfony/routing": "2.7.*",
+        "symfony/translation": "2.7.*",
+        "symfony/var-dumper": "2.7.*",
+        "vlucas/phpdotenv": "~1.0",
+        "doctrine/dbal": "^2.5",
+        "symfony/psr-http-message-bridge": "^0.2.0",
+        "zendframework/zend-diactoros": "^1.1"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "files": [
+        ],
+        "psr-4": {
+            "Notadd\\": "src/Notadd/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packagist.phpcomposer.com"
+        },
+        {
+            "packagist": false
+        }
+    ]
+}

@@ -35,5 +35,6 @@ class FoundationServiceProvider extends AggregateServiceProvider {
         ValidationServiceProvider::class,
         ViewServiceProvider::class,
         FormRequestServiceProvider::class,
+        ExtensionServiceProvider::class,
     ];
 }

@@ -6,7 +6,7 @@
  * @datetime 2015-10-17 20:15
  */
 return [
-    'default' => env('CACHE_DRIVER', 'file'),
+    'default' => 'file',
     'stores' => [
         'apc' => [
             'driver' => 'apc',

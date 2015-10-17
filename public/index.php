@@ -7,7 +7,6 @@
  */
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
-ini_set( 'display_errors', 'On');
 $app = require __DIR__ . '/../notadd/bootstrap.php';
 $kernel = $app->make(Kernel::class);
 $response = $kernel->handle(

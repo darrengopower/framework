@@ -6,13 +6,13 @@
  * @datetime 2015-10-17 20:15
  */
 return [
-    'default' => env('BROADCAST_DRIVER', 'pusher'),
+    'default' => 'pusher',
     'connections' => [
         'pusher' => [
             'driver' => 'pusher',
-            'key' => env('PUSHER_KEY'),
-            'secret' => env('PUSHER_SECRET'),
-            'app_id' => env('PUSHER_APP_ID'),
+            'key' => '',
+            'secret' => '',
+            'app_id' => '',
         ],
         'redis' => [
             'driver' => 'redis',

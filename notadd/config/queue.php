@@ -6,7 +6,7 @@
  * @datetime 2015-10-17 20:15
  */
 return [
-    'default' => env('QUEUE_DRIVER', 'sync'),
+    'default' => 'sync',
     'connections' => [
         'sync' => [
             'driver' => 'sync',

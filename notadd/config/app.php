@@ -6,14 +6,14 @@
  * @datetime 2015-10-17 20:15
  */
 return [
-    'debug' => env('APP_DEBUG', true),
+    'debug' => true,
     'url' => 'http://localhost',
     'timezone' => 'UTC',
     'locale' => 'en',
     'fallback_locale' => 'en',
-    'key' => env('APP_KEY', 'SomeRandomString'),
+    'key' => 'SomeRandomString',
     'cipher' => 'AES-256-CBC',
-    'log' => 'single',
+    'log' => 'daily',
     'providers' => [
         Notadd\Foundation\Providers\CoreServiceProvider::class,
         Notadd\Foundation\Providers\ConsoleSupportServiceProvider::class,

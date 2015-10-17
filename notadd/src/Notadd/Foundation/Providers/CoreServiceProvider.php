@@ -6,6 +6,7 @@
  * @datetime 2015-10-17 20:20
  */
 namespace Notadd\Foundation\Providers;
+use Illuminate\Auth\AuthServiceProvider;
 use Illuminate\Broadcasting\BroadcastServiceProvider;
 use Illuminate\Bus\BusServiceProvider;
 use Illuminate\Cache\CacheServiceProvider;
@@ -16,9 +17,14 @@ use Illuminate\Routing\ControllerServiceProvider;
 use Illuminate\Support\AggregateServiceProvider;
 class CoreServiceProvider extends AggregateServiceProvider {
     /**
+     * @var bool
+     */
+    protected $defer = true;
+    /**
      * @var array
      */
     protected $providers = [
+        AuthServiceProvider::class,
         BroadcastServiceProvider::class,
         BusServiceProvider::class,
         CacheServiceProvider::class,

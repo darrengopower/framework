@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2c88bd6bfac1bd00afb83c7979dfaeca",
-    "content-hash": "3b0b504c097d6b4e049d4fe5b7e3a170",
+    "hash": "76b6ec993c15be389a06cd8d0e249962",
+    "content-hash": "68f22ec71377cbf698ec32d682158654",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -618,6 +618,56 @@
                 "parser"
             ],
             "time": "2014-09-09 13:34:57"
+        },
+        {
+            "name": "illuminate/auth",
+            "version": "v5.1.16",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/auth.git",
+                "reference": "62cc601415637a2b8ff588e9d6d65e7630db7068"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "http://packagist.phpcomposer.com/files/illuminate/auth/62cc601415637a2b8ff588e9d6d65e7630db7068.zip",
+                "reference": "62cc601415637a2b8ff588e9d6d65e7630db7068",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "5.1.*",
+                "illuminate/http": "5.1.*",
+                "illuminate/session": "5.1.*",
+                "illuminate/support": "5.1.*",
+                "nesbot/carbon": "~1.19",
+                "php": ">=5.5.9"
+            },
+            "suggest": {
+                "illuminate/console": "Required to use the auth:clear-resets command (5.1.*)."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Auth\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                }
+            ],
+            "description": "The Illuminate Auth package.",
+            "homepage": "http://laravel.com",
+            "time": "2015-09-03 13:58:07"
         },
         {
             "name": "illuminate/broadcasting",

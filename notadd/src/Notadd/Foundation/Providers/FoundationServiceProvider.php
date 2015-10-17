@@ -20,6 +20,10 @@ use Illuminate\Validation\ValidationServiceProvider;
 use Illuminate\View\ViewServiceProvider;
 class FoundationServiceProvider extends AggregateServiceProvider {
     /**
+     * @var bool
+     */
+    protected $defer = true;
+    /**
      * @var array
      */
     protected $providers = [
@@ -36,5 +40,6 @@ class FoundationServiceProvider extends AggregateServiceProvider {
         ViewServiceProvider::class,
         FormRequestServiceProvider::class,
         ExtensionServiceProvider::class,
+        HttpServiceProvider::class,
     ];
 }

@@ -7,19 +7,31 @@
  */
 namespace Notadd\Install;
 use Illuminate\Support\ServiceProvider;
-use Psr\Http\Message\ServerRequestInterface;
+use Notadd\Install\Contracts\Prerequisite;
+use Notadd\Install\Prerequisites\Composite;
+use Notadd\Install\Prerequisites\PhpExtensions;
+use Notadd\Install\Prerequisites\PhpVersion;
+use Notadd\Install\Prerequisites\WritablePaths;
 class InstallServiceProvider extends ServiceProvider {
     /**
      * @return void
      */
     public function boot() {
-        $this->app['router']->get('/', function(ServerRequestInterface $request) {
-            dd($request);
-        });
+        $this->app['router']->get('/', 'Notadd\Install\Controllers\PrerequisiteController@render');
     }
     /**
      * @return void
      */
     public function register() {
+        $this->app->bind(
+            Prerequisite::class,
+            function() {
+                return new Composite(
+                    new PhpVersion(),
+                    new PhpExtensions(),
+                    new WritablePaths()
+                );
+            }
+        );
     }
 }

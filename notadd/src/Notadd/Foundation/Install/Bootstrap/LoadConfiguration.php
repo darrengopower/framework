@@ -25,9 +25,9 @@ use Illuminate\Validation\ValidationServiceProvider;
 use Illuminate\View\ViewServiceProvider;
 use Notadd\Foundation\Providers\ExtensionServiceProvider;
 use Notadd\Foundation\Providers\FormRequestServiceProvider;
-use Notadd\Install\InstallServiceProvider;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Config\Repository as RepositoryContract;
+use Notadd\Install\InstallServiceProvider;
 class LoadConfiguration {
     /**
      * @param  \Illuminate\Contracts\Foundation\Application $app
@@ -80,7 +80,7 @@ class LoadConfiguration {
         ]);
         $config->set('view', [
             'paths' => [
-                realpath(base_path('resources/views')),
+                realpath(base_path('../template')),
             ],
             'compiled' => realpath(storage_path('framework/views')),
         ]);

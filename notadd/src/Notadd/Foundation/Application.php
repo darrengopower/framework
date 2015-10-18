@@ -229,7 +229,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      * @return string
      */
     public function publicPath() {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'public';
+        return realpath($this->basePath . DIRECTORY_SEPARATOR . '../public');
     }
     /**
      * @return string

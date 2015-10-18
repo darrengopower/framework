@@ -22,7 +22,6 @@ if($app->isInstalled()) {
     $app->singleton(ExceptionHandler::class, Handler::class);
 } else {
     $app->singleton(HttpKernelContract::class, InstallKernel::class);
-    $app->singleton(ConsoleKernelContract::class, ConsoleKernel::class);
     $app->singleton(ExceptionHandler::class, Handler::class);
 }
 return $app;

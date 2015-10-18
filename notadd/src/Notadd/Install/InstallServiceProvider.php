@@ -5,13 +5,17 @@
  * @copyright (c) 2015, iBenchu.org
  * @datetime 2015-10-18 16:28
  */
-namespace Notadd\Foundation\Providers;
+namespace Notadd\Install;
 use Illuminate\Support\ServiceProvider;
-class HttpServiceProvider extends ServiceProvider {
+use Psr\Http\Message\ServerRequestInterface;
+class InstallServiceProvider extends ServiceProvider {
     /**
      * @return void
      */
     public function boot() {
+        $this->app['router']->get('/', function(ServerRequestInterface $request) {
+            dd($request);
+        });
     }
     /**
      * @return void

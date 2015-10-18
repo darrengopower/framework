@@ -7,13 +7,23 @@
  */
 namespace Notadd\Foundation\Http;
 use Exception;
-use Throwable;
-use Illuminate\Routing\Router;
-use Illuminate\Pipeline\Pipeline;
-use Illuminate\Support\Facades\Facade;
+use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Http\Kernel as KernelContract;
+use Illuminate\Pipeline\Pipeline;
+use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Facade;
+use Notadd\Admin\Middleware\Authenticate as AdminAuthenticate;
+use Notadd\Admin\Middleware\RedirectIfAuthenticated as AdminRedirectIfAuthenticated;
+use Notadd\Foundation\Bootstrap\BootProviders;
+use Notadd\Foundation\Bootstrap\ConfigureLogging;
+use Notadd\Foundation\Bootstrap\DetectEnvironment;
+use Notadd\Foundation\Bootstrap\HandleExceptions;
+use Notadd\Foundation\Bootstrap\LoadConfiguration;
+use Notadd\Foundation\Bootstrap\RegisterFacades;
+use Notadd\Foundation\Bootstrap\RegisterProviders;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
+use Throwable;
 class Kernel implements KernelContract {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
@@ -27,13 +37,13 @@ class Kernel implements KernelContract {
      * @var array
      */
     protected $bootstrappers = [
-        'Notadd\Foundation\Bootstrap\DetectEnvironment',
-        'Notadd\Foundation\Bootstrap\LoadConfiguration',
-        'Notadd\Foundation\Bootstrap\ConfigureLogging',
-        'Notadd\Foundation\Bootstrap\HandleExceptions',
-        'Notadd\Foundation\Bootstrap\RegisterFacades',
-        'Notadd\Foundation\Bootstrap\RegisterProviders',
-        'Notadd\Foundation\Bootstrap\BootProviders',
+        DetectEnvironment::class,
+        LoadConfiguration::class,
+        ConfigureLogging::class,
+        HandleExceptions::class,
+        RegisterFacades::class,
+        RegisterProviders::class,
+        BootProviders::class,
     ];
     /**
      * @var array
@@ -42,7 +52,11 @@ class Kernel implements KernelContract {
     /**
      * @var array
      */
-    protected $routeMiddleware = [];
+    protected $routeMiddleware = [
+        'auth.basic' => AuthenticateWithBasicAuth::class,
+        'auth.admin' => AdminAuthenticate::class,
+        'guest.admin' => AdminRedirectIfAuthenticated::class,
+    ];
     /**
      * @param  \Illuminate\Contracts\Foundation\Application $app
      * @param  \Illuminate\Routing\Router $router

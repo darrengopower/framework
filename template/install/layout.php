@@ -158,7 +158,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Notadd</h1>
+    <h1><?php echo file_get_contents(__DIR__ . '/logo.svg'); ?></h1>
     <div class="animated fadeIn"><?php echo $content; ?></div>
 </div>
 </body>

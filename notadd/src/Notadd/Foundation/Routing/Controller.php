@@ -9,6 +9,7 @@ namespace Notadd\Foundation\Routing;
 use BadMethodCallException;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Routing\Controller as IlluminateController;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 abstract class Controller extends IlluminateController {
     /**
@@ -37,5 +38,15 @@ abstract class Controller extends IlluminateController {
      */
     public function __call($method, $parameters) {
         throw new BadMethodCallException("方法[$method]不存在。");
+    }
+    public function share($key, $value = null) {
+        $this->view->share($key, $value);
+    }
+    public function view($template) {
+        if(Str::contains($template, '::')) {
+            return $this->view->make($template, $this->data);
+        } else {
+            return $this->view->make('themes::' . $template);
+        }
     }
 }

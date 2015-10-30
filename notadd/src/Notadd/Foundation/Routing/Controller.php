@@ -39,12 +39,20 @@ abstract class Controller extends IlluminateController {
     public function __call($method, $parameters) {
         throw new BadMethodCallException("方法[$method]不存在。");
     }
-    public function share($key, $value = null) {
+    /**
+     * @param $key
+     * @param null $value
+     */
+    protected function share($key, $value = null) {
         $this->view->share($key, $value);
     }
-    public function view($template) {
+    /**
+     * @param $template
+     * @return \Illuminate\Contracts\View\View
+     */
+    protected function view($template) {
         if(Str::contains($template, '::')) {
-            return $this->view->make($template, $this->data);
+            return $this->view->make($template);
         } else {
             return $this->view->make('themes::' . $template);
         }

@@ -13,7 +13,7 @@ use Illuminate\Contracts\Http\Kernel as KernelContract;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Facade;
-use Notadd\Admin\Middleware\Authenticate as AdminAuthenticate;
+use Notadd\Admin\Middleware\AuthenticateWithAdmin;
 use Notadd\Admin\Middleware\RedirectIfAuthenticated as AdminRedirectIfAuthenticated;
 use Notadd\Foundation\Bootstrap\BootProviders;
 use Notadd\Foundation\Bootstrap\ConfigureLogging;
@@ -54,7 +54,7 @@ class Kernel implements KernelContract {
      */
     protected $routeMiddleware = [
         'auth.basic' => AuthenticateWithBasicAuth::class,
-        'auth.admin' => AdminAuthenticate::class,
+        'auth.admin' => AuthenticateWithAdmin::class,
         'guest.admin' => AdminRedirectIfAuthenticated::class,
     ];
     /**

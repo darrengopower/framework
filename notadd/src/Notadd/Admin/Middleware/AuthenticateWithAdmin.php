@@ -8,7 +8,7 @@
 namespace Notadd\Admin\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
-class Authenticate {
+class AuthenticateWithAdmin {
     /**
      * The Guard implementation.
      * @var Guard

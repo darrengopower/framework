@@ -47,6 +47,7 @@ return [
         Notadd\Foundation\Providers\SettingServiceProvider::class,
         Notadd\Foundation\Providers\ThemeServiceProvider::class,
         Notadd\Foundation\Providers\MenuServiceProvider::class,
+        Notadd\Foundation\Providers\CategoryServiceProvider::class,
         Notadd\Foundation\Providers\AdminServiceProvider::class
     ],
     'aliases' => [

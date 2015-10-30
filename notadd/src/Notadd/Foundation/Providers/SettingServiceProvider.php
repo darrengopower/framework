@@ -16,7 +16,7 @@ class SettingServiceProvider extends ServiceProvider {
      */
     public function boot() {
         $this->app['router']->group(['namespace' => 'Notadd\Setting\Controllers'], function () {
-            $this->app['router']->group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+            $this->app['router']->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
                 $this->app['router']->get('site', 'ConfigController@getSite');
                 $this->app['router']->post('site', 'ConfigController@postSite');
                 $this->app['router']->get('seo', 'ConfigController@getSeo');

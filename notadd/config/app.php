@@ -11,8 +11,8 @@ return [
     'timezone' => 'UTC',
     'locale' => 'en',
     'fallback_locale' => 'en',
-    'key' => 'SomeRandomString',
-    'cipher' => 'AES-256-CBC',
+    'key' => 'GERojpSdTnQQbr77s5iXIa1c7Ne7NO4d',
+    'cipher' => MCRYPT_RIJNDAEL_128,
     'log' => 'daily',
     'providers' => [
         Illuminate\Auth\AuthServiceProvider::class,

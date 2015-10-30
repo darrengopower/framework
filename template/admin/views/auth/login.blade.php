@@ -1,4 +1,4 @@
-@extends('layouts')
+@extends('admin::auth.layouts')
 @section('title'){{ Setting::get('site.company', 'iBenchu CMS')  }}后台管理系统@endsection
 @section('content')
 <div class="page page-auth clearfix">
@@ -14,7 +14,7 @@
             <form action="{{ url('admin/login') }}" class="form-horizontal" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group form-group-lg">
-                    <input type="email" class="form-control" name="email" placeholder="邮件账户" value="{{ old('email') }}">
+                    <input type="email" class="form-control" name="email" placeholder="邮件账户" value="">
                 </div>
                 <div class="form-group form-group-lg">
                     <input type="password" class="form-control" name="password" placeholder="密码" value="">

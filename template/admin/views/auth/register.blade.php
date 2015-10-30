@@ -1,4 +1,4 @@
-@extends('layouts')
+@extends('admin::auth.layouts')
 @section('content')
 <div class="page page-auth clearfix">
     <div class="auth-container">

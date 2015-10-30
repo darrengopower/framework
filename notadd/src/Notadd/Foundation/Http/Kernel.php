@@ -10,9 +10,13 @@ use Exception;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Http\Kernel as KernelContract;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Routing\Router;
+use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Facade;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Notadd\Admin\Middleware\AuthenticateWithAdmin;
 use Notadd\Admin\Middleware\RedirectIfAuthenticated as AdminRedirectIfAuthenticated;
 use Notadd\Foundation\Bootstrap\BootProviders;
@@ -22,6 +26,8 @@ use Notadd\Foundation\Bootstrap\HandleExceptions;
 use Notadd\Foundation\Bootstrap\LoadConfiguration;
 use Notadd\Foundation\Bootstrap\RegisterFacades;
 use Notadd\Foundation\Bootstrap\RegisterProviders;
+use Notadd\Foundation\Http\Middleware\CheckForMaintenanceMode;
+use Notadd\Foundation\Http\Middleware\VerifyCsrfToken;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 use Throwable;
 class Kernel implements KernelContract {
@@ -48,7 +54,14 @@ class Kernel implements KernelContract {
     /**
      * @var array
      */
-    protected $middleware = [];
+    protected $middleware = [
+        CheckForMaintenanceMode::class,
+        EncryptCookies::class,
+        AddQueuedCookiesToResponse::class,
+        StartSession::class,
+        ShareErrorsFromSession::class,
+        VerifyCsrfToken::class,
+    ];
     /**
      * @var array
      */

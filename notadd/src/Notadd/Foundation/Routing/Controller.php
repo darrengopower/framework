@@ -10,8 +10,11 @@ use BadMethodCallException;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Routing\Controller as IlluminateController;
 use Illuminate\Support\Str;
+use Notadd\Foundation\Bus\DispatchesJobs;
+use Notadd\Foundation\Validation\ValidatesRequests;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 abstract class Controller extends IlluminateController {
+    use DispatchesJobs, ValidatesRequests;
     /**
      * @var Factory
      */

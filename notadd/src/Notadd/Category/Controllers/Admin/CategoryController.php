@@ -6,41 +6,12 @@
  * @datetime 2015-10-30 15:48
  */
 namespace Notadd\Category\Controllers\Admin;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Redirect;
 use Notadd\Admin\Controllers\AbstractAdminController;
 use Notadd\Category\Models\Category;
 use Notadd\Category\Requests\CategoryCreateRequest;
 use Notadd\Category\Requests\CategoryEditRequest;
 class CategoryController extends AbstractAdminController {
-    /**
-     * 当前Category模型实例
-     * @var \Notadd\Category\Models\Category
-     */
-    public $category;
-    /**
-     * @var
-     */
-    public $request;
-    /**
-     * @var array
-     */
-    public $templates;
-    /**
-     * @var array
-     */
-    public $types;
-    /**
-     * 构造函数
-     * @param \Illuminate\Http\Request $request
-     */
-    public function __construct(Factory $view, Request $request) {
-        parent::__construct($view, $request);
-        $this->types = Collection::make();
-        $this->fireEvent('on.init', false);
-    }
     /**
      * @param $id
      * @return mixed
@@ -55,15 +26,13 @@ class CategoryController extends AbstractAdminController {
      * @return \Illuminate\Support\Facades\View
      */
     public function edit($id) {
-        $service = new Service($id);
-        $this->category = $service->getCategory();
+        $category = Category::findOrFail($id);
         $crumbs = [];
-        Category::buildCrumb($this->category->parent_id, $crumbs);
-        $this->fireEvent('before.edit', false);
-        $this->share('category', $this->category);
+        Category::buildCrumb($category->parent_id, $crumbs);
+        $this->share('category', $category);
         $this->share('crumbs', $crumbs);
-        $this->share('types', $service->getType());
-        return $this->view($service->getTemplate()->get('edit'));
+        $this->share('types', $category->getTypes());
+        return $this->view($category->getAdminTemplate()->get('edit'));
     }
     /**
      * @return mixed
@@ -81,12 +50,12 @@ class CategoryController extends AbstractAdminController {
      * @return mixed
      */
     public function show($id) {
-        $crumb = [];
-        Category::buildCrumb($id, $crumb);
+        $crumbs = [];
+        Category::buildCrumb($id, $crumbs);
         $categories = Category::whereParentId($id)->get();
         $this->share('categories', $categories);
         $this->share('count', $categories->count());
-        $this->share('crumbs', []);
+        $this->share('crumbs', $crumbs);
         $this->share('id', $id);
         return $this->view('content.category.show');
     }
@@ -117,11 +86,8 @@ class CategoryController extends AbstractAdminController {
      * @return mixed
      */
     public function update(CategoryEditRequest $request, $id) {
-        $this->category = Category::findOrFail($id);
-        $this->request = $request;
-        $this->fireEvent('on.edit', false);
-        if($this->category->update($this->request->all())) {
-            $this->fireEvent('after.edit', false);
+        $category = Category::findOrFail($id);
+        if($category->update($request->all())) {
             return Redirect::back();
         } else {
             return Redirect::back()->withInput()->withErrors('保存失败！');

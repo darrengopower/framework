@@ -7,6 +7,7 @@
  */
 namespace Notadd\Foundation\Routing;
 use BadMethodCallException;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Routing\Controller as IlluminateController;
 use Illuminate\Support\Str;
@@ -15,6 +16,7 @@ use Notadd\Foundation\Validation\ValidatesRequests;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 abstract class Controller extends IlluminateController {
     use DispatchesJobs, ValidatesRequests;
+    protected $app;
     /**
      * @var Factory
      */
@@ -22,7 +24,8 @@ abstract class Controller extends IlluminateController {
     /**
      * @param Factory $view
      */
-    public function __construct(Factory $view) {
+    public function __construct(Application $app, Factory $view) {
+        $this->app = $app;
         $this->view = $view;
     }
     /**

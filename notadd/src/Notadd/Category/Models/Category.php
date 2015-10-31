@@ -6,8 +6,11 @@
  * @datetime 2015-10-30 15:08
  */
 namespace Notadd\Category\Models;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Notadd\Article\Models\Article;
+use Notadd\Category\Events\GetCategoryAdminTemplates;
+use Notadd\Category\Events\GetCategoryTypes;
 class Category extends Model {
     /**
      * @var array
@@ -84,6 +87,25 @@ class Category extends Model {
             }
             $collections = $collections->merge($data);
         }
+    }
+    public function getAdminTemplate($key = '') {
+        $templates = Collection::make();
+        $templates->put('edit', 'admin::content.category.edit');
+        static::$dispatcher->fire(new GetCategoryAdminTemplates($this, $templates));
+        if($key) {
+            return $templates->get($key);
+        } else {
+            return $templates;
+        }
+    }
+    /**
+     * @return static
+     */
+    public function getTypes() {
+        $types = Collection::make();
+        $types->put('normal', '普通分类');
+        static::$dispatcher->fire(new GetCategoryTypes($this, $types));
+        return $types;
     }
     /**
      * @return int

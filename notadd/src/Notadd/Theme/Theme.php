@@ -6,6 +6,7 @@
  * @datetime 2015-11-02 23:38
  */
 namespace Notadd\Theme;
+use Notadd\Setting\Facades\Setting;
 class Theme {
     /**
      * @var string
@@ -89,5 +90,14 @@ class Theme {
      */
     public function getViewPath() {
         return $this->viewPath;
+    }
+    /**
+     * @return bool
+     */
+    public function isDefault() {
+        if(Setting::get('site.theme') === $this->alias) {
+            return true;
+        }
+        return false;
     }
 }

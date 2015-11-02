@@ -73,11 +73,11 @@ return [
                         'active' => 'admin/page*',
                         'url' => 'admin/page',
                     ],
-                    [
+                    /*[
                         'title' => '回收站',
                         'active' => 'admin/recycle*',
                         'url' => 'admin/recycle',
-                    ],
+                    ],*/
                 ]
             ],
             [
@@ -94,7 +94,7 @@ return [
                         'active' => 'admin/theme*',
                         'url' => 'admin/theme',
                     ],
-                    [
+                    /*[
                         'title' => '幻灯片',
                         'active' => 'admin/flash*',
                         'url' => 'admin/flash',
@@ -103,7 +103,7 @@ return [
                         'title' => '广告位',
                         'active' => 'admin/ad*',
                         'url' => 'admin/ad',
-                    ],
+                    ],*/
                 ]
             ],
         ]

@@ -13,7 +13,7 @@ class ArticleServiceProvider extends ServiceProvider {
      */
     public function boot() {
         $this->app['router']->group(['namespace' => 'Notadd\Article\Controllers'], function () {
-            $this->app['router']->group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+            $this->app['router']->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
                 $this->app['router']->resource('article', 'ArticleController');
                 $this->app['router']->post('article/{id}/delete', 'ArticleController@delete');
                 $this->app['router']->post('article/{id}/restore', 'ArticleController@restore');

@@ -8,6 +8,7 @@
 namespace Notadd\Category\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Notadd\Article\Events\GetArticleAdminTemplates;
 use Notadd\Article\Models\Article;
 use Notadd\Category\Events\GetCategoryAdminTemplates;
 use Notadd\Category\Events\GetCategoryTypes;
@@ -92,6 +93,18 @@ class Category extends Model {
         $templates = Collection::make();
         $templates->put('edit', 'admin::content.category.edit');
         static::$dispatcher->fire(new GetCategoryAdminTemplates($this, $templates));
+        if($key) {
+            return $templates->get($key);
+        } else {
+            return $templates;
+        }
+    }
+    public function getArticleTemplate($key = '') {
+        $templates = Collection::make();
+        $templates->put('create', 'admin::content.article.create');
+        $templates->put('edit', 'admin::content.article.edit');
+        $templates->put('list', 'admin::content.article.list');
+        static::$dispatcher->fire(new GetArticleAdminTemplates($this, $templates));
         if($key) {
             return $templates->get($key);
         } else {

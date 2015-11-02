@@ -14,7 +14,7 @@ class PageServiceProvider extends ServiceProvider {
      */
     public function boot() {
         $this->app['router']->group(['namespace' => 'Notadd\Page\Controllers'], function () {
-            $this->app['router']->group(['middleware' => 'auth','namespace' => 'Admin', 'prefix' => 'admin'], function () {
+            $this->app['router']->group(['middleware' => 'auth.admin','namespace' => 'Admin', 'prefix' => 'admin'], function () {
                 $this->app['router']->resource('page', 'PageController');
                 $this->app['router']->post('page/{id}/delete', 'PageController@delete');
                 $this->app['router']->post('page/{id}/restore', 'PageController@restore');

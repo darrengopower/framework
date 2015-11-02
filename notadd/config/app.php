@@ -50,6 +50,7 @@ return [
         Notadd\Foundation\Providers\CategoryServiceProvider::class,
         Notadd\Foundation\Providers\ArticleServiceProvider::class,
         Notadd\Foundation\Providers\PageServiceProvider::class,
+        Notadd\Foundation\Providers\HttpServiceProvider::class,
         Notadd\Foundation\Providers\AdminServiceProvider::class
     ],
     'aliases' => [

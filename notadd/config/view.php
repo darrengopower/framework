@@ -7,7 +7,7 @@
  */
 return [
     'paths' => [
-        realpath(base_path('../template')),
+        realpath(base_path('../template/default/views')),
     ],
     'compiled' => realpath(storage_path('framework/views')),
 ];

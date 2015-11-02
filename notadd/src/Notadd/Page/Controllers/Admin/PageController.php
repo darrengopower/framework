@@ -6,9 +6,10 @@
  * @datetime 2015-10-30 17:19
  */
 namespace Notadd\Page\Controllers\Admin;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
+use Notadd\Admin\Controllers\AbstractAdminController;
 use Notadd\Page\Models\Page;
 use Notadd\Page\Requests\PageCreateRequest;
 use Notadd\Page\Requests\PageEditRequest;
@@ -17,15 +18,17 @@ class PageController extends AbstractAdminController {
      * @return \Illuminate\Support\Facades\View
      */
     public function create() {
+        $page = new Page();
+        $this->share('templates', $page->getTemplateList());
         return $this->view('content.page.create');
     }
     /**
      * @param $id
      * @return mixed
      */
-    public function delete($id) {
-        Request::isMethod('post') && Page::onlyTrashed()->find($id)->forceDelete();
-        return Redirect::to('admin/page');
+    public function delete($id, Request $request) {
+        $request->isMethod('post') && Page::onlyTrashed()->find($id)->forceDelete();
+        return $this->app['redirect']->to('admin/page');
     }
     /**
      * @param $id
@@ -41,29 +44,33 @@ class PageController extends AbstractAdminController {
      * @return mixed
      */
     public function edit($id) {
-        return $this->view('content.page.edit')->withPage(Page::find($id));
+        $this->share('page', Page::find($id));
+        return $this->view('content.page.edit');
     }
     /**
      * @return mixed
      */
     public function index() {
-        return $this->view('content.page.index')->withPages(Page::latest()->paginate(30))->withCount(Page::count());
+        $this->share('pages', Page::latest()->paginate(30));
+        $this->share('count', Page::count());
+        return $this->view('content.page.index');
     }
     /**
      * @param $id
      * @return mixed
      */
-    public function restore($id) {
-        Request::isMethod('post') && Page::onlyTrashed()->find($id)->restore();
-        return Redirect::to('admin/page');
+    public function restore($id, Request $request) {
+        $request->isMethod('post') && Page::onlyTrashed()->find($id)->restore();
+        return $this->app['redirect']->to('admin/page');
     }
     /**
      * @param $id
      * @return mixed
      */
     public function show($id) {
-        Session::put('page.id.for.call.create', $id);
-        return $this->view('admin.content.page.show')->withPage(Page::findOrFail($id));
+        $this->app['session']->put('page.id.for.call.create', $id);
+        $this->share('page', Page::findOrFail($id));
+        return $this->view('admin.content.page.show');
     }
     /**
      * @param PageCreateRequest $request
@@ -78,9 +85,9 @@ class PageController extends AbstractAdminController {
         }
         $request->files->replace();
         if($page->create($request->all())) {
-            return Redirect::to('admin/page');
+            return $this->app['redirect']->to('admin/page');
         } else {
-            return Redirect::back()->withInput()->withErrors('保存失败！');
+            return $this->app['redirect']->back()->withInput()->withErrors('保存失败！');
         }
     }
     /**
@@ -97,9 +104,9 @@ class PageController extends AbstractAdminController {
         }
         $request->files->replace();
         if($page->update($request->all())) {
-            return Redirect::to('admin/page');
+            return $this->app['redirect']->to('admin/page');
         } else {
-            return Redirect::back()->withInput()->withErrors('保存失败！');
+            return $this->app['redirect']->back()->withInput()->withErrors('保存失败！');
         }
     }
 }

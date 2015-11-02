@@ -7,7 +7,6 @@ namespace Notadd\Theme\Controllers\Admin;
 use Illuminate\Support\Facades\Redirect;
 use Notadd\Admin\Controllers\AbstractAdminController;
 use Notadd\Setting\Facades\Setting;
-use Notadd\Theme\Facades\Theme;
 class ThemeController extends AbstractAdminController {
     /**
      * @return Response
@@ -21,22 +20,11 @@ class ThemeController extends AbstractAdminController {
      * @param int $id
      * @return Response
      */
-    public function show($id) {
-    }
-    /**
-     * @return Response
-     */
-    public function store() {
-    }
-    /**
-     * @param int $id
-     * @return Response
-     */
     public function update($id) {
         $themes = $this->app['theme']->getThemeList();
         if($themes->has($id)) {
-            if($id != Setting::get('site.theme')) {
-                Setting::set('site.theme', $id);
+            if($id != $this->app['setting']->get('site.theme')) {
+                $this->app['setting']->set('site.theme', $id);
             }
             //Theme::publishAssets($id);
         }

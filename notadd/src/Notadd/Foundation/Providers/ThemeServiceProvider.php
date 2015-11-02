@@ -23,7 +23,7 @@ class ThemeServiceProvider extends ServiceProvider {
             });
         });
         $default = $this->app['setting']->get('site.theme');
-        $this->app['events']->listen('kernel.handled', function () use ($default) {
+        $this->app['events']->listen('router.matched', function () use ($default) {
             foreach($this->app['theme']->getThemeList() as $theme) {
                 if($theme->getAlias() == $default) {
                     $this->loadViewsFrom($theme->getViewPath(), 'themes');

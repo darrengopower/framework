@@ -27,9 +27,9 @@
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="btn-group">
-                                        <!--<a class="btn btn-primary btn-sm" href="{{ url('admin/page/' . $page->id) }}">
+                                        <a class="btn btn-primary btn-sm" href="{{ url('page/' . $page->id) }}" target="_blank">
                                             <i class="fa fa-search-plus"></i>查看
-                                        </a>-->
+                                        </a>
                                         <a class="btn btn-success btn-sm" href="{{ url('admin/page/' . $page->id . '/edit') }}">
                                             <i class="fa fa-edit"></i>编辑
                                         </a>

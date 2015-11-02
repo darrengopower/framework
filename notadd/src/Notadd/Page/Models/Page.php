@@ -8,6 +8,8 @@
 namespace Notadd\Page\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
+use Notadd\Page\Events\GetTemplateList;
 class Page extends Model {
     use SoftDeletes;
     /**
@@ -19,6 +21,13 @@ class Page extends Model {
         'alias',
         'keyword',
         'description',
+        'template',
         'enabled',
     ];
+    public function getTemplateList() {
+        $templates = Collection::make();
+        $templates->put('default::page.default', '默认模板');
+        static::$dispatcher->fire(new GetTemplateList($templates));
+        return $templates;
+    }
 }

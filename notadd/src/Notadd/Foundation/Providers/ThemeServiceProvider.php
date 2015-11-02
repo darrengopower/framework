@@ -7,6 +7,7 @@
  */
 namespace Notadd\Foundation\Providers;
 use Illuminate\Support\ServiceProvider;
+use Notadd\Theme\Factory;
 class ThemeServiceProvider extends ServiceProvider {
     /**
      * @return void
@@ -24,8 +25,7 @@ class ThemeServiceProvider extends ServiceProvider {
      */
     public function register() {
         $this->app->singleton('theme', function () {
-            $factory = new Factory();
-            return $factory;
+            return $this->app->make(Factory::class);
         });
     }
 }

@@ -6,11 +6,13 @@
  * @datetime 2015-10-17 20:41
  */
 namespace Notadd\Foundation\Extension;
+use Illuminate\Contracts\Foundation\Application;
 class ExtensionManager {
-    protected $config;
     protected $app;
+    protected $config;
     protected $migrator;
-    public function __construct() {
+    public function __construct(Application $app) {
+        $this->app = $app;
     }
     public function getInfo() {
     }
@@ -33,7 +35,7 @@ class ExtensionManager {
     }
     protected function load($extension) {
     }
-    protected function getExtensionsDir() {
-        return base_path('../extensions');
+    public function getExtensionsDir() {
+        return realpath(base_path('../extensions'));
     }
 }

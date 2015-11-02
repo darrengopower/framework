@@ -6,8 +6,10 @@
  * @datetime 2015-11-02 18:21
  */
 namespace Notadd\Theme\Events;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Collection;
+use Notadd\Theme\Theme;
 class GetThemeList {
     private $app;
     private $list;
@@ -20,6 +22,10 @@ class GetThemeList {
      * @param $value
      */
     public function register($key, $value) {
-        $this->list->put($key, $value);
+        if($value instanceof Theme) {
+            $this->list->put($key, $value);
+        } else {
+            throw new Exception('正在注册未知类型的主题！');
+        }
     }
 }

@@ -13,6 +13,15 @@ class ThemeServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
+        $default = $this->app['setting']->get('site.theme');
+        $this->app['events']->listen('kernel.handled', function () use ($default) {
+            foreach($this->app['theme']->getThemeList() as $theme) {
+                if($theme->getAlias() == $default) {
+                    $this->loadViewsFrom($theme->getViewPath(), 'themes');
+                }
+                $this->loadViewsFrom($theme->getViewPath(), $theme->getAlias());
+            }
+        });
     }
     /**
      * @return array

@@ -18,7 +18,7 @@ class Factory {
     }
     protected function buildThemeList() {
         $list = Collection::make();
-        $list->put('default', '默认模板');
+        $list->put('default', new Theme('默认模板', 'default', realpath($this->app->basePath() . '/../template/default')));
         $this->app['events']->fire(new GetThemeList($this->app, $list));
         $this->list = $list;
     }

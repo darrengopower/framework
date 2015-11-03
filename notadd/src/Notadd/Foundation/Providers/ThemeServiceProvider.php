@@ -25,11 +25,21 @@ class ThemeServiceProvider extends ServiceProvider {
         $default = $this->app['setting']->get('site.theme');
         $this->app['events']->listen('router.matched', function () use ($default) {
             foreach($this->app['theme']->getThemeList() as $theme) {
-                if($theme->getAlias() == $default) {
+                $alias = $theme->getAlias();
+                if($alias == $default) {
                     $this->loadViewsFrom($theme->getViewPath(), 'themes');
                 }
-                $this->loadViewsFrom($theme->getViewPath(), $theme->getAlias());
+                $this->loadViewsFrom($theme->getViewPath(), $alias);
+                $this->publishes([
+                    $theme->getCssPath() => public_path('themes/' . $alias . '/css'),
+                    $theme->getFontPath() => public_path('themes/' . $alias . '/fonts'),
+                    $theme->getJsPath() => public_path('themes/' . $alias . '/js'),
+                    $theme->getImagePath() => public_path('themes/' . $alias . '/images'),
+                ], $alias);
             }
+        });
+        $this->app['events']->listen('kernel.handled', function () use ($default) {
+            $this->app['theme']->publishAssets();
         });
     }
     /**

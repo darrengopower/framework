@@ -27,6 +27,10 @@ class Theme {
     /**
      * @var string
      */
+    private $fontPath;
+    /**
+     * @var string
+     */
     private $jsPath;
     /**
      * @var string
@@ -45,6 +49,7 @@ class Theme {
         $this->alias = $alias;
         $this->basePath = $path;
         $this->cssPath = realpath($this->basePath . DIRECTORY_SEPARATOR . 'css');
+        $this->fontPath = realpath($this->basePath . DIRECTORY_SEPARATOR . 'fonts');
         $this->jsPath = realpath($this->basePath . DIRECTORY_SEPARATOR . 'js');
         $this->imagePath = realpath($this->basePath . DIRECTORY_SEPARATOR . 'images');
         $this->viewPath = realpath($this->basePath . DIRECTORY_SEPARATOR . 'views');
@@ -72,6 +77,12 @@ class Theme {
      */
     public function getCssPath() {
         return $this->cssPath;
+    }
+    /**
+     * @return string
+     */
+    public function getFontPath() {
+        return $this->fontPath;
     }
     /**
      * @return string

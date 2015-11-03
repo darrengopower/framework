@@ -38,5 +38,5 @@ return [
             'connection' => 'default',
         ],
     ],
-    'prefix' => 'laravel',
+    'prefix' => 'notadd',
 ];

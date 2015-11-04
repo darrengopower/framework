@@ -32,6 +32,7 @@ class Category extends Model {
         'extend_id',
         'extend_type',
     ];
+    protected $showTemplate = 'default::category.show';
     /**
      * @var array
      */
@@ -110,6 +111,12 @@ class Category extends Model {
         } else {
             return $templates;
         }
+    }
+    public function getShowTemplate() {
+        return $this->showTemplate;
+    }
+    public function setShowTemplate($template) {
+        $this->showTemplate = $template;
     }
     /**
      * @return static

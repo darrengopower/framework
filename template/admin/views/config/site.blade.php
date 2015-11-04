@@ -72,6 +72,25 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-4 control-label">首页设置</label>
+                            <div class="col-md-4">
+                                <select class="form-control" name="home">
+                                    @if($home == 'default')
+                                    <option value="default" selected>默认首页</option>
+                                    @else
+                                    <option value="default">默认首页</option>
+                                    @endif
+                                    @foreach($pages as $key=>$value)
+                                    @if($home == 'page_' . $value['id'])
+                                    <option value="page_{{ $value['id'] }}" selected>{{ $value['title'] }}</option>
+                                    @else
+                                    <option value="page_{{ $value['id'] }}">{{ $value['title'] }}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-4 control-label"></label>
                             <div class="col-md-4">
                                 <button class="btn btn-primary right" type="submit">提交</button>

@@ -8,11 +8,22 @@
 namespace Notadd\Foundation\Providers;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\AliasLoader;
+use Notadd\Page\Models\Page;
 class PageServiceProvider extends ServiceProvider {
     /**
      * @return void
      */
     public function boot() {
+        $this->app['router']->before(function() {
+            $pages = Page::whereEnabled(true)->get();
+            foreach($pages as $page) {
+                if($this->app['setting']->get('site.home') !== 'page_' . $page->id) {
+                    $this->app['router']->get($page->alias, function() use ($page) {
+                        return $this->app->call('Notadd\Page\Controllers\PageController@show', ['id' => $page->id]);
+                    });
+                }
+            }
+        });
         $this->app['router']->group(['namespace' => 'Notadd\Page\Controllers'], function () {
             $this->app['router']->group(['middleware' => 'auth.admin','namespace' => 'Admin', 'prefix' => 'admin'], function () {
                 $this->app['router']->resource('page', 'PageController');

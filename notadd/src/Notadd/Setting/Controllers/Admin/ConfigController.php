@@ -9,6 +9,7 @@ namespace Notadd\Setting\Controllers\Admin;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Notadd\Admin\Controllers\AbstractAdminController;
+use Notadd\Page\Models\Page;
 use Notadd\Setting\Facades\Setting;
 use Notadd\Setting\Requests\SeoRequest;
 use Notadd\Setting\Requests\SiteRequest;
@@ -25,6 +26,8 @@ class ConfigController extends AbstractAdminController {
         $this->share('copyright', Setting::get('site.copyright'));
         $this->share('company', Setting::get('site.company'));
         $this->share('message', Session::get('message'));
+        $this->share('home', Setting::get('site.home'));
+        $this->share('pages', Page::all());
         return $this->view('config.site');
     }
     /**
@@ -39,6 +42,7 @@ class ConfigController extends AbstractAdminController {
         Setting::set('site.statistics', $request->get('statistics'));
         Setting::set('site.copyright', $request->get('copyright'));
         Setting::set('site.company', $request->get('company'));
+        Setting::set('site.home', $request->get('home'));
         return Redirect::to('admin/site')->withMessage('更新站点信息成功');
     }
     /**

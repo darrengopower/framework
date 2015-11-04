@@ -7,14 +7,26 @@
  */
 namespace Notadd\Foundation\Providers;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use Notadd\Page\Models\Page;
 class HttpServiceProvider extends ServiceProvider {
     /**
      * @return void
      */
     public function boot() {
         $this->app['router']->get('/', function() {
-            $this->app['view']->share('logo', file_get_contents(realpath($this->app->basePath() . '/../template/install') . DIRECTORY_SEPARATOR . 'logo.svg'));
-            return $this->app['view']->make('index');
+            $home = $this->app['setting']->get('site.home');
+            if($home == 'default') {
+                $this->app['view']->share('logo', file_get_contents(realpath($this->app->basePath() . '/../template/install') . DIRECTORY_SEPARATOR . 'logo.svg'));
+                return $this->app['view']->make('index');
+            } else {
+                if(Str::contains($home, 'page_')) {
+                    $id = Str::substr($home, 5);
+                    if(Page::whereEnabled(true)->whereId($id)->count()) {
+                        return $this->app->call('Notadd\Page\Controllers\PageController@show', ['id' => $id]);
+                    }
+                }
+            }
         });
     }
     /**

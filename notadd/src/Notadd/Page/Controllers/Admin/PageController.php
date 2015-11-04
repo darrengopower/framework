@@ -44,7 +44,9 @@ class PageController extends AbstractAdminController {
      * @return mixed
      */
     public function edit($id) {
-        $this->share('page', Page::find($id));
+        $page = Page::findOrFail($id);
+        $this->share('page', $page);
+        $this->share('templates', $page->getTemplateList());
         return $this->view('content.page.edit');
     }
     /**

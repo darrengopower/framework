@@ -89,6 +89,20 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-4 control-label">模板</label>
+                            <div class="col-md-4">
+                                <select class="form-control" name="template">
+                                    @foreach($templates as $key=>$value)
+                                        @if($page->template == $key)
+                                        <option value="{{ $key }}" selected>{{ $value }}</option>
+                                        @else
+                                        <option value="{{ $key }}">{{ $value }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-4 control-label">浏览次数</label>
                             <div class="col-md-4">
                                 <input type="text" class="form-control" disabled>

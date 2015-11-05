@@ -7,10 +7,7 @@
  */
 namespace Notadd\Article\Controllers\Admin;
 use Carbon\Carbon;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -22,7 +19,7 @@ use Notadd\Article\Requests\ArticleEditRequest;
 use Notadd\Category\Models\Category;
 class ArticleController extends AbstractAdminController {
     /**
-     * @return \Illuminate\Support\Facades\View
+     * @return View
      */
     public function create(Request $request) {
         if(Category::whereEnabled(true)->whereId($request->input('category'))->count()) {
@@ -53,7 +50,7 @@ class ArticleController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @return \Illuminate\Support\Facades\View
+     * @return View
      */
     public function edit($id) {
         $article = Article::findOrFail($id);

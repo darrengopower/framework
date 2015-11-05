@@ -32,6 +32,7 @@ class Article extends Model {
         'is_sticky',
         'created_at',
     ];
+    protected $showTemplate = 'default::article.show';
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -81,6 +82,12 @@ class Article extends Model {
     public function getPreviousArticleInCategory() {
         $id = $this->whereCategoryId($this->attributes['category_id'])->where('id', '<', $this->attributes['id'])->max('id');
         return $this->find($id);
+    }
+    public function getShowTemplate() {
+        return $this->showTemplate;
+    }
+    public function setShowTemplate($template) {
+        $this->showTemplate = $template;
     }
     /**
      * @param $value

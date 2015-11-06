@@ -12,28 +12,27 @@
     });
     $(document).on("click.bs.theme.data-api", '[data-toggle="theme"]', function () {
         var $this = $(this);
-        $.post('http://' + document.domain + '/admin/theme/cookie', {theme:$this.data("theme")}, function(data) {
-            if ($("body").hasClass("theme-zero")) {
-                $("body").toggleClass("theme-zero");
-            }
-            if ($("body").hasClass("theme-one")) {
-                $("body").toggleClass("theme-one");
-            }
-            if ($("body").hasClass("theme-two")) {
-                $("body").toggleClass("theme-two");
-            }
-            if ($("body").hasClass("theme-three")) {
-                $("body").toggleClass("theme-three");
-            }
-            if ($("body").hasClass("theme-four")) {
-                $("body").toggleClass("theme-four");
-            }
-            $("body").toggleClass($this.data("theme"));
-            $this.parent("li").parent("ul").find("li").each(function () {
-                $(this).removeClass("active");
-            });
-            $this.parent("li").addClass("active");
+        if ($("body").hasClass("theme-zero")) {
+            $("body").toggleClass("theme-zero");
+        }
+        if ($("body").hasClass("theme-one")) {
+            $("body").toggleClass("theme-one");
+        }
+        if ($("body").hasClass("theme-two")) {
+            $("body").toggleClass("theme-two");
+        }
+        if ($("body").hasClass("theme-three")) {
+            $("body").toggleClass("theme-three");
+        }
+        if ($("body").hasClass("theme-four")) {
+            $("body").toggleClass("theme-four");
+        }
+        $("body").toggleClass($this.data("theme"));
+        $this.parent("li").parent("ul").find("li").each(function () {
+            $(this).removeClass("active");
         });
+        $this.parent("li").addClass("active");
+        $.post('http://' + document.domain + '/admin/theme/cookie', {theme:$this.data("theme")}, function(data) {});
     });
     $(window).on("load", function () {
         $('[data-toggle="nav-accordion"]').each(function (index, element) {

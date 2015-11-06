@@ -6,7 +6,6 @@
 namespace Notadd\Theme\Controllers\Admin;
 use Illuminate\Support\Facades\Redirect;
 use Notadd\Admin\Controllers\AbstractAdminController;
-use Notadd\Setting\Facades\Setting;
 class ThemeController extends AbstractAdminController {
     /**
      * @return Response
@@ -26,7 +25,7 @@ class ThemeController extends AbstractAdminController {
             if($id != $this->app->make('setting')->get('site.theme')) {
                 $this->app->make('setting')->set('site.theme', $id);
             }
-            //Theme::publishAssets($id);
+            $this->app->make('theme')->publishAssets();
         }
         return Redirect::to('admin/theme');
     }

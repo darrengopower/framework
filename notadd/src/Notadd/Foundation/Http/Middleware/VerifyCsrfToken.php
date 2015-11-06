@@ -19,7 +19,9 @@ class VerifyCsrfToken {
     /**
      * @var array
      */
-    protected $except = [];
+    protected $except = [
+        'admin/theme/cookie',
+    ];
     /**
      * Create a new middleware instance.
      * @param  \Illuminate\Contracts\Encryption\Encrypter $encrypter

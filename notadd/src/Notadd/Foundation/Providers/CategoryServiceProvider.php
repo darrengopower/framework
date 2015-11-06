@@ -7,6 +7,7 @@
  */
 namespace Notadd\Foundation\Providers;
 use Illuminate\Support\ServiceProvider;
+use Notadd\Category\Listeners\BeforeCategoryDelete;
 use Notadd\Category\Models\Category;
 class CategoryServiceProvider extends ServiceProvider {
     /**
@@ -31,6 +32,7 @@ class CategoryServiceProvider extends ServiceProvider {
             });
             $this->app['router']->resource('category', 'CategoryController');
         });
+        $this->app->make('events')->subscribe(BeforeCategoryDelete::class);
     }
     /**
      * @return void

@@ -8,6 +8,7 @@
 namespace Notadd\Category\Controllers\Admin;
 use Illuminate\Support\Facades\Redirect;
 use Notadd\Admin\Controllers\AbstractAdminController;
+use Notadd\Category\Events\BeforeCategoryDelete;
 use Notadd\Category\Models\Category;
 use Notadd\Category\Requests\CategoryCreateRequest;
 use Notadd\Category\Requests\CategoryEditRequest;
@@ -18,6 +19,7 @@ class CategoryController extends AbstractAdminController {
      */
     public function destroy($id) {
         $category = Category::findOrFail($id);
+        $this->app->make('events')->fire(new BeforeCategoryDelete($this->app, $category));
         $category->delete();
         return Redirect::back();
     }

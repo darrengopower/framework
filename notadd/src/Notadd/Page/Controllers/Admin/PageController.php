@@ -7,8 +7,6 @@
  */
 namespace Notadd\Page\Controllers\Admin;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
 use Notadd\Admin\Controllers\AbstractAdminController;
 use Notadd\Page\Models\Page;
 use Notadd\Page\Requests\PageCreateRequest;
@@ -37,7 +35,7 @@ class PageController extends AbstractAdminController {
     public function destroy($id) {
         $page = Page::find($id);
         $page->delete();
-        return Redirect::to('admin/page');
+        return $this->app->make('redirect')->back();
     }
     /**
      * @param $id
@@ -53,9 +51,12 @@ class PageController extends AbstractAdminController {
      * @return mixed
      */
     public function index() {
-        $this->share('pages', Page::latest()->paginate(30));
-        $this->share('count', Page::count());
-        return $this->view('content.page.index');
+        $page = Page::whereParentId(0)->orderBy('created_at', 'desc');
+        $this->share('count', $page->count());
+        $this->share('crumbs', []);
+        $this->share('id', 0);
+        $this->share('pages', $page->get());
+        return $this->view('content.page.list');
     }
     /**
      * @param $id
@@ -70,27 +71,27 @@ class PageController extends AbstractAdminController {
      * @return mixed
      */
     public function show($id) {
-        $this->app->make('session')->put('page.id.for.call.create', $id);
-        $this->share('page', Page::findOrFail($id));
-        return $this->view('admin.content.page.show');
+        $crumb = [];
+        Page::getCrumbMenu($id, $crumb);
+        $page = Page::whereParentId($id)->orderBy('created_at', 'desc');
+        $this->share('count', $page->count());
+        $this->share('crumbs', $crumb);
+        $this->share('id', $id);
+        $this->share('pages', $page->get());
+        return $this->view('content.page.list');
     }
     /**
      * @param PageCreateRequest $request
      * @return mixed
      */
     public function store(PageCreateRequest $request) {
-        $page = new Page();
-        if($request->hasFile('thumb_image') && $request->file('thumb_image')->isValid()) {
-            $file_name = Str::random() . '.' . $request->file('thumb_image')->getClientOriginalExtension();
-            $request->file('thumb_image')->move('uploads/pages/thumbs/', $file_name);
-            $request->offsetSet('thumb_image', 'uploads/pages/thumbs/' . $file_name);
+        if($request->input('parent_id')) {
+            if(!Page::whereId($request->input('parent_id'))->count()) {
+                return $this->app->make('redirect')->back()->withInput()->withErrors('父页面不存在，创建子页面失败！');
+            }
         }
-        $request->files->replace();
-        if($page->create($request->all())) {
-            return $this->app->make('redirect')->to('admin/page');
-        } else {
-            return $this->app->make('redirect')->back()->withInput()->withErrors('保存失败！');
-        }
+        Page::create($request->all());
+        return $this->app->make('redirect')->back();
     }
     /**
      * @param PageEditRequest $request

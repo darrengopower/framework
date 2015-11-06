@@ -103,9 +103,15 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-4 control-label">内容</label>
+                            <div class="col-md-8">
+                                <script id="editor-container" type="text/plain" data-toggle="ueditor" name="content">{!! Request::old('content', $page->content) !!}</script>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-4 control-label">浏览次数</label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" disabled>
+                                <input type="text" class="form-control" name="view_count" value="{{ Request::old('view_count', $page->view_count) }}">
                             </div>
                         </div>
                         <div class="form-group">

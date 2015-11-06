@@ -16,18 +16,39 @@ class Page extends Model {
      * @var array
      */
     protected $fillable = [
+        'parent_id',
         'title',
         'thumb_image',
         'alias',
         'keyword',
         'description',
         'template',
+        'content',
         'enabled',
+        'view_count',
     ];
+    public function countSubPages() {
+        $count = parent::whereParentId($this->attributes['id'])->count();
+        return $count ? $count : 0;
+    }
+    public static function getCrumbMenu($parent_id, &$crumb) {
+        if($parent_id == 0) {
+            return $crumb;
+        } else {
+            $parent = parent::find($parent_id);
+            array_unshift($crumb, $parent);
+            if($parent['parent_id']) {
+                static::getCrumbMenu($parent['parent_id'], $crumb);
+            }
+        }
+    }
     public function getTemplateList() {
         $templates = Collection::make();
         $templates->put('default::page.default', '默认模板');
         static::$dispatcher->fire(new GetTemplateList($templates));
         return $templates;
+    }
+    public function parent() {
+        return $this->belongsTo(Page::class, 'parent_id');
     }
 }

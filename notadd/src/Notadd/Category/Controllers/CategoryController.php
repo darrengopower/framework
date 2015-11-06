@@ -12,7 +12,7 @@ class CategoryController extends Controller {
     }
     public function show($id) {
         $category = Category::findOrFail($id);
-        $this->app['events']->fire(new OnCategoryShow($this->app, $this->view, $category));
+        $this->app->make('events')->fire(new OnCategoryShow($this->app, $this->view, $category));
         $this->share('category', $category);
         return $this->view($category->getShowTemplate());
     }

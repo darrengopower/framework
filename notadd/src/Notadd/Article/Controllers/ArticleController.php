@@ -13,7 +13,7 @@ class ArticleController extends Controller {
      */
     public function show($id) {
         $article = Article::findOrFail($id);
-        $this->app['events']->fire(new OnArticleShow($this->app, $this->view, $article));
+        $this->app->make('events')->fire(new OnArticleShow($this->app, $this->view, $article));
         $this->share('article', $article);
         return $this->view($article->getShowTemplate());
     }

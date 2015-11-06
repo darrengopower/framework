@@ -13,27 +13,27 @@ class AdminServiceProvider extends ServiceProvider {
      */
     public function boot() {
         $this->loadViewsFrom(realpath($this->app->basePath() . '/../template/admin/views'), 'admin');
-        $this->app['router']->group(['namespace' => 'Notadd\Admin\Controllers'], function () {
-            $this->app['router']->group(['prefix' => 'admin'], function () {
-                $this->app['router']->get('login', 'AuthController@getLogin');
-                $this->app['router']->post('login', 'AuthController@postLogin');
-                $this->app['router']->get('logout', 'AuthController@getLogout');
-                $this->app['router']->get('register', 'AuthController@getRegister');
-                $this->app['router']->post('register', 'AuthController@postRegister');
+        $this->app->make('router')->group(['namespace' => 'Notadd\Admin\Controllers'], function () {
+            $this->app->make('router')->group(['prefix' => 'admin'], function () {
+                $this->app->make('router')->get('login', 'AuthController@getLogin');
+                $this->app->make('router')->post('login', 'AuthController@postLogin');
+                $this->app->make('router')->get('logout', 'AuthController@getLogout');
+                $this->app->make('router')->get('register', 'AuthController@getRegister');
+                $this->app->make('router')->post('register', 'AuthController@postRegister');
             });
-            $this->app['router']->group(['middleware' => 'auth.admin', 'prefix' => 'admin'], function () {
-                $this->app['router']->get('/', 'AdminController@init');
+            $this->app->make('router')->group(['middleware' => 'auth.admin', 'prefix' => 'admin'], function () {
+                $this->app->make('router')->get('/', 'AdminController@init');
             });
         });
-        if($this->app['request']->is('admin*')) {
-            $menu = $this->app['config']->get('admin');
+        if($this->app->make('request')->is('admin*')) {
+            $menu = $this->app->make('config')->get('admin');
             foreach($menu as $top_key => $top) {
                 if(isset($top['sub'])) {
                     foreach($top['sub'] as $one_key => $one) {
                         if(isset($one['sub'])) {
                             $active = false;
                             foreach((array)$one['active'] as $rule) {
-                                if($this->app['request']->is($rule)) {
+                                if($this->app->make('request')->is($rule)) {
                                     $active = true;
                                 }
                             }
@@ -43,7 +43,7 @@ class AdminServiceProvider extends ServiceProvider {
                                 $menu[$top_key]['sub'][$one_key]['active'] = '';
                             }
                         } else {
-                            if($this->app['request']->is($one['active'])) {
+                            if($this->app->make('request')->is($one['active'])) {
                                 $menu[$top_key]['sub'][$one_key]['active'] = 'active';
                             } else {
                                 $menu[$top_key]['sub'][$one_key]['active'] = '';
@@ -52,7 +52,7 @@ class AdminServiceProvider extends ServiceProvider {
                     }
                 }
             }
-            $this->app['config']->set('admin', $menu);
+            $this->app->make('config')->set('admin', $menu);
         }
     }
     /**

@@ -28,7 +28,7 @@ class PageController extends AbstractAdminController {
      */
     public function delete($id, Request $request) {
         $request->isMethod('post') && Page::onlyTrashed()->find($id)->forceDelete();
-        return $this->app['redirect']->to('admin/page');
+        return $this->app->make('redirect')->to('admin/page');
     }
     /**
      * @param $id
@@ -63,14 +63,14 @@ class PageController extends AbstractAdminController {
      */
     public function restore($id, Request $request) {
         $request->isMethod('post') && Page::onlyTrashed()->find($id)->restore();
-        return $this->app['redirect']->to('admin/page');
+        return $this->app->make('redirect')->to('admin/page');
     }
     /**
      * @param $id
      * @return mixed
      */
     public function show($id) {
-        $this->app['session']->put('page.id.for.call.create', $id);
+        $this->app->make('session')->put('page.id.for.call.create', $id);
         $this->share('page', Page::findOrFail($id));
         return $this->view('admin.content.page.show');
     }
@@ -87,9 +87,9 @@ class PageController extends AbstractAdminController {
         }
         $request->files->replace();
         if($page->create($request->all())) {
-            return $this->app['redirect']->to('admin/page');
+            return $this->app->make('redirect')->to('admin/page');
         } else {
-            return $this->app['redirect']->back()->withInput()->withErrors('保存失败！');
+            return $this->app->make('redirect')->back()->withInput()->withErrors('保存失败！');
         }
     }
     /**
@@ -106,9 +106,9 @@ class PageController extends AbstractAdminController {
         }
         $request->files->replace();
         if($page->update($request->all())) {
-            return $this->app['redirect']->to('admin/page');
+            return $this->app->make('redirect')->to('admin/page');
         } else {
-            return $this->app['redirect']->back()->withInput()->withErrors('保存失败！');
+            return $this->app->make('redirect')->back()->withInput()->withErrors('保存失败！');
         }
     }
 }

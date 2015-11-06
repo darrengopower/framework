@@ -98,7 +98,7 @@ class Kernel implements KernelContract {
             $this->reportException($e);
             $response = $this->renderException($request, $e);
         }
-        $this->app['events']->fire('kernel.handled', [
+        $this->app->make('events')->fire('kernel.handled', [
             $request,
             $response
         ]);
@@ -209,7 +209,7 @@ class Kernel implements KernelContract {
      * @return void
      */
     protected function reportException(Exception $e) {
-        $this->app['Illuminate\Contracts\Debug\ExceptionHandler']->report($e);
+        $this->app->make('Illuminate\Contracts\Debug\ExceptionHandler')->report($e);
     }
     /**
      * @param  \Illuminate\Http\Request $request
@@ -217,7 +217,7 @@ class Kernel implements KernelContract {
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function renderException($request, Exception $e) {
-        return $this->app['Illuminate\Contracts\Debug\ExceptionHandler']->render($request, $e);
+        return $this->app->make('Illuminate\Contracts\Debug\ExceptionHandler')->render($request, $e);
     }
     /**
      * @return \Illuminate\Contracts\Foundation\Application

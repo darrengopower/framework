@@ -12,14 +12,14 @@ class ArticleServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
-        $this->app['router']->group(['namespace' => 'Notadd\Article\Controllers'], function () {
-            $this->app['router']->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
-                $this->app['router']->resource('article', 'ArticleController');
-                $this->app['router']->post('article/{id}/delete', 'ArticleController@delete');
-                $this->app['router']->post('article/{id}/restore', 'ArticleController@restore');
-                $this->app['router']->post('article/select', 'ArticleController@select');
+        $this->app->make('router')->group(['namespace' => 'Notadd\Article\Controllers'], function () {
+            $this->app->make('router')->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+                $this->app->make('router')->resource('article', 'ArticleController');
+                $this->app->make('router')->post('article/{id}/delete', 'ArticleController@delete');
+                $this->app->make('router')->post('article/{id}/restore', 'ArticleController@restore');
+                $this->app->make('router')->post('article/select', 'ArticleController@select');
             });
-            $this->app['router']->resource('article', 'ArticleController');
+            $this->app->make('router')->resource('article', 'ArticleController');
         });
     }
     /**

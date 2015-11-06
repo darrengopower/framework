@@ -19,7 +19,7 @@ class FormRequestServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
-        $this->app['events']->listen('router.matched', function () {
+        $this->app->make('events')->listen('router.matched', function () {
             $this->app->resolving(function (FormRequest $request, $app) {
                 $this->initializeRequest($request, $app['request']);
                 $request->setContainer($app)->setRedirector($app['Illuminate\Routing\Redirector']);

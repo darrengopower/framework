@@ -17,7 +17,7 @@ class InstallServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
-        $this->app['router']->get('/', 'Notadd\Install\Controllers\PrerequisiteController@render');
+        $this->app->make('router')->get('/', 'Notadd\Install\Controllers\PrerequisiteController@render');
     }
     /**
      * @return void

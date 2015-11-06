@@ -81,7 +81,7 @@ class HandleExceptions {
      * @return void
      */
     protected function renderHttpResponse($e) {
-        $this->getExceptionHandler()->render($this->app['request'], $e)->send();
+        $this->getExceptionHandler()->render($this->app->make('request'), $e)->send();
     }
     /**
      * @return void

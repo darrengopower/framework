@@ -11,8 +11,8 @@ use Notadd\Foundation\Extension\ExtensionManager;
 use Symfony\Component\Finder\Finder;
 class ExtensionServiceProvider extends ServiceProvider {
     public function boot() {
-        $extension_dir = $this->app['extension']->getExtensionsDir();
-        if($this->app['files']->isDirectory($extension_dir)) {
+        $extension_dir = $this->app->make('extension')->getExtensionsDir();
+        if($this->app->make('files')->isDirectory($extension_dir)) {
             foreach(Finder::create()->in($extension_dir)->directories()->depth(0) as $dir) {
                 if(file_exists($file = $dir . '/bootstrap.php')) {
                     $extension = require $file;

@@ -14,11 +14,11 @@ class HttpServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
-        $this->app['router']->get('/', function() {
-            $home = $this->app['setting']->get('site.home');
+        $this->app->make('router')->get('/', function() {
+            $home = $this->app->make('setting')->get('site.home');
             if($home == 'default') {
-                $this->app['view']->share('logo', file_get_contents(realpath($this->app->basePath() . '/../template/install') . DIRECTORY_SEPARATOR . 'logo.svg'));
-                return $this->app['view']->make('index');
+                $this->app->make('view')->share('logo', file_get_contents(realpath($this->app->basePath() . '/../template/install') . DIRECTORY_SEPARATOR . 'logo.svg'));
+                return $this->app->make('view')->make('index');
             } else {
                 if(Str::contains($home, 'page_')) {
                     $id = Str::substr($home, 5);

@@ -15,12 +15,12 @@ class SettingServiceProvider extends ServiceProvider {
      * @return array
      */
     public function boot() {
-        $this->app['router']->group(['namespace' => 'Notadd\Setting\Controllers'], function () {
-            $this->app['router']->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
-                $this->app['router']->get('site', 'ConfigController@getSite');
-                $this->app['router']->post('site', 'ConfigController@postSite');
-                $this->app['router']->get('seo', 'ConfigController@getSeo');
-                $this->app['router']->post('seo', 'ConfigController@postSeo');
+        $this->app->make('router')->group(['namespace' => 'Notadd\Setting\Controllers'], function () {
+            $this->app->make('router')->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+                $this->app->make('router')->get('site', 'ConfigController@getSite');
+                $this->app->make('router')->post('site', 'ConfigController@postSite');
+                $this->app->make('router')->get('seo', 'ConfigController@getSeo');
+                $this->app->make('router')->post('seo', 'ConfigController@postSeo');
             });
         });
         AliasLoader::getInstance()->alias('Setting', Setting::class);

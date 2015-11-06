@@ -14,15 +14,15 @@ class MenuServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
-        $this->app['router']->group(['namespace' => 'Notadd\Menu\Controllers'], function () {
-            $this->app['router']->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
-                $this->app['router']->resource('menu', 'GroupController');
-                $this->app['router']->get('menu/{id}/sort', 'GroupController@sort');
-                $this->app['router']->post('menu/{id}/sorting', 'GroupController@sorting');
-                $this->app['router']->resource('menu/item', 'ItemController');
-                $this->app['router']->post('menu/item/{id}/status', 'ItemController@status');
-                $this->app['router']->get('menu/item/{id}/sort', 'ItemController@sort');
-                $this->app['router']->post('menu/item/{id}/sorting', 'ItemController@sorting');
+        $this->app->make('router')->group(['namespace' => 'Notadd\Menu\Controllers'], function () {
+            $this->app->make('router')->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+                $this->app->make('router')->resource('menu', 'GroupController');
+                $this->app->make('router')->get('menu/{id}/sort', 'GroupController@sort');
+                $this->app->make('router')->post('menu/{id}/sorting', 'GroupController@sorting');
+                $this->app->make('router')->resource('menu/item', 'ItemController');
+                $this->app->make('router')->post('menu/item/{id}/status', 'ItemController@status');
+                $this->app->make('router')->get('menu/item/{id}/sort', 'ItemController@sort');
+                $this->app->make('router')->post('menu/item/{id}/sorting', 'ItemController@sorting');
             });
         });
         AliasLoader::getInstance()->alias('Menu', Menu::class);

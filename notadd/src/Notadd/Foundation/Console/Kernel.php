@@ -113,7 +113,7 @@ class Kernel implements KernelContract {
      * @return void
      */
     public function queue($command, array $parameters = []) {
-        $this->app['Illuminate\Contracts\Queue\Queue']->push('Illuminate\Foundation\Console\QueuedJob', func_get_args());
+        $this->app->make('Illuminate\Contracts\Queue\Queue')->push('Illuminate\Foundation\Console\QueuedJob', func_get_args());
     }
     /**
      * @return array
@@ -158,7 +158,7 @@ class Kernel implements KernelContract {
      * @return void
      */
     protected function reportException(Exception $e) {
-        $this->app['Illuminate\Contracts\Debug\ExceptionHandler']->report($e);
+        $this->app->make('Illuminate\Contracts\Debug\ExceptionHandler')->report($e);
     }
     /**
      * @param  \Symfony\Component\Console\Output\OutputInterface $output
@@ -166,6 +166,6 @@ class Kernel implements KernelContract {
      * @return void
      */
     protected function renderException($output, Exception $e) {
-        $this->app['Illuminate\Contracts\Debug\ExceptionHandler']->renderForConsole($output, $e);
+        $this->app->make('Illuminate\Contracts\Debug\ExceptionHandler')->renderForConsole($output, $e);
     }
 }

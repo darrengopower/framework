@@ -12,7 +12,7 @@ class ThemeController extends AbstractAdminController {
      * @return Response
      */
     public function index() {
-        $themes = $this->app['theme']->getThemeList();
+        $themes = $this->app->make('theme')->getThemeList();
         $this->share('themes', $themes);
         return $this->view('theme.index');
     }
@@ -21,10 +21,10 @@ class ThemeController extends AbstractAdminController {
      * @return Response
      */
     public function update($id) {
-        $themes = $this->app['theme']->getThemeList();
+        $themes = $this->app->make('theme')->getThemeList();
         if($themes->has($id)) {
-            if($id != $this->app['setting']->get('site.theme')) {
-                $this->app['setting']->set('site.theme', $id);
+            if($id != $this->app->make('setting')->get('site.theme')) {
+                $this->app->make('setting')->set('site.theme', $id);
             }
             //Theme::publishAssets($id);
         }

@@ -8,19 +8,20 @@
 namespace Notadd\Foundation\Providers;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\AliasLoader;
-use Notadd\Page\Models\Page;
+use Notadd\Page\Models\Page as PageModel;
 class PageServiceProvider extends ServiceProvider {
     /**
      * @return void
      */
     public function boot() {
         $this->app->make('router')->before(function() {
-            $pages = Page::whereEnabled(true)->get();
-            foreach($pages as $page) {
-                if($this->app->make('setting')->get('site.home') !== 'page_' . $page->id) {
-                    if($page->alias) {
-                        $this->app->make('router')->get($page->alias, function() use ($page) {
-                            return $this->app->call('Notadd\Page\Controllers\PageController@show', ['id' => $page->id]);
+            $dataes = PageModel::whereEnabled(true)->get();
+            foreach($dataes as $value) {
+                if($this->app->make('setting')->get('site.home') !== 'page_' . $value->id) {
+                    if($value->alias) {
+                        $page = new \Notadd\Page\Page($value->id);
+                        $this->app->make('router')->get($page->getRouting(), function() use ($page) {
+                            return $this->app->call('Notadd\Page\Controllers\PageController@show', ['id' => $page->getId()]);
                         });
                     }
                 }
@@ -37,7 +38,6 @@ class PageServiceProvider extends ServiceProvider {
             $this->app->make('router')->resource('page', 'PageController');
         });
         $this->loadViewsFrom($this->app->basePath() . '/resources/views/pages/', 'page');
-        AliasLoader::getInstance()->alias('Page', Page::class);
     }
     /**
      * @return void

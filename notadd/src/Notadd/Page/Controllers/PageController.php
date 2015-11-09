@@ -17,7 +17,10 @@ class PageController extends Controller {
         } else {
             $template = 'default::page.default';
         }
+        $this->share('content', $page->getContent());
         $this->share('logo', file_get_contents(realpath($this->app->basePath() . '/../template/install') . DIRECTORY_SEPARATOR . 'logo.svg'));
+        $this->share('page', $page);
+        $this->share('title', $page->getTitle());
         return $this->view($template);
     }
 }

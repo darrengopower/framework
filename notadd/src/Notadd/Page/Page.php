@@ -15,8 +15,14 @@ class Page {
         $this->id = $id;
         $this->model = PageModel::find($id);
     }
+    public function getAlias() {
+        return $this->model->getAttribute('alias');
+    }
     public function getContent() {
         return $this->model->getAttribute('content');
+    }
+    public function getId() {
+        return $this->id;
     }
     public function getLoopParent(Collection &$list, PageModel $model = null) {
         if ($model === null) {

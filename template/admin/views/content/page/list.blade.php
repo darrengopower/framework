@@ -18,8 +18,8 @@
                         <thead>
                             <tr>
                                 <th class="col-md-5">页面标题</td>
-                                <th class="col-md-4">创建时间</td>
-                                <th class="col-md-3">操作</td>
+                                <th class="col-md-3">创建时间</td>
+                                <th class="col-md-4">操作</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,11 +55,22 @@
                         <table class="table table-hover">
                             <tr>
                                 <td class="col-md-5"><strong>当前级别有{{ $count }}个分类</strong></td>
-                                <td class="col-md-4"><input class="form-control input-sm" name="title" placeholder="输入页面名称"></td>
-                                <td class="col-md-3">
+                                <td class="col-md-3"><input class="form-control input-sm" name="title" placeholder="输入页面名称"></td>
+                                <td class="col-md-4">
+                                    @if($id && $count)
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary btn-xs" type="submit">
+                                            <i class="fa fa-plus"></i>添加新页面
+                                        </button>
+                                        <a href="{{ url('admin/page/' . $id . '/sort') }}" class="btn btn-info btn-xs">
+                                            <i class="fa fa-sort-alpha-asc"></i>子页排序
+                                        </a>
+                                    </div>
+                                    @else
                                     <button class="btn btn-primary btn-xs" type="submit">
                                         <i class="fa fa-plus"></i>添加新页面
                                     </button>
+                                    @endif
                                 </td>
                             </tr>
                         </table>

@@ -7,6 +7,7 @@
  */
 namespace Notadd\Page\Controllers\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Notadd\Admin\Controllers\AbstractAdminController;
 use Notadd\Page\Models\Page;
 use Notadd\Page\Requests\PageCreateRequest;
@@ -73,12 +74,38 @@ class PageController extends AbstractAdminController {
     public function show($id) {
         $crumb = [];
         Page::getCrumbMenu($id, $crumb);
-        $page = Page::whereParentId($id)->orderBy('created_at', 'desc');
+        $page = Page::whereParentId($id)->orderBy('order_id', 'asc');
         $this->share('count', $page->count());
         $this->share('crumbs', $crumb);
         $this->share('id', $id);
         $this->share('pages', $page->get());
         return $this->view('content.page.list');
+    }
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function sort($id) {
+        $crumb = [];
+        Page::getCrumbMenu($id, $crumb);
+        $page = Page::findOrFail($id);
+        $pages = Page::whereParentId($id)->orderBy('order_id', 'asc')->get();
+        $this->share('count', $page->count());
+        $this->share('crumbs', $crumb);
+        $this->share('id', $id);
+        $this->share('page', $page);
+        $this->share('pages', $pages);
+        return $this->view('content.page.sort');
+    }
+    public function sorting($id, Request $request) {
+        if(is_array($request->get('order')) && $request->get('order')) {
+            foreach($request->get('order') as $key => $value) {
+                if(Page::whereParentId($id)->whereId($key)->count()) {
+                    Page::findOrFail($key)->update(['order_id' => $value]);
+                }
+            }
+        }
+        return $this->app->make('redirect')->back();
     }
     /**
      * @param PageCreateRequest $request

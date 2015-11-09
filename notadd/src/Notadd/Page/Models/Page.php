@@ -25,6 +25,7 @@ class Page extends Model {
         'template',
         'content',
         'enabled',
+        'order_id',
         'view_count',
     ];
     public function countSubPages() {
@@ -47,6 +48,9 @@ class Page extends Model {
         $templates->put('default::page.default', '默认模板');
         static::$dispatcher->fire(new GetTemplateList($templates));
         return $templates;
+    }
+    public function hasParent() {
+        return $this->getAttribute('parent_id') && parent::whereId($this->getAttribute('parent_id'))->count();
     }
     public function parent() {
         return $this->belongsTo(Page::class, 'parent_id');

@@ -140,5 +140,7 @@
 </div>
 @endsection
 @section('admin-js')
+<script src="{{ asset('/editor/ueditor/ueditor.config.js') }}"></script>
+<script src="{{ asset('/editor/ueditor/ueditor.all.min.js') }}"></script>
 <script src="{{ asset('themes/admin/js/jquery.uploadPreview.js') }}"></script>
 @endsection

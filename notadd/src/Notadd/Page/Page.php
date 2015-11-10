@@ -13,7 +13,7 @@ class Page {
     protected $model;
     public function __construct($id) {
         $this->id = $id;
-        $this->model = PageModel::find($id);
+        $this->model = PageModel::findOrFail($id);
     }
     public function getAlias() {
         return $this->model->getAttribute('alias');

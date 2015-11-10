@@ -127,6 +127,9 @@ class Category extends Model {
         static::$dispatcher->fire(new GetCategoryTypes($this, $types));
         return $types;
     }
+    public function hasParent() {
+        return $this->getAttribute('parent_id') && parent::whereId($this->getAttribute('parent_id'))->count();
+    }
     /**
      * @return int
      */

@@ -8,19 +8,20 @@
 namespace Notadd\Foundation\Providers;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Category\Listeners\BeforeCategoryDelete;
-use Notadd\Category\Models\Category;
+use Notadd\Category\Models\Category as CategoryModel;
 class CategoryServiceProvider extends ServiceProvider {
     /**
      * @return void
      */
     public function boot() {
         $this->app->make('router')->before(function() {
-            $categories = Category::whereEnabled(true)->get();
-            foreach($categories as $category) {
-                if($category->alias) {
-                    $this->app->make('router')->get($category->alias . '/{id}', 'Notadd\Article\Controllers\ArticleController@show')->where('id', '[0-9]+');
-                    $this->app->make('router')->get($category->alias, function() use ($category) {
-                        return $this->app->call('Notadd\Category\Controllers\CategoryController@show', ['id' => $category->id]);
+            $categories = CategoryModel::whereEnabled(true)->get();
+            foreach($categories as $value) {
+                if($value->alias) {
+                    $category = new \Notadd\Category\Category($value->id);
+                    $this->app->make('router')->get($category->getRouting() . '/{id}', 'Notadd\Article\Controllers\ArticleController@show')->where('id', '[0-9]+');
+                    $this->app->make('router')->get($category->getRouting(), function() use ($category) {
+                        return $this->app->call('Notadd\Category\Controllers\CategoryController@show', ['id' => $category->getId()]);
                     });
                 }
             }

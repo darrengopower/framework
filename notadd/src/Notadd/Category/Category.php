@@ -6,8 +6,10 @@
  * @datetime 2015-11-10 14:51:12
  */
 namespace Notadd\Category;
+
 use Illuminate\Support\Collection;
-use Notadd\Article\Models\Article;
+use Notadd\Article\Article;
+use Notadd\Article\Models\Article as ArticleModel;
 use Notadd\Category\Models\Category as CategoryModel;
 class Category {
     private $id;
@@ -21,16 +23,21 @@ class Category {
     }
     public function getList() {
         if($this->model->hasParent()) {
-            $model = Article::whereCategoryId($this->model->getAttribute('id'));
+            $model = ArticleModel::whereCategoryId($this->model->getAttribute('id'));
         } else {
             $relations = $this->getRelationCategoryList();
             $list = Collection::make();
             foreach($relations as $relation) {
                 $list->push($relation->getId());
             }
-            $model = Article::whereIn('category_id', $list->toArray());
+            $model = ArticleModel::whereIn('category_id', $list->toArray());
         }
-        return $model->get();
+        $data = $model->get();
+        $list = Collection::make();
+        foreach($data as $value) {
+            $list->push(new Article($value->getAttribute('id')));
+        }
+        return $list;
     }
     public function getLoopParent(Collection &$list, CategoryModel $model = null) {
         if($model === null) {
@@ -51,9 +58,9 @@ class Category {
     public function getRelationCategoryList() {
         $list = Collection::make();
         if($this->model->hasParent()) {
-            $data = CategoryModel::whereEnabled(true)->whereParentId($this->model->getAttribute('parent_id'))->orderBy('created_at', 'asc')->get();
+            $data = $this->model->whereEnabled(true)->whereParentId($this->model->getAttribute('parent_id'))->orderBy('created_at', 'asc')->get();
         } else {
-            $data = CategoryModel::whereEnabled(true)->whereParentId($this->model->getAttribute('id'))->orderBy('created_at', 'asc')->get();
+            $data = $this->model->whereEnabled(true)->whereParentId($this->model->getAttribute('id'))->orderBy('created_at', 'asc')->get();
         }
         foreach($data as $category) {
             $list->push(new Category($category->getAttribute('id')));

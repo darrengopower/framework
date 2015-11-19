@@ -6,7 +6,9 @@
  * @datetime 2015-10-30 15:46
  */
 namespace Notadd\Foundation\Providers;
+
 use Illuminate\Support\ServiceProvider;
+use Notadd\Category\Category;
 use Notadd\Category\Listeners\BeforeCategoryDelete;
 use Notadd\Category\Models\Category as CategoryModel;
 class CategoryServiceProvider extends ServiceProvider {
@@ -18,7 +20,7 @@ class CategoryServiceProvider extends ServiceProvider {
             $categories = CategoryModel::whereEnabled(true)->get();
             foreach($categories as $value) {
                 if($value->alias) {
-                    $category = new \Notadd\Category\Category($value->id);
+                    $category = new Category($value->id);
                     $this->app->make('router')->get($category->getRouting() . '/{id}', 'Notadd\Article\Controllers\ArticleController@show')->where('id', '[0-9]+');
                     $this->app->make('router')->get($category->getRouting(), function() use ($category) {
                         return $this->app->call('Notadd\Category\Controllers\CategoryController@show', ['id' => $category->getId()]);

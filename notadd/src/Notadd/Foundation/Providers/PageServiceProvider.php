@@ -6,9 +6,11 @@
  * @datetime 2015-10-30 16:29
  */
 namespace Notadd\Foundation\Providers;
+
 use Illuminate\Support\ServiceProvider;
-use Notadd\Foundation\AliasLoader;
+use Notadd\Page\Factory;
 use Notadd\Page\Models\Page as PageModel;
+use Notadd\Page\Page;
 class PageServiceProvider extends ServiceProvider {
     /**
      * @return void
@@ -19,9 +21,9 @@ class PageServiceProvider extends ServiceProvider {
             foreach($dataes as $value) {
                 if($this->app->make('setting')->get('site.home') !== 'page_' . $value->id) {
                     if($value->alias) {
-                        $page = new \Notadd\Page\Page($value->id);
+                        $page = new Page($value->id);
                         $this->app->make('router')->get($page->getRouting(), function() use ($page) {
-                            return $this->app->call('Notadd\Page\Controllers\PageController@show', ['id' => $page->getId()]);
+                            return $this->app->call('Notadd\Page\Controllers\PageController@show', ['id' => $page->getPageId()]);
                         });
                     }
                 }

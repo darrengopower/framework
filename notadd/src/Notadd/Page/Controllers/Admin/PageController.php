@@ -43,7 +43,10 @@ class PageController extends AbstractAdminController {
      * @return mixed
      */
     public function edit($id) {
+        $crumb = [];
+        Page::getCrumbMenu($id, $crumb);
         $page = Page::findOrFail($id);
+        $this->share('crumbs', $crumb);
         $this->share('page', $page);
         $this->share('templates', $page->getTemplateList());
         return $this->view('content.page.edit');
@@ -134,7 +137,7 @@ class PageController extends AbstractAdminController {
         }
         $request->files->replace();
         if($page->update($request->all())) {
-            return $this->app->make('redirect')->to('admin/page');
+            return $this->app->make('redirect')->to('admin/page/' . $id . '/edit');
         } else {
             return $this->app->make('redirect')->back()->withInput()->withErrors('保存失败！');
         }

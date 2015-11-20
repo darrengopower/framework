@@ -27,6 +27,7 @@ class Category {
         } else {
             $relations = $this->getRelationCategoryList();
             $list = Collection::make();
+            $list->push($this->model->getAttribute('id'));
             foreach($relations as $relation) {
                 $list->push($relation->getId());
             }

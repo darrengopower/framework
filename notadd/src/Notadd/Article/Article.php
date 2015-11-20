@@ -8,6 +8,7 @@
 namespace Notadd\Article;
 use Illuminate\Support\Str;
 use Notadd\Article\Models\Article as ArticleModel;
+use Notadd\Category\Category;
 class Article {
     /**
      * @var
@@ -55,6 +56,14 @@ class Article {
      */
     public function getModel() {
         return $this->model;
+    }
+    /**
+     * @return string
+     */
+    public function getRouting() {
+        $category = new Category($this->model->getAttribute('category_id'));
+        $path = $category->getRouting();
+        return $path . '/' . $this->id;
     }
     /**
      * @return mixed

@@ -6,9 +6,12 @@
         <li>后台首页</li>
         <li><a href="{{ url('admin/page') }}">页面管理</a></li>
         @foreach($crumbs as $crumb)
-        <li><a href="{{ url('admin/page/' . $crumb->id) }}">{{ $crumb->title }}</a></li>
-        @endforeach
+        @if($page->id == $crumb->id)
         <li><a href="{{ url('admin/page/' . $page->id . '/edit') }}">编辑页面：{{ $page->title }}</a></li>
+        @else
+        <li><a href="{{ url('admin/page/' . $crumb->id) }}">{{ $crumb->title }}</a></li>
+        @endif
+        @endforeach
     </ol>
     <div class="page-wrap">
         <div class="row">

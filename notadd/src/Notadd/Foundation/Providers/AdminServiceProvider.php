@@ -20,6 +20,7 @@ class AdminServiceProvider extends ServiceProvider {
                 $this->app->make('router')->get('logout', 'AuthController@getLogout');
                 $this->app->make('router')->get('register', 'AuthController@getRegister');
                 $this->app->make('router')->post('register', 'AuthController@postRegister');
+                $this->app['router']->controllers(['password' => 'PasswordController']);
             });
             $this->app->make('router')->group(['middleware' => 'auth.admin', 'prefix' => 'admin'], function () {
                 $this->app->make('router')->get('/', 'AdminController@init');

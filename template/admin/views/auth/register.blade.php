@@ -2,12 +2,12 @@
 @section('content')
 <div class="page page-auth clearfix">
     <div class="auth-container">
-        <h1 class="site-logo h2 mb15"><a href="/"><span>Laravel</span>&nbsp;内容管理系统</a> - 注册管理员账号</h1>
+        <h1 class="site-logo h2 mb15"><a href="/"><span>Notadd</span>&nbsp;内容管理系统</a> - 注册管理员账号</h1>
         <div class="form-container">
             <p class="small">已经有账号了。<a href="{{ url('admin/login') }}">前往登录</a></p>
             @if (count($errors) > 0)
             <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <strong>喔！</strong>您的填写有误哦！<br><br>
                 <ul>
                     @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>

@@ -16,7 +16,7 @@ trait ResetsPasswords {
      * @return \Illuminate\Http\Response
      */
     public function getEmail() {
-        return view('auth.password');
+        return view('admin::auth.password');
     }
     /**
      * @param  \Illuminate\Http\Request $request
@@ -48,7 +48,7 @@ trait ResetsPasswords {
         if(is_null($token)) {
             throw new NotFoundHttpException;
         }
-        return view('auth.reset')->with('token', $token);
+        return view('admin::auth.reset')->with('token', $token);
     }
     /**
      * @param  \Illuminate\Http\Request $request
@@ -88,6 +88,6 @@ trait ResetsPasswords {
         if(property_exists($this, 'redirectPath')) {
             return $this->redirectPath;
         }
-        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : 'admin';
     }
 }

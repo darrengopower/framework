@@ -231,6 +231,10 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     public function publicPath() {
         return realpath($this->basePath . DIRECTORY_SEPARATOR . '../public');
     }
+    public function usePublicPath($path) {
+        $this->instance('path.public', $path);
+        return $this;
+    }
     /**
      * @return string
      */

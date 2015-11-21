@@ -21,8 +21,14 @@ class Page {
     public function getContent() {
         return $this->model->getAttribute('content');
     }
+    public function getDescription() {
+        return $this->model->getAttribute('description');
+    }
     public function getId() {
         return $this->id;
+    }
+    public function getKeywords() {
+        return $this->model->getAttribute('keyword');
     }
     public function getLoopParent(Collection &$list, PageModel $model = null) {
         if ($model === null) {

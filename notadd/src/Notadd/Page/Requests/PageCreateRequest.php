@@ -19,7 +19,6 @@ class PageCreateRequest extends FormRequest {
      */
     public function messages() {
         return [
-            'title.unique' => '已有一个相同标题的页面存在！',
             'title.required' => '必须填写标题！',
             'title.max' => '标题长度超过最大限制字数！',
             //'alias.required' => '必须填写静态化名称！',
@@ -32,8 +31,7 @@ class PageCreateRequest extends FormRequest {
      */
     public function rules() {
         return [
-            'title' => 'required|unique:pages|max:255',
-            //'alias' => 'required|unique:pages|max:255',
+            'title' => 'required|max:255',
         ];
     }
 }

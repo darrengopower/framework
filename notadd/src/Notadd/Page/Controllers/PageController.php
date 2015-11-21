@@ -17,6 +17,9 @@ class PageController extends Controller {
         } else {
             $template = 'default::page.default';
         }
+        $this->app->make('searchengine.optimization')->setTitleMeta($page->getTitle());
+        $this->app->make('searchengine.optimization')->setDescriptionMeta($page->getDescription());
+        $this->app->make('searchengine.optimization')->setKeywordsMeta($page->getKeywords());
         $this->share('content', $page->getContent());
         $this->share('logo', file_get_contents(realpath($this->app->basePath() . '/../template/install') . DIRECTORY_SEPARATOR . 'logo.svg'));
         $this->share('page', $page);

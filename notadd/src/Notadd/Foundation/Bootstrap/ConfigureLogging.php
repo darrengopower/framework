@@ -48,7 +48,7 @@ class ConfigureLogging {
      * @return void
      */
     protected function configureSingleHandler(Application $app, Writer $log) {
-        $log->useFiles($app->storagePath() . '/logs/laravel.log');
+        $log->useFiles($app->storagePath() . '/logs/notadd.log');
     }
     /**
      * @param  \Illuminate\Contracts\Foundation\Application $app
@@ -56,7 +56,7 @@ class ConfigureLogging {
      * @return void
      */
     protected function configureDailyHandler(Application $app, Writer $log) {
-        $log->useDailyFiles($app->storagePath() . '/logs/laravel.log', $app->make('config')->get('app.log_max_files', 5));
+        $log->useDailyFiles($app->storagePath() . '/logs/notadd.log', $app->make('config')->get('app.log_max_files', 5));
     }
     /**
      * @param  \Illuminate\Contracts\Foundation\Application $app
@@ -64,7 +64,7 @@ class ConfigureLogging {
      * @return void
      */
     protected function configureSyslogHandler(Application $app, Writer $log) {
-        $log->useSyslog('laravel');
+        $log->useSyslog('notadd');
     }
     /**
      * @param  \Illuminate\Contracts\Foundation\Application $app

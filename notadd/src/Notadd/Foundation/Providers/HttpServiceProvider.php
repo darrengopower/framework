@@ -8,6 +8,7 @@
 namespace Notadd\Foundation\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Notadd\Foundation\Auth\Models\User;
 use Notadd\Page\Models\Page;
 class HttpServiceProvider extends ServiceProvider {
     /**

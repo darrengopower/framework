@@ -17,8 +17,8 @@ class PageServiceProvider extends ServiceProvider {
      */
     public function boot() {
         $this->app->make('router')->before(function() {
-            $dataes = PageModel::whereEnabled(true)->get();
-            foreach($dataes as $value) {
+            $pages = PageModel::whereEnabled(true)->get();
+            foreach($pages as $value) {
                 if($this->app->make('setting')->get('site.home') !== 'page_' . $value->id) {
                     if($value->alias) {
                         $page = new Page($value->id);

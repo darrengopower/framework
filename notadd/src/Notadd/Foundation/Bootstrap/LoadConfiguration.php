@@ -7,7 +7,7 @@
  */
 namespace Notadd\Foundation\Bootstrap;
 use Illuminate\Config\Repository;
-use Symfony\Component\Finder\Finder;
+use Notadd\Foundation\Configuration\DefaultConfiguration;
 use Symfony\Component\Finder\SplFileInfo;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Config\Repository as RepositoryContract;
@@ -26,6 +26,7 @@ class LoadConfiguration {
         if(!isset($loadedFromCache)) {
             $this->loadConfigurationFiles($app, $config);
         }
+        $this->loadDefaultConfiguration($config);
         date_default_timezone_set($config['app.timezone']);
         mb_internal_encoding('UTF-8');
     }
@@ -35,21 +36,31 @@ class LoadConfiguration {
      * @return void
      */
     protected function loadConfigurationFiles(Application $app, RepositoryContract $config) {
-        foreach($this->getConfigurationFiles($app) as $key => $path) {
-            $config->set($key, require $path);
+        $data = require $this->getConfigurationFile($app);
+        foreach($data as $key => $value) {
+            $config->set($key, $value);
         }
+    }
+    public function loadDefaultConfiguration(Repository $config) {
+        $default = new DefaultConfiguration($config);
+        $default->loadApplicationConfiguration();
+        $default->loadAuthConfiguration();
+        $default->loadBroadcastingConfiguration();
+        $default->loadCacheConfiguration();
+        $default->loadCompileConfiguration();
+        $default->loadFilesystemsConfiguration();
+        $default->loadMailConfiguration();
+        $default->loadQueueConfiguration();
+        $default->loadServicesConfiguration();
+        $default->loadSessionConfiguration();
+        $default->loadViewConfiguration();
     }
     /**
      * @param  \Illuminate\Contracts\Foundation\Application $app
      * @return array
      */
-    protected function getConfigurationFiles(Application $app) {
-        $files = [];
-        foreach(Finder::create()->files()->name('*.php')->in($app->configPath()) as $file) {
-            $nesting = $this->getConfigurationNesting($file);
-            $files[$nesting . basename($file->getRealPath(), '.php')] = $file->getRealPath();
-        }
-        return $files;
+    protected function getConfigurationFile(Application $app) {
+        return $app->basePath() . DIRECTORY_SEPARATOR . 'config.php';
     }
     /**
      * @param  \Symfony\Component\Finder\SplFileInfo $file

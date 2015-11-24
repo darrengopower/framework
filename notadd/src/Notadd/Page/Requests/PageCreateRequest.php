@@ -21,9 +21,6 @@ class PageCreateRequest extends FormRequest {
         return [
             'title.required' => '必须填写标题！',
             'title.max' => '标题长度超过最大限制字数！',
-            //'alias.required' => '必须填写静态化名称！',
-            //'alias.unique' => '已有一个相同静态化名称的页面存在！',
-            //'alias.max' => '静态化名称长度超过最大限制字数！',
         ];
     }
     /**

@@ -17,7 +17,9 @@ class PageController extends Controller {
         } else {
             $template = 'default::page.default';
         }
-        $this->app->make('searchengine.optimization')->setTitleMeta($page->getTitle());
+        if($this->app->make('setting')->get('site.home') !== 'page_' . $id) {
+            $this->app->make('searchengine.optimization')->setTitleMeta($page->getTitle() . ' - {sitename}');
+        }
         $this->app->make('searchengine.optimization')->setDescriptionMeta($page->getDescription());
         $this->app->make('searchengine.optimization')->setKeywordsMeta($page->getKeywords());
         $this->share('content', $page->getContent());

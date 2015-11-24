@@ -22,7 +22,6 @@ class PageEditRequest extends FormRequest {
             'title.required' => '必须填写标题！',
             'title.max'      => '标题长度超过最大限制字数！',
             'alias.required' => '必须填写静态化名称！',
-            'alias.unique' => '已有一个相同别名的页面存在！',
             'alias.max'      => '别名长度超过最大限制字数！',
         ];
     }
@@ -32,7 +31,7 @@ class PageEditRequest extends FormRequest {
     public function rules() {
         return [
             'title' => 'required|max:300',
-            'alias' => 'required|unique:pages,alias,' . $this->route('page') . '|max:300',
+            'alias' => 'required|max:300',
         ];
     }
 }

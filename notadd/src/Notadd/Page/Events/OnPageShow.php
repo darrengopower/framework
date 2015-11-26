@@ -7,7 +7,7 @@
  */
 namespace Notadd\Page\Events;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\View\Factory;
+use Illuminate\Contracts\View\Factory;
 use Notadd\Page\Page;
 class OnPageShow {
     private $app;

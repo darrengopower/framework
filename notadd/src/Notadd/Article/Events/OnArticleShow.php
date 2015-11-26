@@ -7,8 +7,8 @@
  */
 namespace Notadd\Article\Events;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\View\Factory;
-use Notadd\Article\Models\Article;
+use Illuminate\Contracts\View\Factory;
+use Notadd\Article\Article;
 class OnArticleShow {
     private $app;
     private $view;
@@ -19,13 +19,13 @@ class OnArticleShow {
         $this->article = $article;
     }
     public function getArticle() {
-        return $this->article;
+        return $this->article->getModel();
     }
     public function getCategory() {
-        return $this->article->category;
+        return $this->article->getCategory();
     }
     public function setArticleShowTemplate($template) {
-        $this->article->setShowTemplate($template);
+        $this->article->getModel()->setShowTemplate($template);
     }
     public function share($key, $value) {
         $this->view->share($key, $value);

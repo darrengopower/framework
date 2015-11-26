@@ -36,7 +36,7 @@ class Article {
      * @return mixed
      */
     public function getCategory() {
-        return $this->model->getAttribute('category');
+        return new Category($this->model->getAttribute('category_id'));
     }
     /**
      * @return mixed
@@ -64,6 +64,9 @@ class Article {
         $category = new Category($this->model->getAttribute('category_id'));
         $path = $category->getRouting();
         return $path . '/' . $this->id;
+    }
+    public function getShowTemplate() {
+        return $this->model->getShowTemplate();
     }
     /**
      * @return mixed

@@ -53,9 +53,6 @@ class Category {
     public function getModel() {
         return $this->model;
     }
-    public function getName() {
-        return $this->model->getAttribute('title');
-    }
     public function getRelationCategoryList() {
         $list = Collection::make();
         if($this->model->hasParent()) {
@@ -63,8 +60,12 @@ class Category {
         } else {
             $data = $this->model->whereEnabled(true)->whereParentId($this->model->getAttribute('id'))->orderBy('created_at', 'asc')->get();
         }
-        foreach($data as $category) {
-            $list->push(new Category($category->getAttribute('id')));
+        if($data->count()) {
+            foreach($data as $category) {
+                $list->push(new Category($category->getAttribute('id')));
+            }
+        } else {
+            $list->push(new Category($this->model->getAttribute('id')));
         }
         return $list;
     }
@@ -79,5 +80,11 @@ class Category {
     }
     public function getShowTemplate() {
         return $this->model->getShowTemplate();
+    }
+    public function getTitle() {
+        return $this->model->getAttribute('title');
+    }
+    public function getType() {
+        return $this->model->getAttribute('type');
     }
 }

@@ -14,6 +14,7 @@ class AuthController extends AbstractAdminController {
     protected $middleware = [
         'guest.admin' => ['except' => 'getLogout']
     ];
+    protected $loginPath = 'admin/login';
     protected $redirectPath = 'admin';
     /**
      * @param array $data

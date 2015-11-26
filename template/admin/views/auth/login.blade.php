@@ -14,10 +14,12 @@
             <form action="{{ url('admin/login') }}" class="form-horizontal" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group form-group-lg">
-                    <input type="email" class="form-control" name="email" placeholder="邮件账户" value="">
+                    <input type="email" class="form-control" name="email" required>
+                    <label alt="请输入邮件账户" placeholder="邮件账户"></label>
                 </div>
                 <div class="form-group form-group-lg">
-                    <input type="password" class="form-control" name="password" placeholder="密码" value="">
+                    <input type="password" class="form-control" name="password" required>
+                    <label alt="请输入密码" placeholder="密码"></label>
                 </div>
                 <div class="clearfix"><a href="{{ url('admin/password/email') }}" class="right small">忘记密码了吗？</a></div>
                 <div class="clearfix mb15">

@@ -8,6 +8,7 @@
 namespace Notadd\Foundation\Providers;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Theme\Factory;
+use Notadd\Theme\Theme;
 class ThemeServiceProvider extends ServiceProvider {
     /**
      * @return void
@@ -24,7 +25,9 @@ class ThemeServiceProvider extends ServiceProvider {
         });
         $default = $this->app->make('setting')->get('site.theme');
         $this->app->make('events')->listen('router.matched', function () use ($default) {
-            foreach($this->app->make('theme')->getThemeList() as $theme) {
+            $list = $this->app->make('theme')->getThemeList();
+            $list->put('admin', new Theme('后台模板', 'admin', realpath($this->app->basePath() . '/../template/admin')));
+            foreach($list as $theme) {
                 $alias = $theme->getAlias();
                 if($alias == $default) {
                     $this->loadViewsFrom($theme->getViewPath(), 'themes');

@@ -55,7 +55,9 @@ class Factory {
      * @return void
      */
     public function publishAssets() {
-        foreach($this->list as $theme) {
+        $list = $this->list;
+        $list->put('admin', new Theme('后台模板', 'admin', realpath($this->app->basePath() . '/../template/admin')));
+        foreach($list as $theme) {
             $this->publishTag($theme->getAlias());
         }
     }

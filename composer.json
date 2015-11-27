@@ -60,6 +60,7 @@
     },
     "autoload": {
         "files": [
+            "src/Notadd/helpers.php"
         ],
         "psr-4": {
             "Notadd\\": "src/Notadd/"

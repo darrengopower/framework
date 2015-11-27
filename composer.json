@@ -6,7 +6,7 @@
         "notadd"
     ],
     "homepage": "http://notadd.org",
-    "license": "MIT",
+    "license": "Apache License",
     "require": {
         "php": ">=5.5.9",
         "ext-mbstring": "*",

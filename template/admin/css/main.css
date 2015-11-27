@@ -3785,6 +3785,9 @@ body {
     width: 100%;
     height: calc(100% - 46px)
 }
+.page-auth {
+    background: url("../images/background.png") repeat;
+}
 .page-auth .site-logo {
     text-transform: uppercase;
     text-align: center
@@ -3799,6 +3802,13 @@ body {
 .page-auth .auth-container {
     display: table-cell;
     vertical-align: middle
+}
+.page-auth .auth-container .auth-container-wrap {
+    background: #fff;
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 550px;
 }
 .page-auth .auth-container .form-container,
 .page-lock .lock-box,

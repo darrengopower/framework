@@ -17,6 +17,7 @@ class InstallServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
+        $this->loadViewsFrom(__DIR__ . '/../../../views/install', 'install');
         $this->app->make('router')->get('/', 'Notadd\Install\Controllers\PrerequisiteController@render');
     }
     /**

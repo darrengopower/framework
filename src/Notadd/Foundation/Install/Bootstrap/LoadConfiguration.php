@@ -34,8 +34,7 @@ class LoadConfiguration {
      * @return void
      */
     public function bootstrap(Application $app) {
-        $items = [];
-        $app->instance('config', $config = new Repository($items));
+        $app->instance('config', $config = new Repository([]));
         $this->loadConfiguration($app, $config);
         date_default_timezone_set($config['app.timezone']);
         mb_internal_encoding('UTF-8');
@@ -79,9 +78,7 @@ class LoadConfiguration {
             'aliases' => []
         ]);
         $config->set('view', [
-            'paths' => [
-                realpath(base_path('../template')),
-            ],
+            'paths' => [],
             'compiled' => realpath(storage_path('framework/views')),
         ]);
     }

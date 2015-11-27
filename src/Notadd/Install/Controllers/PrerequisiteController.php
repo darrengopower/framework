@@ -11,14 +11,14 @@ use Notadd\Install\Contracts\Prerequisite;
 use Psr\Http\Message\ServerRequestInterface;
 class PrerequisiteController extends Controller {
     public function render(ServerRequestInterface $request, Prerequisite $prerequisite) {
-        $view = $this->view->make('install.layout');
+        $view = $this->view->make('install::layout');
         $prerequisite->check();
         $errors = $prerequisite->getErrors();
         if(count($errors)) {
-            $view->content = $this->view->make('install.errors');
+            $view->content = $this->view->make('install::errors');
             $view->content->errors = $errors;
         } else {
-            $view->content = $this->view->make('install.install');
+            $view->content = $this->view->make('install::install');
         }
         return $view;
     }

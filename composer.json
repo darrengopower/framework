@@ -1,4 +1,12 @@
 {
+    "name": "notadd/framework",
+    "description": "The Core Code For Notadd CMS!",
+    "keywords": [
+        "framework",
+        "notadd"
+    ],
+    "homepage": "http://notadd.org",
+    "license": "MIT",
     "require": {
         "php": ">=5.5.9",
         "ext-mbstring": "*",
@@ -68,14 +76,5 @@
     },
     "config": {
         "preferred-install": "dist"
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "http://packagist.phpcomposer.com"
-        },
-        {
-            "packagist": false
-        }
-    ]
+    }
 }

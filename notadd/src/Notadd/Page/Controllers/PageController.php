@@ -26,6 +26,7 @@ class PageController extends Controller {
         $this->share('logo', file_get_contents(realpath($this->app->basePath() . '/../template/install') . DIRECTORY_SEPARATOR . 'logo.svg'));
         $this->share('page', $page);
         $this->share('title', $page->getTitle());
+        $this->share('subPages', $page->getSubPages());
         return $this->view($template);
     }
 }

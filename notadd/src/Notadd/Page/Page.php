@@ -55,6 +55,14 @@ class Page {
         }
         return $routingString->implode('/');
     }
+    public function getSubPages() {
+        $list = Collection::make();
+        $data = $this->model->whereParentId($this->model->getAttribute('id'))->get();
+        foreach($data as $value) {
+            $list->push(new Page($value->getAttribute('id')));
+        }
+        return $list;
+    }
     public function getTemplate() {
         return $this->model->getAttribute('template');
     }

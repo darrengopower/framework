@@ -5,7 +5,7 @@
  * @copyright (c) 2015, iBenchu.org
  * @datetime 2015-10-30 16:29
  */
-namespace Notadd\Foundation\Providers;
+namespace Notadd\Page;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Page\Factory;
 use Notadd\Page\Models\Page as PageModel;

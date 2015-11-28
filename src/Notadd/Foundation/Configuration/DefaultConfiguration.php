@@ -62,17 +62,17 @@ use Illuminate\Translation\TranslationServiceProvider;
 use Illuminate\Validation\ValidationServiceProvider;
 use Illuminate\View\ViewServiceProvider;
 use Notadd\Foundation\Auth\Models\User;
-use Notadd\Foundation\Providers\AdminServiceProvider;
-use Notadd\Foundation\Providers\ArticleServiceProvider;
-use Notadd\Foundation\Providers\CategoryServiceProvider;
+use Notadd\Admin\AdminServiceProvider;
+use Notadd\Article\ArticleServiceProvider;
+use Notadd\Category\CategoryServiceProvider;
 use Notadd\Foundation\Providers\ComposerServiceProvider;
-use Notadd\Foundation\Providers\ExtensionServiceProvider;
-use Notadd\Foundation\Providers\FormRequestServiceProvider;
-use Notadd\Foundation\Providers\HttpServiceProvider;
-use Notadd\Foundation\Providers\MenuServiceProvider;
-use Notadd\Foundation\Providers\PageServiceProvider;
-use Notadd\Foundation\Providers\SettingServiceProvider;
-use Notadd\Foundation\Providers\ThemeServiceProvider;
+use Notadd\Foundation\Extension\ExtensionServiceProvider;
+use Notadd\Foundation\Http\FormRequestServiceProvider;
+use Notadd\Foundation\Http\HttpServiceProvider;
+use Notadd\Menu\MenuServiceProvider;
+use Notadd\Page\PageServiceProvider;
+use Notadd\Setting\SettingServiceProvider;
+use Notadd\Theme\ThemeServiceProvider;
 class DefaultConfiguration {
     private $config;
     public function __construct(Repository $config) {

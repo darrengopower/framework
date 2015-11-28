@@ -5,7 +5,7 @@
  * @copyright (c) 2015, iBenchu.org
  * @datetime 2015-10-29 16:31
  */
-namespace Notadd\Foundation\Providers;
+namespace Notadd\Theme;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Theme\Factory;
 use Notadd\Theme\Theme;

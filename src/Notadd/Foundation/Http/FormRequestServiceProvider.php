@@ -5,7 +5,7 @@
  * @copyright (c) 2015, iBenchu.org
  * @datetime 2015-10-17 11:21
  */
-namespace Notadd\Foundation\Providers;
+namespace Notadd\Foundation\Http;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Request;

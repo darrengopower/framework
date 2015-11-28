@@ -8,6 +8,8 @@
 namespace Notadd\Foundation\Install\Bootstrap;
 use Illuminate\Cache\CacheServiceProvider;
 use Illuminate\Config\Repository;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Config\Repository as RepositoryContract;
 use Illuminate\Cookie\CookieServiceProvider;
 use Illuminate\Database\DatabaseServiceProvider;
 use Illuminate\Encryption\EncryptionServiceProvider;
@@ -23,10 +25,8 @@ use Illuminate\Session\SessionServiceProvider;
 use Illuminate\Translation\TranslationServiceProvider;
 use Illuminate\Validation\ValidationServiceProvider;
 use Illuminate\View\ViewServiceProvider;
-use Notadd\Foundation\Providers\ExtensionServiceProvider;
-use Notadd\Foundation\Providers\FormRequestServiceProvider;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Config\Repository as RepositoryContract;
+use Notadd\Foundation\Extension\ExtensionServiceProvider;
+use Notadd\Foundation\Http\FormRequestServiceProvider;
 use Notadd\Install\InstallServiceProvider;
 class LoadConfiguration {
     /**

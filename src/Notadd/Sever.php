@@ -13,7 +13,7 @@ use Notadd\Foundation\Application;
 use Notadd\Foundation\Http\Kernel as HttpKernel;
 use Notadd\Foundation\Install\Kernel as InstallKernel;
 use Notadd\Foundation\Exceptions\Handler;
-class Core {
+class Sever {
     private $app;
     private $path;
     public function __construct($path) {

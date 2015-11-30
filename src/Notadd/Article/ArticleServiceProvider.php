@@ -5,7 +5,7 @@
  * @copyright (c) 2015, iBenchu.org
  * @datetime 2015-10-30 16:03
  */
-namespace Notadd\Foundation\Providers;
+namespace Notadd\Article;
 use Illuminate\Support\ServiceProvider;
 class ArticleServiceProvider extends ServiceProvider {
     /**

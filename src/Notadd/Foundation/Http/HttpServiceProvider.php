@@ -5,10 +5,11 @@
  * @copyright (c) 2015, iBenchu.org
  * @datetime 2015-11-02 17:55
  */
-namespace Notadd\Foundation\Providers;
+namespace Notadd\Foundation\Http;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Auth\Models\User;
+use Notadd\Foundation\SearchEngine\SearchEngineServiceProvider;
 use Notadd\Page\Models\Page;
 class HttpServiceProvider extends ServiceProvider {
     /**

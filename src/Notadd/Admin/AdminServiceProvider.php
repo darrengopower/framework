@@ -5,7 +5,7 @@
  * @copyright (c) 2015, iBenchu.org
  * @datetime 2015-10-29 18:19
  */
-namespace Notadd\Foundation\Providers;
+namespace Notadd\Admin;
 use Illuminate\Support\ServiceProvider;
 class AdminServiceProvider extends ServiceProvider {
     /**

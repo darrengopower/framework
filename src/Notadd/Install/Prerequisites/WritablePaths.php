@@ -13,8 +13,7 @@ class WritablePaths extends Prerequisite {
     public function check() {
         $paths = [
             public_path(),
-            public_path('assets'),
-            base_path('../extensions'),
+            base_path('extensions'),
             storage_path()
         ];
         foreach($paths as $path) {

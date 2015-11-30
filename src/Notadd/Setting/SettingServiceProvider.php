@@ -5,7 +5,7 @@
  * @copyright (c) 2015, iBenchu.org
  * @datetime 2015-10-29 16:11
  */
-namespace Notadd\Foundation\Providers;
+namespace Notadd\Setting;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\AliasLoader;
 use Notadd\Setting\Facades\Setting;

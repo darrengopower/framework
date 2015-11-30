@@ -48,17 +48,14 @@
         $('form :input:first').select();
         $('form').on('submit', function (e) {
             e.preventDefault();
-            var $button = $(this).find('button')
-                .text('正在安装...')
-                .prop('disabled', true);
-            $.post('', $(this).serialize())
-                .done(function () {
-                    window.location.reload();
-                })
-                .fail(function (data) {
-                    $('#error').show().text('Something went wrong:\n\n' + data.responseJSON.error);
-                    $button.prop('disabled', false).text('开始安装');
-                });
+            var $button = $(this).find('button').text('正在安装...').prop('disabled', true);
+            $.post('', $(this).serialize()).done(function (data) {
+                console.log(data);
+                //window.location.reload();
+            }).fail(function (data) {
+                $('#error').show().text('Something went wrong:\n\n' + data.responseJSON.error);
+                $button.prop('disabled', false).text('开始安装');
+            });
             return false;
         });
     });

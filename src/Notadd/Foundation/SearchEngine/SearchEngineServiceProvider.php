@@ -5,7 +5,7 @@
  * @copyright (c) 2015, iBenchu.org
  * @datetime 2015-11-21 14:51
  */
-namespace Notadd\Foundation\Providers;
+namespace Notadd\Foundation\SearchEngine;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\AliasLoader;
 use Notadd\Foundation\SearchEngine\Facades\SearchEngineOptimization;

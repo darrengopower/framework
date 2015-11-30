@@ -5,9 +5,10 @@
  * @copyright (c) 2015, iBenchu.org
  * @datetime 2015-10-30 15:02
  */
-namespace Notadd\Foundation\Providers;
+namespace Notadd\Menu;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\AliasLoader;
+use Notadd\Foundation\Providers\Factory;
 use Notadd\Menu\Models\Menu;
 class MenuServiceProvider extends ServiceProvider {
     /**

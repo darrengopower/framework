@@ -5,8 +5,7 @@
  * @copyright (c) 2015, iBenchu.org
  * @datetime 2015-10-30 15:46
  */
-namespace Notadd\Foundation\Providers;
-
+namespace Notadd\Category;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Category\Category;
 use Notadd\Category\Listeners\BeforeCategoryDelete;

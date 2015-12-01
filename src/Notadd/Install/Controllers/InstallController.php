@@ -11,6 +11,6 @@ use Psr\Http\Message\ServerRequestInterface;
 class InstallController extends Controller {
     public function handle(ServerRequestInterface $request) {
         $artisan = $this->app->make('Illuminate\Contracts\Console\Kernel');
-        $artisan->call('route:list');
+        $artisan->call('install');
     }
 }

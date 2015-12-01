@@ -10,6 +10,7 @@ use Notadd\Foundation\Routing\Controller;
 use Psr\Http\Message\ServerRequestInterface;
 class InstallController extends Controller {
     public function handle(ServerRequestInterface $request) {
-        dd($this);
+        $artisan = $this->app->make('Illuminate\Contracts\Console\Kernel');
+        $artisan->call('route:list');
     }
 }

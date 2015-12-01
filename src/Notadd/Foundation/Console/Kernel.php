@@ -10,15 +10,19 @@ use Exception;
 use Throwable;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Console\Application as Artisan;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Console\Kernel as KernelContract;
+use Illuminate\Contracts\Foundation\Application;
+use Notadd\Foundation\Console\Application as Artisan;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 class Kernel implements KernelContract {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
      */
     protected $app;
+    /**
+     * @var array
+     */
+    protected $commands = [];
     /**
      * @var \Illuminate\Contracts\Events\Dispatcher
      */
@@ -44,7 +48,6 @@ class Kernel implements KernelContract {
     /**
      * @param  \Illuminate\Contracts\Foundation\Application $app
      * @param  \Illuminate\Contracts\Events\Dispatcher $events
-     * @return void
      */
     public function __construct(Application $app, Dispatcher $events) {
         if(!defined('ARTISAN_BINARY')) {

@@ -15,6 +15,8 @@ use Notadd\Foundation\Console\Kernel as ConsoleKernel;
 use Notadd\Foundation\Http\Kernel as HttpKernel;
 use Notadd\Foundation\Install\Kernel as InstallKernel;
 use Notadd\Foundation\Exceptions\Handler;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
 class Server {
     private $app;
     private $path;
@@ -42,5 +44,16 @@ class Server {
         );
         $response->send();
         $kernel->terminate($request, $response);
+    }
+    public function console() {
+        $this->app = new Application($this->path);
+        $this->app->singleton(ConsoleKernelContract::class, ConsoleKernel::class);
+        $kernel = $this->app->make(ConsoleKernelContract::class);
+        $status = $kernel->handle(
+            $input = new ArgvInput,
+            new ConsoleOutput
+        );
+        $kernel->terminate($input, $status);
+        exit($status);
     }
 }

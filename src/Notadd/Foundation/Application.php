@@ -89,7 +89,6 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     protected $namespace = null;
     /**
      * @param  string|null $basePath
-     * @return void
      */
     public function __construct($basePath = null) {
         $this->registerBaseBindings();

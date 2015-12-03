@@ -36,9 +36,11 @@ class LoadConfiguration {
      * @return void
      */
     protected function loadConfigurationFiles(Application $app, RepositoryContract $config) {
-        $data = require $this->getConfigurationFile($app);
-        foreach($data as $key => $value) {
-            $config->set($key, $value);
+        if(file_exists($app->basePath() . DIRECTORY_SEPARATOR . 'config.php')) {
+            $data = require $app->basePath() . DIRECTORY_SEPARATOR . 'config.php';
+            foreach($data as $key => $value) {
+                $config->set($key, $value);
+            }
         }
     }
     public function loadDefaultConfiguration(Repository $config) {
@@ -60,7 +62,7 @@ class LoadConfiguration {
      * @return array
      */
     protected function getConfigurationFile(Application $app) {
-        return $app->basePath() . DIRECTORY_SEPARATOR . 'config.php';
+
     }
     /**
      * @param  \Symfony\Component\Finder\SplFileInfo $file

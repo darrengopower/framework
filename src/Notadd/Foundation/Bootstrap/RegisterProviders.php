@@ -7,12 +7,16 @@
  */
 namespace Notadd\Foundation\Bootstrap;
 use Illuminate\Contracts\Foundation\Application;
+use Notadd\Foundation\Console\ConsoleServiceProvider;
+use Notadd\Foundation\Console\ConsoleSupportServiceProvider;
 class RegisterProviders {
     /**
      * @param  \Illuminate\Contracts\Foundation\Application $app
      * @return void
      */
     public function bootstrap(Application $app) {
+        $app->register(ConsoleServiceProvider::class);
+        $app->register(ConsoleSupportServiceProvider::class);
         $app->registerConfiguredProviders();
     }
 }

@@ -11,10 +11,13 @@ use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Contracts\Http\Kernel as HttpKernelContract;
 use Notadd\Foundation\Application;
+use Notadd\Foundation\Console\ConsoleServiceProvider;
+use Notadd\Foundation\Console\ConsoleSupportServiceProvider;
 use Notadd\Foundation\Console\Kernel as ConsoleKernel;
 use Notadd\Foundation\Http\Kernel as HttpKernel;
 use Notadd\Foundation\Install\Kernel as InstallKernel;
 use Notadd\Foundation\Exceptions\Handler;
+use Notadd\Install\InstallServiceProvider;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 class Server {
@@ -47,7 +50,13 @@ class Server {
     }
     public function console() {
         $this->app = new Application($this->path);
+        $this->app->register(ConsoleServiceProvider::class);
+        $this->app->register(ConsoleSupportServiceProvider::class);
+        if(!$this->app->isInstalled()) {
+            $this->app->register(InstallServiceProvider::class);
+        }
         $this->app->singleton(ConsoleKernelContract::class, ConsoleKernel::class);
+        $this->app->singleton(ExceptionHandler::class, Handler::class);
         $kernel = $this->app->make(ConsoleKernelContract::class);
         $status = $kernel->handle(
             $input = new ArgvInput,

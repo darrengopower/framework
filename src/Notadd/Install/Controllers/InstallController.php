@@ -12,6 +12,5 @@ class InstallController extends Controller {
     public function handle(ServerRequestInterface $request) {
         $artisan = $this->app->make('Illuminate\Contracts\Console\Kernel');
         $artisan->call('list');
-        dd($this->app->make('log'));
     }
 }

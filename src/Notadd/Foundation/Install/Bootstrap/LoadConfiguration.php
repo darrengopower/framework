@@ -41,5 +41,17 @@ class LoadConfiguration {
             'paths' => [],
             'compiled' => realpath(storage_path('framework/views')),
         ]);
+        $config->set('session.driver', 'file');
+        $config->set('session.lifetime', 120);
+        $config->set('session.expire_on_close', false);
+        $config->set('session.encrypt', false);
+        $config->set('session.files', storage_path('framework/sessions'));
+        $config->set('session.connection', null);
+        $config->set('session.table', 'sessions');
+        $config->set('session.lottery', [2, 100]);
+        $config->set('session.cookie', 'notadd_session');
+        $config->set('session.path', '/');
+        $config->set('session.domain', null);
+        $config->set('session.secure', false);
     }
 }

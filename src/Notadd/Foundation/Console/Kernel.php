@@ -7,18 +7,30 @@
  */
 namespace Notadd\Foundation\Console;
 use Exception;
+use Notadd\Foundation\Bootstrap\BootProviders;
+use Notadd\Foundation\Bootstrap\ConfigureLogging;
+use Notadd\Foundation\Bootstrap\DetectEnvironment;
+use Notadd\Foundation\Bootstrap\HandleExceptions;
+use Notadd\Foundation\Bootstrap\LoadConfiguration;
+use Notadd\Foundation\Bootstrap\RegisterFacades;
+use Notadd\Foundation\Bootstrap\RegisterProviders;
+use Notadd\Foundation\Bootstrap\SetRequestForConsole;
 use Throwable;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Console\Application as Artisan;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Console\Kernel as KernelContract;
+use Illuminate\Contracts\Foundation\Application;
+use Notadd\Foundation\Console\Application as Artisan;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 class Kernel implements KernelContract {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
      */
     protected $app;
+    /**
+     * @var array
+     */
+    protected $commands = [];
     /**
      * @var \Illuminate\Contracts\Events\Dispatcher
      */
@@ -32,19 +44,18 @@ class Kernel implements KernelContract {
      * @var array
      */
     protected $bootstrappers = [
-        'Illuminate\Foundation\Bootstrap\DetectEnvironment',
-        'Illuminate\Foundation\Bootstrap\LoadConfiguration',
-        'Illuminate\Foundation\Bootstrap\ConfigureLogging',
-        'Illuminate\Foundation\Bootstrap\HandleExceptions',
-        'Illuminate\Foundation\Bootstrap\RegisterFacades',
-        'Illuminate\Foundation\Bootstrap\SetRequestForConsole',
-        'Illuminate\Foundation\Bootstrap\RegisterProviders',
-        'Illuminate\Foundation\Bootstrap\BootProviders',
+        DetectEnvironment::class,
+        LoadConfiguration::class,
+        ConfigureLogging::class,
+        HandleExceptions::class,
+        RegisterFacades::class,
+        SetRequestForConsole::class,
+        RegisterProviders::class,
+        BootProviders::class,
     ];
     /**
      * @param  \Illuminate\Contracts\Foundation\Application $app
      * @param  \Illuminate\Contracts\Events\Dispatcher $events
-     * @return void
      */
     public function __construct(Application $app, Dispatcher $events) {
         if(!defined('ARTISAN_BINARY')) {

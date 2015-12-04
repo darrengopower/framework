@@ -10,17 +10,16 @@
             background: #fff;
             margin: 0;
             padding: 0;
-            line-height: 1.5;
         }
         body, input, button {
-            font-family: 'Open Sans', sans-serif;
+            color: #7e96b3;
+            font-family: "Microsoft Yahei", "Open Sans", Helvetica, Arial, sans-serif;
             font-size: 16px;
-            color: #7E96B3;
         }
         .container {
             max-width: 515px;
             margin: 0 auto;
-            padding: 100px 30px;
+            padding: 60px 30px;
             text-align: center;
         }
         a {
@@ -31,62 +30,66 @@
             text-decoration: underline;
         }
         h1 {
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
         h2 {
+            color: #3c5675;
             font-size: 28px;
             font-weight: normal;
-            color: #3C5675;
             margin-bottom: 0;
         }
         form {
             margin-top: 40px;
         }
-        .FormGroup {
+        .form-group {
             margin-bottom: 20px;
         }
-        .FormGroup .FormField:first-child input {
+        .form-group .form-field:first-child input {
             border-top-left-radius: 4px;
             border-top-right-radius: 4px;
         }
-        .FormGroup .FormField:last-child input {
+        .form-group .form-field:last-child input {
             border-bottom-left-radius: 4px;
             border-bottom-right-radius: 4px;
         }
-        .FormField input {
-            background: #EDF2F7;
-            margin: 0 0 1px;
+        .form-field input {
+            background: #edf2f7;
             border: 2px solid transparent;
+            box-sizing: border-box;
+            height: 44px;
+            line-height: 44px;
+            margin: 0 0 1px;
+            padding: 0 15px 0 180px;
             transition: background 0.2s, border-color 0.2s, color 0.2s;
             width: 100%;
-            padding: 15px 15px 15px 180px;
-            box-sizing: border-box;
         }
-        .FormField input:focus {
-            border-color: #e7652e;
+        .form-field input:focus {
             background: #fff;
+            border-color: #e7652e;
             color: #444;
             outline: none;
         }
-        .FormField label {
+        .form-field label {
             float: left;
-            width: 160px;
-            text-align: right;
-            margin-right: -160px;
-            position: relative;
-            margin-top: 18px;
             font-size: 14px;
-            pointer-events: none;
+            height: 20px;
+            line-height: 20px;
+            margin-right: -160px;
+            margin-top: 12px;
             opacity: 0.7;
+            pointer-events: none;
+            position: relative;
+            text-align: right;
+            width: 160px;
         }
         button {
             background: #3C5675;
-            color: #fff;
             border: 0;
-            font-weight: bold;
-            border-radius: 4px;
+            border-radius: 3px;
+            color: #fff;
             cursor: pointer;
-            padding: 15px 30px;
+            font-weight: bold;
+            padding: 10px 40px;
             -webkit-appearance: none;
         }
         button[disabled] {
@@ -94,10 +97,20 @@
         }
         #error {
             background: #D83E3E;
-            color: #fff;
-            padding: 15px 20px;
             border-radius: 4px;
+            color: #fff;
             margin-bottom: 20px;
+            padding: 10px 20px;
+            text-align: left;
+        }
+        #error p {
+            margin: 6px 0;
+        }
+        #error p:first-child {
+            margin-top: 0;
+        }
+        #error p:last-child {
+            margin-bottom: 0;
         }
         .animated {
             -webkit-animation-fill-mode: both;
@@ -127,30 +140,30 @@
             -webkit-animation-name: fadeIn;
             animation-name: fadeIn;
         }
-        .Errors {
+        .errors {
             margin-top: 50px;
         }
-        .Errors .Error:first-child {
+        .errors .error:first-child {
             border-top-left-radius: 4px;
             border-top-right-radius: 4px;
         }
-        .Errors .Error:last-child {
+        .errors .error:last-child {
             border-bottom-left-radius: 4px;
             border-bottom-right-radius: 4px;
         }
-        .Error {
+        .error {
             background: #EDF2F7;
             margin: 0 0 1px;
             padding: 20px 25px;
             text-align: left;
         }
-        .Error-message {
+        .error-message {
             font-size: 16px;
             color: #3C5675;
             font-weight: normal;
             margin: 0;
         }
-        .Error-detail {
+        .error-detail {
             font-size: 13px;
             margin: 5px 0 0;
         }

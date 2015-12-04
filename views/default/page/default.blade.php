@@ -42,18 +42,18 @@
         form {
             margin-top: 40px;
         }
-        .FormGroup {
+        .form-group {
             margin-bottom: 20px;
         }
-        .FormGroup .FormField:first-child input {
+        .form-group .form-field:first-child input {
             border-top-left-radius: 4px;
             border-top-right-radius: 4px;
         }
-        .FormGroup .FormField:last-child input {
+        .form-group .form-field:last-child input {
             border-bottom-left-radius: 4px;
             border-bottom-right-radius: 4px;
         }
-        .FormField input {
+        .form-field input {
             background: #EDF2F7;
             margin: 0 0 1px;
             border: 2px solid transparent;
@@ -62,13 +62,13 @@
             padding: 15px 15px 15px 180px;
             box-sizing: border-box;
         }
-        .FormField input:focus {
+        .form-field input:focus {
             border-color: #e7652e;
             background: #fff;
             color: #444;
             outline: none;
         }
-        .FormField label {
+        .form-field label {
             float: left;
             width: 160px;
             text-align: right;
@@ -127,30 +127,30 @@
             -webkit-animation-name: fadeIn;
             animation-name: fadeIn;
         }
-        .Errors {
+        .errors {
             margin-top: 50px;
         }
-        .Errors .Error:first-child {
+        .errors .error:first-child {
             border-top-left-radius: 4px;
             border-top-right-radius: 4px;
         }
-        .Errors .Error:last-child {
+        .errors .error:last-child {
             border-bottom-left-radius: 4px;
             border-bottom-right-radius: 4px;
         }
-        .Error {
+        .error {
             background: #EDF2F7;
             margin: 0 0 1px;
             padding: 20px 25px;
             text-align: left;
         }
-        .Error-message {
+        .error-message {
             font-size: 16px;
             color: #3C5675;
             font-weight: normal;
             margin: 0;
         }
-        .Error-detail {
+        .error-detail {
             font-size: 13px;
             margin: 5px 0 0;
         }

@@ -7,6 +7,7 @@
  */
 namespace Notadd\Install;
 use Illuminate\Support\ServiceProvider;
+use Notadd\Install\Console\InstallCommand;
 use Notadd\Install\Contracts\Prerequisite;
 use Notadd\Install\Prerequisites\Composite;
 use Notadd\Install\Prerequisites\PhpExtensions;
@@ -25,15 +26,12 @@ class InstallServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->app->bind(
-            Prerequisite::class,
-            function() {
-                return new Composite(
-                    new PhpVersion(),
-                    new PhpExtensions(),
-                    new WritablePaths()
-                );
-            }
-        );
+        $this->app->bind(Prerequisite::class, function () {
+            return new Composite(new PhpVersion(), new PhpExtensions(), new WritablePaths());
+        });
+        $this->app->singleton('command.install', function($app) {
+            return new InstallCommand($app, $app['files']);
+        });
+        $this->commands('command.install');
     }
 }

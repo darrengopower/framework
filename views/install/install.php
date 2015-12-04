@@ -2,43 +2,53 @@
 <p>如果您在安装过程中遇到问题，可以联系作者获取帮助。</p>
 <form method="post">
     <div id="error" style="display:none"></div>
-    <div class="FormGroup">
-        <div class="FormField">
-            <label>网站标题</label> <input name="forumTitle">
+    <div class="form-group">
+        <div class="form-field">
+            <label>网站标题</label>
+            <input name="title">
         </div>
     </div>
-    <div class="FormGroup">
-        <div class="FormField">
-            <label>MySQL Host</label> <input name="mysqlHost" value="localhost">
+    <div class="form-group">
+        <div class="form-field">
+            <label>数据库服务器</label>
+            <input name="host" value="localhost">
         </div>
-        <div class="FormField">
-            <label>MySQL Database</label> <input name="mysqlDatabase">
+        <div class="form-field">
+            <label>数据库名</label>
+            <input name="database">
         </div>
-        <div class="FormField">
-            <label>MySQL Username</label> <input name="mysqlUsername">
+        <div class="form-field">
+            <label>数据库用户名</label>
+            <input name="username">
         </div>
-        <div class="FormField">
-            <label>MySQL Password</label> <input type="password" name="mysqlPassword">
+        <div class="form-field">
+            <label>数据库密码</label>
+            <input type="password" name="password">
         </div>
-        <div class="FormField">
-            <label>表前缀(例：not_)</label> <input type="text" name="tablePrefix">
-        </div>
-    </div>
-    <div class="FormGroup">
-        <div class="FormField">
-            <label>管理员用户名</label> <input name="adminUsername">
-        </div>
-        <div class="FormField">
-            <label>管理员Email</label> <input name="adminEmail">
-        </div>
-        <div class="FormField">
-            <label>管理员密码</label> <input type="password" name="adminPassword">
-        </div>
-        <div class="FormField">
-            <label>确认密码</label> <input type="password" name="adminPasswordConfirmation">
+        <div class="form-field">
+            <label>数据库表前缀(例：not_)</label>
+            <input type="text" name="prefix">
         </div>
     </div>
-    <div class="FormButtons">
+    <div class="form-group">
+        <div class="form-field">
+            <label>管理员用户名</label>
+            <input name="admin_username">
+        </div>
+        <div class="form-field">
+            <label>管理员Email</label>
+            <input name="admin_email">
+        </div>
+        <div class="form-field">
+            <label>管理员密码</label>
+            <input type="password" name="admin_password">
+        </div>
+        <div class="form-field">
+            <label>确认密码</label>
+            <input type="password" name="admin_password_confirmation">
+        </div>
+    </div>
+    <div>
         <button type="submit">开始安装</button>
     </div>
 </form>
@@ -48,12 +58,15 @@
         $('form :input:first').select();
         $('form').on('submit', function (e) {
             e.preventDefault();
+            $('#error').hide().text('');
             var $button = $(this).find('button').text('正在安装...').prop('disabled', true);
             $.post('', $(this).serialize()).done(function (data) {
-                console.log(data);
                 //window.location.reload();
             }).fail(function (data) {
-                $('#error').show().text('Something went wrong:\n\n' + data.responseJSON.error);
+                $('#error').show().append("<p>安装操作有误：</p>");
+                $.each(data.responseJSON, function(key, value) {
+                    $("#error").append("<p>" + value + "</p>");
+                });
                 $button.prop('disabled', false).text('开始安装');
             });
             return false;

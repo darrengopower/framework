@@ -16,13 +16,17 @@ use Notadd\Foundation\Validation\ValidatesRequests;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 abstract class Controller extends IlluminateController {
     use DispatchesJobs, ValidatesRequests;
+    /**
+     * @var \Illuminate\Contracts\Foundation\Application
+     */
     protected $app;
     /**
-     * @var Factory
+     * @var \Illuminate\Contracts\View\Factory
      */
     protected $view;
     /**
-     * @param Factory $view
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\View\Factory $view
      */
     public function __construct(Application $app, Factory $view) {
         $this->app = $app;

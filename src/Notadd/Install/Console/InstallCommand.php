@@ -10,14 +10,19 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Notadd\Foundation\Console\Command;
-use Symfony\Component\Console\Helper\QuestionHelper;
+use Notadd\Install\Requests\InstallRequest;
+use PDO;
 class InstallCommand extends Command {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
      */
     protected $application;
     /**
-     * @var static
+     * @var \Illuminate\Contracts\Config\Repository
+     */
+    protected $config;
+    /**
+     * @var \Illuminate\Support\Collection
      */
     protected $data;
     /**
@@ -43,6 +48,7 @@ class InstallCommand extends Command {
     public function __construct(Application $application, Filesystem $filesystem) {
         parent::__construct();
         $this->application = $application;
+        $this->config = $application->make('config');
         $this->data = Collection::make();
         $this->filesystem = $filesystem;
     }
@@ -50,19 +56,31 @@ class InstallCommand extends Command {
         if(!$this->isDataSetted) {
             $this->setDataFromConsoling();
         }
+        $this->config->set('database.fetch', PDO::FETCH_CLASS);
+        $this->config->set('database.default', 'mysql');
+        $this->config->set('database.connections.mysql.driver', 'mysql');
+        $this->config->set('database.connections.mysql.host', $this->data->get('host'));
+        $this->config->set('database.connections.mysql.database', $this->data->get('database'));
+        $this->config->set('database.connections.mysql.username', $this->data->get('username'));
+        $this->config->set('database.connections.mysql.password', $this->data->get('password'));
+        $this->config->set('database.connections.mysql.charset', 'utf8');
+        $this->config->set('database.connections.mysql.collation', 'utf8_unicode_ci');
+        $this->config->set('database.connections.mysql.prefix', $this->data->get('prefix'));
+        $this->config->set('database.connections.mysql.strict', true);
+        $this->call('migrate');
     }
-    public function setDataFromCalling($request) {
+    public function setDataFromCalling(InstallRequest $request) {
         $this->data->put('driver', 'mysql');
-        $this->data->put('host', $request->offset('host'));
-        $this->data->put('database', $request->offset('database'));
-        $this->data->put('username', $request->offset('username'));
-        $this->data->put('password', $request->offset('password'));
-        $this->data->put('prefix', $request->offset('prefix'));
-        $this->data->put('admin_username', $request->offset('username'));
-        $this->data->put('admin_password', $request->offset('password'));
-        $this->data->put('admin_password_confirmation', $request->offset('password_confirmation'));
-        $this->data->put('admin_email', $request->offset('email'));
-        $this->data->put('title', $request->offset('title'));
+        $this->data->put('host', $request->offsetGet('host'));
+        $this->data->put('database', $request->offsetGet('database'));
+        $this->data->put('username', $request->offsetGet('username'));
+        $this->data->put('password', $request->offsetGet('password'));
+        $this->data->put('prefix', $request->offsetGet('prefix'));
+        $this->data->put('admin_username', $request->offsetGet('admin_username'));
+        $this->data->put('admin_password', $request->offsetGet('admin_password'));
+        $this->data->put('admin_password_confirmation', $request->offsetGet('admin_password_confirmation'));
+        $this->data->put('admin_email', $request->offsetGet('admin_email'));
+        $this->data->put('title', $request->offsetGet('title'));
         $this->isDataSetted = true;
     }
     public function setDataFromConsoling() {

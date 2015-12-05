@@ -27,7 +27,7 @@ class VendorPublishCommand extends Command {
      */
     protected $description = 'Publish any publishable assets from vendor packages';
     /**
-     * @param  \Illuminate\Filesystem\Filesystem $files
+     * @param \Illuminate\Filesystem\Filesystem $files
      */
     public function __construct(Filesystem $files) {
         parent::__construct();
@@ -44,7 +44,7 @@ class VendorPublishCommand extends Command {
         }
     }
     /**
-     * @param  string $tag
+     * @param string $tag
      * @return mixed
      */
     private function publishTag($tag) {
@@ -64,8 +64,8 @@ class VendorPublishCommand extends Command {
         $this->info("Publishing complete for tag [{$tag}]!");
     }
     /**
-     * @param  string $from
-     * @param  string $to
+     * @param string $from
+     * @param string $to
      * @return void
      */
     protected function publishFile($from, $to) {
@@ -77,8 +77,8 @@ class VendorPublishCommand extends Command {
         $this->status($from, $to, 'File');
     }
     /**
-     * @param  string $from
-     * @param  string $to
+     * @param string $from
+     * @param string $to
      * @return void
      */
     protected function publishDirectory($from, $to) {
@@ -94,7 +94,7 @@ class VendorPublishCommand extends Command {
         $this->status($from, $to, 'Directory');
     }
     /**
-     * @param  string $directory
+     * @param string $directory
      * @return void
      */
     protected function createParentDirectory($directory) {
@@ -103,9 +103,9 @@ class VendorPublishCommand extends Command {
         }
     }
     /**
-     * @param  string $from
-     * @param  string $to
-     * @param  string $type
+     * @param string $from
+     * @param string $to
+     * @param string $type
      * @return void
      */
     protected function status($from, $to, $type) {

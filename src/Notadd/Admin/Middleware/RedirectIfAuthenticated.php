@@ -17,14 +17,14 @@ class RedirectIfAuthenticated {
      */
     protected $auth;
     /**
-     * @param  Guard $auth
+     * @param Guard $auth
      */
     public function __construct(Guard $auth) {
         $this->auth = $auth;
     }
     /**
-     * @param  Request $request
-     * @param  \Closure $next
+     * @param Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next) {

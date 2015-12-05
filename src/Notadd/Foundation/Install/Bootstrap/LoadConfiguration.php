@@ -11,7 +11,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Config\Repository as RepositoryContract;
 class LoadConfiguration {
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
      * @return void
      */
     public function bootstrap(Application $app) {
@@ -21,8 +21,8 @@ class LoadConfiguration {
         mb_internal_encoding('UTF-8');
     }
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
-     * @param  \Illuminate\Contracts\Config\Repository $config
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Config\Repository $config
      * @return void
      */
     protected function loadConfiguration(Application $app, RepositoryContract $config) {

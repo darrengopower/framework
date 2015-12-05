@@ -20,15 +20,15 @@ class Composer {
      */
     protected $workingPath;
     /**
-     * @param  \Illuminate\Filesystem\Filesystem $files
-     * @param  string $workingPath
+     * @param \Illuminate\Filesystem\Filesystem $files
+     * @param string $workingPath
      */
     public function __construct(Filesystem $files, $workingPath = null) {
         $this->files = $files;
         $this->workingPath = $workingPath;
     }
     /**
-     * @param  string $extra
+     * @param string $extra
      * @return void
      */
     public function dumpAutoloads($extra = '') {
@@ -58,7 +58,7 @@ class Composer {
         return (new Process('', $this->workingPath))->setTimeout(null);
     }
     /**
-     * @param  string $path
+     * @param string $path
      * @return $this
      */
     public function setWorkingPath($path) {

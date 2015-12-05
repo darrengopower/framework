@@ -27,8 +27,8 @@ class CacheTableCommand extends Command {
      */
     protected $composer;
     /**
-     * @param  \Illuminate\Filesystem\Filesystem $files
-     * @param  \Notadd\Foundation\Composer\Composer
+     * @param \Illuminate\Filesystem\Filesystem $files
+     * @param \Notadd\Foundation\Composer\Composer
      */
     public function __construct(Filesystem $files, Composer $composer) {
         parent::__construct();

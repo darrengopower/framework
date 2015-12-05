@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Foundation\Application;
 class SetRequestForConsole {
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
      * @return void
      */
     public function bootstrap(Application $app) {

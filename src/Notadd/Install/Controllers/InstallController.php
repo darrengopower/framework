@@ -11,6 +11,10 @@ use Illuminate\Contracts\View\Factory;
 use Notadd\Foundation\Routing\Controller;
 use Notadd\Install\Console\InstallCommand;
 use Notadd\Install\Requests\InstallRequest;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\StringInput;
+use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\Console\Output\StreamOutput;
 class InstallController extends Controller {
     /**
      * @var \Notadd\Install\Console\InstallCommand
@@ -19,15 +23,18 @@ class InstallController extends Controller {
     /**
      * @param \Illuminate\Contracts\Foundation\Application $app
      * @param \Illuminate\Contracts\View\Factory $view
-     * @param \Notadd\Install\Console\InstallCommand $command
      */
-    public function __construct(Application $app, Factory $view, InstallCommand $command) {
+    public function __construct(Application $app, Factory $view) {
         parent::__construct($app, $view);
-        $this->command = $command;
+        $this->command = $this->getCommand('install');
     }
     /**
      * @param \Notadd\Install\Requests\InstallRequest $request
      */
     public function handle(InstallRequest $request) {
+        $output = new BufferedOutput();
+        $this->command->setDataFromCalling($request);
+        $this->command->run(new ArrayInput([]), $output);
+        echo $output->fetch();
     }
 }

@@ -21,7 +21,7 @@ class ViewClearCommand extends Command {
      */
     protected $files;
     /**
-     * @param  \Illuminate\Filesystem\Filesystem $files
+     * @param \Illuminate\Filesystem\Filesystem $files
      */
     public function __construct(Filesystem $files) {
         parent::__construct();

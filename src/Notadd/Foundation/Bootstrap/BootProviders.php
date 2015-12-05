@@ -9,7 +9,7 @@ namespace Notadd\Foundation\Bootstrap;
 use Illuminate\Contracts\Foundation\Application;
 class BootProviders {
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
      * @return void
      */
     public function bootstrap(Application $app) {

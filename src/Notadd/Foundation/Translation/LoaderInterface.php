@@ -8,15 +8,15 @@
 namespace Notadd\Foundation\Translation;
 interface LoaderInterface {
     /**
-     * @param  string $locale
-     * @param  string $group
-     * @param  string $namespace
+     * @param string $locale
+     * @param string $group
+     * @param string $namespace
      * @return array
      */
     public function load($locale, $group, $namespace = null);
     /**
-     * @param  string $namespace
-     * @param  string $hint
+     * @param string $namespace
+     * @param string $hint
      * @return void
      */
     public function addNamespace($namespace, $hint);

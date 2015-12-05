@@ -18,7 +18,7 @@ class HandleExceptions {
      */
     protected $app;
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
      * @return void
      */
     public function bootstrap(Application $app) {
@@ -41,11 +41,11 @@ class HandleExceptions {
         }
     }
     /**
-     * @param  int $level
-     * @param  string $message
-     * @param  string $file
-     * @param  int $line
-     * @param  array $context
+     * @param int $level
+     * @param string $message
+     * @param string $file
+     * @param int $line
+     * @param array $context
      * @return void
      * @throws \ErrorException
      */
@@ -55,7 +55,7 @@ class HandleExceptions {
         }
     }
     /**
-     * @param  \Throwable $e
+     * @param \Throwable $e
      * @return void
      */
     public function handleException($e) {
@@ -70,14 +70,14 @@ class HandleExceptions {
         }
     }
     /**
-     * @param  \Exception $e
+     * @param \Exception $e
      * @return void
      */
     protected function renderForConsole($e) {
         $this->getExceptionHandler()->renderForConsole(new ConsoleOutput, $e);
     }
     /**
-     * @param  \Exception $e
+     * @param \Exception $e
      * @return void
      */
     protected function renderHttpResponse($e) {
@@ -92,15 +92,15 @@ class HandleExceptions {
         }
     }
     /**
-     * @param  array $error
-     * @param  int|null $traceOffset
+     * @param array $error
+     * @param int|null $traceOffset
      * @return \Symfony\Component\Debug\Exception\FatalErrorException
      */
     protected function fatalExceptionFromError(array $error, $traceOffset = null) {
         return new FatalErrorException($error['message'], $error['type'], 0, $error['file'], $error['line'], $traceOffset);
     }
     /**
-     * @param  int $type
+     * @param int $type
      * @return bool
      */
     protected function isFatal($type) {

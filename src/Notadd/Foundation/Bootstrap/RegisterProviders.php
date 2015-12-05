@@ -11,7 +11,7 @@ use Notadd\Foundation\Console\ConsoleServiceProvider;
 use Notadd\Foundation\Console\ConsoleSupportServiceProvider;
 class RegisterProviders {
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
      * @return void
      */
     public function bootstrap(Application $app) {

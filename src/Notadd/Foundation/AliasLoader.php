@@ -20,13 +20,13 @@ class AliasLoader {
      */
     protected static $instance;
     /**
-     * @param  array $aliases
+     * @param array $aliases
      */
     private function __construct($aliases) {
         $this->aliases = $aliases;
     }
     /**
-     * @param  array $aliases
+     * @param array $aliases
      * @return \Notadd\Foundation\AliasLoader
      */
     public static function getInstance(array $aliases = []) {
@@ -38,7 +38,7 @@ class AliasLoader {
         return static::$instance;
     }
     /**
-     * @param  string $alias
+     * @param string $alias
      * @return void
      */
     public function load($alias) {
@@ -47,8 +47,8 @@ class AliasLoader {
         }
     }
     /**
-     * @param  string $class
-     * @param  string $alias
+     * @param string $class
+     * @param string $alias
      * @return void
      */
     public function alias($class, $alias) {
@@ -79,7 +79,7 @@ class AliasLoader {
         return $this->aliases;
     }
     /**
-     * @param  array $aliases
+     * @param array $aliases
      * @return void
      */
     public function setAliases(array $aliases) {
@@ -92,14 +92,14 @@ class AliasLoader {
         return $this->registered;
     }
     /**
-     * @param  bool $value
+     * @param bool $value
      * @return void
      */
     public function setRegistered($value) {
         $this->registered = $value;
     }
     /**
-     * @param  \Notadd\Foundation\AliasLoader $loader
+     * @param \Notadd\Foundation\AliasLoader $loader
      * @return void
      */
     public static function setInstance($loader) {

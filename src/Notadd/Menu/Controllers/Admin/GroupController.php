@@ -63,7 +63,7 @@ class GroupController extends AbstractAdminController {
         return $this->view('menu.group.sort');
     }
     /**
-     * @param                          $id
+     * @param                         $id
      * @param \Illuminate\Http\Request $request
      * @return mixed
      */

@@ -24,15 +24,15 @@ class VerifyCsrfToken {
     ];
     /**
      * Create a new middleware instance.
-     * @param  \Illuminate\Contracts\Encryption\Encrypter $encrypter
+     * @param \Illuminate\Contracts\Encryption\Encrypter $encrypter
      * @return void
      */
     public function __construct(Encrypter $encrypter) {
         $this->encrypter = $encrypter;
     }
     /**
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      * @throws \Illuminate\Session\TokenMismatchException
      */
@@ -43,7 +43,7 @@ class VerifyCsrfToken {
         throw new TokenMismatchException;
     }
     /**
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return bool
      */
     protected function shouldPassThrough($request) {
@@ -55,7 +55,7 @@ class VerifyCsrfToken {
         return false;
     }
     /**
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return bool
      */
     protected function tokensMatch($request) {
@@ -66,8 +66,8 @@ class VerifyCsrfToken {
         return Str::equals($request->session()->token(), $token);
     }
     /**
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Illuminate\Http\Response $response
+     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Response $response
      * @return \Illuminate\Http\Response
      */
     protected function addCookieToResponse($request, $response) {
@@ -76,7 +76,7 @@ class VerifyCsrfToken {
         return $response;
     }
     /**
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return bool
      */
     protected function isReading($request) {

@@ -10,8 +10,8 @@ use Closure;
 use Illuminate\Http\Exception\PostTooLargeException;
 class VerifyPostSize {
     /**
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      * @throws \Illuminate\Http\Exception\PostTooLargeException
      */

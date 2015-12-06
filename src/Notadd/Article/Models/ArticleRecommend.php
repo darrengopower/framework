@@ -6,7 +6,7 @@
  * @datetime 2015-10-30 16:09
  */
 namespace Notadd\Article\Models;
-use Illuminate\Database\Eloquent\Model;
+use Notadd\Foundation\Database\Eloquent\Model;
 class ArticleRecommend extends Model {
     /**
      * @var array

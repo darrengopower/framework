@@ -20,7 +20,6 @@
         "illuminate/container": "5.1.*",
         "illuminate/contracts": "5.1.*",
         "illuminate/cookie": "5.1.*",
-        "illuminate/database": "5.1.*",
         "illuminate/encryption": "5.1.*",
         "illuminate/events": "5.1.*",
         "illuminate/filesystem": "5.1.*",

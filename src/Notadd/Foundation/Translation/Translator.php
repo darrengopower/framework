@@ -29,25 +29,25 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface {
      */
     protected $loaded = [];
     /**
-     * @param  \Notadd\Foundation\Translation\LoaderInterface $loader
-     * @param  string $locale
+     * @param \Notadd\Foundation\Translation\LoaderInterface $loader
+     * @param string $locale
      */
     public function __construct(LoaderInterface $loader, $locale) {
         $this->loader = $loader;
         $this->locale = $locale;
     }
     /**
-     * @param  string $key
-     * @param  string $locale
+     * @param string $key
+     * @param string $locale
      * @return bool
      */
     public function has($key, $locale = null) {
         return $this->get($key, [], $locale) !== $key;
     }
     /**
-     * @param  string $key
-     * @param  array $replace
-     * @param  string $locale
+     * @param string $key
+     * @param array $replace
+     * @param string $locale
      * @return string
      */
     public function get($key, array $replace = [], $locale = null) {
@@ -65,11 +65,11 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface {
         return $line;
     }
     /**
-     * @param  string $namespace
-     * @param  string $group
-     * @param  string $locale
-     * @param  string $item
-     * @param  array $replace
+     * @param string $namespace
+     * @param string $group
+     * @param string $locale
+     * @param string $item
+     * @param array $replace
      * @return string|array|null
      */
     protected function getLine($namespace, $group, $locale, $item, array $replace) {
@@ -81,8 +81,8 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface {
         }
     }
     /**
-     * @param  string $line
-     * @param  array $replace
+     * @param string $line
+     * @param array $replace
      * @return string
      */
     protected function makeReplacements($line, array $replace) {
@@ -93,7 +93,7 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface {
         return $line;
     }
     /**
-     * @param  array $replace
+     * @param array $replace
      * @return array
      */
     protected function sortReplacements(array $replace) {
@@ -102,10 +102,10 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface {
         });
     }
     /**
-     * @param  string $key
-     * @param  int $number
-     * @param  array $replace
-     * @param  string $locale
+     * @param string $key
+     * @param int $number
+     * @param array $replace
+     * @param string $locale
      * @return string
      */
     public function choice($key, $number, array $replace = [], $locale = null) {
@@ -114,30 +114,30 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface {
         return $this->makeReplacements($this->getSelector()->choose($line, $number, $locale), $replace);
     }
     /**
-     * @param  string $id
-     * @param  array $parameters
-     * @param  string $domain
-     * @param  string $locale
+     * @param string $id
+     * @param array $parameters
+     * @param string $domain
+     * @param string $locale
      * @return string
      */
     public function trans($id, array $parameters = [], $domain = 'messages', $locale = null) {
         return $this->get($id, $parameters, $locale);
     }
     /**
-     * @param  string $id
-     * @param  int $number
-     * @param  array $parameters
-     * @param  string $domain
-     * @param  string $locale
+     * @param string $id
+     * @param int $number
+     * @param array $parameters
+     * @param string $domain
+     * @param string $locale
      * @return string
      */
     public function transChoice($id, $number, array $parameters = [], $domain = 'messages', $locale = null) {
         return $this->choice($id, $number, $parameters, $locale);
     }
     /**
-     * @param  string $namespace
-     * @param  string $group
-     * @param  string $locale
+     * @param string $namespace
+     * @param string $group
+     * @param string $locale
      * @return void
      */
     public function load($namespace, $group, $locale) {
@@ -148,24 +148,24 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface {
         $this->loaded[$namespace][$group][$locale] = $lines;
     }
     /**
-     * @param  string $namespace
-     * @param  string $group
-     * @param  string $locale
+     * @param string $namespace
+     * @param string $group
+     * @param string $locale
      * @return bool
      */
     protected function isLoaded($namespace, $group, $locale) {
         return isset($this->loaded[$namespace][$group][$locale]);
     }
     /**
-     * @param  string $namespace
-     * @param  string $hint
+     * @param string $namespace
+     * @param string $hint
      * @return void
      */
     public function addNamespace($namespace, $hint) {
         $this->loader->addNamespace($namespace, $hint);
     }
     /**
-     * @param  string $key
+     * @param string $key
      * @return array
      */
     public function parseKey($key) {
@@ -176,7 +176,7 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface {
         return $segments;
     }
     /**
-     * @param  string $locale
+     * @param string $locale
      * @return array
      */
     protected function parseLocale($locale) {
@@ -201,7 +201,7 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface {
         return $this->selector;
     }
     /**
-     * @param  \Symfony\Component\Translation\MessageSelector $selector
+     * @param \Symfony\Component\Translation\MessageSelector $selector
      * @return void
      */
     public function setSelector(MessageSelector $selector) {
@@ -226,7 +226,7 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface {
         return $this->locale;
     }
     /**
-     * @param  string $locale
+     * @param string $locale
      * @return void
      */
     public function setLocale($locale) {
@@ -239,7 +239,7 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface {
         return $this->fallback;
     }
     /**
-     * @param  string $fallback
+     * @param string $fallback
      * @return void
      */
     public function setFallback($fallback) {

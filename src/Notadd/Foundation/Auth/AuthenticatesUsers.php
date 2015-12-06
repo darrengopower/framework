@@ -21,7 +21,7 @@ trait AuthenticatesUsers {
         return view('auth.login');
     }
     /**
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function postLogin(Request $request) {
@@ -45,8 +45,8 @@ trait AuthenticatesUsers {
             ]);
     }
     /**
-     * @param  \Illuminate\Http\Request $request
-     * @param  bool $throttles
+     * @param \Illuminate\Http\Request $request
+     * @param bool $throttles
      * @return \Illuminate\Http\Response
      */
     protected function handleUserWasAuthenticated(Request $request, $throttles) {
@@ -59,7 +59,7 @@ trait AuthenticatesUsers {
         return redirect()->intended($this->redirectPath());
     }
     /**
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     protected function getCredentials(Request $request) {

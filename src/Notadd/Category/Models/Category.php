@@ -6,12 +6,12 @@
  * @datetime 2015-10-30 15:08
  */
 namespace Notadd\Category\Models;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Notadd\Article\Events\GetArticleAdminTemplates;
 use Notadd\Article\Models\Article;
 use Notadd\Category\Events\GetCategoryAdminTemplates;
 use Notadd\Category\Events\GetCategoryTypes;
+use Notadd\Foundation\Database\Eloquent\Model;
 class Category extends Model {
     /**
      * @var array
@@ -145,13 +145,13 @@ class Category extends Model {
         return $count ? $count : 0;
     }
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return \Notadd\Foundation\Database\Eloquent\Relations\MorphTo
      */
     public function extend() {
         return $this->morphTo();
     }
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Notadd\Foundation\Database\Eloquent\Relations\BelongsTo
      */
     public function parent() {
         return $this->belongsTo(Category::class, 'parent_id');

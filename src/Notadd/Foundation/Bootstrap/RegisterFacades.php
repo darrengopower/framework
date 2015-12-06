@@ -11,7 +11,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Notadd\Foundation\AliasLoader;
 class RegisterFacades {
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
      * @return void
      */
     public function bootstrap(Application $app) {

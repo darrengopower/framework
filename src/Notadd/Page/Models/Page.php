@@ -6,9 +6,9 @@
  * @datetime 2015-10-30 17:13
  */
 namespace Notadd\Page\Models;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
+use Notadd\Foundation\Database\Eloquent\Model;
+use Notadd\Foundation\Database\Eloquent\SoftDeletes;
 use Notadd\Page\Events\GetTemplateList;
 class Page extends Model {
     use SoftDeletes;

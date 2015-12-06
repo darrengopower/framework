@@ -6,11 +6,12 @@
  * @datetime 2015-10-30 15:05
  */
 namespace Notadd\Menu\Models;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
+use Notadd\Article\Models\Article;
 use Notadd\Category\Models\Category;
+use Notadd\Foundation\Database\Eloquent\Collection;
+use Notadd\Foundation\Database\Eloquent\Model;
 class Menu extends Model {
     /**
      * @var array
@@ -73,7 +74,7 @@ class Menu extends Model {
         return parent::whereParentId($this->attributes['id'])->count();
     }
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Notadd\Foundation\Database\Eloquent\Relations\BelongsTo
      */
     public function group() {
         return $this->belongsTo('App\Menu\Models\MenuGroup', 'group_id');

@@ -22,9 +22,9 @@ class ProviderRepository {
      */
     protected $manifestPath;
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
-     * @param  \Illuminate\Filesystem\Filesystem $files
-     * @param  string $manifestPath
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Filesystem\Filesystem $files
+     * @param string $manifestPath
      * @return void
      */
     public function __construct(ApplicationContract $app, Filesystem $files, $manifestPath) {
@@ -33,7 +33,7 @@ class ProviderRepository {
         $this->manifestPath = $manifestPath;
     }
     /**
-     * @param  array $providers
+     * @param array $providers
      * @return void
      */
     public function load(array $providers) {
@@ -50,8 +50,8 @@ class ProviderRepository {
         $this->app->setDeferredServices($manifest['deferred']);
     }
     /**
-     * @param  string $provider
-     * @param  array $events
+     * @param string $provider
+     * @param array $events
      * @return void
      */
     protected function registerLoadEvents($provider, array $events) {
@@ -64,7 +64,7 @@ class ProviderRepository {
         });
     }
     /**
-     * @param  array $providers
+     * @param array $providers
      * @return array
      */
     protected function compileManifest($providers) {
@@ -83,15 +83,15 @@ class ProviderRepository {
         return $this->writeManifest($manifest);
     }
     /**
-     * @param  string $provider
+     * @param string $provider
      * @return \Illuminate\Support\ServiceProvider
      */
     public function createProvider($provider) {
         return new $provider($this->app);
     }
     /**
-     * @param  array $manifest
-     * @param  array $providers
+     * @param array $manifest
+     * @param array $providers
      * @return bool
      */
     public function shouldRecompile($manifest, $providers) {
@@ -107,7 +107,7 @@ class ProviderRepository {
         }
     }
     /**
-     * @param  array $manifest
+     * @param array $manifest
      * @return array
      */
     public function writeManifest($manifest) {
@@ -115,7 +115,7 @@ class ProviderRepository {
         return $manifest;
     }
     /**
-     * @param  array $providers
+     * @param array $providers
      * @return array
      */
     protected function freshManifest(array $providers) {

@@ -71,8 +71,8 @@ class Kernel implements KernelContract {
         'guest.admin' => AdminRedirectIfAuthenticated::class,
     ];
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
-     * @param  \Illuminate\Routing\Router $router
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Routing\Router $router
      * @return void
      */
     public function __construct(Application $app, Router $router) {
@@ -83,7 +83,7 @@ class Kernel implements KernelContract {
         }
     }
     /**
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function handle($request) {
@@ -105,7 +105,7 @@ class Kernel implements KernelContract {
         return $response;
     }
     /**
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     protected function sendRequestThroughRouter($request) {
@@ -115,8 +115,8 @@ class Kernel implements KernelContract {
         return (new Pipeline($this->app))->send($request)->through($this->app->shouldSkipMiddleware() ? [] : $this->middleware)->then($this->dispatchToRouter());
     }
     /**
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Illuminate\Http\Response $response
+     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Response $response
      * @return void
      */
     public function terminate($request, $response) {
@@ -131,7 +131,7 @@ class Kernel implements KernelContract {
         $this->app->terminate();
     }
     /**
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     protected function gatherRouteMiddlewares($request) {
@@ -141,7 +141,7 @@ class Kernel implements KernelContract {
         return [];
     }
     /**
-     * @param  string $middleware
+     * @param string $middleware
      * @return array
      */
     protected function parseMiddleware($middleware) {
@@ -155,7 +155,7 @@ class Kernel implements KernelContract {
         ];
     }
     /**
-     * @param  string $middleware
+     * @param string $middleware
      * @return $this
      */
     public function prependMiddleware($middleware) {
@@ -165,7 +165,7 @@ class Kernel implements KernelContract {
         return $this;
     }
     /**
-     * @param  string $middleware
+     * @param string $middleware
      * @return $this
      */
     public function pushMiddleware($middleware) {
@@ -192,7 +192,7 @@ class Kernel implements KernelContract {
         };
     }
     /**
-     * @param  string $middleware
+     * @param string $middleware
      * @return bool
      */
     public function hasMiddleware($middleware) {
@@ -205,15 +205,15 @@ class Kernel implements KernelContract {
         return $this->bootstrappers;
     }
     /**
-     * @param  \Exception $e
+     * @param \Exception $e
      * @return void
      */
     protected function reportException(Exception $e) {
         $this->app->make('Illuminate\Contracts\Debug\ExceptionHandler')->report($e);
     }
     /**
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Exception $e
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception $e
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function renderException($request, Exception $e) {

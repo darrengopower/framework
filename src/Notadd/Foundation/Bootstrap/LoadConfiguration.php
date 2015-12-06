@@ -13,7 +13,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Config\Repository as RepositoryContract;
 class LoadConfiguration {
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
      * @return void
      */
     public function bootstrap(Application $app) {
@@ -31,8 +31,8 @@ class LoadConfiguration {
         mb_internal_encoding('UTF-8');
     }
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
-     * @param  \Illuminate\Contracts\Config\Repository $config
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Config\Repository $config
      * @return void
      */
     protected function loadConfigurationFiles(Application $app, RepositoryContract $config) {
@@ -58,14 +58,14 @@ class LoadConfiguration {
         $default->loadViewConfiguration();
     }
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
      * @return array
      */
     protected function getConfigurationFile(Application $app) {
 
     }
     /**
-     * @param  \Symfony\Component\Finder\SplFileInfo $file
+     * @param \Symfony\Component\Finder\SplFileInfo $file
      * @return string
      */
     protected function getConfigurationNesting(SplFileInfo $file) {

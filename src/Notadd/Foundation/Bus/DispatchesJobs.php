@@ -9,24 +9,24 @@ namespace Notadd\Foundation\Bus;
 use ArrayAccess;
 trait DispatchesJobs {
     /**
-     * @param  mixed $job
+     * @param mixed $job
      * @return mixed
      */
     protected function dispatch($job) {
         return app('Illuminate\Contracts\Bus\Dispatcher')->dispatch($job);
     }
     /**
-     * @param  mixed $job
-     * @param  array $array
+     * @param mixed $job
+     * @param array $array
      * @return mixed
      */
     protected function dispatchFromArray($job, array $array) {
         return app('Illuminate\Contracts\Bus\Dispatcher')->dispatchFromArray($job, $array);
     }
     /**
-     * @param  mixed $job
-     * @param  \ArrayAccess $source
-     * @param  array $extras
+     * @param mixed $job
+     * @param \ArrayAccess $source
+     * @param array $extras
      * @return mixed
      */
     protected function dispatchFrom($job, ArrayAccess $source, $extras = []) {

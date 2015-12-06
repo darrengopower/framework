@@ -19,7 +19,7 @@ abstract class GeneratorCommand extends Command {
      */
     protected $type;
     /**
-     * @param  \Illuminate\Filesystem\Filesystem $files
+     * @param \Illuminate\Filesystem\Filesystem $files
      */
     public function __construct(Filesystem $files) {
         parent::__construct();
@@ -44,7 +44,7 @@ abstract class GeneratorCommand extends Command {
         $this->info($this->type . ' created successfully.');
     }
     /**
-     * @param  string $rawName
+     * @param string $rawName
      * @return bool
      */
     protected function alreadyExists($rawName) {
@@ -52,7 +52,7 @@ abstract class GeneratorCommand extends Command {
         return $this->files->exists($path = $this->getPath($name));
     }
     /**
-     * @param  string $name
+     * @param string $name
      * @return string
      */
     protected function getPath($name) {
@@ -60,7 +60,7 @@ abstract class GeneratorCommand extends Command {
         return $this->notadd['path'] . '/' . str_replace('\\', '/', $name) . '.php';
     }
     /**
-     * @param  string $name
+     * @param string $name
      * @return string
      */
     protected function parseName($name) {
@@ -74,14 +74,14 @@ abstract class GeneratorCommand extends Command {
         return $this->parseName($this->getDefaultNamespace(trim($rootNamespace, '\\')) . '\\' . $name);
     }
     /**
-     * @param  string $rootNamespace
+     * @param string $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace) {
         return $rootNamespace;
     }
     /**
-     * @param  string $path
+     * @param string $path
      * @return string
      */
     protected function makeDirectory($path) {
@@ -90,7 +90,7 @@ abstract class GeneratorCommand extends Command {
         }
     }
     /**
-     * @param  string $name
+     * @param string $name
      * @return string
      */
     protected function buildClass($name) {
@@ -98,8 +98,8 @@ abstract class GeneratorCommand extends Command {
         return $this->replaceNamespace($stub, $name)->replaceClass($stub, $name);
     }
     /**
-     * @param  string $stub
-     * @param  string $name
+     * @param string $stub
+     * @param string $name
      * @return $this
      */
     protected function replaceNamespace(&$stub, $name) {
@@ -108,15 +108,15 @@ abstract class GeneratorCommand extends Command {
         return $this;
     }
     /**
-     * @param  string $name
+     * @param string $name
      * @return string
      */
     protected function getNamespace($name) {
         return trim(implode('\\', array_slice(explode('\\', $name), 0, -1)), '\\');
     }
     /**
-     * @param  string $stub
-     * @param  string $name
+     * @param string $stub
+     * @param string $name
      * @return string
      */
     protected function replaceClass($stub, $name) {

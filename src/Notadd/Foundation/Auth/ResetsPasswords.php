@@ -19,7 +19,7 @@ trait ResetsPasswords {
         return view('admin::auth.password');
     }
     /**
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function postEmail(Request $request) {
@@ -41,7 +41,7 @@ trait ResetsPasswords {
         return isset($this->subject) ? $this->subject : 'Your Password Reset Link';
     }
     /**
-     * @param  string $token
+     * @param string $token
      * @return \Illuminate\Http\Response
      */
     public function getReset($token = null) {
@@ -51,7 +51,7 @@ trait ResetsPasswords {
         return view('admin::auth.reset')->with('token', $token);
     }
     /**
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function postReset(Request $request) {
@@ -72,8 +72,8 @@ trait ResetsPasswords {
         }
     }
     /**
-     * @param  \Illuminate\Contracts\Auth\CanResetPassword $user
-     * @param  string $password
+     * @param \Illuminate\Contracts\Auth\CanResetPassword $user
+     * @param string $password
      * @return void
      */
     protected function resetPassword($user, $password) {

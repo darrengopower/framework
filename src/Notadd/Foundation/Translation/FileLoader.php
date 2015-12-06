@@ -21,17 +21,17 @@ class FileLoader implements LoaderInterface {
      */
     protected $hints = [];
     /**
-     * @param  \Illuminate\Filesystem\Filesystem $files
-     * @param  string $path
+     * @param \Illuminate\Filesystem\Filesystem $files
+     * @param string $path
      */
     public function __construct(Filesystem $files, $path) {
         $this->path = $path;
         $this->files = $files;
     }
     /**
-     * @param  string $locale
-     * @param  string $group
-     * @param  string $namespace
+     * @param string $locale
+     * @param string $group
+     * @param string $namespace
      * @return array
      */
     public function load($locale, $group, $namespace = null) {
@@ -41,9 +41,9 @@ class FileLoader implements LoaderInterface {
         return $this->loadNamespaced($locale, $group, $namespace);
     }
     /**
-     * @param  string $locale
-     * @param  string $group
-     * @param  string $namespace
+     * @param string $locale
+     * @param string $group
+     * @param string $namespace
      * @return array
      */
     protected function loadNamespaced($locale, $group, $namespace) {
@@ -54,10 +54,10 @@ class FileLoader implements LoaderInterface {
         return [];
     }
     /**
-     * @param  array $lines
-     * @param  string $locale
-     * @param  string $group
-     * @param  string $namespace
+     * @param array $lines
+     * @param string $locale
+     * @param string $group
+     * @param string $namespace
      * @return array
      */
     protected function loadNamespaceOverrides(array $lines, $locale, $group, $namespace) {
@@ -68,9 +68,9 @@ class FileLoader implements LoaderInterface {
         return $lines;
     }
     /**
-     * @param  string $path
-     * @param  string $locale
-     * @param  string $group
+     * @param string $path
+     * @param string $locale
+     * @param string $group
      * @return array
      */
     protected function loadPath($path, $locale, $group) {
@@ -80,8 +80,8 @@ class FileLoader implements LoaderInterface {
         return [];
     }
     /**
-     * @param  string $namespace
-     * @param  string $hint
+     * @param string $namespace
+     * @param string $hint
      */
     public function addNamespace($namespace, $hint) {
         $this->hints[$namespace] = $hint;

@@ -10,8 +10,8 @@ use Illuminate\Contracts\Auth\Access\Gate;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 trait AuthorizesRequests {
     /**
-     * @param  mixed $ability
-     * @param  mixed|array $arguments
+     * @param mixed $ability
+     * @param mixed|array $arguments
      * @return void
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      */
@@ -22,9 +22,9 @@ trait AuthorizesRequests {
         }
     }
     /**
-     * @param  \Illuminate\Contracts\Auth\Authenticatable|mixed $user
-     * @param  mixed $ability
-     * @param  mixed|array $arguments
+     * @param \Illuminate\Contracts\Auth\Authenticatable|mixed $user
+     * @param mixed $ability
+     * @param mixed|array $arguments
      * @return void
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      */
@@ -36,8 +36,8 @@ trait AuthorizesRequests {
         }
     }
     /**
-     * @param  mixed $ability
-     * @param  mixed|array $arguments
+     * @param mixed $ability
+     * @param mixed|array $arguments
      * @return array
      */
     protected function parseAbilityAndArguments($ability, $arguments) {
@@ -53,8 +53,8 @@ trait AuthorizesRequests {
         ];
     }
     /**
-     * @param  string $ability
-     * @param  array $arguments
+     * @param string $ability
+     * @param array $arguments
      * @return \Symfony\Component\HttpKernel\Exception\HttpException
      */
     protected function createGateUnauthorizedException($ability, $arguments) {

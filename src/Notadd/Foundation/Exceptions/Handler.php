@@ -23,14 +23,14 @@ class Handler implements ExceptionHandlerContract {
      */
     protected $dontReport = [];
     /**
-     * @param  \Psr\Log\LoggerInterface $log
+     * @param \Psr\Log\LoggerInterface $log
      * @return void
      */
     public function __construct(LoggerInterface $log) {
         $this->log = $log;
     }
     /**
-     * @param  \Exception $e
+     * @param \Exception $e
      * @return void
      */
     public function report(Exception $e) {
@@ -39,14 +39,14 @@ class Handler implements ExceptionHandlerContract {
         }
     }
     /**
-     * @param  \Exception $e
+     * @param \Exception $e
      * @return bool
      */
     public function shouldReport(Exception $e) {
         return !$this->shouldntReport($e);
     }
     /**
-     * @param  \Exception $e
+     * @param \Exception $e
      * @return bool
      */
     protected function shouldntReport(Exception $e) {
@@ -58,8 +58,8 @@ class Handler implements ExceptionHandlerContract {
         return false;
     }
     /**
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Exception $e
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception $e
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $e) {
@@ -70,8 +70,8 @@ class Handler implements ExceptionHandlerContract {
         }
     }
     /**
-     * @param  \Symfony\Component\HttpFoundation\Response $response
-     * @param  \Exception $e
+     * @param \Symfony\Component\HttpFoundation\Response $response
+     * @param \Exception $e
      * @return \Illuminate\Http\Response
      */
     protected function toIlluminateResponse($response, Exception $e) {
@@ -80,15 +80,15 @@ class Handler implements ExceptionHandlerContract {
         return $response;
     }
     /**
-     * @param  \Symfony\Component\Console\Output\OutputInterface $output
-     * @param  \Exception $e
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @param \Exception $e
      * @return void
      */
     public function renderForConsole($output, Exception $e) {
         (new ConsoleApplication)->renderException($e, $output);
     }
     /**
-     * @param  \Symfony\Component\HttpKernel\Exception\HttpException $e
+     * @param \Symfony\Component\HttpKernel\Exception\HttpException $e
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function renderHttpException(HttpException $e) {
@@ -100,14 +100,14 @@ class Handler implements ExceptionHandlerContract {
         }
     }
     /**
-     * @param  \Exception $e
+     * @param \Exception $e
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function convertExceptionToResponse(Exception $e) {
         return (new SymfonyDisplayer(config('app.debug')))->createResponse($e);
     }
     /**
-     * @param  \Exception $e
+     * @param \Exception $e
      * @return bool
      */
     protected function isHttpException(Exception $e) {

@@ -8,7 +8,6 @@
 namespace Notadd\Foundation\Install\Bootstrap;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Cookie\CookieServiceProvider;
-use Illuminate\Database\DatabaseServiceProvider;
 use Illuminate\Encryption\EncryptionServiceProvider;
 use Illuminate\Filesystem\FilesystemServiceProvider;
 use Illuminate\Hashing\HashServiceProvider;
@@ -19,14 +18,15 @@ use Illuminate\Queue\QueueServiceProvider;
 use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Routing\ControllerServiceProvider;
 use Illuminate\Session\SessionServiceProvider;
-use Illuminate\Translation\TranslationServiceProvider;
 use Illuminate\Validation\ValidationServiceProvider;
 use Illuminate\View\ViewServiceProvider;
 use Notadd\Foundation\Cache\CacheServiceProvider;
 use Notadd\Foundation\Console\ConsoleServiceProvider;
 use Notadd\Foundation\Console\ConsoleSupportServiceProvider;
+use Notadd\Foundation\Database\DatabaseServiceProvider;
 use Notadd\Foundation\Extension\ExtensionServiceProvider;
 use Notadd\Foundation\Http\FormRequestServiceProvider;
+use Notadd\Foundation\Translation\TranslationServiceProvider;
 use Notadd\Install\InstallServiceProvider;
 class RegisterProviders {
     /**

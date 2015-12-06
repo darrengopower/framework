@@ -11,8 +11,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 class EnvironmentDetector {
     /**
-     * @param  \Closure $callback
-     * @param  array|null $consoleArgs
+     * @param \Closure $callback
+     * @param array|null $consoleArgs
      * @return string
      */
     public function detect(Closure $callback, $consoleArgs = null) {
@@ -22,15 +22,15 @@ class EnvironmentDetector {
         return $this->detectWebEnvironment($callback);
     }
     /**
-     * @param  \Closure $callback
+     * @param \Closure $callback
      * @return string
      */
     protected function detectWebEnvironment(Closure $callback) {
         return call_user_func($callback);
     }
     /**
-     * @param  \Closure $callback
-     * @param  array $args
+     * @param \Closure $callback
+     * @param array $args
      * @return string
      */
     protected function detectConsoleEnvironment(Closure $callback, array $args) {
@@ -40,7 +40,7 @@ class EnvironmentDetector {
         return $this->detectWebEnvironment($callback);
     }
     /**
-     * @param  array $args
+     * @param array $args
      * @return string|null
      */
     protected function getEnvironmentArgument(array $args) {

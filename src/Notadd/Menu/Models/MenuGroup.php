@@ -6,7 +6,7 @@
  * @datetime 2015-10-30 15:14
  */
 namespace Notadd\Menu\Models;
-use Illuminate\Database\Eloquent\Model;
+use Notadd\Foundation\Database\Eloquent\Model;
 class MenuGroup extends Model {
     /**
      * @var array

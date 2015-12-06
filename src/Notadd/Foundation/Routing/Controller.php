@@ -32,22 +32,16 @@ abstract class Controller extends IlluminateController {
         $this->app = $app;
         $this->view = $view;
     }
+    public function getCommand($command) {
+        return $this->app->make('Illuminate\Contracts\Console\Kernel')->find($command);
+    }
     /**
-     * @param  array $parameters
+     * @param array $parameters
      * @return mixed
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function missingMethod($parameters = []) {
         throw new NotFoundHttpException('控制器方法未找到。');
-    }
-    /**
-     * @param  string $method
-     * @param  array $parameters
-     * @return mixed
-     * @throws \BadMethodCallException
-     */
-    public function __call($method, $parameters) {
-        throw new BadMethodCallException("方法[$method]不存在。");
     }
     /**
      * @param $key
@@ -66,5 +60,14 @@ abstract class Controller extends IlluminateController {
         } else {
             return $this->view->make('themes::' . $template);
         }
+    }
+    /**
+     * @param string $method
+     * @param array $parameters
+     * @return mixed
+     * @throws \BadMethodCallException
+     */
+    public function __call($method, $parameters) {
+        throw new BadMethodCallException("方法[$method]不存在。");
     }
 }

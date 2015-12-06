@@ -29,8 +29,8 @@ class FailedTableCommand extends Command {
     protected $composer;
     /**
      * Create a new failed queue jobs table command instance.
-     * @param  \Illuminate\Filesystem\Filesystem $files
-     * @param  \Notadd\Foundation\Composer\Composer $composer
+     * @param \Illuminate\Filesystem\Filesystem $files
+     * @param \Notadd\Foundation\Composer\Composer $composer
      */
     public function __construct(Filesystem $files, Composer $composer) {
         parent::__construct();
@@ -57,7 +57,7 @@ class FailedTableCommand extends Command {
         $this->composer->dumpAutoloads();
     }
     /**
-     * @param  string $table
+     * @param string $table
      * @return string
      */
     protected function createBaseMigration($table = 'failed_jobs') {

@@ -27,9 +27,9 @@ class Application extends SymfonyApplication implements ApplicationContract {
     protected $lastOutput;
     /**
      * Create a new Artisan console application.
-     * @param  \Illuminate\Contracts\Container\Container $laravel
-     * @param  \Illuminate\Contracts\Events\Dispatcher $events
-     * @param  string $version
+     * @param \Illuminate\Contracts\Container\Container $laravel
+     * @param \Illuminate\Contracts\Events\Dispatcher $events
+     * @param string $version
      */
     public function __construct(Container $laravel, Dispatcher $events, $version) {
         parent::__construct('Notadd Framework', $version);
@@ -40,8 +40,8 @@ class Application extends SymfonyApplication implements ApplicationContract {
     }
     /**
      * Run an Artisan console command by name.
-     * @param  string $command
-     * @param  array $parameters
+     * @param string $command
+     * @param array $parameters
      * @return int
      */
     public function call($command, array $parameters = []) {
@@ -58,7 +58,7 @@ class Application extends SymfonyApplication implements ApplicationContract {
     }
     /**
      * Add a command to the console.
-     * @param  \Symfony\Component\Console\Command\Command $command
+     * @param \Symfony\Component\Console\Command\Command $command
      * @return \Symfony\Component\Console\Command\Command
      */
     public function add(SymfonyCommand $command) {
@@ -69,7 +69,7 @@ class Application extends SymfonyApplication implements ApplicationContract {
     }
     /**
      * Add the command to the parent instance.
-     * @param  \Symfony\Component\Console\Command\Command $command
+     * @param \Symfony\Component\Console\Command\Command $command
      * @return \Symfony\Component\Console\Command\Command
      */
     protected function addToParent(SymfonyCommand $command) {
@@ -77,7 +77,7 @@ class Application extends SymfonyApplication implements ApplicationContract {
     }
     /**
      * Add a command, resolving through the application.
-     * @param  string $command
+     * @param string $command
      * @return \Symfony\Component\Console\Command\Command
      */
     public function resolve($command) {
@@ -85,7 +85,7 @@ class Application extends SymfonyApplication implements ApplicationContract {
     }
     /**
      * Resolve an array of commands through the application.
-     * @param  array|mixed $commands
+     * @param array|mixed $commands
      * @return $this
      */
     public function resolveCommands($commands) {

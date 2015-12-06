@@ -6,9 +6,8 @@
  * @datetime 2015-12-01 17:55
  */
 namespace Notadd\Foundation\Database;
-use Illuminate\Database\Console\Seeds\SeedCommand;
-use Illuminate\Database\Seeder;
 use Illuminate\Support\ServiceProvider;
+use Notadd\Foundation\Database\Console\Seeds\SeedCommand;
 use Notadd\Foundation\Database\Console\Seeds\SeederMakeCommand;
 class SeedServiceProvider extends ServiceProvider {
     /**

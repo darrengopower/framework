@@ -6,6 +6,6 @@
  * @datetime 2015-10-29 16:11
  */
 namespace Notadd\Setting\Models;
-use Illuminate\Database\Eloquent\Model;
+use Notadd\Foundation\Database\Eloquent\Model;
 class Setting extends Model {
 }

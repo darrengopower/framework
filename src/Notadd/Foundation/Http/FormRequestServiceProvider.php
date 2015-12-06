@@ -27,8 +27,8 @@ class FormRequestServiceProvider extends ServiceProvider {
         });
     }
     /**
-     * @param  \Notadd\Foundation\Http\FormRequest $form
-     * @param  \Symfony\Component\HttpFoundation\Request $current
+     * @param \Notadd\Foundation\Http\FormRequest $form
+     * @param \Symfony\Component\HttpFoundation\Request $current
      * @return void
      */
     protected function initializeRequest(FormRequest $form, Request $current) {

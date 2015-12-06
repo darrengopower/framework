@@ -11,7 +11,7 @@ use Monolog\Logger as Monolog;
 use Illuminate\Contracts\Foundation\Application;
 class ConfigureLogging {
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
      * @return void
      */
     public function bootstrap(Application $app) {
@@ -26,7 +26,7 @@ class ConfigureLogging {
         });
     }
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
      * @return \Illuminate\Log\Writer
      */
     protected function registerLogger(Application $app) {
@@ -34,8 +34,8 @@ class ConfigureLogging {
         return $log;
     }
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
-     * @param  \Illuminate\Log\Writer $log
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Log\Writer $log
      * @return void
      */
     protected function configureHandlers(Application $app, Writer $log) {
@@ -43,32 +43,32 @@ class ConfigureLogging {
         $this->{$method}($app, $log);
     }
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
-     * @param  \Illuminate\Log\Writer $log
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Log\Writer $log
      * @return void
      */
     protected function configureSingleHandler(Application $app, Writer $log) {
         $log->useFiles($app->storagePath() . '/logs/notadd.log');
     }
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
-     * @param  \Illuminate\Log\Writer $log
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Log\Writer $log
      * @return void
      */
     protected function configureDailyHandler(Application $app, Writer $log) {
         $log->useDailyFiles($app->storagePath() . '/logs/notadd.log', $app->make('config')->get('app.log_max_files', 5));
     }
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
-     * @param  \Illuminate\Log\Writer $log
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Log\Writer $log
      * @return void
      */
     protected function configureSyslogHandler(Application $app, Writer $log) {
         $log->useSyslog('notadd');
     }
     /**
-     * @param  \Illuminate\Contracts\Foundation\Application $app
-     * @param  \Illuminate\Log\Writer $log
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Log\Writer $log
      * @return void
      */
     protected function configureErrorlogHandler(Application $app, Writer $log) {

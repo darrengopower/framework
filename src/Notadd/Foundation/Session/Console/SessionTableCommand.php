@@ -30,8 +30,8 @@ class SessionTableCommand extends Command {
      */
     protected $composer;
     /**
-     * @param  \Illuminate\Filesystem\Filesystem $files
-     * @param  \Notadd\Foundation\Composer\Composer $composer
+     * @param \Illuminate\Filesystem\Filesystem $files
+     * @param \Notadd\Foundation\Composer\Composer $composer
      */
     public function __construct(Filesystem $files, Composer $composer) {
         parent::__construct();

@@ -27,8 +27,8 @@ class SeederMakeCommand extends GeneratorCommand {
      */
     protected $composer;
     /**
-     * @param  \Illuminate\Filesystem\Filesystem $files
-     * @param  \Notadd\Foundation\Composer\Composer $composer
+     * @param \Illuminate\Filesystem\Filesystem $files
+     * @param \Notadd\Foundation\Composer\Composer $composer
      */
     public function __construct(Filesystem $files, Composer $composer) {
         parent::__construct($files);
@@ -48,14 +48,14 @@ class SeederMakeCommand extends GeneratorCommand {
         return __DIR__ . '/stubs/seeder.stub';
     }
     /**
-     * @param  string $name
+     * @param string $name
      * @return string
      */
     protected function getPath($name) {
         return $this->notadd->databasePath() . '/seeds/' . $name . '.php';
     }
     /**
-     * @param  string $name
+     * @param string $name
      * @return string
      */
     protected function parseName($name) {

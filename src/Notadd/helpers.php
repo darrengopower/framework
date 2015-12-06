@@ -206,10 +206,10 @@ if(!function_exists('factory')) {
     /**
      * Create a model factory builder for a given class, name, and amount.
      * @param dynamic  class|class,name|class,amount|class,name,amount
-     * @return \Illuminate\Database\Eloquent\FactoryBuilder
+     * @return \Notadd\Foundation\Database\Eloquent\FactoryBuilder
      */
     function factory() {
-        $factory = app('Illuminate\Database\Eloquent\Factory');
+        $factory = app('Notadd\Foundation\Database\Eloquent\Factory');
         $arguments = func_get_args();
         if(isset($arguments[1]) && is_string($arguments[1])) {
             return $factory->of($arguments[0], $arguments[1])->times(isset($arguments[2]) ? $arguments[2] : 1);

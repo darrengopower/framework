@@ -689,7 +689,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
                 'Illuminate\Encryption\Encrypter',
                 'Illuminate\Contracts\Encryption\Encrypter'
             ],
-            'db' => 'Illuminate\Database\DatabaseManager',
+            'db' => 'Notadd\Foundation\Database\DatabaseManager',
             'events' => [
                 'Illuminate\Events\Dispatcher',
                 'Illuminate\Contracts\Events\Dispatcher'

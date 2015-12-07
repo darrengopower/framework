@@ -18,7 +18,6 @@ use Illuminate\Queue\QueueServiceProvider;
 use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Routing\ControllerServiceProvider;
 use Illuminate\Session\SessionServiceProvider;
-use Illuminate\Validation\ValidationServiceProvider;
 use Illuminate\View\ViewServiceProvider;
 use Notadd\Foundation\Cache\CacheServiceProvider;
 use Notadd\Foundation\Console\ConsoleServiceProvider;
@@ -27,6 +26,7 @@ use Notadd\Foundation\Database\DatabaseServiceProvider;
 use Notadd\Foundation\Extension\ExtensionServiceProvider;
 use Notadd\Foundation\Http\FormRequestServiceProvider;
 use Notadd\Foundation\Translation\TranslationServiceProvider;
+use Notadd\Foundation\Validation\ValidationServiceProvider;
 use Notadd\Install\InstallServiceProvider;
 class RegisterProviders {
     /**

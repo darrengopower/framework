@@ -10,6 +10,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Notadd\Foundation\Console\Command;
+use Notadd\Foundation\Database\Migrations\DatabaseMigrationRepository;
 use Notadd\Install\Requests\InstallRequest;
 use PDO;
 class InstallCommand extends Command {
@@ -56,17 +57,26 @@ class InstallCommand extends Command {
         if(!$this->isDataSetted) {
             $this->setDataFromConsoling();
         }
-        $this->config->set('database.fetch', PDO::FETCH_CLASS);
-        $this->config->set('database.default', 'mysql');
-        $this->config->set('database.connections.mysql.driver', 'mysql');
-        $this->config->set('database.connections.mysql.host', $this->data->get('host'));
-        $this->config->set('database.connections.mysql.database', $this->data->get('database'));
-        $this->config->set('database.connections.mysql.username', $this->data->get('username'));
-        $this->config->set('database.connections.mysql.password', $this->data->get('password'));
-        $this->config->set('database.connections.mysql.charset', 'utf8');
-        $this->config->set('database.connections.mysql.collation', 'utf8_unicode_ci');
-        $this->config->set('database.connections.mysql.prefix', $this->data->get('prefix'));
-        $this->config->set('database.connections.mysql.strict', true);
+        $this->config->set('database', [
+            'fetch' => PDO::FETCH_CLASS,
+            'default' => 'mysql',
+            'connections' => [
+                'mysql' => [
+                    'driver' => 'mysql',
+                    'host' => $this->data->get('host'),
+                    'database' => $this->data->get('database'),
+                    'username' => $this->data->get('username'),
+                    'password' => $this->data->get('password'),
+                    'charset' => 'utf8',
+                    'collation' => 'utf8_unicode_ci',
+                    'prefix' => $this->data->get('prefix'),
+                    'strict' => true,
+                ],
+            ],
+            'migrations' => 'migrations',
+            'redis' => [
+            ],
+        ]);
         $this->call('migrate');
     }
     public function setDataFromCalling(InstallRequest $request) {

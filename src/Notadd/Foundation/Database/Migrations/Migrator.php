@@ -6,9 +6,15 @@
  * @datetime 2015-12-06 01:40
  */
 namespace Notadd\Foundation\Database\Migrations;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 use Notadd\Foundation\Database\ConnectionResolverInterface as Resolver;
 class Migrator {
+    /**
+     * @var \Illuminate\Contracts\Foundation\Application
+     */
+    protected $application;
     /**
      * @var \Notadd\Foundation\Database\Migrations\MigrationRepositoryInterface
      */
@@ -30,11 +36,13 @@ class Migrator {
      */
     protected $notes = [];
     /**
+     * @param \Illuminate\Contracts\Foundation\Application $application
      * @param \Notadd\Foundation\Database\Migrations\MigrationRepositoryInterface $repository
      * @param \Notadd\Foundation\Database\ConnectionResolverInterface $resolver
      * @param \Illuminate\Filesystem\Filesystem $files
      */
-    public function __construct(MigrationRepositoryInterface $repository, Resolver $resolver, Filesystem $files) {
+    public function __construct(Application $application, MigrationRepositoryInterface $repository, Resolver $resolver, Filesystem $files) {
+        $this->application = $application;
         $this->files = $files;
         $this->resolver = $resolver;
         $this->repository = $repository;
@@ -186,7 +194,7 @@ class Migrator {
     public function resolve($file) {
         $file = implode('_', array_slice(explode('_', $file), 4));
         $class = Str::studly($file);
-        return new $class;
+        return $this->application->make($class);
     }
     /**
      * @param string $message

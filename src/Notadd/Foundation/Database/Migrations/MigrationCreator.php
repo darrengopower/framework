@@ -46,8 +46,7 @@ class MigrationCreator {
     protected function getStub($table, $create) {
         if(is_null($table)) {
             return $this->files->get($this->getStubPath() . '/blank.stub');
-        }
-        else {
+        } else {
             $stub = $create ? 'create.stub' : 'update.stub';
             return $this->files->get($this->getStubPath() . "/{$stub}");
         }
@@ -105,7 +104,7 @@ class MigrationCreator {
      * @return string
      */
     public function getStubPath() {
-        return __DIR__ . '/stubs';
+        return realpath(__DIR__ . '/../../../../../stubs/migrations');
     }
     /**
      * @return \Illuminate\Filesystem\Filesystem

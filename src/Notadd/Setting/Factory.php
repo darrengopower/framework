@@ -6,13 +6,26 @@
  * @datetime 2015-10-29 16:11
  */
 namespace Notadd\Setting;
-use Illuminate\Support\Facades\Cache;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
 use Notadd\Setting\Models\Setting;
 class Factory {
     /**
+     * @var \Illuminate\Contracts\Foundation\Application
+     */
+    private $application;
+    /**
+     * @var \Illuminate\Cache\CacheManager
+     */
+    private $cache;
+    /**
      * @var string
      */
-    private $cache_key = 'setting';
+    private $cache_key = 'notadd_setting';
+    public function __construct(Application $application) {
+        $this->application = $application;
+        $this->cache = $application->make('cache');
+    }
     /**
      * @param $key
      * @param null $default
@@ -20,7 +33,7 @@ class Factory {
      */
     public function get($key, $default = null) {
         try {
-            $settings = Cache::rememberForever($this->cache_key, function () {
+            $settings = $this->cache->rememberForever($this->cache_key, function () {
                 $settings = Setting::get([
                     'key',
                     'value'
@@ -32,7 +45,7 @@ class Factory {
                 return $arr;
             });
             return (isset($settings[$key])) ? $settings[$key] : $default;
-        } catch(\Exception $ex) {
+        } catch(Exception $ex) {
             return null;
         }
     }
@@ -49,7 +62,9 @@ class Factory {
         }
         $setting->value = $value;
         $setting->save();
-        Cache::forget($this->cache_key);
+        if($this->application->isInstalled()) {
+            $this->cache->forget($this->cache_key);
+        }
         return true;
     }
 }

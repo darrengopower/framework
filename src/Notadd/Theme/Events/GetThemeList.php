@@ -11,8 +11,18 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Collection;
 use Notadd\Theme\Theme;
 class GetThemeList {
+    /**
+     * @var \Illuminate\Contracts\Foundation\Application
+     */
     private $app;
+    /**
+     * @var \Illuminate\Support\Collection
+     */
     private $list;
+    /**
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Support\Collection $list
+     */
     public function __construct(Application $app, Collection $list) {
         $this->app = $app;
         $this->list = $list;
@@ -20,6 +30,7 @@ class GetThemeList {
     /**
      * @param $key
      * @param $value
+     * @throws \Exception
      */
     public function register($key, $value) {
         if($value instanceof Theme) {

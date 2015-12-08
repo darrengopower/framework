@@ -8,8 +8,6 @@
 namespace Notadd\Setting;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\AliasLoader;
-use Notadd\Setting\Facades\Setting;
-use Notadd\Setting\Factory;
 class SettingServiceProvider extends ServiceProvider {
     /**
      * @return array
@@ -23,7 +21,7 @@ class SettingServiceProvider extends ServiceProvider {
                 $this->app->make('router')->post('seo', 'ConfigController@postSeo');
             });
         });
-        AliasLoader::getInstance()->alias('Setting', Setting::class);
+        AliasLoader::getInstance()->alias('Setting', $this->app->make('setting'));
     }
     /**
      * @return array
@@ -36,8 +34,7 @@ class SettingServiceProvider extends ServiceProvider {
      */
     public function register() {
         $this->app->singleton('setting', function () {
-            $factory = new Factory();
-            return $factory;
+            return $this->app->make(Factory::class);
         });
     }
 }

@@ -6,8 +6,7 @@
  * @datetime 2015-10-30 15:05
  */
 namespace Notadd\Menu\Models;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Container\Container;
 use Notadd\Article\Models\Article;
 use Notadd\Category\Models\Category;
 use Notadd\Foundation\Database\Eloquent\Collection;
@@ -97,8 +96,8 @@ class Menu extends Model {
                     $id = $tmp[1];
                     $collection  = Collection::make();
                     $ids = [];
-                    if(Request::route("article")) {
-                        $article = Article::find(Request::route("article"));
+                    if(Container::getInstance()->make('request')->route("article")) {
+                        $article = Article::find(Container::getInstance()->make('request')->route("article"));
                         if($article instanceof Article) {
                             Category::getAllParentCategories($article->category->id, $collection);
                         }
@@ -116,14 +115,14 @@ class Menu extends Model {
                             $ids[] = $category->id;
                         }
                         $ids = array_unique($ids);
-                        $current = Request::route("category");
+                        $current = Container::getInstance()->make('request')->route("category");
                         if(in_array($current, $ids)) {
                             return true;
                         }
                     }
                 }
             } else {
-                return Request::is($this->attributes['link'] . '*') ? true : false;
+                return Container::getInstance()->make('request')->is($this->attributes['link'] . '*') ? true : false;
             }
         }
     }
@@ -132,7 +131,7 @@ class Menu extends Model {
      */
     public function toUrl() {
         if(strpos($this->attributes['link'], 'http://') === false && strpos($this->attributes['link'], 'https://') === false) {
-            return URL::to($this->attributes['link']);
+            return Container::getInstance()->make('url')->to($this->attributes['link']);
         } else {
             return $this->attributes['link'];
         }

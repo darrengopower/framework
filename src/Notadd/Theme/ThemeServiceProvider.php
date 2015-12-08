@@ -7,8 +7,6 @@
  */
 namespace Notadd\Theme;
 use Illuminate\Support\ServiceProvider;
-use Notadd\Theme\Factory;
-use Notadd\Theme\Theme;
 class ThemeServiceProvider extends ServiceProvider {
     /**
      * @return void

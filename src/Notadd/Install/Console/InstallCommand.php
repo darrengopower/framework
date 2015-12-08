@@ -43,6 +43,10 @@ class InstallCommand extends Command {
      */
     protected $description = '应用程序安装器';
     /**
+     * @var \Notadd\Setting\Factory
+     */
+    protected $setting;
+    /**
      * @param \Illuminate\Contracts\Foundation\Application $application
      * @param \Illuminate\Filesystem\Filesystem $filesystem
      */
@@ -52,6 +56,7 @@ class InstallCommand extends Command {
         $this->config = $application->make('config');
         $this->data = Collection::make();
         $this->filesystem = $filesystem;
+        $this->setting = $application->make('setting');
     }
     public function fire() {
         if(!$this->isDataSetted) {
@@ -78,6 +83,8 @@ class InstallCommand extends Command {
             ],
         ]);
         $this->call('migrate');
+        $this->setting->set('site.title', $this->data->get('title'));
+        $this->setting->set('seo.title', $this->data->get('title'));
     }
     public function setDataFromCalling(InstallRequest $request) {
         $this->data->put('driver', 'mysql');

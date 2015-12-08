@@ -6,7 +6,7 @@
  * @datetime 2015-11-02 23:38
  */
 namespace Notadd\Theme;
-use Notadd\Setting\Facades\Setting;
+use Illuminate\Container\Container;
 class Theme {
     /**
      * @var string
@@ -106,7 +106,7 @@ class Theme {
      * @return bool
      */
     public function isDefault() {
-        if(Setting::get('site.theme') === $this->alias) {
+        if(Container::getInstance()->make('setting')->get('site.theme') === $this->alias) {
             return true;
         }
         return false;

@@ -6,7 +6,7 @@
  * @datetime 2015-10-30 15:13
  */
 namespace Notadd\Menu;
-use Illuminate\Support\Facades\View;
+use Illuminate\Container\Container;
 use Notadd\Menu\Models\Menu;
 use Notadd\Menu\Models\MenuGroup;
 class Factory {
@@ -27,6 +27,6 @@ class Factory {
     public function make($name, $template = '') {
         $group = MenuGroup::whereAlias($name)->firstOrFail();
         $menus = $this->build($group->id);
-        return View::make($template)->withMenus($menus);
+        return Container::getInstance()->make('view')->make($template)->withMenus($menus);
     }
 }

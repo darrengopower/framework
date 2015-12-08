@@ -28,6 +28,7 @@ use Notadd\Foundation\Http\FormRequestServiceProvider;
 use Notadd\Foundation\Translation\TranslationServiceProvider;
 use Notadd\Foundation\Validation\ValidationServiceProvider;
 use Notadd\Install\InstallServiceProvider;
+use Notadd\Setting\SettingServiceProvider;
 class RegisterProviders {
     /**
      * @param \Illuminate\Contracts\Foundation\Application $app
@@ -53,6 +54,7 @@ class RegisterProviders {
         $app->register(ViewServiceProvider::class);
         $app->register(FormRequestServiceProvider::class);
         $app->register(ExtensionServiceProvider::class);
+        $app->register(SettingServiceProvider::class);
         $app->register(InstallServiceProvider::class);
     }
 }

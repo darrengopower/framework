@@ -8,9 +8,6 @@
 namespace Notadd\Article\Controllers\Admin;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Notadd\Admin\Controllers\AbstractAdminController;
 use Notadd\Article\Models\Article;
 use Notadd\Article\Models\ArticleRecommend;
@@ -27,7 +24,7 @@ class ArticleController extends AbstractAdminController {
             $this->share('category', $category);
             return $this->view($category->getArticleTemplate('create'));
         } else {
-            return Redirect::to('admin/category');
+            return $this->redirect->to('admin/category');
         }
     }
     /**
@@ -36,7 +33,7 @@ class ArticleController extends AbstractAdminController {
      */
     public function delete($id, Request $request) {
         $request->isMethod('post') && Article::onlyTrashed()->find($id)->forceDelete();
-        return Redirect::to('admin/article');
+        return $this->redirect->to('admin/article');
     }
     /**
      * @param $id
@@ -46,7 +43,7 @@ class ArticleController extends AbstractAdminController {
         $article = Article::find($id);
         $article->delete();
         ArticleRecommend::whereArticleId($id)->delete();
-        return Redirect::to('admin/article');
+        return $this->redirect->to('admin/article');
     }
     /**
      * @param $id
@@ -64,7 +61,7 @@ class ArticleController extends AbstractAdminController {
      */
     public function index() {
         $articles = Article::with('category')->latest()->paginate(30);
-        $articles->setPath(App::make('request')->url());
+        $articles->setPath($this->app->make('request')->url());
         $this->share('articles', $articles);
         $this->share('category_id', 0);
         $this->share('crumbs', []);
@@ -77,13 +74,13 @@ class ArticleController extends AbstractAdminController {
      */
     public function restore($id, Request $request) {
         $request->isMethod('post') && Article::onlyTrashed()->find($id)->restore();
-        return Redirect::to('admin/article');
+        return $this->redirect->to('admin/article');
     }
     public function show($id) {
         $crumb = [];
         Category::buildCrumb($id, $crumb);
         $articles = Article::with('category')->whereCategoryId($id)->orderBy('created_at', 'desc')->paginate(30);
-        $articles->setPath(App::make('request')->url());
+        $articles->setPath($this->app->make('request')->url());
         $this->share('articles', $articles);
         $this->share('category_id', $id);
         $this->share('crumbs', $crumb);
@@ -96,10 +93,10 @@ class ArticleController extends AbstractAdminController {
      */
     public function store(ArticleCreateRequest $request) {
         $article = new Article();
-        $request->offsetSet('user_id', Auth::user()->id);
+        $request->offsetSet('user_id', $this->app->make('auth')->user()->id);
         $request->offsetSet('created_at', new Carbon());
         $article->create($request->all());
-        return Redirect::to('admin/article');
+        return $this->redirect->to('admin/article');
     }
     /**
      * @param ArticleEditRequest $request
@@ -108,12 +105,12 @@ class ArticleController extends AbstractAdminController {
      */
     public function update(ArticleEditRequest $request, $id) {
         $article = Article::findOrFail($id);
-        $request->offsetSet('user_id', Auth::user()->id);
+        $request->offsetSet('user_id', $this->app->make('auth')->user()->id);
         $request->offsetSet('created_at', new Carbon($request->offsetGet('created_at')));
         if($article->update($request->all())) {
-            return Redirect::to('admin/article');
+            return $this->redirect->to('admin/article');
         } else {
-            return Redirect::back()->withInput()->withErrors('保存失败！');
+            return $this->redirect->back()->withInput()->withErrors('保存失败！');
         }
     }
 }

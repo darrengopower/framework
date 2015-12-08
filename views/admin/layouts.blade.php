@@ -122,7 +122,7 @@
                     </form>
                 </div>
                 <nav class="site-nav clearfix" role="navigation" data-toggle="nav-accordion">
-                    @foreach(\Illuminate\Support\Facades\Config::get('admin') as $top)
+                    @foreach(Config::get('admin') as $top)
                     <div class="nav-title panel-heading"><i>{{ $top['title'] }}</i></div>
                     @if($top['sub'])
                     <ul class="list-unstyled nav-list">

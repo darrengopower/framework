@@ -8,7 +8,7 @@
 namespace Notadd\Admin\Controllers;
 class AdminController extends AbstractAdminController {
     /**
-     * @return \Illuminate\Support\Facades\View
+     * @return \Illuminate\Contracts\View\View
      */
     public function init() {
         $this->share('article_count', 0);

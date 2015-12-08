@@ -8,11 +8,8 @@
 namespace Notadd\Foundation\SearchEngine;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\AliasLoader;
-use Notadd\Foundation\SearchEngine\Facades\SearchEngineOptimization;
-use Notadd\Foundation\SearchEngine\Optimization;
 class SearchEngineServiceProvider extends ServiceProvider {
     public function boot() {
-        AliasLoader::getInstance()->alias('Seo', SearchEngineOptimization::class);
     }
     public function register() {
         $this->app->singleton('searchengine.optimization', Optimization::class);

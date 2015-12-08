@@ -4,11 +4,10 @@
  * @copyright (c) 2015, iBenchu.com
  */
 namespace Notadd\Theme\Controllers\Admin;
-use Illuminate\Support\Facades\Redirect;
 use Notadd\Admin\Controllers\AbstractAdminController;
 class ThemeController extends AbstractAdminController {
     /**
-     * @return Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function index() {
         $themes = $this->app->make('theme')->getThemeList();
@@ -16,8 +15,8 @@ class ThemeController extends AbstractAdminController {
         return $this->view('theme.index');
     }
     /**
-     * @param int $id
-     * @return Response
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update($id) {
         $themes = $this->app->make('theme')->getThemeList();
@@ -27,6 +26,6 @@ class ThemeController extends AbstractAdminController {
             }
             $this->app->make('theme')->publishAssets();
         }
-        return Redirect::to('admin/theme');
+        return $this->redirect->to('admin/theme');
     }
 }

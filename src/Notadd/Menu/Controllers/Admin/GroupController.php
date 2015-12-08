@@ -7,7 +7,6 @@
  */
 namespace Notadd\Menu\Controllers\Admin;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Notadd\Admin\Controllers\AbstractAdminController;
 use Notadd\Menu\Models\Menu;
 use Notadd\Menu\Models\MenuGroup;
@@ -21,7 +20,7 @@ class GroupController extends AbstractAdminController {
     public function destroy($id) {
         $group = MenuGroup::find($id);
         $group->delete();
-        return Redirect::to('admin/menu');
+        return $this->redirect->to('admin/menu');
     }
     /**
      * @param $id
@@ -76,7 +75,7 @@ class GroupController extends AbstractAdminController {
                 }
             }
         }
-        return Redirect::back();
+        return $this->redirect->back();
     }
     /**
      * @param MenuGroupCreateRequest $request
@@ -85,9 +84,9 @@ class GroupController extends AbstractAdminController {
     public function store(MenuGroupCreateRequest $request) {
         $group = new MenuGroup();
         if($group->create($request->all())) {
-            return Redirect::back();
+            return $this->redirect->back();
         } else {
-            return Redirect::back()->withInput()->withErrors('保存失败！');
+            return $this->redirect->back()->withInput()->withErrors('保存失败！');
         }
     }
     /**
@@ -98,9 +97,9 @@ class GroupController extends AbstractAdminController {
     public function update(MenuGroupEditRequest $request, $id) {
         $group = MenuGroup::findOrFail($id);
         if($group->update($request->all())) {
-            return Redirect::to("admin/menu");
+            return $this->redirect->to("admin/menu");
         } else {
-            return Redirect::back()->withInput()->withErrors('保存失败！');
+            return $this->redirect->back()->withInput()->withErrors('保存失败！');
         }
     }
 }

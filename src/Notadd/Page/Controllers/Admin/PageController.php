@@ -14,7 +14,7 @@ use Notadd\Page\Requests\PageCreateRequest;
 use Notadd\Page\Requests\PageEditRequest;
 class PageController extends AbstractAdminController {
     /**
-     * @return \Illuminate\Support\Facades\View
+     * @return \Illuminate\Contracts\View\View
      */
     public function create() {
         $page = new Page();

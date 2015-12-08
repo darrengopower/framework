@@ -6,16 +6,24 @@
  * @datetime 2015-10-30 17:14
  */
 namespace Notadd\Page;
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Contracts\View\Factory as View;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\View;
 use Notadd\Article\Models\Article;
 use Notadd\Article\Models\ArticleRecommend;
 use Notadd\Page\Models\Page as Model;
 class Factory {
+    protected $config;
+    protected $file;
+    protected $view;
+    public function __construct(Repository $config, Filesystem $file, View $view) {
+        $this->config = $config;
+        $this->file = $file;
+        $this->view = $view;
+    }
     /**
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @return \Notadd\Foundation\Database\Eloquent\Collection|static[]
      */
     public function all() {
         return Model::all();
@@ -71,18 +79,18 @@ class Factory {
                     $thumbnail = '';
                     if($matches && $matches[3]) {
                         $matches = array_unique($matches[3]);
-                        if($matches[0] && File::exists(public_path($matches[0]))) {
+                        if($matches[0] && $this->file->exists(public_path($matches[0]))) {
                             $thumbnail = $matches[0];
                             $hash = hash_file('md5', public_path($matches[0]), false);
                         }
                     }
                     if($thumbnail && $hash) {
-                        $path = '/uploads/thumbnails/' . $opinions['thumbnail']['width'] . 'X' . $opinions['thumbnail']['height'] . '/' .$hash . '.' . File::extension(public_path($thumbnail));
+                        $path = '/uploads/thumbnails/' . $opinions['thumbnail']['width'] . 'X' . $opinions['thumbnail']['height'] . '/' .$hash . '.' . $this->file->extension(public_path($thumbnail));
                         $directory = public_path('/uploads/thumbnails/' . $opinions['thumbnail']['width'] . 'X' . $opinions['thumbnail']['height'] . '/');
-                        if(!File::isDirectory($directory)) {
-                            File::makeDirectory($directory, 0777, true, true);
+                        if(!$this->file->isDirectory($directory)) {
+                            $this->file->makeDirectory($directory, 0777, true, true);
                         }
-                        if(!File::exists(public_path($path))) {
+                        if(!$this->file->exists(public_path($path))) {
                             $image = Image::make($thumbnail, $opinions['thumbnail']);
                             $image->save(public_path($path));
                         }
@@ -92,7 +100,7 @@ class Factory {
                 }
             }
         }
-        return View::make($template)->withArticles($articles);
+        return $this->view->make($template)->withArticles($articles);
     }
     /**
      * @param $template
@@ -113,7 +121,7 @@ class Factory {
      * @return mixed
      */
     public function position($key, $opinions = []) {
-        $config = Config::get('page.recommends');
+        $config = $this->config->get('page.recommends');
         $config = array_merge($config[$key], $opinions);
         $articles = ArticleRecommend::wherePosition($key);
         if(isset($opinions['limit']) && $opinions['limit'] > 0) {
@@ -129,18 +137,18 @@ class Factory {
                     $thumbnail = '';
                     if($matches && $matches[3]) {
                         $matches = array_unique($matches[3]);
-                        if($matches[0] && File::exists(public_path($matches[0]))) {
+                        if($matches[0] && $this->file->exists(public_path($matches[0]))) {
                             $thumbnail = $matches[0];
                             $hash = hash_file('md5', public_path($matches[0]), false);
                         }
                     }
                     if($thumbnail && $hash) {
-                        $path = '/uploads/thumbnails/' . $config['thumbnail']['width'] . 'X' . $config['thumbnail']['height'] . '/' .$hash . '.' . File::extension(public_path($thumbnail));
+                        $path = '/uploads/thumbnails/' . $config['thumbnail']['width'] . 'X' . $config['thumbnail']['height'] . '/' .$hash . '.' . $this->file->extension(public_path($thumbnail));
                         $directory = public_path('/uploads/thumbnails/' . $config['thumbnail']['width'] . 'X' . $config['thumbnail']['height'] . '/');
-                        if(!File::isDirectory($directory)) {
-                            File::makeDirectory($directory, 0777, true, true);
+                        if(!$this->file->isDirectory($directory)) {
+                            $this->file->makeDirectory($directory, 0777, true, true);
                         }
-                        if(!File::exists(public_path($path))) {
+                        if(!$this->file->exists(public_path($path))) {
                             $image = Image::make($thumbnail, $config['thumbnail']);
                             $image->save(public_path($path));
                         }
@@ -152,6 +160,6 @@ class Factory {
                 }
             }
         }
-        return View::make($config['template'])->withArticles($articles);
+        return $this->view->make($config['template'])->withArticles($articles);
     }
 }

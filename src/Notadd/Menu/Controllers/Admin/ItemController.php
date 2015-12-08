@@ -6,7 +6,7 @@
  * @datetime 2015-10-30 15:22
  */
 namespace Notadd\Menu\Controllers\Admin;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 use Notadd\Admin\Controllers\AbstractAdminController;
 use Notadd\Menu\Models\Menu;
 use Notadd\Menu\Models\MenuGroup;
@@ -19,7 +19,7 @@ class ItemController extends AbstractAdminController {
     public function destroy($id) {
         $menu = Menu::findOrFail($id);
         $menu->delete();
-        return Redirect::back();
+        return $this->redirect->back();
     }
     /**
      * @param $id
@@ -56,7 +56,7 @@ class ItemController extends AbstractAdminController {
     public function status($id) {
         $item = Menu::findOrFail($id);
         $item->update(['enabled' => !$item->enabled]);
-        return Redirect::back();
+        return $this->redirect->back();
     }
     /**
      * @param $id
@@ -87,7 +87,7 @@ class ItemController extends AbstractAdminController {
                 }
             }
         }
-        return Redirect::back();
+        return $this->redirect->back();
     }
     /**
      * @param MenuCreateRequest $request
@@ -96,9 +96,9 @@ class ItemController extends AbstractAdminController {
     public function store(MenuCreateRequest $request) {
         $menu = new Menu();
         if($menu->create($request->all())) {
-            return Redirect::back();
+            return $this->redirect->back();
         } else {
-            return Redirect::back()->withInput()->withErrors('保存失败！');
+            return $this->redirect->back()->withInput()->withErrors('保存失败！');
         }
     }
     /**
@@ -115,9 +115,9 @@ class ItemController extends AbstractAdminController {
         }
         $request->files->replace();
         if($menu->update($request->all())) {
-            return Redirect::back();
+            return $this->redirect->back();
         } else {
-            return Redirect::back()->withInput()->withErrors('保存失败！');
+            return $this->redirect->back()->withInput()->withErrors('保存失败！');
         }
     }
 }

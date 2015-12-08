@@ -9,15 +9,12 @@ namespace Notadd\Install\Console;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
+use Notadd\Foundation\Auth\Models\User;
 use Notadd\Foundation\Console\Command;
 use Notadd\Foundation\Database\Migrations\DatabaseMigrationRepository;
 use Notadd\Install\Requests\InstallRequest;
 use PDO;
 class InstallCommand extends Command {
-    /**
-     * @var \Illuminate\Contracts\Foundation\Application
-     */
-    protected $application;
     /**
      * @var \Illuminate\Contracts\Config\Repository
      */
@@ -52,11 +49,21 @@ class InstallCommand extends Command {
      */
     public function __construct(Application $application, Filesystem $filesystem) {
         parent::__construct();
-        $this->application = $application;
-        $this->config = $application->make('config');
+        $this->notadd = $application;
+        $this->config = $this->notadd->make('config');
         $this->data = Collection::make();
         $this->filesystem = $filesystem;
-        $this->setting = $application->make('setting');
+        $this->setting = $this->notadd->make('setting');
+    }
+    protected function createAdministrationUser() {
+        $auth = $this->notadd->make('auth');
+        $user = User::create([
+            'name' => $this->data->get('admin_username'),
+            'email' => $this->data->get('admin_email'),
+            'password' => $this->data->get('admin_password'),
+        ]);
+        $auth->login($user);
+        touch($this->notadd->storagePath() . '/framework/notadd/installed');
     }
     public function fire() {
         if(!$this->isDataSetted) {
@@ -85,6 +92,9 @@ class InstallCommand extends Command {
         $this->call('migrate');
         $this->setting->set('site.title', $this->data->get('title'));
         $this->setting->set('seo.title', $this->data->get('title'));
+        $this->createAdministrationUser();
+        $this->writingConfiguration();
+        $this->comment('Application Installed!');
     }
     public function setDataFromCalling(InstallRequest $request) {
         $this->data->put('driver', 'mysql');
@@ -113,5 +123,36 @@ class InstallCommand extends Command {
         $this->data->put('admin_email', $this->ask('电子邮箱：'));
         $this->data->put('title', $this->ask('网站标题：'));
         $this->isDataSetted = true;
+    }
+    protected function writingConfiguration() {
+        $config = [
+            'app' => [
+                'debug' => true,
+            ],
+            'database' => [
+                'fetch' => PDO::FETCH_CLASS,
+                'default' => 'mysql',
+                'connections' => [
+                    'mysql' => [
+                        'driver' => 'mysql',
+                        'host' => $this->data->get('host'),
+                        'database' => $this->data->get('database'),
+                        'username' => $this->data->get('username'),
+                        'password' => $this->data->get('password'),
+                        'charset' => 'utf8',
+                        'collation' => 'utf8_unicode_ci',
+                        'prefix' => $this->data->get('prefix'),
+                        'strict' => true,
+                    ],
+                ],
+                'migrations' => 'migrations',
+                'redis' => [
+                ],
+            ]
+        ];
+        file_put_contents(
+            realpath($this->notadd->storagePath() . '/framework/notadd') . DIRECTORY_SEPARATOR . 'config.php',
+            '<?php return '.var_export($config, true).';'
+        );
     }
 }

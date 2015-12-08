@@ -6,6 +6,7 @@
  * @datetime 2015-10-18 16:28
  */
 namespace Notadd\Foundation\Install\Bootstrap;
+use Illuminate\Auth\AuthServiceProvider;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Cookie\CookieServiceProvider;
 use Illuminate\Encryption\EncryptionServiceProvider;
@@ -36,6 +37,7 @@ class RegisterProviders {
     public function bootstrap(Application $app) {
         $app->register(ConsoleServiceProvider::class);
         $app->register(ConsoleSupportServiceProvider::class);
+        $app->register(AuthServiceProvider::class);
         $app->register(CacheServiceProvider::class);
         $app->register(ControllerServiceProvider::class);
         $app->register(CookieServiceProvider::class);

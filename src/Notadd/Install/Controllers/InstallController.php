@@ -38,4 +38,11 @@ class InstallController extends Controller {
         $this->command->run($input, $output);
         echo $output->fetch();
     }
+    public function make() {
+        $command = $this->getCommand('make:migration');
+        $input = new ArrayInput(['name' => 'create_pages_table', '--create' => 'pages']);
+        $output = new BufferedOutput();
+        $command->run($input, $output);
+        echo $output->fetch();
+    }
 }

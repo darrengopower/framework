@@ -8,50 +8,55 @@
 namespace Notadd\Foundation\Install\Bootstrap;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Config\Repository as RepositoryContract;
+use Notadd\Foundation\Auth\Models\User;
 class LoadConfiguration {
     /**
      * @param \Illuminate\Contracts\Foundation\Application $app
      * @return void
      */
     public function bootstrap(Application $app) {
-        $app->instance('config', $config = new Repository([]));
-        $this->loadConfiguration($app, $config);
+        $app->instance('config', $config = new Repository([
+            'app' => [
+                'debug' => true,
+                'url' => 'http://localhost',
+                'timezone' => 'UTC',
+                'locale' => 'en',
+                'fallback_locale' => 'en',
+                'key' => 'SomeRandomString',
+                'cipher' => 'AES-256-CBC',
+                'log' => 'daily',
+                'aliases' => []
+            ],
+            'auth' => [
+                'driver' => 'eloquent',
+                'model' => User::class,
+                'table' => 'users',
+                'password' => [
+                    'email' => 'emails.password',
+                    'table' => 'password_resets',
+                    'expire' => 60,
+                ],
+            ],
+            'session' => [
+                'driver' => 'file',
+                'lifetime' => 120,
+                'expire_on_close' => false,
+                'encrypt' => false,
+                'files' => storage_path('framework/sessions'),
+                'connection' => null,
+                'table' => 'sessions',
+                'lottery' => [2, 100],
+                'cookie' => 'notadd_session',
+                'path' => '/',
+                'domain' => null,
+                'secure' => false,
+            ],
+            'view' => [
+                'paths' => [],
+                'compiled' => realpath(storage_path('framework/views')),
+            ]
+        ]));
         date_default_timezone_set($config['app.timezone']);
         mb_internal_encoding('UTF-8');
-    }
-    /**
-     * @param \Illuminate\Contracts\Foundation\Application $app
-     * @param \Illuminate\Contracts\Config\Repository $config
-     * @return void
-     */
-    protected function loadConfiguration(Application $app, RepositoryContract $config) {
-        $config->set('app', [
-            'debug' => true,
-            'url' => 'http://localhost',
-            'timezone' => 'UTC',
-            'locale' => 'en',
-            'fallback_locale' => 'en',
-            'key' => 'SomeRandomString',
-            'cipher' => 'AES-256-CBC',
-            'log' => 'daily',
-            'aliases' => []
-        ]);
-        $config->set('view', [
-            'paths' => [],
-            'compiled' => realpath(storage_path('framework/views')),
-        ]);
-        $config->set('session.driver', 'file');
-        $config->set('session.lifetime', 120);
-        $config->set('session.expire_on_close', false);
-        $config->set('session.encrypt', false);
-        $config->set('session.files', storage_path('framework/sessions'));
-        $config->set('session.connection', null);
-        $config->set('session.table', 'sessions');
-        $config->set('session.lottery', [2, 100]);
-        $config->set('session.cookie', 'notadd_session');
-        $config->set('session.path', '/');
-        $config->set('session.domain', null);
-        $config->set('session.secure', false);
     }
 }

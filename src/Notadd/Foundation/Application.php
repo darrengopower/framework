@@ -552,7 +552,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      * @return bool
      */
     public function isInstalled() {
-        return file_exists($this->storagePath() . '/framework/installed');
+        return file_exists($this->storagePath() . '/framework/notadd/installed');
     }
     /**
      * @param int $code

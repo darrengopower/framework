@@ -1,21 +1,21 @@
 @extends('admin::layouts')
 @section('title')首页@endsection
 @section('content')
-<div class="page clearfix">
-    <ol class="breadcrumb breadcrumb-small">
-        <li>后台首页</li>
-        <li><a href="{{ url('admin') }}">仪表盘</a></li>
-    </ol>
-    <div class="page-wrap">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="panel panel-lined clearfix mb30">
-                    <div class="panel-heading mb20"><i>仪表盘</i></div>
-                    <table class="table table-hover">
-                        <tbody>
+    <div class="page clearfix">
+        <ol class="breadcrumb breadcrumb-small">
+            <li>后台首页</li>
+            <li><a href="{{ url('admin') }}">仪表盘</a></li>
+        </ol>
+        <div class="page-wrap">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="panel panel-lined clearfix mb30">
+                        <div class="panel-heading mb20"><i>仪表盘</i></div>
+                        <table class="table table-hover">
+                            <tbody>
                             <tr>
-                                <td class="col-md-4 text-right"><strong>iBenchuCMS版本：</strong></td>
-                                <td class="col-md-8">{{ Config::get('app.version') }}</td>
+                                <td class="col-md-4 text-right"><strong>NotaddCMS版本：</strong></td>
+                                <td class="col-md-8">{{ app('config')->get('app.version') }}</td>
                             </tr>
                             <tr>
                                 <td class="col-md-4 text-right"><strong>当前时间：</strong></td>
@@ -54,11 +54,11 @@
                                 <td class="text-right"><strong>文章数：</strong></td>
                                 <td>{{ $article_count }}</td>
                             </tr>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

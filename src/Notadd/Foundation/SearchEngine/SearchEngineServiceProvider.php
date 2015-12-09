@@ -7,7 +7,6 @@
  */
 namespace Notadd\Foundation\SearchEngine;
 use Illuminate\Support\ServiceProvider;
-use Notadd\Foundation\AliasLoader;
 class SearchEngineServiceProvider extends ServiceProvider {
     public function boot() {
     }

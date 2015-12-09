@@ -7,7 +7,6 @@
  */
 namespace Notadd\Setting;
 use Illuminate\Support\ServiceProvider;
-use Notadd\Foundation\AliasLoader;
 class SettingServiceProvider extends ServiceProvider {
     /**
      * @return array

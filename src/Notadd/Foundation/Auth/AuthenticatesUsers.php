@@ -7,8 +7,6 @@
  */
 namespace Notadd\Foundation\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Lang;
 trait AuthenticatesUsers {
     use RedirectsUsers;
     /**
@@ -34,7 +32,7 @@ trait AuthenticatesUsers {
             return $this->sendLockoutResponse($request);
         }
         $credentials = $this->getCredentials($request);
-        if(Auth::attempt($credentials, $request->has('remember'))) {
+        if($this->app->make('auth')->attempt($credentials, $request->has('remember'))) {
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
         if($throttles) {
@@ -54,7 +52,7 @@ trait AuthenticatesUsers {
             $this->clearLoginAttempts($request);
         }
         if(method_exists($this, 'authenticated')) {
-            return $this->authenticated($request, Auth::user());
+            return $this->authenticated($request, $this->app->make('auth')->user());
         }
         return redirect()->intended($this->redirectPath());
     }
@@ -69,13 +67,13 @@ trait AuthenticatesUsers {
      * @return string
      */
     protected function getFailedLoginMessage() {
-        return Lang::has('auth.failed') ? Lang::get('auth.failed') : 'These credentials do not match our records.';
+        return trans()->has('auth.failed') ? trans()->get('auth.failed') : 'These credentials do not match our records.';
     }
     /**
      * @return \Illuminate\Http\Response
      */
     public function getLogout() {
-        Auth::logout();
+        $this->app->make('auth')->logout();
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }
     /**

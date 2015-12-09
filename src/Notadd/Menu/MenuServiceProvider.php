@@ -7,8 +7,6 @@
  */
 namespace Notadd\Menu;
 use Illuminate\Support\ServiceProvider;
-use Notadd\Foundation\AliasLoader;
-use Notadd\Menu\Models\Menu;
 class MenuServiceProvider extends ServiceProvider {
     /**
      * @return void
@@ -25,7 +23,6 @@ class MenuServiceProvider extends ServiceProvider {
                 $this->app->make('router')->post('menu/item/{id}/sorting', 'ItemController@sorting');
             });
         });
-        AliasLoader::getInstance()->alias('Menu', Menu::class);
     }
     /**
      * @return array

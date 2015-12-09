@@ -10,7 +10,6 @@ use Notadd\Foundation\Bootstrap\BootProviders;
 use Notadd\Foundation\Bootstrap\ConfigureLogging;
 use Notadd\Foundation\Bootstrap\DetectEnvironment;
 use Notadd\Foundation\Bootstrap\HandleExceptions;
-use Notadd\Foundation\Bootstrap\RegisterFacades;
 use Notadd\Foundation\Http\Kernel as HttpKernel;
 use Notadd\Foundation\Install\Bootstrap\LoadConfiguration;
 use Notadd\Foundation\Install\Bootstrap\RegisterProviders;
@@ -23,7 +22,6 @@ class Kernel extends HttpKernel {
         LoadConfiguration::class,
         ConfigureLogging::class,
         HandleExceptions::class,
-        RegisterFacades::class,
         RegisterProviders::class,
         BootProviders::class,
     ];

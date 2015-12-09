@@ -15,7 +15,6 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Routing\Router;
 use Illuminate\Session\Middleware\StartSession;
-use Illuminate\Support\Facades\Facade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Notadd\Admin\Middleware\AuthenticateWithAdmin;
 use Notadd\Admin\Middleware\RedirectIfAuthenticated as AdminRedirectIfAuthenticated;
@@ -24,7 +23,6 @@ use Notadd\Foundation\Bootstrap\ConfigureLogging;
 use Notadd\Foundation\Bootstrap\DetectEnvironment;
 use Notadd\Foundation\Bootstrap\HandleExceptions;
 use Notadd\Foundation\Bootstrap\LoadConfiguration;
-use Notadd\Foundation\Bootstrap\RegisterFacades;
 use Notadd\Foundation\Bootstrap\RegisterProviders;
 use Notadd\Foundation\Http\Middleware\CheckForMaintenanceMode;
 use Notadd\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -47,7 +45,6 @@ class Kernel implements KernelContract {
         LoadConfiguration::class,
         ConfigureLogging::class,
         HandleExceptions::class,
-        RegisterFacades::class,
         RegisterProviders::class,
         BootProviders::class,
     ];
@@ -110,7 +107,6 @@ class Kernel implements KernelContract {
      */
     protected function sendRequestThroughRouter($request) {
         $this->app->instance('request', $request);
-        Facade::clearResolvedInstance('request');
         $this->bootstrap();
         return (new Pipeline($this->app))->send($request)->through($this->app->shouldSkipMiddleware() ? [] : $this->middleware)->then($this->dispatchToRouter());
     }

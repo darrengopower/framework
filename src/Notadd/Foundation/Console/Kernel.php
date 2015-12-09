@@ -12,7 +12,6 @@ use Notadd\Foundation\Bootstrap\ConfigureLogging;
 use Notadd\Foundation\Bootstrap\DetectEnvironment;
 use Notadd\Foundation\Bootstrap\HandleExceptions;
 use Notadd\Foundation\Bootstrap\LoadConfiguration;
-use Notadd\Foundation\Bootstrap\RegisterFacades;
 use Notadd\Foundation\Bootstrap\RegisterProviders;
 use Notadd\Foundation\Bootstrap\SetRequestForConsole;
 use Throwable;
@@ -48,7 +47,6 @@ class Kernel implements KernelContract {
         LoadConfiguration::class,
         ConfigureLogging::class,
         HandleExceptions::class,
-        RegisterFacades::class,
         SetRequestForConsole::class,
         RegisterProviders::class,
         BootProviders::class,

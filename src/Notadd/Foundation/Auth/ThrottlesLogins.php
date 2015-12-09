@@ -8,7 +8,6 @@
 namespace Notadd\Foundation\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Cache\RateLimiter;
-use Illuminate\Support\Facades\Lang;
 trait ThrottlesLogins {
     /**
      * @param \Illuminate\Http\Request $request
@@ -39,7 +38,7 @@ trait ThrottlesLogins {
      * @return string
      */
     protected function getLockoutErrorMessage($seconds) {
-        return Lang::has('auth.throttle') ? Lang::get('auth.throttle', ['seconds' => $seconds]) : 'Too many login attempts. Please try again in ' . $seconds . ' seconds.';
+        return trans()->has('auth.throttle') ? trans()->get('auth.throttle', ['seconds' => $seconds]) : 'Too many login attempts. Please try again in ' . $seconds . ' seconds.';
     }
     /**
      * @param \Illuminate\Http\Request $request

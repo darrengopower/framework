@@ -32,9 +32,17 @@ class InstallController extends Controller {
      * @param \Notadd\Install\Requests\InstallRequest $request
      */
     public function handle(InstallRequest $request) {
+        $input = new ArrayInput([]);
         $output = new BufferedOutput();
         $this->command->setDataFromCalling($request);
-        $this->command->run(new ArrayInput([]), $output);
+        $this->command->run($input, $output);
+        echo $output->fetch();
+    }
+    public function make() {
+        $command = $this->getCommand('make:migration');
+        $input = new ArrayInput(['name' => 'create_pages_table', '--create' => 'pages']);
+        $output = new BufferedOutput();
+        $command->run($input, $output);
         echo $output->fetch();
     }
 }

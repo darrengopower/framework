@@ -6,7 +6,6 @@
  * @datetime 2015-10-29 22:44
  */
 namespace Notadd\Admin\Controllers;
-use Illuminate\Support\Facades\Validator;
 use Notadd\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Notadd\Foundation\Auth\Models\User;
 class AuthController extends AbstractAdminController {
@@ -44,7 +43,7 @@ class AuthController extends AbstractAdminController {
      * @return mixed
      */
     protected function validator(array $data) {
-        return Validator::make($data, [
+        return $this->app->make('validator')->make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',

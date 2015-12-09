@@ -1,0 +1,19 @@
+<?php
+use Notadd\Foundation\Database\Schema\Blueprint;
+use Notadd\Foundation\Database\Migrations\Migration;
+class DummyClass extends Migration {
+    /**
+     * Run the migrations.
+     * @return void
+     */
+    public function up() {
+        // Input your UP code in here.
+    }
+    /**
+     * Reverse the migrations.
+     * @return void
+     */
+    public function down() {
+        // Input your DOWN code in here.
+    }
+}

@@ -1,6 +1,7 @@
 <h2>安装</h2>
 <p>如果您在安装过程中遇到问题，可以联系作者获取帮助。</p>
 <form autocomplete="off" method="post">
+    <input type="hidden" name="driver" value="mysql">
     <div class="form-group">
         <div class="form-field">
             <label>网站标题</label>
@@ -61,13 +62,25 @@
             $('#error').hide().text('');
             var $button = $(this).find('button').text('正在安装...').prop('disabled', true);
             $.post("", $(this).serialize()).done(function (data) {
-                //window.location.reload();
+                var infos = data.split("\n");
+                $button.prop('disabled', false).text('即将自动跳转……');
+                $("#error").append("<p>安装成功！反馈信息：</p>");
+                $.each(infos, function(key, value) {
+                    $("#error").append("<p>" + value + "</p>");
+                });
+                $("#error").addClass("info").show();
+                $("body").animate({
+                    scrollTop: $("body").outerHeight()
+                }, 1000);
+                setTimeout(function() {
+                    window.location.reload();
+                }, 6000);
             }).fail(function (data) {
+                $button.prop('disabled', false).text('开始安装');
                 $("#error").append("<p>安装操作有误：</p>");
                 $.each(data.responseJSON, function(key, value) {
                     $("#error").append("<p>" + value + "</p>");
                 });
-                $button.prop('disabled', false).text('开始安装');
                 $("#error").show();
                 $("body").animate({
                     scrollTop: $("body").outerHeight()

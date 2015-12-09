@@ -12,8 +12,28 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Routing\Controller;
 class AbstractAdminController extends Controller {
+    /**
+     * @var \Illuminate\Routing\Redirector
+     */
+    protected $redirect;
+    /**
+     * @var \Illuminate\Session\SessionManager
+     */
+    protected $session;
+    /**
+     * @var \Notadd\Setting\Factory
+     */
+    protected $setting;
+    /**
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\View\Factory $view
+     * @param \Illuminate\Http\Request $request
+     */
     public function __construct(Application $app, Factory $view, Request $request) {
         parent::__construct($app, $view);
+        $this->redirect = $app->make('redirect');
+        $this->session = $app->make('session');
+        $this->setting = $app->make('setting');
         $this->share('admin_theme', $request->cookie('admin-theme'));
     }
     /**

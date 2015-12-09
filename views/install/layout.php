@@ -96,12 +96,15 @@
             opacity: 0.5;
         }
         #error {
-            background: #D83E3E;
+            background: #d83e3e;
             border-radius: 4px;
             color: #fff;
             margin-bottom: 20px;
             padding: 10px 20px;
             text-align: left;
+        }
+        .info {
+            background: #356196 !important;
         }
         #error p {
             margin: 6px 0;

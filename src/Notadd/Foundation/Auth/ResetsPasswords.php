@@ -8,8 +8,6 @@
 namespace Notadd\Foundation\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Message;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Password;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 trait ResetsPasswords {
     /**
@@ -24,13 +22,13 @@ trait ResetsPasswords {
      */
     public function postEmail(Request $request) {
         $this->validate($request, ['email' => 'required|email']);
-        $response = Password::sendResetLink($request->only('email'), function (Message $message) {
+        $response = $this->app->make('auth.password')->sendResetLink($request->only('email'), function (Message $message) {
             $message->subject($this->getEmailSubject());
         });
         switch($response) {
-            case Password::RESET_LINK_SENT:
+            case 'passwords.sent':
                 return redirect()->back()->with('status', trans($response));
-            case Password::INVALID_USER:
+            case 'passwords.user':
                 return redirect()->back()->withErrors(['email' => trans($response)]);
         }
     }
@@ -61,11 +59,11 @@ trait ResetsPasswords {
             'password' => 'required|confirmed|min:6',
         ]);
         $credentials = $request->only('email', 'password', 'password_confirmation', 'token');
-        $response = Password::reset($credentials, function ($user, $password) {
+        $response = $this->app->make('auth.password')->reset($credentials, function ($user, $password) {
             $this->resetPassword($user, $password);
         });
         switch($response) {
-            case Password::PASSWORD_RESET:
+            case 'passwords.reset':
                 return redirect($this->redirectPath())->with('status', trans($response));
             default:
                 return redirect()->back()->withInput($request->only('email'))->withErrors(['email' => trans($response)]);
@@ -79,7 +77,7 @@ trait ResetsPasswords {
     protected function resetPassword($user, $password) {
         $user->password = bcrypt($password);
         $user->save();
-        Auth::login($user);
+        $this->app->make('auth')->login($user);
     }
     /**
      * @return string

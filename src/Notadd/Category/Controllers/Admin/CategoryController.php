@@ -6,7 +6,6 @@
  * @datetime 2015-10-30 15:48
  */
 namespace Notadd\Category\Controllers\Admin;
-use Illuminate\Support\Facades\Redirect;
 use Notadd\Admin\Controllers\AbstractAdminController;
 use Notadd\Category\Events\BeforeCategoryDelete;
 use Notadd\Category\Models\Category;
@@ -21,11 +20,11 @@ class CategoryController extends AbstractAdminController {
         $category = Category::findOrFail($id);
         $this->app->make('events')->fire(new BeforeCategoryDelete($this->app, $category));
         $category->delete();
-        return Redirect::back();
+        return $this->redirect->back();
     }
     /**
      * @param $id
-     * @return \Illuminate\Support\Facades\View
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($id) {
         $category = Category::findOrFail($id);
@@ -68,7 +67,7 @@ class CategoryController extends AbstractAdminController {
     public function status($id) {
         $category = Category::findOrFail($id);
         $category->update(['enabled' => !$category->enabled]);
-        return Redirect::back();
+        return $this->redirect->back();
     }
     /**
      * @param CategoryCreateRequest $request
@@ -77,9 +76,9 @@ class CategoryController extends AbstractAdminController {
     public function store(CategoryCreateRequest $request) {
         $category = new Category();
         if($category->create($request->all())) {
-            return Redirect::back();
+            return $this->redirect->back();
         } else {
-            return Redirect::back()->withInput()->withErrors('保存失败！');
+            return $this->redirect->back()->withInput()->withErrors('保存失败！');
         }
     }
     /**
@@ -90,9 +89,9 @@ class CategoryController extends AbstractAdminController {
     public function update(CategoryEditRequest $request, $id) {
         $category = Category::findOrFail($id);
         if($category->update($request->all())) {
-            return Redirect::back();
+            return $this->redirect->back();
         } else {
-            return Redirect::back()->withInput()->withErrors('保存失败！');
+            return $this->redirect->back()->withInput()->withErrors('保存失败！');
         }
     }
 }

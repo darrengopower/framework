@@ -45,7 +45,7 @@ class PageServiceProvider extends ServiceProvider {
      */
     public function register() {
         $this->app->singleton('page', function () {
-            return new Factory();
+            return $this->app->make(Factory::class);
         });
     }
 }

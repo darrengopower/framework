@@ -21,6 +21,7 @@ class InstallServiceProvider extends ServiceProvider {
         $this->loadViewsFrom(realpath(__DIR__ . '/../../../views/install'), 'install');
         $this->app->make('router')->get('/', 'Notadd\Install\Controllers\PrerequisiteController@render');
         $this->app->make('router')->post('/', 'Notadd\Install\Controllers\InstallController@handle');
+        $this->app->make('router')->get('make', 'Notadd\Install\Controllers\InstallController@make');
     }
     /**
      * @return void

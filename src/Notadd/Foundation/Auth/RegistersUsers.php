@@ -7,7 +7,6 @@
  */
 namespace Notadd\Foundation\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 trait RegistersUsers {
     use RedirectsUsers;
     /**
@@ -25,7 +24,7 @@ trait RegistersUsers {
         if($validator->fails()) {
             $this->throwValidationException($request, $validator);
         }
-        Auth::login($this->create($request->all()));
+        $this->app->make('auth')->login($this->create($request->all()));
         return redirect($this->redirectPath());
     }
 }

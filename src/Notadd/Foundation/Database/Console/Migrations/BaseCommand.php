@@ -12,6 +12,6 @@ class BaseCommand extends Command {
      * @return string
      */
     protected function getMigrationPath() {
-        return $this->notadd->databasePath() . '/migrations';
+        return realpath(__DIR__ . '/../../../../../../migrations');
     }
 }

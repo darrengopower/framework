@@ -6,6 +6,7 @@
  * @datetime 2015-10-18 16:28
  */
 namespace Notadd\Foundation\Install\Bootstrap;
+use Illuminate\Auth\AuthServiceProvider;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Cookie\CookieServiceProvider;
 use Illuminate\Encryption\EncryptionServiceProvider;
@@ -18,7 +19,6 @@ use Illuminate\Queue\QueueServiceProvider;
 use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Routing\ControllerServiceProvider;
 use Illuminate\Session\SessionServiceProvider;
-use Illuminate\Validation\ValidationServiceProvider;
 use Illuminate\View\ViewServiceProvider;
 use Notadd\Foundation\Cache\CacheServiceProvider;
 use Notadd\Foundation\Console\ConsoleServiceProvider;
@@ -27,7 +27,9 @@ use Notadd\Foundation\Database\DatabaseServiceProvider;
 use Notadd\Foundation\Extension\ExtensionServiceProvider;
 use Notadd\Foundation\Http\FormRequestServiceProvider;
 use Notadd\Foundation\Translation\TranslationServiceProvider;
+use Notadd\Foundation\Validation\ValidationServiceProvider;
 use Notadd\Install\InstallServiceProvider;
+use Notadd\Setting\SettingServiceProvider;
 class RegisterProviders {
     /**
      * @param \Illuminate\Contracts\Foundation\Application $app
@@ -35,6 +37,7 @@ class RegisterProviders {
     public function bootstrap(Application $app) {
         $app->register(ConsoleServiceProvider::class);
         $app->register(ConsoleSupportServiceProvider::class);
+        $app->register(AuthServiceProvider::class);
         $app->register(CacheServiceProvider::class);
         $app->register(ControllerServiceProvider::class);
         $app->register(CookieServiceProvider::class);
@@ -53,6 +56,7 @@ class RegisterProviders {
         $app->register(ViewServiceProvider::class);
         $app->register(FormRequestServiceProvider::class);
         $app->register(ExtensionServiceProvider::class);
+        $app->register(SettingServiceProvider::class);
         $app->register(InstallServiceProvider::class);
     }
 }

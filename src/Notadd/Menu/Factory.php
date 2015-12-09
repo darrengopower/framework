@@ -6,10 +6,16 @@
  * @datetime 2015-10-30 15:13
  */
 namespace Notadd\Menu;
-use Illuminate\Support\Facades\View;
+use Illuminate\Contracts\Foundation\Application;
 use Notadd\Menu\Models\Menu;
 use Notadd\Menu\Models\MenuGroup;
 class Factory {
+    protected $application;
+    protected $view;
+    public function __construct(Application $application, \Illuminate\Contracts\View\Factory $view) {
+        $this->application = $application;
+        $this->view = $view;
+    }
     /**
      * @param $group_id
      * @return array
@@ -27,6 +33,6 @@ class Factory {
     public function make($name, $template = '') {
         $group = MenuGroup::whereAlias($name)->firstOrFail();
         $menus = $this->build($group->id);
-        return View::make($template)->withMenus($menus);
+        return $this->view->make($template)->withMenus($menus);
     }
 }

@@ -19,10 +19,10 @@ class HttpServiceProvider extends ServiceProvider {
         //注册搜索引擎优化服务提供者
         $this->app->register(SearchEngineServiceProvider::class);
         $this->app->make('router')->get('/', function() {
-            $home = $this->app->make('setting')->get('site.home');
+            $home = $this->app->make('setting')->get('site.home', 'default');
             if($home == 'default') {
-                $this->app->make('view')->share('logo', file_get_contents(realpath($this->app->basePath() . '/../template/install') . DIRECTORY_SEPARATOR . 'logo.svg'));
-                return $this->app->make('view')->make('index');
+                $this->app->make('view')->share('logo', file_get_contents(realpath($this->app->frameworkPath() . '/views/install') . DIRECTORY_SEPARATOR . 'logo.svg'));
+                return $this->app->make('view')->make('default::index');
             } else {
                 if(Str::contains($home, 'page_')) {
                     $id = Str::substr($home, 5);

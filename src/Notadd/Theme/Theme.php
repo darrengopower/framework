@@ -19,10 +19,6 @@ class Theme {
     /**
      * @var string
      */
-    private $basePath;
-    /**
-     * @var string
-     */
     private $cssPath;
     /**
      * @var string
@@ -41,18 +37,12 @@ class Theme {
      */
     private $viewPath;
     /**
+     * @param $title
      * @param $alias
-     * @param $path
      */
-    public function __construct($title, $alias, $path) {
+    public function __construct($title, $alias) {
         $this->title = $title;
         $this->alias = $alias;
-        $this->basePath = $path;
-        $this->cssPath = realpath($this->basePath . DIRECTORY_SEPARATOR . 'css');
-        $this->fontPath = realpath($this->basePath . DIRECTORY_SEPARATOR . 'fonts');
-        $this->jsPath = realpath($this->basePath . DIRECTORY_SEPARATOR . 'js');
-        $this->imagePath = realpath($this->basePath . DIRECTORY_SEPARATOR . 'images');
-        $this->viewPath = realpath($this->basePath . DIRECTORY_SEPARATOR . 'views');
     }
     /**
      * @return string
@@ -69,14 +59,14 @@ class Theme {
     /**
      * @return string
      */
-    public function getBasePath() {
-        return $this->basePath;
-    }
-    /**
-     * @return string
-     */
     public function getCssPath() {
         return $this->cssPath;
+    }
+    /**
+     * @param string $path
+     */
+    public function useCssPath($path) {
+        $this->cssPath = $path;
     }
     /**
      * @return string
@@ -85,10 +75,19 @@ class Theme {
         return $this->fontPath;
     }
     /**
+     * @param string $path
+     */
+    public function useFontPath($path) {
+        $this->fontPath = $path;
+    }
+    /**
      * @return string
      */
     public function getJsPath() {
         return $this->jsPath;
+    }
+    public function useJsPath($path) {
+        $this->jsPath = $path;
     }
     /**
      * @return string
@@ -97,10 +96,22 @@ class Theme {
         return $this->imagePath;
     }
     /**
+     * @param string $path
+     */
+    public function useImagePath($path) {
+        $this->imagePath = $path;
+    }
+    /**
      * @return string
      */
     public function getViewPath() {
         return $this->viewPath;
+    }
+    /**
+     * @param string $path
+     */
+    public function useViewPath($path) {
+        $this->viewPath = $path;
     }
     /**
      * @return bool

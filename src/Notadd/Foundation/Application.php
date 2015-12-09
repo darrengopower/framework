@@ -263,6 +263,9 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         $this->environmentPath = $path;
         return $this;
     }
+    public function frameworkPath() {
+        return realpath(__DIR__ . '/../../../../framework');
+    }
     /**
      * @param string $file
      * @return $this

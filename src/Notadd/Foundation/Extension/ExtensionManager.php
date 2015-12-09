@@ -36,6 +36,6 @@ class ExtensionManager {
     protected function load($extension) {
     }
     public function getExtensionsDir() {
-        return realpath(base_path('../extensions'));
+        return realpath(base_path('extensions'));
     }
 }

@@ -21,7 +21,6 @@ class SettingServiceProvider extends ServiceProvider {
                 $this->app->make('router')->post('seo', 'ConfigController@postSeo');
             });
         });
-        AliasLoader::getInstance()->alias('Setting', $this->app->make('setting'));
     }
     /**
      * @return array

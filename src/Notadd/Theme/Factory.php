@@ -16,20 +16,20 @@ use League\Flysystem\Adapter\Local as LocalAdapter;
 use Notadd\Theme\Events\GetThemeList;
 class Factory {
     /**
-     * @var
+     * @var \Illuminate\Contracts\Foundation\Application
      */
     private $app;
     /**
-     * @var
+     * @var \Illuminate\Filesystem\Filesystem
      */
     private $files;
     /**
-     * @var
+     * @var \Illuminate\Support\Collection
      */
     private $list;
     /**
-     * @param Application $app
-     * @param Filesystem $files
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Filesystem\Filesystem $files
      */
     public function __construct(Application $app, Filesystem $files) {
         $this->app = $app;
@@ -41,7 +41,20 @@ class Factory {
      */
     protected function buildThemeList() {
         $list = Collection::make();
-        $list->put('default', new Theme('默认模板', 'default', realpath($this->app->basePath() . '/../template/default')));
+        $default = new Theme('默认模板', 'default');
+        $default->useCssPath(realpath($this->app->frameworkPath() . '/less/default'));
+        $default->useFontPath(realpath($this->app->frameworkPath() . '/fonts'));
+        $default->useImagePath(realpath($this->app->frameworkPath() . '/images/default'));
+        $default->useJsPath(realpath($this->app->frameworkPath() . '/js/default'));
+        $default->useViewPath(realpath($this->app->frameworkPath() . '/views/default'));
+        $list->put('default', $default);
+        $admin = new Theme('后台模板', 'admin');
+        $admin->useCssPath(realpath($this->app->frameworkPath() . '/less/admin'));
+        $admin->useFontPath(realpath($this->app->frameworkPath() . '/fonts'));
+        $admin->useImagePath(realpath($this->app->frameworkPath() . '/images/admin'));
+        $admin->useJsPath(realpath($this->app->frameworkPath() . '/js/admin'));
+        $admin->useViewPath(realpath($this->app->frameworkPath() . '/views/admin'));
+        $list->put('admin', $admin);
         $this->app->make('events')->fire(new GetThemeList($this->app, $list));
         $this->list = $list;
     }

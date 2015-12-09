@@ -79,9 +79,8 @@ class DefaultConfiguration {
         $this->config = $config;
     }
     public function loadApplicationConfiguration() {
-        $this->config->set('app.debug', true);
         $this->config->set('app.url', 'http://localhost');
-        $this->config->set('app.timezone', 'UTC');
+        $this->config->set('app.timezone', 'UTC+8');
         $this->config->set('app.locale', 'en');
         $this->config->set('app.fallback_locale', 'en');
         $this->config->set('app.key', 'GERojpSdTnQQbr77s5iXIa1c7Ne7NO4d');

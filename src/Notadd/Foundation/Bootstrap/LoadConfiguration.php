@@ -36,8 +36,9 @@ class LoadConfiguration {
      * @return void
      */
     protected function loadConfigurationFiles(Application $app, RepositoryContract $config) {
-        if(file_exists($app->basePath() . DIRECTORY_SEPARATOR . 'config.php')) {
-            $data = require $app->basePath() . DIRECTORY_SEPARATOR . 'config.php';
+        $file = $this->getConfigurationFile($app);
+        if(file_exists($file)) {
+            $data = require $file;
             foreach($data as $key => $value) {
                 $config->set($key, $value);
             }
@@ -62,17 +63,6 @@ class LoadConfiguration {
      * @return array
      */
     protected function getConfigurationFile(Application $app) {
-
-    }
-    /**
-     * @param \Symfony\Component\Finder\SplFileInfo $file
-     * @return string
-     */
-    protected function getConfigurationNesting(SplFileInfo $file) {
-        $directory = dirname($file->getRealPath());
-        if($tree = trim(str_replace(config_path(), '', $directory), DIRECTORY_SEPARATOR)) {
-            $tree = str_replace(DIRECTORY_SEPARATOR, '.', $tree) . '.';
-        }
-        return $tree;
+        return realpath($app->storagePath() . '/framework/notadd') . DIRECTORY_SEPARATOR . 'config.php';
     }
 }

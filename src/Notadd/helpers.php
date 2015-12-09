@@ -191,6 +191,11 @@ if(!function_exists('database_path')) {
         return app()->databasePath() . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 }
+if(!function_exists('extension_path')) {
+    function extension_path($path) {
+        return base_path('extensions') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+    }
+}
 if(!function_exists('delete')) {
     /**
      * Register a new DELETE route with the router.
@@ -218,6 +223,11 @@ if(!function_exists('factory')) {
         } else {
             return $factory->of($arguments[0]);
         }
+    }
+}
+if(!function_exists('framework_path')) {
+    function framework_path($path) {
+        return app()->frameworkPath() . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 }
 if(!function_exists('get')) {

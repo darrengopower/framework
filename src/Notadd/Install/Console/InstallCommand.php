@@ -126,9 +126,6 @@ class InstallCommand extends Command {
     }
     protected function writingConfiguration() {
         $config = [
-            'app' => [
-                'debug' => true,
-            ],
             'database' => [
                 'fetch' => PDO::FETCH_CLASS,
                 'default' => 'mysql',

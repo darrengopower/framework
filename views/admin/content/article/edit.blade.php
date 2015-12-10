@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="panel panel-lined clearfix mb30">
-                            <div class="panel-heading mb20"><i>编辑文章：{{ $artile->title }}</i></div>
+                            <div class="panel-heading mb20"><i>编辑文章：{{ $article->title }}</i></div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="col-md-12">

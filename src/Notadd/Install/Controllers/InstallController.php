@@ -26,6 +26,7 @@ class InstallController extends Controller {
      */
     public function __construct(Application $app, Factory $view) {
         parent::__construct($app, $view);
+        dd("LLLLLLLLLLLLLL");
         $this->command = $this->getCommand('install');
     }
     /**

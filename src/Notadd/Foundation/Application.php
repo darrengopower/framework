@@ -284,14 +284,6 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         return $this['env'] == 'local';
     }
     /**
-     * @param \Closure $callback
-     * @return string
-     */
-    public function detectEnvironment(Closure $callback) {
-        $args = isset($_SERVER['argv']) ? $_SERVER['argv'] : null;
-        return $this['env'] = (new EnvironmentDetector())->detect($callback, $args);
-    }
-    /**
      * @return bool
      */
     public function runningInConsole() {
@@ -335,13 +327,6 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         $this->register(FormRequestServiceProvider::class);
         $this->register(ExtensionServiceProvider::class);
         $this->register(SettingServiceProvider::class);
-        $this->register(ThemeServiceProvider::class);
-        $this->register(MenuServiceProvider::class);
-        $this->register(CategoryServiceProvider::class);
-        $this->register(ArticleServiceProvider::class);
-        $this->register(HttpServiceProvider::class);
-        $this->register(PageServiceProvider::class);
-        $this->register(AdminServiceProvider::class);
     }
     /**
      * @param \Illuminate\Support\ServiceProvider|string $provider

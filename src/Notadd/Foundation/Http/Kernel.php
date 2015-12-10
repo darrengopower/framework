@@ -21,7 +21,6 @@ use Notadd\Admin\Middleware\RedirectIfAuthenticated as AdminRedirectIfAuthentica
 use Notadd\Foundation\Bootstrap\BootProviders;
 use Notadd\Foundation\Bootstrap\ConfigureLogging;
 use Notadd\Foundation\Bootstrap\HandleExceptions;
-use Notadd\Foundation\Bootstrap\LoadConfiguration;
 use Notadd\Foundation\Http\Middleware\CheckForMaintenanceMode;
 use Notadd\Foundation\Http\Middleware\VerifyCsrfToken;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
@@ -39,7 +38,6 @@ class Kernel implements KernelContract {
      * @var array
      */
     protected $bootstrappers = [
-        LoadConfiguration::class,
         ConfigureLogging::class,
         HandleExceptions::class,
         BootProviders::class,

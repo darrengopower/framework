@@ -10,7 +10,6 @@ use Exception;
 use Notadd\Foundation\Bootstrap\BootProviders;
 use Notadd\Foundation\Bootstrap\ConfigureLogging;
 use Notadd\Foundation\Bootstrap\HandleExceptions;
-use Notadd\Foundation\Bootstrap\LoadConfiguration;
 use Notadd\Foundation\Bootstrap\SetRequestForConsole;
 use Throwable;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -41,7 +40,6 @@ class Kernel implements KernelContract {
      * @var array
      */
     protected $bootstrappers = [
-        LoadConfiguration::class,
         ConfigureLogging::class,
         HandleExceptions::class,
         SetRequestForConsole::class,

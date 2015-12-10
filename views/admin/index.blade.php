@@ -14,8 +14,8 @@
                         <table class="table table-hover">
                             <tbody>
                             <tr>
-                                <td class="col-md-4 text-right"><strong>NotaddCMS版本：</strong></td>
-                                <td class="col-md-8">{{ app('config')->get('app.version') }}</td>
+                                <td class="col-md-4 text-right"><strong>Notadd CMS版本：</strong></td>
+                                <td class="col-md-8">{{ \Notadd\Foundation\Application::VERSION }}</td>
                             </tr>
                             <tr>
                                 <td class="col-md-4 text-right"><strong>当前时间：</strong></td>

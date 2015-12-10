@@ -6,41 +6,8 @@
  * @datetime 2015-11-23 23:26
  */
 namespace Notadd\Foundation\Configuration;
-use Illuminate\Auth\AuthServiceProvider;
-use Illuminate\Auth\Passwords\PasswordResetServiceProvider;
-use Illuminate\Broadcasting\BroadcastServiceProvider;
-use Illuminate\Bus\BusServiceProvider;
 use Illuminate\Config\Repository;
-use Illuminate\Console\ScheduleServiceProvider;
-use Illuminate\Cookie\CookieServiceProvider;
-use Illuminate\Encryption\EncryptionServiceProvider;
-use Illuminate\Filesystem\FilesystemServiceProvider;
-use Illuminate\Hashing\HashServiceProvider;
-use Illuminate\Mail\MailServiceProvider;
-use Illuminate\Pagination\PaginationServiceProvider;
-use Illuminate\Pipeline\PipelineServiceProvider;
-use Illuminate\Queue\QueueServiceProvider;
-use Illuminate\Redis\RedisServiceProvider;
-use Illuminate\Routing\ControllerServiceProvider;
-use Illuminate\Routing\GeneratorServiceProvider;
-use Illuminate\Session\SessionServiceProvider;
-use Illuminate\View\ViewServiceProvider;
 use Notadd\Foundation\Auth\Models\User;
-use Notadd\Admin\AdminServiceProvider;
-use Notadd\Article\ArticleServiceProvider;
-use Notadd\Category\CategoryServiceProvider;
-use Notadd\Foundation\Cache\CacheServiceProvider;
-use Notadd\Foundation\Composer\ComposerServiceProvider;
-use Notadd\Foundation\Database\DatabaseServiceProvider;
-use Notadd\Foundation\Extension\ExtensionServiceProvider;
-use Notadd\Foundation\Http\FormRequestServiceProvider;
-use Notadd\Foundation\Http\HttpServiceProvider;
-use Notadd\Foundation\Translation\TranslationServiceProvider;
-use Notadd\Foundation\Validation\ValidationServiceProvider;
-use Notadd\Menu\MenuServiceProvider;
-use Notadd\Page\PageServiceProvider;
-use Notadd\Setting\SettingServiceProvider;
-use Notadd\Theme\ThemeServiceProvider;
 class DefaultConfiguration {
     private $config;
     public function __construct(Repository $config) {
@@ -54,41 +21,6 @@ class DefaultConfiguration {
         $this->config->set('app.key', 'GERojpSdTnQQbr77s5iXIa1c7Ne7NO4d');
         $this->config->set('app.cipher', MCRYPT_RIJNDAEL_128);
         $this->config->set('app.log', 'daily');
-        $this->config->set('app.providers', [
-            AuthServiceProvider::class,
-            PasswordResetServiceProvider::class,
-            BroadcastServiceProvider::class,
-            BusServiceProvider::class,
-            CacheServiceProvider::class,
-            ControllerServiceProvider::class,
-            CookieServiceProvider::class,
-            DatabaseServiceProvider::class,
-            EncryptionServiceProvider::class,
-            ScheduleServiceProvider::class,
-            GeneratorServiceProvider::class,
-            FilesystemServiceProvider::class,
-            HashServiceProvider::class,
-            MailServiceProvider::class,
-            PaginationServiceProvider::class,
-            PipelineServiceProvider::class,
-            QueueServiceProvider::class,
-            RedisServiceProvider::class,
-            SessionServiceProvider::class,
-            TranslationServiceProvider::class,
-            ValidationServiceProvider::class,
-            ViewServiceProvider::class,
-            ComposerServiceProvider::class,
-            FormRequestServiceProvider::class,
-            ExtensionServiceProvider::class,
-            SettingServiceProvider::class,
-            ThemeServiceProvider::class,
-            MenuServiceProvider::class,
-            CategoryServiceProvider::class,
-            ArticleServiceProvider::class,
-            HttpServiceProvider::class,
-            PageServiceProvider::class,
-            AdminServiceProvider::class
-        ]);
     }
     public function loadAuthConfiguration() {
         $this->config->set('auth.driver', 'eloquent');

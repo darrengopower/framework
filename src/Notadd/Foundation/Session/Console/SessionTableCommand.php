@@ -53,7 +53,7 @@ class SessionTableCommand extends Command {
      */
     protected function createBaseMigration() {
         $name = 'create_sessions_table';
-        $path = $this->notadd->databasePath() . '/migrations';
+        $path = $this->notadd->frameworkPath() . '/migrations';
         return $this->notadd['migration.creator']->create($name, $path);
     }
 }

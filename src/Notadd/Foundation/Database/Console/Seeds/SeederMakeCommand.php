@@ -52,7 +52,7 @@ class SeederMakeCommand extends GeneratorCommand {
      * @return string
      */
     protected function getPath($name) {
-        return $this->notadd->databasePath() . '/seeds/' . $name . '.php';
+        return $this->notadd->frameworkPath() . '/seeds/' . $name . '.php';
     }
     /**
      * @param string $name

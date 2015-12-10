@@ -8,7 +8,6 @@
 namespace Notadd\Foundation\Install;
 use Notadd\Foundation\Bootstrap\BootProviders;
 use Notadd\Foundation\Bootstrap\ConfigureLogging;
-use Notadd\Foundation\Bootstrap\DetectEnvironment;
 use Notadd\Foundation\Bootstrap\HandleExceptions;
 use Notadd\Foundation\Http\Kernel as HttpKernel;
 use Notadd\Foundation\Install\Bootstrap\LoadConfiguration;
@@ -18,7 +17,6 @@ class Kernel extends HttpKernel {
      * @var array
      */
     protected $bootstrappers = [
-        DetectEnvironment::class,
         LoadConfiguration::class,
         ConfigureLogging::class,
         HandleExceptions::class,

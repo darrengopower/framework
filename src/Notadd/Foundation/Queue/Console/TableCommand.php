@@ -63,7 +63,7 @@ class TableCommand extends Command {
      */
     protected function createBaseMigration($table = 'jobs') {
         $name = 'create_' . $table . '_table';
-        $path = $this->notadd->databasePath() . '/migrations';
+        $path = $this->notadd->frameworkPath() . '/migrations';
         return $this->notadd['migration.creator']->create($name, $path);
     }
 }

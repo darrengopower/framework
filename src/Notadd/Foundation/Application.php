@@ -8,24 +8,58 @@
 namespace Notadd\Foundation;
 use Closure;
 use RuntimeException;
+use Illuminate\Auth\AuthServiceProvider;
+use Illuminate\Auth\Passwords\PasswordResetServiceProvider;
+use Illuminate\Broadcasting\BroadcastServiceProvider;
+use Illuminate\Bus\BusServiceProvider;
+use Illuminate\Console\ScheduleServiceProvider;
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Foundation\Application as ApplicationContract;
+use Illuminate\Cookie\CookieServiceProvider;
+use Illuminate\Encryption\EncryptionServiceProvider;
+use Illuminate\Filesystem\FilesystemServiceProvider;
+use Illuminate\Hashing\HashServiceProvider;
+use Illuminate\Mail\MailServiceProvider;
+use Illuminate\Pagination\PaginationServiceProvider;
+use Illuminate\Pipeline\PipelineServiceProvider;
+use Illuminate\Queue\QueueServiceProvider;
+use Illuminate\Redis\RedisServiceProvider;
+use Illuminate\Routing\ControllerServiceProvider;
+use Illuminate\Routing\GeneratorServiceProvider;
+use Illuminate\Session\SessionServiceProvider;
+use Illuminate\View\ViewServiceProvider;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Container\Container;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Events\EventServiceProvider;
 use Illuminate\Routing\RoutingServiceProvider;
+use Notadd\Admin\AdminServiceProvider;
+use Notadd\Article\ArticleServiceProvider;
+use Notadd\Category\CategoryServiceProvider;
+use Notadd\Foundation\Cache\CacheServiceProvider;
+use Notadd\Foundation\Composer\ComposerServiceProvider;
+use Notadd\Foundation\Console\ConsoleServiceProvider;
+use Notadd\Foundation\Console\ConsoleSupportServiceProvider;
+use Notadd\Foundation\Database\DatabaseServiceProvider;
+use Notadd\Foundation\Extension\ExtensionServiceProvider;
+use Notadd\Foundation\Http\FormRequestServiceProvider;
+use Notadd\Foundation\Http\HttpServiceProvider;
+use Notadd\Foundation\Translation\TranslationServiceProvider;
+use Notadd\Foundation\Validation\ValidationServiceProvider;
+use Notadd\Menu\MenuServiceProvider;
+use Notadd\Page\PageServiceProvider;
+use Notadd\Setting\SettingServiceProvider;
+use Notadd\Theme\ThemeServiceProvider;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Illuminate\Contracts\Foundation\Application as ApplicationContract;
 class Application extends Container implements ApplicationContract, HttpKernelInterface {
     /**
      * @var string
      */
-    const VERSION = '0.1.1';
+    const VERSION = '0.1.5';
     /**
      * @var string
      */
@@ -69,19 +103,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * @var string
      */
-    protected $databasePath;
-    /**
-     * @var string
-     */
     protected $storagePath;
-    /**
-     * @var string
-     */
-    protected $environmentPath;
-    /**
-     * @var string
-     */
-    protected $environmentFile = '.env';
     /**
      * The application namespace.
      * @var string
@@ -177,7 +199,6 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         foreach([
                     'base',
                     'config',
-                    'database',
                     'lang',
                     'public',
                     'storage'
@@ -202,21 +223,6 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      */
     public function configPath() {
         return $this->basePath . DIRECTORY_SEPARATOR . 'config';
-    }
-    /**
-     * @return string
-     */
-    public function databasePath() {
-        return $this->databasePath ?: $this->basePath . DIRECTORY_SEPARATOR . 'database';
-    }
-    /**
-     * @param string $path
-     * @return $this
-     */
-    public function useDatabasePath($path) {
-        $this->databasePath = $path;
-        $this->instance('path.database', $path);
-        return $this;
     }
     /**
      * @return string
@@ -252,33 +258,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * @return string
      */
-    public function environmentPath() {
-        return $this->environmentPath ?: $this->basePath;
-    }
-    /**
-     * @param string $path
-     * @return $this
-     */
-    public function useEnvironmentPath($path) {
-        $this->environmentPath = $path;
-        return $this;
-    }
     public function frameworkPath() {
         return realpath(__DIR__ . '/../../../../framework');
-    }
-    /**
-     * @param string $file
-     * @return $this
-     */
-    public function loadEnvironmentFrom($file) {
-        $this->environmentFile = $file;
-        return $this;
-    }
-    /**
-     * @return string
-     */
-    public function environmentFile() {
-        return $this->environmentFile ?: '.env';
     }
     /**
      * @param mixed
@@ -326,8 +307,41 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      * @return void
      */
     public function registerConfiguredProviders() {
-        $manifestPath = $this->getCachedServicesPath();
-        (new ProviderRepository($this, new Filesystem, $manifestPath))->load($this->config['app.providers']);
+        $this->register(ConsoleServiceProvider::class);
+        $this->register(ConsoleSupportServiceProvider::class);
+        $this->register(AuthServiceProvider::class);
+        $this->register(PasswordResetServiceProvider::class);
+        $this->register(BroadcastServiceProvider::class);
+        $this->register(BusServiceProvider::class);
+        $this->register(CacheServiceProvider::class);
+        $this->register(ControllerServiceProvider::class);
+        $this->register(CookieServiceProvider::class);
+        $this->register(DatabaseServiceProvider::class);
+        $this->register(EncryptionServiceProvider::class);
+        $this->register(ScheduleServiceProvider::class);
+        $this->register(GeneratorServiceProvider::class);
+        $this->register(FilesystemServiceProvider::class);
+        $this->register(HashServiceProvider::class);
+        $this->register(MailServiceProvider::class);
+        $this->register(PaginationServiceProvider::class);
+        $this->register(PipelineServiceProvider::class);
+        $this->register(QueueServiceProvider::class);
+        $this->register(RedisServiceProvider::class);
+        $this->register(SessionServiceProvider::class);
+        $this->register(TranslationServiceProvider::class);
+        $this->register(ValidationServiceProvider::class);
+        $this->register(ViewServiceProvider::class);
+        $this->register(ComposerServiceProvider::class);
+        $this->register(FormRequestServiceProvider::class);
+        $this->register(ExtensionServiceProvider::class);
+        $this->register(SettingServiceProvider::class);
+        $this->register(ThemeServiceProvider::class);
+        $this->register(MenuServiceProvider::class);
+        $this->register(CategoryServiceProvider::class);
+        $this->register(ArticleServiceProvider::class);
+        $this->register(HttpServiceProvider::class);
+        $this->register(PageServiceProvider::class);
+        $this->register(AdminServiceProvider::class);
     }
     /**
      * @param \Illuminate\Support\ServiceProvider|string $provider

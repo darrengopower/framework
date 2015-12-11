@@ -30,13 +30,25 @@ use Notadd\Theme\ThemeServiceProvider;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 class Server {
+    /**
+     * @var \Notadd\Foundation\Application
+     */
     private $application;
+    /**
+     * @var string
+     */
     private $path;
+    /**
+     * @param $path
+     */
     public function __construct($path) {
         define('NOTADD_START', microtime(true));
         $this->path = realpath($path);
         $this->application = new Application($this->path);
     }
+    /**
+     * @return $this
+     */
     public function init() {
         $config = Arr::collapse([
             $this->loadIlluminateConfiguration(),
@@ -63,7 +75,7 @@ class Server {
         return $this;
     }
     /**
-     * @return string
+     * @return array|mixed
      */
     protected function loadFiledConfiguration() {
         $file = realpath($this->application->storagePath() . '/framework/notadd') . DIRECTORY_SEPARATOR . 'config.php';
@@ -73,6 +85,9 @@ class Server {
             return [];
         }
     }
+    /**
+     * @return array
+     */
     protected function loadIlluminateConfiguration() {
         return [
             'app' => [
@@ -133,12 +148,26 @@ class Server {
             ]
         ];
     }
+    /**
+     * @param $path
+     * @return $this
+     */
+    public function usePublicPath($path) {
+        $this->application->usePublicPath($path);
+        return $this;
+    }
+    /**
+     * @return void
+     */
     public function terminate() {
         $kernel = $this->application->make(HttpKernelContract::class);
         $response = $kernel->handle($request = Request::capture());
         $response->send();
         $kernel->terminate($request, $response);
     }
+    /**
+     * @return void
+     */
     public function console() {
         $this->application->singleton(ConsoleKernelContract::class, ConsoleKernel::class);
         $this->application->singleton(ExceptionHandler::class, Handler::class);

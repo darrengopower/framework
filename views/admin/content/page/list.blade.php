@@ -17,40 +17,35 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th class="col-md-5">页面标题
-                                </td>
-                                <th class="col-md-3">创建时间
-                                </td>
-                                <th class="col-md-4">操作
-                                </td>
+                                <th class="col-md-5">页面标题</td>
+                                <th class="col-md-3">创建时间</td>
+                                <th class="col-md-4">操作</td>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($pages as $page)
-                                <tr>
-                                    <td>
-                                        <a href="{{ url('page/' . $page->id) }}" target="_blank"><strong>{{ $page->title }}</strong></a>
-                                    </td>
-                                    <td>{{ $page->created_at }}</td>
-                                    <td>
-                                        <form action="{{ URL('admin/page/'.$page->id) }}" method="POST" style="display: inline;">
-                                            <input name="_method" type="hidden" value="DELETE">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <div class="btn-group">
-                                                <a class="btn btn-primary btn-sm" href="{{ url('admin/page/' . $page->id) }}">
-                                                    <i class="fa fa-search-plus"></i>子页管理
-                                                    <span class="badge" title="该分类下子级页面数量">{{ $page->countSubPages() }}</span>
-                                                </a>
-                                                <a class="btn btn-success btn-sm" href="{{ url('admin/page/' . $page->id . '/edit') }}">
-                                                    <i class="fa fa-edit"></i>编辑 </a>
-                                                <button class="btn btn-danger btn-sm">
-                                                    <i class="fa fa-trash-o"></i>删除
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                @foreach($pages as $page)
+                                    <tr>
+                                        <td>
+                                            <a href="{{ url('page/' . $page->id) }}" target="_blank"><strong>{{ $page->title }}</strong></a>
+                                        </td>
+                                        <td>{{ $page->created_at }}</td>
+                                        <td>
+                                            <form action="{{ URL('admin/page/'.$page->id) }}" method="POST" style="display: inline;">
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <div class="btn-group">
+                                                    <a class="btn btn-primary btn-sm" href="{{ url('admin/page/' . $page->id) }}">
+                                                        <i class="fa fa-search-plus"></i>子页管理
+                                                        <span class="badge" title="该分类下子级页面数量">{{ $page->countSubPages() }}</span>
+                                                    </a>
+                                                    <a class="btn btn-success btn-sm" href="{{ url('admin/page/' . $page->id . '/edit') }}"><i class="fa fa-edit"></i>编辑 </a>
+                                                    <a class="btn btn-info btn-sm" href="{{ url('admin/page/' . $page->id . '/move') }}"><i class="fa fa-arrows"></i>移动</a>
+                                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i>删除</button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                         <form action="{{ url('admin/page') }}" method="post" autocomplete="off">

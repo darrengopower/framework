@@ -32,6 +32,8 @@ class PageServiceProvider extends ServiceProvider {
             $this->app->make('router')->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
                 $this->app->make('router')->resource('page', 'PageController');
                 $this->app->make('router')->post('page/{id}/delete', 'PageController@delete');
+                $this->app->make('router')->get('page/{id}/move', 'PageController@move');
+                $this->app->make('router')->post('page/{id}/moving', 'PageController@moving');
                 $this->app->make('router')->post('page/{id}/restore', 'PageController@restore');
                 $this->app->make('router')->get('page/{id}/sort', 'PageController@sort');
                 $this->app->make('router')->post('page/{id}/sorting', 'PageController@sorting');

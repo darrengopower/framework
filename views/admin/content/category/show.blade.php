@@ -17,9 +17,9 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th class="col-md-5">栏目名称</th>
+                                <th class="col-md-4">栏目名称</th>
                                 <th class="col-md-2">是否开启</th>
-                                <th class="col-md-5">操作</th>
+                                <th class="col-md-6">操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -27,8 +27,7 @@
                                 <tr>
                                     <td>
                                         <a href="{{ url('category/' . $category->id) }}" target="_blank"><strong>{{ $category->title }}</strong></a>
-                                        <span class="badge ml10" title="该分类下文章数量">文章：{{ $category->countArticles() }}</span>
-                                        <span class="badge" title="该分类下子级分类数量">子级：{{ $category->countSubCategories() }}</span>
+
                                     </td>
                                     <td>
                                         <form action="{{ url('admin/category/' . $category->id . '/status') }}" method="post">
@@ -50,16 +49,16 @@
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <div class="btn-group">
                                                 <a class="btn btn-primary btn-xs" href="{{ url('admin/category', ['category' => $category->id]) }}">
-                                                    <i class="fa fa-search-plus"></i>子级分类 </a>
-                                                <a class="btn btn-success btn-xs" href="{{ url('admin/category/' . $category->id . '/edit') }}">
-                                                    <i class="fa fa-edit"></i>编辑 </a>
+                                                    <i class="fa fa-search-plus"></i>子级分类
+                                                    <span class="badge" title="该分类下子级页面数量">{{ $category->countSubCategories() }}</span>
+                                                </a>
+                                                <a class="btn btn-success btn-xs" href="{{ url('admin/category/' . $category->id . '/edit') }}"><i class="fa fa-edit"></i>编辑</a>
                                                 <a class="btn btn-info btn-xs" href="{{ url('admin/article/' . $category->id) }}">
-                                                    <i class="fa fa-list"></i>文章列表 </a>
-                                                <a class="btn btn-info btn-xs" href="{{ url('admin/article/create/?category=' . $category->id) }}">
-                                                    <i class="fa fa-plus-square"></i>添加文章 </a>
-                                                <button class="btn btn-danger btn-xs" type="submit">
-                                                    <i class="fa fa-trash-o"></i>删除
-                                                </button>
+                                                    <i class="fa fa-list"></i>文章列表
+                                                    <span class="badge" title="该分类下文章数量">{{ $category->countArticles() }}</span>
+                                                </a>
+                                                <a class="btn btn-info btn-xs" href="{{ url('admin/article/create/?category=' . $category->id) }}"><i class="fa fa-plus-square"></i>添加文章</a>
+                                                <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-trash-o"></i>删除</button>
                                             </div>
                                         </form>
                                     </td>

@@ -8,14 +8,14 @@
         </ol>
         <div class="page-wrap">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-lined clearfix mb30">
                         <div class="panel-heading mb20"><i>仪表盘</i></div>
                         <table class="table table-hover">
                             <tbody>
                             <tr>
                                 <td class="col-md-4 text-right"><strong>Notadd CMS版本：</strong></td>
-                                <td class="col-md-8">{{ app('version') }}</td>
+                                <td class="col-md-8">{{ app()->version() }}</td>
                             </tr>
                             <tr>
                                 <td class="col-md-4 text-right"><strong>当前时间：</strong></td>

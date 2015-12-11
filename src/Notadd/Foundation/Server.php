@@ -56,7 +56,6 @@ class Server {
         ]);
         $this->application->instance('env', 'production');
         $this->application->instance('config', new Repository($config));
-        $this->application->instance('version', Application::VERSION);
         $this->application->registerConfiguredProviders();
         $this->application->singleton(HttpKernelContract::class, HttpKernel::class);
         $this->application->singleton(ConsoleKernelContract::class, ConsoleKernel::class);

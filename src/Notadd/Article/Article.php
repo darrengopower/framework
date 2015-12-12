@@ -45,6 +45,12 @@ class Article {
         return $this->model->getAttribute('content');
     }
     /**
+     * @return mixed
+     */
+    public function getCreatedAt() {
+        return $this->model->getAttribute('created_at');
+    }
+    /**
      * @param int $limit
      * @return string
      */

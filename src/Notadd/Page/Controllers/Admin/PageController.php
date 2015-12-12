@@ -23,6 +23,7 @@ class PageController extends AbstractAdminController {
     }
     /**
      * @param $id
+     * @param \Illuminate\Http\Request $request
      * @return mixed
      */
     public function delete($id, Request $request) {
@@ -52,7 +53,7 @@ class PageController extends AbstractAdminController {
         return $this->view('content.page.edit');
     }
     /**
-     * @return mixed
+     * @return \Illuminate\Contracts\View\View
      */
     public function index() {
         $page = Page::whereParentId(0)->orderBy('created_at', 'desc');
@@ -62,8 +63,25 @@ class PageController extends AbstractAdminController {
         $this->share('pages', $page->get());
         return $this->view('content.page.list');
     }
+    public function move($id) {
+        $crumb = [];
+        Page::getCrumbMenu($id, $crumb);
+        $page = Page::findOrFail($id);
+        $list = $page->where('id', '!=', $id)->get();
+        $this->share('crumbs', $crumb);
+        $this->share('id', $id);
+        $this->share('page', $page);
+        $this->share('list', $list);
+        return $this->view('content.page.move');
+    }
+    public function moving($id, Request $request) {
+        $page = Page::findOrFail($id);
+        $page->update($request->all());
+        return $this->redirect->to('admin/page/' . $page->getAttribute('parent_id'));
+    }
     /**
      * @param $id
+     * @param \Illuminate\Http\Request $request
      * @return mixed
      */
     public function restore($id, Request $request) {
@@ -72,7 +90,7 @@ class PageController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Contracts\View\View
      */
     public function show($id) {
         $crumb = [];
@@ -86,7 +104,7 @@ class PageController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Contracts\View\View
      */
     public function sort($id) {
         $crumb = [];
@@ -100,6 +118,11 @@ class PageController extends AbstractAdminController {
         $this->share('pages', $pages);
         return $this->view('content.page.sort');
     }
+    /**
+     * @param $id
+     * @param \Illuminate\Http\Request $request
+     * @return mixed
+     */
     public function sorting($id, Request $request) {
         if(is_array($request->get('order')) && $request->get('order')) {
             foreach($request->get('order') as $key => $value) {
@@ -111,7 +134,7 @@ class PageController extends AbstractAdminController {
         return $this->app->make('redirect')->back();
     }
     /**
-     * @param PageCreateRequest $request
+     * @param \Notadd\Page\Requests\PageCreateRequest $request
      * @return mixed
      */
     public function store(PageCreateRequest $request) {
@@ -124,7 +147,7 @@ class PageController extends AbstractAdminController {
         return $this->app->make('redirect')->back();
     }
     /**
-     * @param PageEditRequest $request
+     * @param \Notadd\Page\Requests\PageEditRequest $request
      * @param $id
      * @return mixed
      */

@@ -1,6 +1,7 @@
 <h2>安装</h2>
 <p>如果您在安装过程中遇到问题，可以联系作者获取帮助。</p>
 <form autocomplete="off" method="post">
+    <input type="hidden" name="_token" value="<?php echo app('session')->getToken() ?>">
     <input type="hidden" name="driver" value="mysql">
     <div class="form-group">
         <div class="form-field">

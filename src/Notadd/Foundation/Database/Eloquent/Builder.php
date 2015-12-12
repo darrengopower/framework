@@ -7,9 +7,13 @@
  */
 namespace Notadd\Foundation\Database\Eloquent;
 use Closure;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Notadd\Foundation\Database\Eloquent\Relations\Relation;
 use Notadd\Foundation\Database\Query\Builder as QueryBuilder;
+use Notadd\Foundation\Database\Query\Expression;
 class Builder {
     /**
      * @var \Notadd\Foundation\Database\Query\Builder

@@ -49,7 +49,7 @@ class CacheTableCommand extends Command {
      */
     protected function createBaseMigration() {
         $name = 'create_cache_table';
-        $path = $this->notadd->databasePath() . '/migrations';
+        $path = $this->notadd->frameworkPath() . '/migrations';
         return $this->notadd['migration.creator']->create($name, $path);
     }
 }

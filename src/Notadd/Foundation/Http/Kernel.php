@@ -20,10 +20,7 @@ use Notadd\Admin\Middleware\AuthenticateWithAdmin;
 use Notadd\Admin\Middleware\RedirectIfAuthenticated as AdminRedirectIfAuthenticated;
 use Notadd\Foundation\Bootstrap\BootProviders;
 use Notadd\Foundation\Bootstrap\ConfigureLogging;
-use Notadd\Foundation\Bootstrap\DetectEnvironment;
 use Notadd\Foundation\Bootstrap\HandleExceptions;
-use Notadd\Foundation\Bootstrap\LoadConfiguration;
-use Notadd\Foundation\Bootstrap\RegisterProviders;
 use Notadd\Foundation\Http\Middleware\CheckForMaintenanceMode;
 use Notadd\Foundation\Http\Middleware\VerifyCsrfToken;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
@@ -41,11 +38,8 @@ class Kernel implements KernelContract {
      * @var array
      */
     protected $bootstrappers = [
-        DetectEnvironment::class,
-        LoadConfiguration::class,
         ConfigureLogging::class,
         HandleExceptions::class,
-        RegisterProviders::class,
         BootProviders::class,
     ];
     /**
@@ -70,7 +64,6 @@ class Kernel implements KernelContract {
     /**
      * @param \Illuminate\Contracts\Foundation\Application $app
      * @param \Illuminate\Routing\Router $router
-     * @return void
      */
     public function __construct(Application $app, Router $router) {
         $this->app = $app;

@@ -18,7 +18,7 @@
     <div class="content-container" id="content">@yield('content')</div>
     <footer id="site-foot" class="site-foot clearfix">
         <p class="left">&copy; Copyright 2015 <strong>iBenchu.net</strong>, All rights reserved.</p>
-        <p class="right">v0.1</p>
+        <p class="right">v{{ app('version') }}</p>
     </footer>
 </div>
 <script src="{{ asset('themes/admin/js/jquery-2.1.3.min.js') }}"></script>

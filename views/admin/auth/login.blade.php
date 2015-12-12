@@ -22,18 +22,9 @@
                         <input type="password" class="form-control" name="password" required>
                         <label alt="请输入密码" placeholder="密码"></label>
                     </div>
-                    <div class="clearfix"><a href="{{ url('admin/password/email') }}" class="right small">忘记密码了吗？</a></div>
-                    <div class="clearfix mb15">
-                        <button type="submit" class="btn btn-lg btn-w120 btn-primary text-uppercase">登录</button>
-                        <div class="ui-checkbox ui-checkbox-primary mt15 right">
-                            <label>
-                                <input type="checkbox" name="remember">
-                                <span>记住我</span>
-                            </label>
-                        </div>
-                    </div>
+                    <div class="clearfix"><a href="{{ url('admin/password/email') }}" class="right small mb20">忘记密码了吗？</a></div>
                     <div class="clearfix text-center">
-                        <p>尚未注册管理员账号？ <a href="{{ url('admin/register') }}">赶紧去注册一个</a></p>
+                        <button type="submit" class="btn btn-lg btn-w120 btn-primary text-uppercase">登录</button>
                     </div>
                 </form>
             </div>

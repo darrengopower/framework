@@ -181,16 +181,6 @@ if(!function_exists('csrf_token')) {
         throw new RuntimeException('Application session store not set.');
     }
 }
-if(!function_exists('database_path')) {
-    /**
-     * Get the database path.
-     * @param string $path
-     * @return string
-     */
-    function database_path($path = '') {
-        return app()->databasePath() . ($path ? DIRECTORY_SEPARATOR . $path : $path);
-    }
-}
 if(!function_exists('extension_path')) {
     function extension_path($path) {
         return base_path('extensions') . ($path ? DIRECTORY_SEPARATOR . $path : $path);

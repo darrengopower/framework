@@ -54,7 +54,7 @@
         <button type="submit">开始安装</button>
     </div>
 </form>
-<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script>
     $(function () {
         $('form :input:first').select();

@@ -9,6 +9,7 @@ class CreatePagesTable extends Migration {
     public function up() {
         $this->schema->create('pages', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('parent_id');
             $table->string('title');
             $table->string('thumb_image')->nullable();
             $table->string('alias')->nullable();
@@ -18,7 +19,7 @@ class CreatePagesTable extends Migration {
             $table->text('content')->nullable();
             $table->boolean('enabled')->default(true);
             $table->tinyInteger('order_id')->default(0);
-            $table->bigInteger('view_count');
+            $table->bigInteger('view_count')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

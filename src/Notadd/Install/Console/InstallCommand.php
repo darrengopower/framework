@@ -60,7 +60,7 @@ class InstallCommand extends Command {
         $user = User::create([
             'name' => $this->data->get('admin_username'),
             'email' => $this->data->get('admin_email'),
-            'password' => $this->data->get('admin_password'),
+            'password' => bcrypt($this->data->get('admin_password')),
         ]);
         $auth->login($user);
         touch($this->notadd->storagePath() . '/framework/notadd/installed');

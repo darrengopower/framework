@@ -31,10 +31,10 @@ class ThemeServiceProvider extends ServiceProvider {
                 }
                 $this->loadViewsFrom($theme->getViewPath(), $alias);
                 $this->publishes([
-                    $theme->getCssPath() => public_path('themes/' . $alias . '/css'),
-                    $theme->getFontPath() => public_path('themes/' . $alias . '/fonts'),
-                    $theme->getJsPath() => public_path('themes/' . $alias . '/js'),
-                    $theme->getImagePath() => public_path('themes/' . $alias . '/images'),
+                    $theme->getCssPath() => $theme->getCssStaticPath(),
+                    $theme->getFontPath() => $theme->getFontStaticPath(),
+                    $theme->getJsPath() => $theme->getJsStaticPath(),
+                    $theme->getImagePath() => $theme->getImageStaticPath(),
                 ], $alias);
             }
         });

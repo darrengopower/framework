@@ -9,6 +9,10 @@ namespace Notadd\Theme;
 use Illuminate\Container\Container;
 class Theme {
     /**
+     * @var \Notadd\Foundation\Application
+     */
+    private $application;
+    /**
      * @var string
      */
     private $title;
@@ -23,7 +27,15 @@ class Theme {
     /**
      * @var string
      */
+    private $cssStaticPath;
+    /**
+     * @var string
+     */
     private $fontPath;
+    /**
+     * @var string
+     */
+    private $fontStaticPath;
     /**
      * @var string
      */
@@ -31,18 +43,32 @@ class Theme {
     /**
      * @var string
      */
+    private $jsStaticPath;
+    /**
+     * @var string
+     */
     private $imagePath;
+    /**
+     * @var string
+     */
+    private $imageStaticPath;
     /**
      * @var string
      */
     private $viewPath;
     /**
+     * @var \Notadd\Setting\Factory
+     */
+    private $setting;
+    /**
      * @param $title
      * @param $alias
      */
     public function __construct($title, $alias) {
-        $this->title = $title;
         $this->alias = $alias;
+        $this->application = Container::getInstance();
+        $this->setting = $this->application->make('setting');
+        $this->title = $title;
     }
     /**
      * @return string
@@ -71,6 +97,18 @@ class Theme {
     /**
      * @return string
      */
+    public function getCssStaticPath() {
+        return $this->imageStaticPath ? $this->imageStaticPath : $this->getDefaultStaticPath('css');
+    }
+    /**
+     * @param string $path
+     */
+    public function useCssStaticPath($path) {
+        $this->cssStaticPath = $path;
+    }
+    /**
+     * @return string
+     */
     public function getFontPath() {
         return $this->fontPath;
     }
@@ -79,6 +117,18 @@ class Theme {
      */
     public function useFontPath($path) {
         $this->fontPath = $path;
+    }
+    /**
+     * @return string
+     */
+    public function getFontStaticPath() {
+        return $this->imageStaticPath ? $this->imageStaticPath : $this->getDefaultStaticPath('fonts');
+    }
+    /**
+     * @param string $path
+     */
+    public function useFontStaticPath($path) {
+        $this->fontStaticPath = $path;
     }
     /**
      * @return string
@@ -92,6 +142,15 @@ class Theme {
     /**
      * @return string
      */
+    public function getJsStaticPath() {
+        return $this->imageStaticPath ? $this->imageStaticPath : $this->getDefaultStaticPath('js');
+    }
+    public function useJsStaticPath($path) {
+        $this->jsStaticPath = $path;
+    }
+    /**
+     * @return string
+     */
     public function getImagePath() {
         return $this->imagePath;
     }
@@ -100,6 +159,18 @@ class Theme {
      */
     public function useImagePath($path) {
         $this->imagePath = $path;
+    }
+    /**
+     * @return string
+     */
+    public function getImageStaticPath() {
+        return $this->imageStaticPath ? $this->imageStaticPath : $this->getDefaultStaticPath('images');
+    }
+    /**
+     * @param string $path
+     */
+    public function useImageStaticPath($path) {
+        $this->imageStaticPath = $path;
     }
     /**
      * @return string
@@ -117,9 +188,17 @@ class Theme {
      * @return bool
      */
     public function isDefault() {
-        if(Container::getInstance()->make('setting')->get('site.theme') === $this->alias) {
+        if($this->setting->get('site.theme') === $this->alias) {
             return true;
         }
         return false;
+    }
+    /**
+     * @param string $path
+     * @return string
+     */
+    protected function getDefaultStaticPath($path = '') {
+        $defaultPath = $this->application->publicPath() . DIRECTORY_SEPARATOR . 'statics' . DIRECTORY_SEPARATOR . $this->alias;
+        return $path ? $defaultPath . DIRECTORY_SEPARATOR . $path : $defaultPath;
     }
 }

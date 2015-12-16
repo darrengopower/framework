@@ -15,7 +15,7 @@ use Notadd\Menu\Requests\MenuGroupEditRequest;
 class GroupController extends AbstractAdminController {
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id) {
         $group = MenuGroup::find($id);
@@ -24,14 +24,14 @@ class GroupController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($id) {
         $this->share('group', MenuGroup::findOrFail($id));
         return $this->view('menu.group.edit');
     }
     /**
-     * @return mixed
+     * @return \Illuminate\Contracts\View\View
      */
     public function index() {
         $groups = MenuGroup::all();
@@ -41,7 +41,7 @@ class GroupController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Contracts\View\View
      */
     public function show($id) {
         $items = Menu::whereParentId(0)->whereGroupId($id)->orderBy('order_id')->get();
@@ -53,7 +53,7 @@ class GroupController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Contracts\View\View
      */
     public function sort($id) {
         $items = Menu::whereParentId(0)->whereGroupId($id)->orderBy('order_id')->get();
@@ -62,9 +62,9 @@ class GroupController extends AbstractAdminController {
         return $this->view('menu.group.sort');
     }
     /**
-     * @param                        $id
+     * @param $id
      * @param \Illuminate\Http\Request $request
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function sorting($id, Request $request) {
         if(is_array($request->get('order')) && $request->get('order')) {
@@ -78,8 +78,8 @@ class GroupController extends AbstractAdminController {
         return $this->redirect->back();
     }
     /**
-     * @param MenuGroupCreateRequest $request
-     * @return mixed
+     * @param \Notadd\Menu\Requests\MenuGroupCreateRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(MenuGroupCreateRequest $request) {
         $group = new MenuGroup();
@@ -90,9 +90,9 @@ class GroupController extends AbstractAdminController {
         }
     }
     /**
-     * @param MenuGroupEditRequest $request
+     * @param \Notadd\Menu\Requests\MenuGroupEditRequest $request
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(MenuGroupEditRequest $request, $id) {
         $group = MenuGroup::findOrFail($id);

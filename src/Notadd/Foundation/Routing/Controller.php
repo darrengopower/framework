@@ -7,6 +7,7 @@
  */
 namespace Notadd\Foundation\Routing;
 use BadMethodCallException;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Routing\Controller as IlluminateController;
@@ -21,15 +22,21 @@ abstract class Controller extends IlluminateController {
      */
     protected $app;
     /**
+     * @var \Illuminate\Contracts\Auth\Access\Gate
+     */
+    protected $gate;
+    /**
      * @var \Illuminate\Contracts\View\Factory
      */
     protected $view;
     /**
      * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Auth\Access\Gate $gate
      * @param \Illuminate\Contracts\View\Factory $view
      */
-    public function __construct(Application $app, Factory $view) {
+    public function __construct(Application $app, GateContract $gate, Factory $view) {
         $this->app = $app;
+        $this->gate = $gate;
         $this->view = $view;
     }
     public function getCommand($command) {

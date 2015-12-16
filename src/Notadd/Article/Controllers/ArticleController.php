@@ -9,7 +9,8 @@ use Notadd\Article\Events\OnArticleShow;
 use Notadd\Foundation\Routing\Controller;
 class ArticleController extends Controller {
     /**
-     * @param type $id
+     * @param int $id
+     * @return \Illuminate\Contracts\View\View
      */
     public function show($id) {
         $article = new Article($id);

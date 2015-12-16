@@ -6,19 +6,13 @@
  * @datetime 2015-10-30 11:21
  */
 namespace Notadd\Setting\Controllers\Admin;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\Request;
 use Notadd\Admin\Controllers\AbstractAdminController;
 use Notadd\Page\Models\Page;
 use Notadd\Setting\Requests\SeoRequest;
 use Notadd\Setting\Requests\SiteRequest;
 class ConfigController extends AbstractAdminController {
-    public function __construct(Application $app, Factory $view, Request $request) {
-        parent::__construct($app, $view, $request);
-    }
     /**
-     * @return mixed
+     * @return \Illuminate\Contracts\View\View
      */
     public function getSite() {
         $this->share('title', $this->setting->get('site.title'));
@@ -34,8 +28,8 @@ class ConfigController extends AbstractAdminController {
         return $this->view('config.site');
     }
     /**
-     * @param SiteRequest $request
-     * @return mixed
+     * @param \Notadd\Setting\Requests\SiteRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postSite(SiteRequest $request) {
         $this->setting->set('site.title', $request->get('title'));
@@ -49,7 +43,7 @@ class ConfigController extends AbstractAdminController {
         return $this->redirect->to('admin/site')->withMessage('更新站点信息成功');
     }
     /**
-     * @return mixed
+     * @return \Illuminate\Contracts\View\View
      */
     public function getSeo() {
         $this->share('title', $this->setting->get('seo.title'));
@@ -59,8 +53,8 @@ class ConfigController extends AbstractAdminController {
         return $this->view('config.seo');
     }
     /**
-     * @param SeoRequest $request
-     * @return mixed
+     * @param \Notadd\Setting\Requests\SeoRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postSeo(SeoRequest $request) {
         $this->setting->set('seo.title', $request->get('title'));

@@ -14,7 +14,7 @@ use Notadd\Category\Requests\CategoryEditRequest;
 class CategoryController extends AbstractAdminController {
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id) {
         $category = Category::findOrFail($id);
@@ -36,7 +36,7 @@ class CategoryController extends AbstractAdminController {
         return $this->view($category->getAdminTemplate()->get('edit'));
     }
     /**
-     * @return mixed
+     * @return \Illuminate\Contracts\View\View
      */
     public function index() {
         $categories = Category::whereParentId('0')->get();
@@ -48,7 +48,7 @@ class CategoryController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Contracts\View\View
      */
     public function show($id) {
         $crumbs = [];
@@ -62,7 +62,7 @@ class CategoryController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function status($id) {
         $category = Category::findOrFail($id);
@@ -70,8 +70,8 @@ class CategoryController extends AbstractAdminController {
         return $this->redirect->back();
     }
     /**
-     * @param CategoryCreateRequest $request
-     * @return mixed
+     * @param \Notadd\Category\Requests\CategoryCreateRequest $request
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function store(CategoryCreateRequest $request) {
         $category = new Category();
@@ -82,9 +82,9 @@ class CategoryController extends AbstractAdminController {
         }
     }
     /**
-     * @param CategoryEditRequest $request
+     * @param \Notadd\Category\Requests\CategoryEditRequest $request
      * @param $id
-     * @return mixed
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function update(CategoryEditRequest $request, $id) {
         $category = Category::findOrFail($id);

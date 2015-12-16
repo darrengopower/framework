@@ -16,7 +16,8 @@ use Notadd\Article\Requests\ArticleEditRequest;
 use Notadd\Category\Models\Category;
 class ArticleController extends AbstractAdminController {
     /**
-     * @return View
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
     public function create(Request $request) {
         if(Category::whereEnabled(true)->whereId($request->input('category'))->count()) {
@@ -29,7 +30,8 @@ class ArticleController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @return mixed
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function delete($id, Request $request) {
         $request->isMethod('post') && Article::onlyTrashed()->find($id)->forceDelete();
@@ -37,7 +39,7 @@ class ArticleController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id) {
         $article = Article::find($id);
@@ -47,7 +49,7 @@ class ArticleController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @return View
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($id) {
         $article = Article::findOrFail($id);
@@ -57,7 +59,7 @@ class ArticleController extends AbstractAdminController {
         return $this->view($category->getArticleTemplate('edit'));
     }
     /**
-     * @return mixed
+     * @return \Illuminate\Contracts\View\View
      */
     public function index() {
         $articles = Article::with('category')->latest()->paginate(30);
@@ -70,12 +72,17 @@ class ArticleController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @return mixed
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function restore($id, Request $request) {
         $request->isMethod('post') && Article::onlyTrashed()->find($id)->restore();
         return $this->redirect->to('admin/article');
     }
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\View
+     */
     public function show($id) {
         $crumb = [];
         Category::buildCrumb($id, $crumb);
@@ -88,8 +95,8 @@ class ArticleController extends AbstractAdminController {
         return $this->view('admin::content.article.list');
     }
     /**
-     * @param ArticleCreateRequest $request
-     * @return mixed
+     * @param \Notadd\Article\Requests\ArticleCreateRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ArticleCreateRequest $request) {
         $article = new Article();
@@ -99,9 +106,9 @@ class ArticleController extends AbstractAdminController {
         return $this->redirect->to('admin/article');
     }
     /**
-     * @param ArticleEditRequest $request
+     * @param \Notadd\Article\Requests\ArticleEditRequest $request
      * @param $id
-     * @return mixed
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function update(ArticleEditRequest $request, $id) {
         $article = Article::findOrFail($id);

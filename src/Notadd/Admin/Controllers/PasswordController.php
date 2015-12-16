@@ -6,14 +6,21 @@
  * @datetime 2015-11-20 18:44
  */
 namespace Notadd\Admin\Controllers;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Notadd\Foundation\Auth\ResetsPasswords;
 class PasswordController extends AbstractAdminController {
     use ResetsPasswords;
-    public function __construct(Application $app, Factory $view, Request $request) {
-        parent::__construct($app, $view, $request);
+    /**
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Auth\Access\Gate $gate
+     * @param \Illuminate\Contracts\View\Factory $view
+     * @param \Illuminate\Http\Request $request
+     */
+    public function __construct(Application $app, GateContract $gate, Factory $view, Request $request) {
+        parent::__construct($app, $gate, $request, $view);
         $this->middleware('guest.admin');
     }
 }

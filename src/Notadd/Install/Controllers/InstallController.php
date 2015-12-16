@@ -6,7 +6,6 @@
  * @datetime 2015-11-27 23:17
  */
 namespace Notadd\Install\Controllers;
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Notadd\Foundation\Routing\Controller;
@@ -20,11 +19,10 @@ class InstallController extends Controller {
     protected $command;
     /**
      * @param \Illuminate\Contracts\Foundation\Application $app
-     * @param \Illuminate\Contracts\Auth\Access\Gate $gate
      * @param \Illuminate\Contracts\View\Factory $view
      */
-    public function __construct(Application $app, GateContract $gate, Factory $view) {
-        parent::__construct($app, $gate, $view);
+    public function __construct(Application $app, Factory $view) {
+        parent::__construct($app, $view);
         $this->command = $this->getCommand('install');
     }
     /**

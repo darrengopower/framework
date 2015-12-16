@@ -6,7 +6,6 @@
  * @datetime 2015-10-29 22:45
  */
 namespace Notadd\Admin\Controllers;
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
@@ -27,12 +26,11 @@ class AbstractAdminController extends Controller {
     protected $setting;
     /**
      * @param \Illuminate\Contracts\Foundation\Application $app
-     * @param \Illuminate\Contracts\Auth\Access\Gate $gate
      * @param \Illuminate\Contracts\View\Factory $view
      * @param \Illuminate\Http\Request $request
      */
-    public function __construct(Application $app, GateContract $gate, Request $request, Factory $view) {
-        parent::__construct($app, $gate, $view);
+    public function __construct(Application $app, Request $request, Factory $view) {
+        parent::__construct($app, $view);
         $this->redirect = $app->make('redirect');
         $this->session = $app->make('session');
         $this->setting = $app->make('setting');

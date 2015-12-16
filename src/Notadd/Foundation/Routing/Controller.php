@@ -7,36 +7,30 @@
  */
 namespace Notadd\Foundation\Routing;
 use BadMethodCallException;
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Routing\Controller as IlluminateController;
 use Illuminate\Support\Str;
+use Notadd\Foundation\Auth\Access\AuthorizesRequests;
 use Notadd\Foundation\Bus\DispatchesJobs;
 use Notadd\Foundation\Validation\ValidatesRequests;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 abstract class Controller extends IlluminateController {
-    use DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     /**
      * @var \Illuminate\Contracts\Foundation\Application
      */
     protected $app;
-    /**
-     * @var \Illuminate\Contracts\Auth\Access\Gate
-     */
-    protected $gate;
     /**
      * @var \Illuminate\Contracts\View\Factory
      */
     protected $view;
     /**
      * @param \Illuminate\Contracts\Foundation\Application $app
-     * @param \Illuminate\Contracts\Auth\Access\Gate $gate
      * @param \Illuminate\Contracts\View\Factory $view
      */
-    public function __construct(Application $app, GateContract $gate, Factory $view) {
+    public function __construct(Application $app, Factory $view) {
         $this->app = $app;
-        $this->gate = $gate;
         $this->view = $view;
     }
     public function getCommand($command) {

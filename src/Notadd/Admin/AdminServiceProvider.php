@@ -61,6 +61,9 @@ class AdminServiceProvider extends ServiceProvider {
             $this->getConfig()->set('admin', $menu);
         }
     }
+    /**
+     * @return void
+     */
     public function initAdminConfig() {
         $this->getConfig()->set('admin', [
             [

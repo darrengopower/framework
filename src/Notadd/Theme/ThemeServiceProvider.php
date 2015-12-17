@@ -33,8 +33,7 @@ class ThemeServiceProvider extends ServiceProvider {
         $default = $this->getSetting()->get('site.theme', 'default');
         $this->getEvents()->listen('router.matched', function () use ($default) {
             $this->getView()->share('__theme', $this->getTheme());
-            $list = $this->getTheme()->getThemeList();
-            foreach($list as $theme) {
+            $this->getTheme()->getThemeList()->each(function(Theme $theme) use($default) {
                 $alias = $theme->getAlias();
                 if($alias == $default) {
                     $this->loadViewsFrom($theme->getViewPath(), 'themes');
@@ -46,7 +45,7 @@ class ThemeServiceProvider extends ServiceProvider {
                     $theme->getJsPath() => $theme->getJsStaticPath(),
                     $theme->getImagePath() => $theme->getImageStaticPath(),
                 ], $alias);
-            }
+            });
         });
         $this->getEvents()->listen('kernel.handled', function () use ($default) {
             $this->getTheme()->publishAssets();

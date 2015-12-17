@@ -97,7 +97,7 @@
             </form>
         </div>
         <nav class="site-nav clearfix" role="navigation" data-toggle="nav-accordion">
-            @foreach(app('config')->get('admin') as $top)
+            @foreach(config('admin') as $top)
                 <div class="nav-title panel-heading"><i>{{ $top['title'] }}</i></div>
                 @if($top['sub'])
                     <ul class="list-unstyled nav-list">
@@ -174,7 +174,7 @@
     <div class="content-container" id="content">@yield('content')</div>
     <footer id="site-foot" class="site-foot clearfix">
         <p class="left">&copy; Copyright 2015 <strong>iBenchu.org</strong>, All rights reserved.</p>
-        <p class="right">{{ app('config')->get('app.version') }}</p>
+        <p class="right">{{ config('app.version') }}</p>
     </footer>
 </div>
 <script src="{{ asset('themes/admin/js/jquery-2.1.3.min.js') }}"></script>

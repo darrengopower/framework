@@ -32,6 +32,7 @@ class ThemeServiceProvider extends ServiceProvider {
         });
         $default = $this->getSetting()->get('site.theme', 'default');
         $this->getEvents()->listen('router.matched', function () use ($default) {
+            $this->getView()->share('__theme', $this->getTheme());
             $list = $this->getTheme()->getThemeList();
             foreach($list as $theme) {
                 $alias = $theme->getAlias();
@@ -49,6 +50,15 @@ class ThemeServiceProvider extends ServiceProvider {
         });
         $this->getEvents()->listen('kernel.handled', function () use ($default) {
             $this->getTheme()->publishAssets();
+        });
+        $this->getBlade()->directive('css', function($expression) {
+            return "<?php \$__theme->registerCss{$expression}; ?>";
+        });
+        $this->getBlade()->directive('js', function($expression) {
+            return "<?php \$__theme->registerJs{$expression}; ?>";
+        });
+        $this->getBlade()->directive('output', function($expression) {
+            return "<?php echo \$__theme->outputInBlade{$expression}; ?>";
         });
     }
     /**

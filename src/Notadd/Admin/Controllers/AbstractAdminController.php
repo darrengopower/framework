@@ -7,10 +7,14 @@
  */
 namespace Notadd\Admin\Controllers;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Routing\Controller;
+use Notadd\Foundation\SearchEngine\Optimization;
+use Notadd\Setting\Factory as SettingFactory;
 class AbstractAdminController extends Controller {
     /**
      * @var \Illuminate\Routing\Redirector
@@ -21,19 +25,17 @@ class AbstractAdminController extends Controller {
      */
     protected $session;
     /**
-     * @var \Notadd\Setting\Factory
-     */
-    protected $setting;
-    /**
      * @param \Illuminate\Contracts\Foundation\Application $app
-     * @param \Illuminate\Contracts\View\Factory $view
+     * @param \Illuminate\Events\Dispatcher $events
+     * @param \Illuminate\Routing\Redirector $redirect
      * @param \Illuminate\Http\Request $request
+     * @param \Notadd\Setting\Factory $setting
+     * @param \Notadd\Foundation\SearchEngine\Optimization $seo
+     * @param \Illuminate\Contracts\View\Factory $view
      */
-    public function __construct(Application $app, Request $request, Factory $view) {
-        parent::__construct($app, $view);
-        $this->redirect = $app->make('redirect');
+    public function __construct(Application $app, Dispatcher $events, Redirector $redirect, Request $request, SettingFactory $setting, Optimization $seo, ViewFactory $view) {
+        parent::__construct($app, $events, $redirect, $setting, $seo, $view);
         $this->session = $app->make('session');
-        $this->setting = $app->make('setting');
         $this->share('admin_theme', $request->cookie('admin-theme'));
     }
     /**

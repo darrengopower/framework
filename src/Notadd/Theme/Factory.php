@@ -18,7 +18,7 @@ class Factory {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
      */
-    private $app;
+    private $application;
     /**
      * @var \Illuminate\Filesystem\Filesystem
      */
@@ -28,12 +28,22 @@ class Factory {
      */
     private $list;
     /**
-     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @var \Illuminate\Support\Collection
+     */
+    private $loadedCssFiles;
+    /**
+     * @var \Illuminate\Support\Collection
+     */
+    private $loadedJsFiles;
+    /**
+     * @param \Illuminate\Contracts\Foundation\Application $application
      * @param \Illuminate\Filesystem\Filesystem $files
      */
-    public function __construct(Application $app, Filesystem $files) {
-        $this->app = $app;
+    public function __construct(Application $application, Filesystem $files) {
+        $this->application = $application;
         $this->files = $files;
+        $this->loadedCssFiles = new Collection();
+        $this->loadedJsFiles = new Collection();
         $this->buildThemeList();
     }
     /**
@@ -42,20 +52,20 @@ class Factory {
     protected function buildThemeList() {
         $list = Collection::make();
         $default = new Theme('默认模板', 'default');
-        $default->useCssPath(realpath($this->app->frameworkPath() . '/less/default'));
-        $default->useFontPath(realpath($this->app->frameworkPath() . '/fonts'));
-        $default->useImagePath(realpath($this->app->frameworkPath() . '/images/default'));
-        $default->useJsPath(realpath($this->app->frameworkPath() . '/js/default'));
-        $default->useViewPath(realpath($this->app->frameworkPath() . '/views/default'));
+        $default->useCssPath(realpath($this->application->frameworkPath() . '/less/default'));
+        $default->useFontPath(realpath($this->application->frameworkPath() . '/fonts'));
+        $default->useImagePath(realpath($this->application->frameworkPath() . '/images/default'));
+        $default->useJsPath(realpath($this->application->frameworkPath() . '/js/default'));
+        $default->useViewPath(realpath($this->application->frameworkPath() . '/views/default'));
         $list->put('default', $default);
         $admin = new Theme('后台模板', 'admin');
-        $admin->useCssPath(realpath($this->app->frameworkPath() . '/less/admin'));
-        $admin->useFontPath(realpath($this->app->frameworkPath() . '/fonts'));
-        $admin->useImagePath(realpath($this->app->frameworkPath() . '/images/admin'));
-        $admin->useJsPath(realpath($this->app->frameworkPath() . '/js/admin'));
-        $admin->useViewPath(realpath($this->app->frameworkPath() . '/views/admin'));
+        $admin->useCssPath(realpath($this->application->frameworkPath() . '/less/admin'));
+        $admin->useFontPath(realpath($this->application->frameworkPath() . '/fonts'));
+        $admin->useImagePath(realpath($this->application->frameworkPath() . '/images/admin'));
+        $admin->useJsPath(realpath($this->application->frameworkPath() . '/js/admin'));
+        $admin->useViewPath(realpath($this->application->frameworkPath() . '/views/admin'));
         $list->put('admin', $admin);
-        $this->app->make('events')->fire(new GetThemeList($this->app, $list));
+        $this->application->make('events')->fire(new GetThemeList($this->application, $list));
         $this->list = $list;
     }
     /**
@@ -69,7 +79,7 @@ class Factory {
      */
     public function publishAssets() {
         $list = $this->list;
-        $list->put('admin', new Theme('后台模板', 'admin', realpath($this->app->basePath() . '/../template/admin')));
+        $list->put('admin', new Theme('后台模板', 'admin', realpath($this->application->basePath() . '/../template/admin')));
         foreach($list as $theme) {
             $this->publishTag($theme->getAlias());
         }
@@ -120,5 +130,20 @@ class Factory {
         if(!$this->files->isDirectory($directory)) {
             $this->files->makeDirectory($directory, 0755, true);
         }
+    }
+    /**
+     * @param \Notadd\Theme\string $path
+     */
+    public function registerCss($path) {
+        $this->loadedCssFiles->push($path);
+    }
+    /**
+     * @param \Notadd\Theme\string $path
+     */
+    public function registerJs($path) {
+        $this->loadedJsFiles->push($path);
+    }
+    public function output() {
+        return "KKKKKKKKKKKK";
     }
 }

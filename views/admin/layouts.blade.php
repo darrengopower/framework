@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800">
     <link rel="stylesheet" href="{{ asset('themes/admin/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('themes/admin/css/bootstrap.min.css') }}">
-    @css('admin::less.bootstrap.bootstrap')
     @yield('admin-css')
     <link rel="stylesheet" href="{{ asset('themes/admin/css/main.css') }}">
 </head>

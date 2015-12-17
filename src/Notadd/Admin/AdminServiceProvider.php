@@ -31,7 +31,7 @@ class AdminServiceProvider extends ServiceProvider {
                 $this->getRouter()->get('/', 'AdminController@init');
             });
         });
-        if($this->getRouter()->is('admin*')) {
+        if($this->getRequest()->is('admin*')) {
             $menu = $this->getConfig()->get('admin');
             foreach($menu as $top_key => $top) {
                 if(isset($top['sub'])) {

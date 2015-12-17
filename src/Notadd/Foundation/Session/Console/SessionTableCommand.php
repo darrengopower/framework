@@ -11,17 +11,14 @@ use Notadd\Foundation\Composer\Composer;
 use Notadd\Foundation\Console\Command;
 class SessionTableCommand extends Command {
     /**
-     * The console command name.
      * @var string
      */
     protected $name = 'session:table';
     /**
-     * The console command description.
      * @var string
      */
     protected $description = 'Create a migration for the session database table';
     /**
-     * The filesystem instance.
      * @var \Illuminate\Filesystem\Filesystem
      */
     protected $files;
@@ -39,7 +36,6 @@ class SessionTableCommand extends Command {
         $this->composer = $composer;
     }
     /**
-     * Execute the console command.
      * @return void
      */
     public function fire() {

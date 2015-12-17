@@ -7,8 +7,17 @@
  */
 namespace Notadd\Foundation\Console;
 class ClearCompiledCommand extends Command {
+    /**
+     * @var string
+     */
     protected $name = 'clear-compiled';
+    /**
+     * @var string
+     */
     protected $description = 'Remove the compiled class file';
+    /**
+     * @return void
+     */
     public function fire() {
         $compiledPath = $this->notadd->getCachedCompilePath();
         $servicesPath = $this->notadd->getCachedServicesPath();

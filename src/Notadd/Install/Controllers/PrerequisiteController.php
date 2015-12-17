@@ -10,6 +10,11 @@ use Notadd\Foundation\Routing\Controller;
 use Notadd\Install\Contracts\Prerequisite;
 use Psr\Http\Message\ServerRequestInterface;
 class PrerequisiteController extends Controller {
+    /**
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Notadd\Install\Contracts\Prerequisite $prerequisite
+     * @return \Illuminate\Contracts\View\View
+     */
     public function render(ServerRequestInterface $request, Prerequisite $prerequisite) {
         $view = $this->view->make('install::layout');
         $prerequisite->check();

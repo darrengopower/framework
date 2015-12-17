@@ -14,9 +14,23 @@ use Notadd\Article\Models\Article;
 use Notadd\Article\Models\ArticleRecommend;
 use Notadd\Page\Models\Page as Model;
 class Factory {
+    /**
+     * @var \Illuminate\Contracts\Config\Repository
+     */
     protected $config;
+    /**
+     * @var \Illuminate\Filesystem\Filesystem
+     */
     protected $file;
+    /**
+     * @var \Illuminate\Contracts\View\Factory
+     */
     protected $view;
+    /**
+     * @param \Illuminate\Contracts\Config\Repository $config
+     * @param \Illuminate\Filesystem\Filesystem $file
+     * @param \Illuminate\Contracts\View\Factory $view
+     */
     public function __construct(Repository $config, Filesystem $file, View $view) {
         $this->config = $config;
         $this->file = $file;

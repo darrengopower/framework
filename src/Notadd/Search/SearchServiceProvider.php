@@ -8,8 +8,14 @@
 namespace Notadd\Search;
 use Illuminate\Support\ServiceProvider;
 class SearchServiceProvider extends ServiceProvider {
+    /**
+     * @return void
+     */
     public function boot() {
     }
+    /**
+     * @return void
+     */
     public function register() {
     }
 }

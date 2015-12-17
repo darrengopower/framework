@@ -8,14 +8,26 @@
 namespace Notadd\Foundation\SearchEngine;
 use Illuminate\Support\Collection;
 class Meta {
+    /**
+     * @var string
+     */
     private $title;
+    /**
+     * @var string
+     */
     private $description;
+    /**
+     * @var string
+     */
     private $keywords;
     public function __construct() {
         $this->title = '{sitename}';
         $this->description = '{sitename}';
         $this->keywords = '{sitename}';
     }
+    /**
+     * @return static
+     */
     public function getData() {
         $data = Collection::make();
         $data->put('title', $this->title);
@@ -23,12 +35,21 @@ class Meta {
         $data->put('keywords', $this->keywords);
         return $data;
     }
+    /**
+     * @param $title
+     */
     public function setTitle($title) {
         $this->title = trim($title);
     }
+    /**
+     * @param $description
+     */
     public function setDescription($description) {
         $this->description = trim($description);
     }
+    /**
+     * @param $keywords
+     */
     public function setKeywords($keywords) {
         $this->keywords = trim($keywords);
     }

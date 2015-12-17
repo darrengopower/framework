@@ -18,7 +18,7 @@ class CategoryController extends AbstractAdminController {
      */
     public function destroy($id) {
         $category = Category::findOrFail($id);
-        $this->app->make('events')->fire(new BeforeCategoryDelete($this->app, $category));
+        $this->events->fire(new BeforeCategoryDelete($this->app, $category));
         $category->delete();
         return $this->redirect->back();
     }

@@ -55,6 +55,9 @@ class Command extends SymfonyCommand {
             $this->specifyParameters();
         }
     }
+    /**
+     * @return void
+     */
     protected function configureUsingFluentDefinition() {
         list($name, $arguments, $options) = Parser::parse($this->signature);
         parent::__construct($name);
@@ -65,6 +68,9 @@ class Command extends SymfonyCommand {
             $this->getDefinition()->addOption($option);
         }
     }
+    /**
+     * @return void
+     */
     protected function specifyParameters() {
         foreach($this->getArguments() as $arguments) {
             call_user_func_array([
@@ -79,11 +85,22 @@ class Command extends SymfonyCommand {
             ], $options);
         }
     }
+    /**
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @return int
+     * @throws \Exception
+     */
     public function run(InputInterface $input, OutputInterface $output) {
         $this->input = $input;
         $this->output = new OutputStyle($input, $output);
         return parent::run($input, $output);
     }
+    /**
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @return mixed
+     */
     protected function execute(InputInterface $input, OutputInterface $output) {
         $method = method_exists($this, 'handle') ? 'handle' : 'fire';
         return $this->notadd->call([
@@ -91,52 +108,112 @@ class Command extends SymfonyCommand {
             $method
         ]);
     }
+    /**
+     * @param $command
+     * @param array $arguments
+     * @return int
+     * @throws \Exception
+     */
     public function call($command, array $arguments = []) {
         $instance = $this->getApplication()->find($command);
         $arguments['command'] = $command;
         return $instance->run(new ArrayInput($arguments), $this->output);
     }
+    /**
+     * @param $command
+     * @param array $arguments
+     * @return int
+     * @throws \Exception
+     */
     public function callSilent($command, array $arguments = []) {
         $instance = $this->getApplication()->find($command);
         $arguments['command'] = $command;
         return $instance->run(new ArrayInput($arguments), new NullOutput);
     }
+    /**
+     * @param null $key
+     * @return array|mixed
+     */
     public function argument($key = null) {
         if(is_null($key)) {
             return $this->input->getArguments();
         }
         return $this->input->getArgument($key);
     }
+    /**
+     * @param null $key
+     * @return array|mixed
+     */
     public function option($key = null) {
         if(is_null($key)) {
             return $this->input->getOptions();
         }
         return $this->input->getOption($key);
     }
+    /**
+     * @param $question
+     * @param bool $default
+     * @return bool|string
+     */
     public function confirm($question, $default = false) {
         return $this->output->confirm($question, $default);
     }
+    /**
+     * @param $question
+     * @param null $default
+     * @return string
+     */
     public function ask($question, $default = null) {
         return $this->output->ask($question, $default);
     }
+    /**
+     * @param $question
+     * @param array $choices
+     * @param null $default
+     * @return string
+     */
     public function anticipate($question, array $choices, $default = null) {
         return $this->askWithCompletion($question, $choices, $default);
     }
+    /**
+     * @param $question
+     * @param array $choices
+     * @param null $default
+     * @return string
+     */
     public function askWithCompletion($question, array $choices, $default = null) {
         $question = new Question($question, $default);
         $question->setAutocompleterValues($choices);
         return $this->output->askQuestion($question);
     }
+    /**
+     * @param $question
+     * @param bool $fallback
+     * @return string
+     */
     public function secret($question, $fallback = true) {
         $question = new Question($question);
         $question->setHidden(true)->setHiddenFallback($fallback);
         return $this->output->askQuestion($question);
     }
+    /**
+     * @param $question
+     * @param array $choices
+     * @param null $default
+     * @param null $attempts
+     * @param null $multiple
+     * @return string
+     */
     public function choice($question, array $choices, $default = null, $attempts = null, $multiple = null) {
         $question = new ChoiceQuestion($question, $choices, $default);
         $question->setMaxAttempts($attempts)->setMultiselect($multiple);
         return $this->output->askQuestion($question);
     }
+    /**
+     * @param array $headers
+     * @param $rows
+     * @param string $style
+     */
     public function table(array $headers, $rows, $style = 'default') {
         $table = new Table($this->output);
         if($rows instanceof Arrayable) {
@@ -144,38 +221,71 @@ class Command extends SymfonyCommand {
         }
         $table->setHeaders($headers)->setRows($rows)->setStyle($style)->render();
     }
+    /**
+     * @param $string
+     */
     public function info($string) {
         $this->output->writeln("<info>$string</info>");
     }
+    /**
+     * @param $string
+     */
     public function line($string) {
         $this->output->writeln($string);
     }
+    /**
+     * @param $string
+     */
     public function comment($string) {
         $this->output->writeln("<comment>$string</comment>");
     }
+    /**
+     * @param $string
+     */
     public function question($string) {
         $this->output->writeln("<question>$string</question>");
     }
+    /**
+     * @param $string
+     */
     public function error($string) {
         $this->output->writeln("<error>$string</error>");
     }
+    /**
+     * @param $string
+     */
     public function warn($string) {
         $style = new OutputFormatterStyle('yellow');
         $this->output->getFormatter()->setStyle('warning', $style);
         $this->output->writeln("<warning>$string</warning>");
     }
+    /**
+     * @return array
+     */
     protected function getArguments() {
         return [];
     }
+    /**
+     * @return array
+     */
     protected function getOptions() {
         return [];
     }
+    /**
+     * @return \Illuminate\Console\OutputStyle
+     */
     public function getOutput() {
         return $this->output;
     }
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application
+     */
     public function getNotadd() {
         return $this->notadd;
     }
+    /**
+     * @param \Illuminate\Contracts\Foundation\Application $notadd
+     */
     public function setNotadd(NotaddApplication $notadd) {
         $this->notadd = $notadd;
     }

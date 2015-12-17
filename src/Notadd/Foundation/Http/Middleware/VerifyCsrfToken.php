@@ -23,9 +23,7 @@ class VerifyCsrfToken {
         'admin/theme/cookie',
     ];
     /**
-     * Create a new middleware instance.
      * @param \Illuminate\Contracts\Encryption\Encrypter $encrypter
-     * @return void
      */
     public function __construct(Encrypter $encrypter) {
         $this->encrypter = $encrypter;

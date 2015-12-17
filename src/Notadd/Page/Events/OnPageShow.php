@@ -10,17 +10,38 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Notadd\Page\Page;
 class OnPageShow {
+    /**
+     * @var \Illuminate\Contracts\Foundation\Application
+     */
     private $app;
+    /**
+     * @var \Notadd\Page\Page
+     */
     private $page;
+    /**
+     * @var \Illuminate\Contracts\View\Factory
+     */
     private $view;
+    /**
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\View\Factory $view
+     * @param \Notadd\Page\Page $page
+     */
     public function __construct(Application $app, Factory $view, Page $page) {
         $this->app = $app;
         $this->page = $page;
         $this->view = $view;
     }
+    /**
+     * @return mixed
+     */
     public function getPage() {
         return $this->page->getModel();
     }
+    /**
+     * @param $key
+     * @param $value
+     */
     public function share($key, $value) {
         $this->view->share($key, $value);
     }

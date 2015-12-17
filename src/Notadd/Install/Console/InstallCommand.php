@@ -55,6 +55,9 @@ class InstallCommand extends Command {
         $this->filesystem = $filesystem;
         $this->setting = $this->notadd->make('setting');
     }
+    /**
+     * @return void
+     */
     protected function createAdministrationUser() {
         $auth = $this->notadd->make('auth');
         $user = User::create([
@@ -65,6 +68,9 @@ class InstallCommand extends Command {
         $auth->login($user);
         touch($this->notadd->storagePath() . '/framework/notadd/installed');
     }
+    /**
+     * @return void
+     */
     public function fire() {
         if(!$this->isDataSetted) {
             $this->setDataFromConsoling();
@@ -96,6 +102,9 @@ class InstallCommand extends Command {
         $this->writingConfiguration();
         $this->comment('Application Installed!');
     }
+    /**
+     * @return void
+     */
     public function setDataFromCalling(InstallRequest $request) {
         $this->data->put('driver', 'mysql');
         $this->data->put('host', $request->offsetGet('host'));
@@ -110,6 +119,9 @@ class InstallCommand extends Command {
         $this->data->put('title', $request->offsetGet('title'));
         $this->isDataSetted = true;
     }
+    /**
+     * @return void
+     */
     public function setDataFromConsoling() {
         $this->data->put('driver', 'mysql');
         $this->data->put('host', $this->ask('数据库服务器：'));
@@ -124,6 +136,9 @@ class InstallCommand extends Command {
         $this->data->put('title', $this->ask('网站标题：'));
         $this->isDataSetted = true;
     }
+    /**
+     * @return void
+     */
     protected function writingConfiguration() {
         $config = [
             'database' => [

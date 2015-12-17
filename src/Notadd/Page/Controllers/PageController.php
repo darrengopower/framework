@@ -8,6 +8,10 @@ use Notadd\Foundation\Routing\Controller;
 use Notadd\Page\Events\OnPageShow;
 use Notadd\Page\Page;
 class PageController extends Controller {
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\View
+     */
     public function show($id) {
         $page = new Page($id);
         $this->events->fire(new OnPageShow($this->app, $this->view, $page));

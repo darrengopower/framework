@@ -8,7 +8,13 @@
 namespace Notadd\Foundation\Console;
 use Illuminate\Support\ServiceProvider;
 class ConsoleServiceProvider extends ServiceProvider {
+    /**
+     * @var bool
+     */
     protected $defer = true;
+    /**
+     * @var array
+     */
     protected $commands = [
         'ClearCompiled' => 'command.clear-compiled',
         'ConfigCache' => 'command.config.cache',
@@ -21,6 +27,9 @@ class ConsoleServiceProvider extends ServiceProvider {
         'VendorPublish' => 'command.vendor.publish',
         'ViewClear' => 'command.view.clear',
     ];
+    /**
+     * @return void
+     */
     public function register() {
         foreach(array_keys($this->commands) as $command) {
             $method = "register{$command}Command";
@@ -31,51 +40,81 @@ class ConsoleServiceProvider extends ServiceProvider {
         }
         $this->commands(array_values($this->commands));
     }
+    /**
+     * @return void
+     */
     protected function registerClearCompiledCommand() {
         $this->app->singleton('command.clear-compiled', function () {
             return new ClearCompiledCommand;
         });
     }
+    /**
+     * @return void
+     */
     protected function registerConfigCacheCommand() {
         $this->app->singleton('command.config.cache', function ($app) {
             return new ConfigCacheCommand($app['files']);
         });
     }
+    /**
+     * @return void
+     */
     protected function registerConfigClearCommand() {
         $this->app->singleton('command.config.clear', function ($app) {
             return new ConfigClearCommand($app['files']);
         });
     }
+    /**
+     * @return void
+     */
     protected function registerDownCommand() {
         $this->app->singleton('command.down', function () {
             return new DownCommand;
         });
     }
+    /**
+     * @return void
+     */
     protected function registerRouteCacheCommand() {
         $this->app->singleton('command.route.cache', function ($app) {
             return new RouteCacheCommand($app['files']);
         });
     }
+    /**
+     * @return void
+     */
     protected function registerRouteClearCommand() {
         $this->app->singleton('command.route.clear', function ($app) {
             return new RouteClearCommand($app['files']);
         });
     }
+    /**
+     * @return void
+     */
     protected function registerRouteListCommand() {
         $this->app->singleton('command.route.list', function ($app) {
             return new RouteListCommand($app['router']);
         });
     }
+    /**
+     * @return void
+     */
     protected function registerUpCommand() {
         $this->app->singleton('command.up', function () {
             return new UpCommand;
         });
     }
+    /**
+     * @return void
+     */
     protected function registerVendorPublishCommand() {
         $this->app->singleton('command.vendor.publish', function ($app) {
             return new VendorPublishCommand($app['files']);
         });
     }
+    /**
+     * @return void
+     */
     protected function registerViewClearCommand() {
         $this->app->singleton('command.view.clear', function ($app) {
             return new ViewClearCommand($app['files']);

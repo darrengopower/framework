@@ -11,7 +11,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Factory;
 class ValidationServiceProvider extends ServiceProvider {
     /**
-     * Register the service provider.
      * @return void
      */
     public function register() {

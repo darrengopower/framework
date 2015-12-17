@@ -13,12 +13,10 @@ use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\Cache\Console\CacheTableCommand;
 class CacheServiceProvider extends ServiceProvider {
     /**
-     * Indicates if loading of the provider is deferred.
      * @var bool
      */
     protected $defer = true;
     /**
-     * Register the service provider.
      * @return void
      */
     public function register() {
@@ -34,7 +32,6 @@ class CacheServiceProvider extends ServiceProvider {
         $this->registerCommands();
     }
     /**
-     * Register the cache related console commands.
      * @return void
      */
     public function registerCommands() {
@@ -47,7 +44,6 @@ class CacheServiceProvider extends ServiceProvider {
         $this->commands('command.cache.clear', 'command.cache.table');
     }
     /**
-     * Get the services provided by the provider.
      * @return array
      */
     public function provides() {

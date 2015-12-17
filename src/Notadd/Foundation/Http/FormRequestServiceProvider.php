@@ -8,8 +8,10 @@
 namespace Notadd\Foundation\Http;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\Http\FormRequest;
+use Notadd\Foundation\Traits\InjectEventsTrait;
 use Symfony\Component\HttpFoundation\Request;
 class FormRequestServiceProvider extends ServiceProvider {
+    use InjectEventsTrait;
     /**
      * @return void
      */
@@ -19,7 +21,7 @@ class FormRequestServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
-        $this->app->make('events')->listen('router.matched', function () {
+        $this->getEvents()->listen('router.matched', function () {
             $this->app->resolving(function (FormRequest $request, $app) {
                 $this->initializeRequest($request, $app['request']);
                 $request->setContainer($app)->setRedirector($app['Illuminate\Routing\Redirector']);

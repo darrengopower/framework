@@ -7,17 +7,19 @@
  */
 namespace Notadd\Setting;
 use Illuminate\Support\ServiceProvider;
+use Notadd\Foundation\Traits\InjectRouterTrait;
 class SettingServiceProvider extends ServiceProvider {
+    use InjectRouterTrait;
     /**
      * @return array
      */
     public function boot() {
-        $this->app->make('router')->group(['namespace' => 'Notadd\Setting\Controllers'], function () {
-            $this->app->make('router')->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
-                $this->app->make('router')->get('site', 'ConfigController@getSite');
-                $this->app->make('router')->post('site', 'ConfigController@postSite');
-                $this->app->make('router')->get('seo', 'ConfigController@getSeo');
-                $this->app->make('router')->post('seo', 'ConfigController@postSeo');
+        $this->getRouter()->group(['namespace' => 'Notadd\Setting\Controllers'], function () {
+            $this->getRouter()->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+                $this->getRouter()->get('site', 'ConfigController@getSite');
+                $this->getRouter()->post('site', 'ConfigController@postSite');
+                $this->getRouter()->get('seo', 'ConfigController@getSeo');
+                $this->getRouter()->post('seo', 'ConfigController@postSeo');
             });
         });
     }

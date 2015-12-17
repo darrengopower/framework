@@ -7,6 +7,7 @@
  */
 namespace Notadd\Install;
 use Illuminate\Support\ServiceProvider;
+use Notadd\Foundation\Traits\InjectRouterTrait;
 use Notadd\Install\Console\InstallCommand;
 use Notadd\Install\Contracts\Prerequisite;
 use Notadd\Install\Prerequisites\Composite;
@@ -14,14 +15,15 @@ use Notadd\Install\Prerequisites\PhpExtensions;
 use Notadd\Install\Prerequisites\PhpVersion;
 use Notadd\Install\Prerequisites\WritablePaths;
 class InstallServiceProvider extends ServiceProvider {
+    use InjectRouterTrait;
     /**
      * @return void
      */
     public function boot() {
         $this->loadViewsFrom(realpath(__DIR__ . '/../../../views/install'), 'install');
-        $this->app->make('router')->get('/', 'Notadd\Install\Controllers\PrerequisiteController@render');
-        $this->app->make('router')->post('/', 'Notadd\Install\Controllers\InstallController@handle');
-        $this->app->make('router')->get('make', 'Notadd\Install\Controllers\InstallController@make');
+        $this->getRouter()->get('/', 'Notadd\Install\Controllers\PrerequisiteController@render');
+        $this->getRouter()->post('/', 'Notadd\Install\Controllers\InstallController@handle');
+        $this->getRouter()->get('make', 'Notadd\Install\Controllers\InstallController@make');
     }
     /**
      * @return void

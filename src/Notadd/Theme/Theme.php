@@ -7,7 +7,8 @@
  */
 namespace Notadd\Theme;
 use Illuminate\Container\Container;
-class Theme {
+use Notadd\Theme\Contracts\Theme as ThemeContract;
+class Theme implements ThemeContract {
     /**
      * @var \Notadd\Foundation\Application
      */
@@ -90,6 +91,7 @@ class Theme {
     }
     /**
      * @param string $path
+     * @return mixed|void
      */
     public function useCssPath($path) {
         $this->cssPath = $path;
@@ -102,6 +104,7 @@ class Theme {
     }
     /**
      * @param string $path
+     * @return mixed|void
      */
     public function useCssStaticPath($path) {
         $this->cssStaticPath = $path;
@@ -114,6 +117,7 @@ class Theme {
     }
     /**
      * @param string $path
+     * @return mixed|void
      */
     public function useFontPath($path) {
         $this->fontPath = $path;
@@ -126,6 +130,7 @@ class Theme {
     }
     /**
      * @param string $path
+     * @return mixed|void
      */
     public function useFontStaticPath($path) {
         $this->fontStaticPath = $path;
@@ -136,6 +141,10 @@ class Theme {
     public function getJsPath() {
         return $this->jsPath;
     }
+    /**
+     * @param $path
+     * @return mixed|void
+     */
     public function useJsPath($path) {
         $this->jsPath = $path;
     }
@@ -145,6 +154,10 @@ class Theme {
     public function getJsStaticPath() {
         return $this->imageStaticPath ? $this->imageStaticPath : $this->getDefaultStaticPath('js');
     }
+    /**
+     * @param $path
+     * @return mixed|void
+     */
     public function useJsStaticPath($path) {
         $this->jsStaticPath = $path;
     }
@@ -156,6 +169,7 @@ class Theme {
     }
     /**
      * @param string $path
+     * @return mixed|void
      */
     public function useImagePath($path) {
         $this->imagePath = $path;
@@ -168,6 +182,7 @@ class Theme {
     }
     /**
      * @param string $path
+     * @return mixed|void
      */
     public function useImageStaticPath($path) {
         $this->imageStaticPath = $path;
@@ -180,6 +195,7 @@ class Theme {
     }
     /**
      * @param string $path
+     * @return mixed|void
      */
     public function useViewPath($path) {
         $this->viewPath = $path;

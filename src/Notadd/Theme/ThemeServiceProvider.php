@@ -73,5 +73,11 @@ class ThemeServiceProvider extends ServiceProvider {
         $this->app->singleton('theme', function () {
             return $this->app->make(Factory::class);
         });
+        $this->app->singleton('theme.finder', function () {
+            return $this->app->make(FileFinder::class);
+        });
+        $this->app->singleton('theme.material', function() {
+            return $this->app->make(Material::class);
+        });
     }
 }

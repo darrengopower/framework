@@ -6,15 +6,18 @@
  * @datetime 2015-10-29 16:32
  */
 namespace Notadd\Theme;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use League\Flysystem\MountManager;
 use League\Flysystem\Filesystem as Flysystem;
 use League\Flysystem\Adapter\Local as LocalAdapter;
+use Notadd\Theme\Contracts\Factory as FactoryContract;
 use Notadd\Theme\Events\GetThemeList;
-class Factory {
+class Factory implements FactoryContract {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
      */
@@ -24,26 +27,28 @@ class Factory {
      */
     private $files;
     /**
+     * @var \Notadd\Theme\FileFinder
+     */
+    private $finder;
+    /**
      * @var \Illuminate\Support\Collection
      */
     private $list;
     /**
-     * @var \Illuminate\Support\Collection
+     * @var \Notadd\Theme\Material
      */
-    private $loadedCssFiles;
-    /**
-     * @var \Illuminate\Support\Collection
-     */
-    private $loadedJsFiles;
+    private $material;
     /**
      * @param \Illuminate\Contracts\Foundation\Application $application
      * @param \Illuminate\Filesystem\Filesystem $files
+     * @param \Notadd\Theme\FileFinder $finder
+     * @param \Notadd\Theme\Material $material
      */
-    public function __construct(Application $application, Filesystem $files) {
+    public function __construct(Application $application, Filesystem $files, FileFinder $finder, Material $material) {
         $this->application = $application;
         $this->files = $files;
-        $this->loadedCssFiles = new Collection();
-        $this->loadedJsFiles = new Collection();
+        $this->finder = $finder;
+        $this->material = $material;
         $this->buildThemeList();
     }
     /**
@@ -132,18 +137,53 @@ class Factory {
         }
     }
     /**
-     * @param \Notadd\Theme\string $path
+     * @param string $path
+     * @return mixed|void
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function registerCss($path) {
-        $this->loadedCssFiles->push($path);
+        if($this->finder->exits($path)) {
+            switch(str_replace(Str::substr($path, strpos($path, '.')), '', Str::substr($path, strpos($path, '::') + 2))) {
+                case 'css':
+                    $this->material->registerCssMaterial($path);
+                    break;
+                case 'less':
+                    $this->material->registerLessMaterial($path);
+                    break;
+                case 'sass':
+                    $this->material->registerSassMaterial($path);
+                    break;
+            }
+        } else {
+            throw new FileNotFoundException('Css file [' . $path . '] does not exits!');
+        }
     }
     /**
-     * @param \Notadd\Theme\string $path
+     * @param string $path
+     * @return mixed|void
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function registerJs($path) {
-        $this->loadedJsFiles->push($path);
+        if($this->finder->exits($path)) {
+            $this->material->registerJsMaterial($path);
+        } else {
+            throw new FileNotFoundException('Js file [' . $path . '] does not exits!');
+        }
     }
-    public function output() {
-        return "KKKKKKKKKKKK";
+    /**
+     * @param string $type
+     * @return string
+     */
+    public function outputInBlade($type = 'css') {
+        $output = '';
+        switch($type) {
+            case 'css':
+                $output = $this->material->outputCssInBlade();
+                break;
+            case 'js':
+                $output = $this->material->outputJsInBlade();
+                break;
+        }
+        return $output;
     }
 }

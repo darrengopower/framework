@@ -27,30 +27,12 @@ interface Theme {
     /**
      * @return mixed
      */
-    public function getCssStaticPath();
-    /**
-     * @param $path
-     * @return mixed
-     */
-    public function useCssStaticPath($path);
-    /**
-     * @return mixed
-     */
     public function getFontPath();
     /**
      * @param $path
      * @return mixed
      */
     public function useFontPath($path);
-    /**
-     * @return mixed
-     */
-    public function getFontStaticPath();
-    /**
-     * @param $path
-     * @return mixed
-     */
-    public function useFontStaticPath($path);
     /**
      * @return mixed
      */
@@ -63,30 +45,12 @@ interface Theme {
     /**
      * @return mixed
      */
-    public function getJsStaticPath();
-    /**
-     * @param $path
-     * @return mixed
-     */
-    public function useJsStaticPath($path);
-    /**
-     * @return mixed
-     */
     public function getImagePath();
     /**
      * @param $path
      * @return mixed
      */
     public function useImagePath($path);
-    /**
-     * @return mixed
-     */
-    public function getImageStaticPath();
-    /**
-     * @param $path
-     * @return mixed
-     */
-    public function useImageStaticPath($path);
     /**
      * @return mixed
      */

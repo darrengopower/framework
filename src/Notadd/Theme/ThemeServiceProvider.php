@@ -39,16 +39,7 @@ class ThemeServiceProvider extends ServiceProvider {
                     $this->loadViewsFrom($theme->getViewPath(), 'themes');
                 }
                 $this->loadViewsFrom($theme->getViewPath(), $alias);
-                $this->publishes([
-                    $theme->getCssPath() => $theme->getCssStaticPath(),
-                    $theme->getFontPath() => $theme->getFontStaticPath(),
-                    $theme->getJsPath() => $theme->getJsStaticPath(),
-                    $theme->getImagePath() => $theme->getImageStaticPath(),
-                ], $alias);
             });
-        });
-        $this->getEvents()->listen('kernel.handled', function () use ($default) {
-            $this->getTheme()->publishAssets();
         });
         $this->getBlade()->directive('css', function($expression) {
             return "<?php \$__theme->registerCss{$expression}; ?>";

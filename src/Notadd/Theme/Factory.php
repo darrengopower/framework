@@ -10,13 +10,13 @@ use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use League\Flysystem\MountManager;
-use League\Flysystem\Filesystem as Flysystem;
-use League\Flysystem\Adapter\Local as LocalAdapter;
 use Notadd\Theme\Contracts\Factory as FactoryContract;
 use Notadd\Theme\Events\GetThemeList;
+/**
+ * Class Factory
+ * @package Notadd\Theme
+ */
 class Factory implements FactoryContract {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
@@ -39,6 +39,7 @@ class Factory implements FactoryContract {
      */
     private $material;
     /**
+     * Factory constructor.
      * @param \Illuminate\Contracts\Foundation\Application $application
      * @param \Illuminate\Filesystem\Filesystem $files
      * @param \Notadd\Theme\FileFinder $finder
@@ -57,84 +58,35 @@ class Factory implements FactoryContract {
     protected function buildThemeList() {
         $list = Collection::make();
         $default = new Theme('默认模板', 'default');
-        $default->useCssPath(realpath($this->application->frameworkPath() . '/less/default'));
+        $default->useCssPath(realpath($this->application->frameworkPath() . '/less'));
+        $default->useLessPath(realpath($this->application->frameworkPath() . '/less'));
         $default->useFontPath(realpath($this->application->frameworkPath() . '/fonts'));
         $default->useImagePath(realpath($this->application->frameworkPath() . '/images/default'));
-        $default->useJsPath(realpath($this->application->frameworkPath() . '/js/default'));
+        $default->useJsPath(realpath($this->application->frameworkPath() . '/js'));
         $default->useViewPath(realpath($this->application->frameworkPath() . '/views/default'));
         $list->put('default', $default);
         $admin = new Theme('后台模板', 'admin');
-        $admin->useCssPath(realpath($this->application->frameworkPath() . '/less/admin'));
+        $admin->useCssPath(realpath($this->application->frameworkPath() . '/less'));
         $admin->useFontPath(realpath($this->application->frameworkPath() . '/fonts'));
         $admin->useImagePath(realpath($this->application->frameworkPath() . '/images/admin'));
-        $admin->useJsPath(realpath($this->application->frameworkPath() . '/js/admin'));
+        $admin->useJsPath(realpath($this->application->frameworkPath() . '/js'));
         $admin->useViewPath(realpath($this->application->frameworkPath() . '/views/admin'));
         $list->put('admin', $admin);
         $this->application->make('events')->fire(new GetThemeList($this->application, $list));
         $this->list = $list;
     }
     /**
+     * @param string $alias
+     * @return \Notadd\Theme\Theme
+     */
+    public function getTheme($alias) {
+        return $this->list->get($alias);
+    }
+    /**
      * @return mixed
      */
     public function getThemeList() {
         return $this->list;
-    }
-    /**
-     * @return void
-     */
-    public function publishAssets() {
-        $list = $this->list;
-        $list->put('admin', new Theme('后台模板', 'admin', realpath($this->application->basePath() . '/../template/admin')));
-        foreach($list as $theme) {
-            $this->publishTag($theme->getAlias());
-        }
-    }
-    /**
-     * @param $tag
-     */
-    private function publishTag($tag) {
-        $paths = ServiceProvider::pathsToPublish(null, $tag);
-        if(empty($paths)) {
-            return;
-        }
-        foreach($paths as $from => $to) {
-            if($this->files->isFile($from)) {
-                $this->publishFile($from, $to);
-            } elseif($this->files->isDirectory($from)) {
-                $this->publishDirectory($from, $to);
-            } else {
-                continue;
-            }
-        }
-    }
-    /**
-     * @param $from
-     * @param $to
-     */
-    protected function publishFile($from, $to) {
-        $this->createParentDirectory(dirname($to));
-        $this->files->copy($from, $to);
-    }
-    /**
-     * @param $from
-     * @param $to
-     */
-    protected function publishDirectory($from, $to) {
-        $manager = new MountManager([
-            'from' => new Flysystem(new LocalAdapter($from)),
-            'to' => new Flysystem(new LocalAdapter($to)),
-        ]);
-        foreach($manager->listContents('from://', true) as $file) {
-            $manager->put('to://' . $file['path'], $manager->read('from://' . $file['path']));
-        }
-    }
-    /**
-     * @param $directory
-     */
-    protected function createParentDirectory($directory) {
-        if(!$this->files->isDirectory($directory)) {
-            $this->files->makeDirectory($directory, 0755, true);
-        }
     }
     /**
      * @param string $path

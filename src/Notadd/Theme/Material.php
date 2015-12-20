@@ -87,6 +87,20 @@ class Material implements MaterialContract {
         $this->layoutSassMaterial = new Collection();
         $this->request = $request;
     }
+    protected function collectingStyleMaterial() {
+        $cssMaterials = $this->layoutCssMaterial->merge($this->defaultCssMaterial)->merge($this->extendCssMaterial);
+        $lessMaterials = $this->layoutLessMaterial->merge($this->defaultLessMaterial)->merge($this->extendLessMaterial);
+        $sassMaterials = $this->layoutSassMaterial->merge($this->defaultSassMaterial)->merge($this->extendSassMaterial);
+        dd($lessMaterials);
+    }
+    /**
+     * @param $path
+     * @return string
+     */
+    public function findHint($path) {
+        $length = strpos($path, '::');
+        return Str::substr($path, 0, $length);
+    }
     /**
      * @param $path
      * @return string
@@ -100,6 +114,7 @@ class Material implements MaterialContract {
      * @return string
      */
     public function outputCssInBlade() {
+        $files = $this->collectingStyleMaterial();
         return '';
     }
     /**

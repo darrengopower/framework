@@ -12,10 +12,6 @@ interface Factory {
      */
     public function getThemeList();
     /**
-     * @return void
-     */
-    public function publishAssets();
-    /**
      * @param $path
      * @return void
      */

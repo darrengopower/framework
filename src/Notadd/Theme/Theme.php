@@ -28,15 +28,7 @@ class Theme implements ThemeContract {
     /**
      * @var string
      */
-    private $cssStaticPath;
-    /**
-     * @var string
-     */
     private $fontPath;
-    /**
-     * @var string
-     */
-    private $fontStaticPath;
     /**
      * @var string
      */
@@ -44,7 +36,7 @@ class Theme implements ThemeContract {
     /**
      * @var string
      */
-    private $jsStaticPath;
+    private $lessPath;
     /**
      * @var string
      */
@@ -52,15 +44,15 @@ class Theme implements ThemeContract {
     /**
      * @var string
      */
-    private $imageStaticPath;
-    /**
-     * @var string
-     */
-    private $viewPath;
+    private $sassPath;
     /**
      * @var \Notadd\Setting\Factory
      */
     private $setting;
+    /**
+     * @var string
+     */
+    private $viewPath;
     /**
      * @param $title
      * @param $alias
@@ -99,19 +91,6 @@ class Theme implements ThemeContract {
     /**
      * @return string
      */
-    public function getCssStaticPath() {
-        return $this->imageStaticPath ? $this->imageStaticPath : $this->getDefaultStaticPath('css');
-    }
-    /**
-     * @param string $path
-     * @return mixed|void
-     */
-    public function useCssStaticPath($path) {
-        $this->cssStaticPath = $path;
-    }
-    /**
-     * @return string
-     */
     public function getFontPath() {
         return $this->fontPath;
     }
@@ -121,45 +100,6 @@ class Theme implements ThemeContract {
      */
     public function useFontPath($path) {
         $this->fontPath = $path;
-    }
-    /**
-     * @return string
-     */
-    public function getFontStaticPath() {
-        return $this->imageStaticPath ? $this->imageStaticPath : $this->getDefaultStaticPath('fonts');
-    }
-    /**
-     * @param string $path
-     * @return mixed|void
-     */
-    public function useFontStaticPath($path) {
-        $this->fontStaticPath = $path;
-    }
-    /**
-     * @return string
-     */
-    public function getJsPath() {
-        return $this->jsPath;
-    }
-    /**
-     * @param $path
-     * @return mixed|void
-     */
-    public function useJsPath($path) {
-        $this->jsPath = $path;
-    }
-    /**
-     * @return string
-     */
-    public function getJsStaticPath() {
-        return $this->imageStaticPath ? $this->imageStaticPath : $this->getDefaultStaticPath('js');
-    }
-    /**
-     * @param $path
-     * @return mixed|void
-     */
-    public function useJsStaticPath($path) {
-        $this->jsStaticPath = $path;
     }
     /**
      * @return string
@@ -177,15 +117,41 @@ class Theme implements ThemeContract {
     /**
      * @return string
      */
-    public function getImageStaticPath() {
-        return $this->imageStaticPath ? $this->imageStaticPath : $this->getDefaultStaticPath('images');
+    public function getJsPath() {
+        return $this->jsPath;
     }
     /**
-     * @param string $path
+     * @param $path
      * @return mixed|void
      */
-    public function useImageStaticPath($path) {
-        $this->imageStaticPath = $path;
+    public function useJsPath($path) {
+        $this->jsPath = $path;
+    }
+    /**
+     * @return string
+     */
+    public function getLessPath() {
+        return $this->lessPath;
+    }
+    /**
+     * @param $path
+     * @return mixed|void
+     */
+    public function useLessPath($path) {
+        $this->lessPath = $path;
+    }
+    /**
+     * @return string
+     */
+    public function getSassPath() {
+        return $this->sassPath;
+    }
+    /**
+     * @param $path
+     * @return mixed|void
+     */
+    public function useSassPath($path) {
+        $this->sassPath = $path;
     }
     /**
      * @return string

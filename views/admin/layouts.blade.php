@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="{{ asset('themes/admin/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('themes/admin/css/bootstrap.min.css') }}">
     @css('admin::less.layout.bootstrap.bootstrap')
+    @css('admin::css.layout.bootstrap.bootstrap')
     @css('admin::css.default.admin.main')
+    @css('admin::css.extend.admin.main')
     @yield('admin-css')
     <link rel="stylesheet" href="{{ asset('themes/admin/css/main.css') }}">
     @output('css')

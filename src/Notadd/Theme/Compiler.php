@@ -6,6 +6,7 @@
  * @datetime 2015-12-21 15:55
  */
 namespace Notadd\Theme;
+use Leafo\ScssPhp\Compiler as SassCompiler;
 /**
  * Class Compiler
  * @package Notadd\Theme
@@ -29,7 +30,7 @@ class Compiler {
     public function __construct() {
         $this->js = '';
         $this->less = '';
-        $this->sass = '';
+        $this->sass = new SassCompiler();
     }
     /**
      * @param string $file
@@ -50,7 +51,7 @@ class Compiler {
      * @return string
      */
     public function compileLess($file) {
-        return '';
+        return $this->less->compileFile($file);
     }
     /**
      * @param string $file

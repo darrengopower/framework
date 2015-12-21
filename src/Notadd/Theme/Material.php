@@ -6,11 +6,21 @@
  * @datetime 2015-12-20 15:42
  */
 namespace Notadd\Theme;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Notadd\Theme\Contracts\Material as MaterialContract;
 class Material implements MaterialContract {
+    /**
+     * @var \Notadd\Foundation\Application
+     */
+    protected $application;
+    /**
+     * @var \Notadd\Theme\Compiler
+     */
     protected $compiler;
     /**
      * @var \Illuminate\Support\Collection
@@ -45,6 +55,10 @@ class Material implements MaterialContract {
      */
     protected $extendSassMaterial;
     /**
+     * @var \Illuminate\Filesystem\Filesystem
+     */
+    protected $files;
+    /**
      * @var \Notadd\Theme\FileFinder
      */
     protected $finder;
@@ -73,11 +87,19 @@ class Material implements MaterialContract {
      */
     protected $theme;
     /**
+     * @var \Illuminate\Routing\UrlGenerator
+     */
+    protected $url;
+    /**
+     * @param Application $application
      * @param \Notadd\Theme\Compiler $compiler
+     * @param \Illuminate\Filesystem\Filesystem $files
      * @param \Notadd\Theme\FileFinder $finder
      * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Routing\UrlGenerator $url
      */
-    public function __construct(Compiler $compiler, FileFinder $finder, Request $request) {
+    public function __construct(Application $application, Compiler $compiler, Filesystem $files, FileFinder $finder, Request $request, UrlGenerator $url) {
+        $this->application = $application;
         $this->compiler = $compiler;
         $this->defaultCssMaterial = new Collection();
         $this->defaultJsMaterial = new Collection();
@@ -87,27 +109,41 @@ class Material implements MaterialContract {
         $this->extendJsMaterial = new Collection();
         $this->extendLessMaterial = new Collection();
         $this->extendSassMaterial = new Collection();
+        $this->files = $files;
         $this->finder = $finder;
         $this->layoutCssMaterial = new Collection();
         $this->layoutJsMaterial = new Collection();
         $this->layoutLessMaterial = new Collection();
         $this->layoutSassMaterial = new Collection();
         $this->request = $request;
+        $this->url = $url;
     }
     /**
      * @return \Illuminate\Support\Collection
      */
-    protected function collectingStyleMaterial() {
+    protected function compileStyleMaterial() {
         $layout = $this->layoutLessMaterial->merge($this->layoutSassMaterial)->merge($this->layoutCssMaterial);
         $default = $this->defaultLessMaterial->merge($this->defaultSassMaterial)->merge($this->defaultCssMaterial);
         $extend = $this->extendLessMaterial->merge($this->extendSassMaterial)->merge($this->extendCssMaterial);
+        $files = new Collection();
         $materials = new Collection();
-        $layout->each(function($value) use($materials) {
-            $path = $this->findPath($value);
-            $type = $this->findType($value);
-            $materials->push($this->compileStyle($path, $type));
+        $layout->merge($default)->merge($extend)->each(function($value) use($files) {
+            $files->push($this->findPath($value));
         });
-        dd($materials);
+        $path = md5($this->request->path());
+        $dictionary = new Collection();
+        $dictionary->push($this->application->publicPath());
+        $dictionary->push('cache');
+        $dictionary = $this->pathSplit($path, '2,2,2,2,2,2', $dictionary);
+        $dictionary = $dictionary->implode(DIRECTORY_SEPARATOR);
+        if(!$this->files->isDirectory($dictionary)) {
+            $this->files->makeDirectory($dictionary, '0755', true);
+        }
+        $file = $dictionary . DIRECTORY_SEPARATOR . Str::substr($path, 12, 20) . '.css';
+        file_put_contents($file, $this->compileStyle($files));
+        return $this->pathSplit($path, '2,2,2,2,2,2,20', Collection::make([
+            'cache'
+        ]))->implode('/') . '.css';
     }
     /**
      * @return \Illuminate\Support\Collection
@@ -116,26 +152,11 @@ class Material implements MaterialContract {
         $jsMaterials = $this->layoutJsMaterial->merge($this->defaultJsMaterial)->merge($this->extendJsMaterial);
     }
     /**
-     * @param string $file
-     * @param string $type
+     * @param \Illuminate\Support\Collection $files
      * @return string
      */
-    protected function compileStyle($file, $type) {
-        $content = '';
-        if($file !== false) {
-            switch($type) {
-                case 'css':
-                    $content = $this->compiler->compileCss($file);
-                    break;
-                case 'less':
-                    $content = $this->compiler->compileLess($file);
-                    break;
-                case 'sass':
-                    $content = $this->compiler->compileSass($file);
-                    break;
-            }
-        }
-        return $content;
+    protected function compileStyle($files) {
+        return $this->compiler->compileLess($files);
     }
     /**
      * @param $path
@@ -195,14 +216,30 @@ class Material implements MaterialContract {
      * @return string
      */
     public function outputCssInBlade() {
-        $files = $this->collectingStyleMaterial();
-        return '';
+        $path = $this->compileStyleMaterial();
+        return '<link href="' . $this->url->asset($path) . '" rel="stylesheet">';
     }
     /**
      * @return string
      */
     public function outputJsInBlade() {
         return '';
+    }
+    /**
+     * @param string $path
+     * @param string $dots
+     * @param \Illuminate\Support\Collection $data
+     * @return \Illuminate\Support\Collection
+     */
+    protected function pathSplit($path, $dots, $data = null) {
+        $dots = explode(',', $dots);
+        $data = $data ? $data : new Collection();
+        $offset = 0;
+        foreach($dots as $dot) {
+            $data->push(Str::substr($path, $offset, $dot));
+            $offset += $dot;
+        }
+        return $data;
     }
     /**
      * @param string $path

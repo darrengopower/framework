@@ -9,12 +9,9 @@
     <meta name="description" content="iBenchu CMS内容管理系统">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800">
     <link rel="stylesheet" href="{{ asset('themes/admin/css/font-awesome.css') }}">
-    <link rel="stylesheet" href="{{ asset('themes/admin/css/bootstrap.min.css') }}">
     @css('admin::less.layout.bootstrap.bootstrap')
     @css('admin::css.default.admin.main')
-    @css('admin::css.extend.admin.main')
     @yield('admin-css')
-    <link rel="stylesheet" href="{{ asset('themes/admin/css/main.css') }}">
     @output('css')
 </head>
 <body class="app {{ $admin_theme }}">

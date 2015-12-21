@@ -7,6 +7,7 @@
  */
 namespace Notadd\Theme;
 use Leafo\ScssPhp\Compiler as SassCompiler;
+use Less_Parser as LessCompiler;
 /**
  * Class Compiler
  * @package Notadd\Theme
@@ -29,15 +30,10 @@ class Compiler {
      */
     public function __construct() {
         $this->js = '';
-        $this->less = '';
+        $this->less = new LessCompiler([
+            'compress' => true
+        ]);
         $this->sass = new SassCompiler();
-    }
-    /**
-     * @param string $file
-     * @return string
-     */
-    public function compileCss($file) {
-        return '';
     }
     /**
      * @param string $file
@@ -47,17 +43,13 @@ class Compiler {
         return '';
     }
     /**
-     * @param string $file
+     * @param \Illuminate\Support\Collection $files
      * @return string
      */
-    public function compileLess($file) {
-        return $this->less->compileFile($file);
-    }
-    /**
-     * @param string $file
-     * @return string
-     */
-    public function compileSass($file) {
-        return '';
+    public function compileLess($files) {
+        $files->each(function($value) {
+            $this->less->parseFile($value);
+        });
+        return $this->less->getCss();
     }
 }

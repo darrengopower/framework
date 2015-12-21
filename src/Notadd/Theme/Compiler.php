@@ -31,7 +31,8 @@ class Compiler {
     public function __construct() {
         $this->js = '';
         $this->less = new LessCompiler([
-            'compress' => true
+            'compress' => true,
+            'strictMath' => true
         ]);
         $this->sass = new SassCompiler();
     }

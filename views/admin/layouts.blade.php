@@ -7,9 +7,8 @@
     <meta name="author" content="iBenchu.net">
     <meta name="keywords" content="iBenchu">
     <meta name="description" content="iBenchu CMS内容管理系统">
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800">
-    <link rel="stylesheet" href="{{ asset('themes/admin/css/font-awesome.css') }}">
     @css('admin::less.layout.bootstrap.bootstrap')
+    @css('admin::less.layout.font-awesome.font-awesome')
     @css('admin::css.default.admin.main')
     @yield('admin-css')
     @output('css')

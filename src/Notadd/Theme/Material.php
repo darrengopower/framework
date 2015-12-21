@@ -101,11 +101,13 @@ class Material implements MaterialContract {
         $layout = $this->layoutLessMaterial->merge($this->layoutSassMaterial)->merge($this->layoutCssMaterial);
         $default = $this->defaultLessMaterial->merge($this->defaultSassMaterial)->merge($this->defaultCssMaterial);
         $extend = $this->extendLessMaterial->merge($this->extendSassMaterial)->merge($this->extendCssMaterial);
-        $layout->each(function($value) {
+        $materials = new Collection();
+        $layout->each(function($value) use($materials) {
             $path = $this->findPath($value);
             $type = $this->findType($value);
-            $this->compileStyle($path, $type);
+            $materials->push($this->compileStyle($path, $type));
         });
+        dd($materials);
     }
     /**
      * @return \Illuminate\Support\Collection

@@ -192,9 +192,11 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         foreach([
                     'base',
                     'config',
+                    'framework',
                     'lang',
                     'public',
-                    'storage'
+                    'storage',
+                    'stubs'
                 ] as $path) {
             $this->instance('path.' . $path, $this->{$path . 'Path'}());
         }
@@ -247,6 +249,9 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         $this->storagePath = $path;
         $this->instance('path.storage', $path);
         return $this;
+    }
+    public function stubsPath() {
+        return realpath($this->frameworkPath() . DIRECTORY_SEPARATOR . 'stubs');
     }
     /**
      * @return string

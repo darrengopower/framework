@@ -24,7 +24,6 @@ class Handler implements ExceptionHandlerContract {
     protected $dontReport = [];
     /**
      * @param \Psr\Log\LoggerInterface $log
-     * @return void
      */
     public function __construct(LoggerInterface $log) {
         $this->log = $log;

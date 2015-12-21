@@ -10,8 +10,18 @@ use Illuminate\Contracts\Foundation\Application;
 use Notadd\Menu\Models\Menu;
 use Notadd\Menu\Models\MenuGroup;
 class Factory {
+    /**
+     * @var \Illuminate\Contracts\Foundation\Application
+     */
     protected $application;
+    /**
+     * @var \Illuminate\Contracts\View\Factory
+     */
     protected $view;
+    /**
+     * @param \Illuminate\Contracts\Foundation\Application $application
+     * @param \Illuminate\Contracts\View\Factory $view
+     */
     public function __construct(Application $application, \Illuminate\Contracts\View\Factory $view) {
         $this->application = $application;
         $this->view = $view;

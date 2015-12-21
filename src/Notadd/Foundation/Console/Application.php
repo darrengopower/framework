@@ -16,17 +16,14 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\BufferedOutput;
 class Application extends SymfonyApplication implements ApplicationContract {
     /**
-     * The Laravel application instance.
      * @var \Illuminate\Contracts\Container\Container
      */
     protected $notadd;
     /**
-     * The output from the previous command.
      * @var \Symfony\Component\Console\Output\BufferedOutput
      */
     protected $lastOutput;
     /**
-     * Create a new Artisan console application.
      * @param \Illuminate\Contracts\Container\Container $laravel
      * @param \Illuminate\Contracts\Events\Dispatcher $events
      * @param string $version
@@ -39,7 +36,6 @@ class Application extends SymfonyApplication implements ApplicationContract {
         $events->fire('artisan.start', [$this]);
     }
     /**
-     * Run an Artisan console command by name.
      * @param string $command
      * @param array $parameters
      * @return int
@@ -50,14 +46,12 @@ class Application extends SymfonyApplication implements ApplicationContract {
         return $this->find($command)->run(new ArrayInput($parameters), $this->lastOutput);
     }
     /**
-     * Get the output for the last run command.
      * @return string
      */
     public function output() {
         return $this->lastOutput ? $this->lastOutput->fetch() : '';
     }
     /**
-     * Add a command to the console.
      * @param \Symfony\Component\Console\Command\Command $command
      * @return \Symfony\Component\Console\Command\Command
      */
@@ -68,7 +62,6 @@ class Application extends SymfonyApplication implements ApplicationContract {
         return $this->addToParent($command);
     }
     /**
-     * Add the command to the parent instance.
      * @param \Symfony\Component\Console\Command\Command $command
      * @return \Symfony\Component\Console\Command\Command
      */
@@ -76,7 +69,6 @@ class Application extends SymfonyApplication implements ApplicationContract {
         return parent::add($command);
     }
     /**
-     * Add a command, resolving through the application.
      * @param string $command
      * @return \Symfony\Component\Console\Command\Command
      */
@@ -84,7 +76,6 @@ class Application extends SymfonyApplication implements ApplicationContract {
         return $this->add($this->notadd->make($command));
     }
     /**
-     * Resolve an array of commands through the application.
      * @param array|mixed $commands
      * @return $this
      */
@@ -104,7 +95,6 @@ class Application extends SymfonyApplication implements ApplicationContract {
         return $definition;
     }
     /**
-     * Get the global environment option for the definition.
      * @return \Symfony\Component\Console\Input\InputOption
      */
     protected function getEnvironmentOption() {

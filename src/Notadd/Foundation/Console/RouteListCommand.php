@@ -30,6 +30,9 @@ class RouteListCommand extends Command {
      * @var \Illuminate\Routing\RouteCollection
      */
     protected $routes;
+    /**
+     * @var array
+     */
     protected $headers = [
         'Domain',
         'Method',
@@ -38,17 +41,26 @@ class RouteListCommand extends Command {
         'Action',
         'Middleware'
     ];
+    /**
+     * @param \Illuminate\Routing\Router $router
+     */
     public function __construct(Router $router) {
         parent::__construct();
         $this->router = $router;
         $this->routes = $router->getRoutes();
     }
+    /**
+     * @return void
+     */
     public function fire() {
         if(count($this->routes) == 0) {
             return $this->error("Your application doesn't have any routes.");
         }
         $this->displayRoutes($this->getRoutes());
     }
+    /**
+     * @return array
+     */
     protected function getRoutes() {
         $results = [];
         foreach($this->routes as $route) {
@@ -64,6 +76,10 @@ class RouteListCommand extends Command {
         }
         return array_filter($results);
     }
+    /**
+     * @param \Illuminate\Routing\Route $route
+     * @return array|void
+     */
     protected function getRouteInformation(Route $route) {
         return $this->filterRoute([
             'host' => $route->domain(),
@@ -74,9 +90,16 @@ class RouteListCommand extends Command {
             'middleware' => $this->getMiddleware($route),
         ]);
     }
+    /**
+     * @param array $routes
+     */
     protected function displayRoutes(array $routes) {
         $this->table($this->headers, $routes);
     }
+    /**
+     * @param $route
+     * @return string
+     */
     protected function getMiddleware($route) {
         $middlewares = array_values($route->middleware());
         $middlewares = array_unique(array_merge($middlewares, $this->getPatternFilters($route)));
@@ -86,11 +109,20 @@ class RouteListCommand extends Command {
         }
         return implode(',', $middlewares);
     }
+    /**
+     * @param $actionName
+     * @return array
+     */
     protected function getControllerMiddleware($actionName) {
         Controller::setRouter($this->notadd['router']);
         $segments = explode('@', $actionName);
         return $this->getControllerMiddlewareFromInstance($this->notadd->make($segments[0]), $segments[1]);
     }
+    /**
+     * @param $controller
+     * @param $method
+     * @return array
+     */
     protected function getControllerMiddlewareFromInstance($controller, $method) {
         $middleware = $this->router->getMiddleware();
         $results = [];
@@ -101,9 +133,18 @@ class RouteListCommand extends Command {
         }
         return $results;
     }
+    /**
+     * @param $method
+     * @param array $options
+     * @return bool
+     */
     protected function methodExcludedByOptions($method, array $options) {
         return (!empty($options['only']) && !in_array($method, (array)$options['only'])) || (!empty($options['except']) && in_array($method, (array)$options['except']));
     }
+    /**
+     * @param $route
+     * @return array
+     */
     protected function getPatternFilters($route) {
         $patterns = [];
         foreach($route->methods() as $method) {
@@ -112,15 +153,27 @@ class RouteListCommand extends Command {
         }
         return $patterns;
     }
+    /**
+     * @param $uri
+     * @param $method
+     * @return array
+     */
     protected function getMethodPatterns($uri, $method) {
         return $this->router->findPatternFilters(Request::create($uri, $method));
     }
+    /**
+     * @param array $route
+     * @return array|void
+     */
     protected function filterRoute(array $route) {
         if(($this->option('name') && !Str::contains($route['name'], $this->option('name'))) || $this->option('path') && !Str::contains($route['uri'], $this->option('path')) || $this->option('method') && !Str::contains($route['method'], $this->option('method'))) {
             return;
         }
         return $route;
     }
+    /**
+     * @return array
+     */
     protected function getOptions() {
         return [
             [

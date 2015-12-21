@@ -10,10 +10,26 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Collection;
 use Illuminate\View\Factory;
 class Optimization {
+    /**
+     * @var \Illuminate\Contracts\Foundation\Application
+     */
     private $app;
+    /**
+     * @var \Illuminate\View\Factory
+     */
     private $view;
+    /**
+     * @var \Notadd\Foundation\SearchEngine\Meta
+     */
     private $meta;
+    /**
+     * @var static
+     */
     private $code;
+    /**
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\View\Factory $view
+     */
     public function __construct(Application $app, Factory $view) {
         $this->app = $app;
         $this->view = $view;
@@ -21,6 +37,10 @@ class Optimization {
         $this->code->put('{sitename}', $this->app->make('setting')->get('seo.title', 'Notadd CMS'));
         $this->meta = new Meta();
     }
+    /**
+     * @param string $key
+     * @return static
+     */
     public function getData($key = '') {
         $data = $this->meta->getData();
         foreach($data as $k=>$v) {
@@ -32,9 +52,18 @@ class Optimization {
             return $data;
         }
     }
+    /**
+     * @param $key
+     * @param $value
+     */
     public function setCode($key, $value) {
         $this->code->put($key, $value);
     }
+    /**
+     * @param $title
+     * @param $description
+     * @param $keywords
+     */
     public function setCustomMeta($title, $description, $keywords) {
         if($title || $keywords || $description) {
             $this->meta->setTitle($title);
@@ -42,12 +71,21 @@ class Optimization {
             $this->meta->setKeywords($keywords);
         }
     }
+    /**
+     * @param $title
+     */
     public function setTitleMeta($title) {
         $this->meta->setTitle($title);
     }
+    /**
+     * @param $description
+     */
     public function setDescriptionMeta($description) {
         $this->meta->setDescription($description);
     }
+    /**
+     * @param $keywords
+     */
     public function setKeywordsMeta($keywords) {
         $this->meta->setKeywords($keywords);
     }

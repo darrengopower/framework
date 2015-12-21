@@ -8,29 +8,29 @@
 namespace Notadd\Foundation\Http;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Notadd\Foundation\Auth\Models\User;
 use Notadd\Foundation\SearchEngine\SearchEngineServiceProvider;
+use Notadd\Foundation\Traits\InjectRouterTrait;
+use Notadd\Foundation\Traits\InjectSettingTrait;
 use Notadd\Page\Models\Page;
 class HttpServiceProvider extends ServiceProvider {
+    use InjectSettingTrait, InjectRouterTrait;
     /**
      * @return void
      */
     public function boot() {
         //注册搜索引擎优化服务提供者
         $this->app->register(SearchEngineServiceProvider::class);
-        $this->app->make('router')->get('/', function() {
-            $home = $this->app->make('setting')->get('site.home', 'default');
-            if($home == 'default') {
-                $this->app->make('view')->share('logo', file_get_contents(realpath($this->app->frameworkPath() . '/views/install') . DIRECTORY_SEPARATOR . 'logo.svg'));
-                return $this->app->make('view')->make('default::index');
-            } else {
-                if(Str::contains($home, 'page_')) {
-                    $id = Str::substr($home, 5);
-                    if(Page::whereEnabled(true)->whereId($id)->count()) {
-                        return $this->app->call('Notadd\Page\Controllers\PageController@show', ['id' => $id]);
-                    }
-                }
+        $this->getRouter()->get('/', function() {
+            $home = $this->getSetting()->get('site.home', 'default');
+            $page_id = 0;
+            if($home != 'default' && Str::contains($home, 'page_')) {
+                $page_id = Str::substr($home, 5);
             }
+            if($page_id && Page::whereEnabled(true)->whereId($page_id)->count()) {
+                return $this->app->call('Notadd\Page\Controllers\PageController@show', ['id' => $page_id]);
+            }
+            $this->app->make('view')->share('logo', file_get_contents(realpath($this->app->frameworkPath() . '/views/install') . DIRECTORY_SEPARATOR . 'logo.svg'));
+            return $this->app->make('view')->make('default::index');
         });
     }
     /**

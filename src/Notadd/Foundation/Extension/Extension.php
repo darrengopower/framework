@@ -9,8 +9,6 @@ namespace Notadd\Foundation\Extension;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
 abstract class Extension extends ServiceProvider {
-    //abstract function info();
-    //abstract function listen(Dispatcher $events);
     /**
      * @return void
      */

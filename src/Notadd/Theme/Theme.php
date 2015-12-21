@@ -7,7 +7,12 @@
  */
 namespace Notadd\Theme;
 use Illuminate\Container\Container;
-class Theme {
+use Notadd\Theme\Contracts\Theme as ThemeContract;
+class Theme implements ThemeContract {
+    /**
+     * @var \Notadd\Foundation\Application
+     */
+    private $application;
     /**
      * @var string
      */
@@ -31,7 +36,19 @@ class Theme {
     /**
      * @var string
      */
+    private $lessPath;
+    /**
+     * @var string
+     */
     private $imagePath;
+    /**
+     * @var string
+     */
+    private $sassPath;
+    /**
+     * @var \Notadd\Setting\Factory
+     */
+    private $setting;
     /**
      * @var string
      */
@@ -41,8 +58,10 @@ class Theme {
      * @param $alias
      */
     public function __construct($title, $alias) {
-        $this->title = $title;
         $this->alias = $alias;
+        $this->application = Container::getInstance();
+        $this->setting = $this->application->make('setting');
+        $this->title = $title;
     }
     /**
      * @return string
@@ -64,6 +83,7 @@ class Theme {
     }
     /**
      * @param string $path
+     * @return mixed|void
      */
     public function useCssPath($path) {
         $this->cssPath = $path;
@@ -76,18 +96,10 @@ class Theme {
     }
     /**
      * @param string $path
+     * @return mixed|void
      */
     public function useFontPath($path) {
         $this->fontPath = $path;
-    }
-    /**
-     * @return string
-     */
-    public function getJsPath() {
-        return $this->jsPath;
-    }
-    public function useJsPath($path) {
-        $this->jsPath = $path;
     }
     /**
      * @return string
@@ -97,9 +109,49 @@ class Theme {
     }
     /**
      * @param string $path
+     * @return mixed|void
      */
     public function useImagePath($path) {
         $this->imagePath = $path;
+    }
+    /**
+     * @return string
+     */
+    public function getJsPath() {
+        return $this->jsPath;
+    }
+    /**
+     * @param $path
+     * @return mixed|void
+     */
+    public function useJsPath($path) {
+        $this->jsPath = $path;
+    }
+    /**
+     * @return string
+     */
+    public function getLessPath() {
+        return $this->lessPath;
+    }
+    /**
+     * @param $path
+     * @return mixed|void
+     */
+    public function useLessPath($path) {
+        $this->lessPath = $path;
+    }
+    /**
+     * @return string
+     */
+    public function getSassPath() {
+        return $this->sassPath;
+    }
+    /**
+     * @param $path
+     * @return mixed|void
+     */
+    public function useSassPath($path) {
+        $this->sassPath = $path;
     }
     /**
      * @return string
@@ -109,6 +161,7 @@ class Theme {
     }
     /**
      * @param string $path
+     * @return mixed|void
      */
     public function useViewPath($path) {
         $this->viewPath = $path;
@@ -117,9 +170,17 @@ class Theme {
      * @return bool
      */
     public function isDefault() {
-        if(Container::getInstance()->make('setting')->get('site.theme') === $this->alias) {
+        if($this->setting->get('site.theme') === $this->alias) {
             return true;
         }
         return false;
+    }
+    /**
+     * @param string $path
+     * @return string
+     */
+    protected function getDefaultStaticPath($path = '') {
+        $defaultPath = $this->application->publicPath() . DIRECTORY_SEPARATOR . 'statics' . DIRECTORY_SEPARATOR . $this->alias;
+        return $path ? $defaultPath . DIRECTORY_SEPARATOR . $path : $defaultPath;
     }
 }

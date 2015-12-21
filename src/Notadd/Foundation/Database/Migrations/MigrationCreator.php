@@ -9,7 +9,12 @@ namespace Notadd\Foundation\Database\Migrations;
 use Closure;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
+use Notadd\Foundation\Application;
 class MigrationCreator {
+    /**
+     * @var \Notadd\Foundation\Application
+     */
+    protected $application;
     /**
      * @var \Illuminate\Filesystem\Filesystem
      */
@@ -19,9 +24,11 @@ class MigrationCreator {
      */
     protected $postCreate = [];
     /**
+     * @param \Notadd\Foundation\Application $application
      * @param \Illuminate\Filesystem\Filesystem $files
      */
-    public function __construct(Filesystem $files) {
+    public function __construct(Application $application, Filesystem $files) {
+        $this->application = $application;
         $this->files = $files;
     }
     /**
@@ -104,7 +111,7 @@ class MigrationCreator {
      * @return string
      */
     public function getStubPath() {
-        return realpath(__DIR__ . '/../../../../../stubs/migrations');
+        return realpath($this->application->stubsPath() . DIRECTORY_SEPARATOR . 'migrations');
     }
     /**
      * @return \Illuminate\Filesystem\Filesystem

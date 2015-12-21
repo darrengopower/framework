@@ -12,15 +12,30 @@ use Notadd\Article\Article;
 use Notadd\Article\Models\Article as ArticleModel;
 use Notadd\Category\Models\Category as CategoryModel;
 class Category {
+    /**
+     * @var int
+     */
     private $id;
+    /**
+     * @var \Notadd\Category\Models\Category
+     */
     private $model;
+    /**
+     * @param $id
+     */
     public function __construct($id) {
         $this->id = $id;
         $this->model = CategoryModel::findOrFail($id);
     }
+    /**
+     * @return int
+     */
     public function getId() {
         return $this->id;
     }
+    /**
+     * @return static
+     */
     public function getList() {
         if($this->model->hasParent()) {
             $model = ArticleModel::whereCategoryId($this->model->getAttribute('id'));
@@ -40,6 +55,10 @@ class Category {
         }
         return $list;
     }
+    /**
+     * @param \Illuminate\Support\Collection $list
+     * @param \Notadd\Category\Models\Category|null $model
+     */
     public function getLoopParent(Collection &$list, CategoryModel $model = null) {
         if($model === null) {
             $model = $this->model;
@@ -50,9 +69,15 @@ class Category {
             $this->getLoopParent($list, $parent);
         }
     }
+    /**
+     * @return \Notadd\Category\Models\Category
+     */
     public function getModel() {
         return $this->model;
     }
+    /**
+     * @return static
+     */
     public function getRelationCategoryList() {
         $list = Collection::make();
         if($this->model->hasParent()) {
@@ -69,6 +94,9 @@ class Category {
         }
         return $list;
     }
+    /**
+     * @return string
+     */
     public function getRouting() {
         $loopParent = Collection::make([$this->model]);
         $this->getLoopParent($loopParent);
@@ -78,12 +106,21 @@ class Category {
         }
         return $routingString->implode('/');
     }
+    /**
+     * @return string
+     */
     public function getShowTemplate() {
         return $this->model->getShowTemplate();
     }
+    /**
+     * @return mixed
+     */
     public function getTitle() {
         return $this->model->getAttribute('title');
     }
+    /**
+     * @return mixed
+     */
     public function getType() {
         return $this->model->getAttribute('type');
     }

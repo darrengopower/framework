@@ -8,20 +8,21 @@ use Notadd\Foundation\Routing\Controller;
 use Notadd\Page\Events\OnPageShow;
 use Notadd\Page\Page;
 class PageController extends Controller {
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\View
+     */
     public function show($id) {
         $page = new Page($id);
-        $this->app->make('events')->fire(new OnPageShow($this->app, $this->view, $page));
+        $this->events->fire(new OnPageShow($this->app, $this->view, $page));
         $template = $page->getTemplate();
-        if($template) {
-            $this->app->make('view')->exists($template) || $template = 'default::page.default';
-        } else {
-            $template = 'default::page.default';
+        $template || $template = 'default::page.default';
+        $this->view->exists($template) || $template = 'default::page.default';
+        if($this->setting->get('site.home') !== 'page_' . $id) {
+            $this->seo->setTitleMeta($page->getTitle() . ' - {sitename}');
         }
-        if($this->app->make('setting')->get('site.home') !== 'page_' . $id) {
-            $this->app->make('searchengine.optimization')->setTitleMeta($page->getTitle() . ' - {sitename}');
-        }
-        $this->app->make('searchengine.optimization')->setDescriptionMeta($page->getDescription());
-        $this->app->make('searchengine.optimization')->setKeywordsMeta($page->getKeywords());
+        $this->seo->setDescriptionMeta($page->getDescription());
+        $this->seo->setKeywordsMeta($page->getKeywords());
         $this->share('content', $page->getContent());
         $this->share('logo', file_get_contents(realpath($this->app->frameworkPath() . '/views/install') . DIRECTORY_SEPARATOR . 'logo.svg'));
         $this->share('page', $page);

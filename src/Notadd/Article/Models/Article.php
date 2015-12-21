@@ -32,6 +32,9 @@ class Article extends Model {
         'is_sticky',
         'created_at',
     ];
+    /**
+     * @var string
+     */
     protected $showTemplate = 'default::article.show';
     /**
      * @return \Notadd\Foundation\Database\Eloquent\Relations\BelongsTo
@@ -56,28 +59,28 @@ class Article extends Model {
         return $value;
     }
     /**
-     * @return mixed
+     * @return \Notadd\Article\Models\Article
      */
     public function getNextArticle() {
         $id = $this->where('id', '>', $this->attributes['id'])->min('id');
         return $this->find($id);
     }
     /**
-     * @return mixed
+     * @return \Notadd\Article\Models\Article
      */
     public function getNextArticleInCategory() {
         $id = $this->whereCategoryId($this->attributes['category_id'])->where('id', '>', $this->attributes['id'])->min('id');
         return $this->find($id);
     }
     /**
-     * @return mixed
+     * @return \Notadd\Article\Models\Article
      */
     public function getPreviousArticle() {
         $id = $this->where('id', '<', $this->attributes['id'])->max('id');
         return $this->find($id);
     }
     /**
-     * @return mixed
+     * @return \Notadd\Article\Models\Article
      */
     public function getPreviousArticleInCategory() {
         $id = $this->whereCategoryId($this->attributes['category_id'])->where('id', '<', $this->attributes['id'])->max('id');

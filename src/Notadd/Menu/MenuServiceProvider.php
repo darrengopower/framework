@@ -7,20 +7,22 @@
  */
 namespace Notadd\Menu;
 use Illuminate\Support\ServiceProvider;
+use Notadd\Foundation\Traits\InjectRouterTrait;
 class MenuServiceProvider extends ServiceProvider {
+    use InjectRouterTrait;
     /**
      * @return void
      */
     public function boot() {
-        $this->app->make('router')->group(['namespace' => 'Notadd\Menu\Controllers'], function () {
-            $this->app->make('router')->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
-                $this->app->make('router')->resource('menu', 'GroupController');
-                $this->app->make('router')->get('menu/{id}/sort', 'GroupController@sort');
-                $this->app->make('router')->post('menu/{id}/sorting', 'GroupController@sorting');
-                $this->app->make('router')->resource('menu/item', 'ItemController');
-                $this->app->make('router')->post('menu/item/{id}/status', 'ItemController@status');
-                $this->app->make('router')->get('menu/item/{id}/sort', 'ItemController@sort');
-                $this->app->make('router')->post('menu/item/{id}/sorting', 'ItemController@sorting');
+        $this->getRouter()->group(['namespace' => 'Notadd\Menu\Controllers'], function () {
+            $this->getRouter()->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+                $this->getRouter()->resource('menu', 'GroupController');
+                $this->getRouter()->get('menu/{id}/sort', 'GroupController@sort');
+                $this->getRouter()->post('menu/{id}/sorting', 'GroupController@sorting');
+                $this->getRouter()->resource('menu/item', 'ItemController');
+                $this->getRouter()->post('menu/item/{id}/status', 'ItemController@status');
+                $this->getRouter()->get('menu/item/{id}/sort', 'ItemController@sort');
+                $this->getRouter()->post('menu/item/{id}/sorting', 'ItemController@sorting');
             });
         });
     }

@@ -10,31 +10,34 @@ use Illuminate\Support\ServiceProvider;
 use Notadd\Category\Category;
 use Notadd\Category\Listeners\BeforeCategoryDelete;
 use Notadd\Category\Models\Category as CategoryModel;
+use Notadd\Foundation\Traits\InjectEventsTrait;
+use Notadd\Foundation\Traits\InjectRouterTrait;
 class CategoryServiceProvider extends ServiceProvider {
+    use InjectEventsTrait, InjectRouterTrait;
     /**
      * @return void
      */
     public function boot() {
-        $this->app->make('router')->before(function() {
+        $this->getEvents()->listen('router.before', function() {
             $categories = CategoryModel::whereEnabled(true)->get();
             foreach($categories as $value) {
                 if($value->alias) {
                     $category = new Category($value->id);
-                    $this->app->make('router')->get($category->getRouting() . '/{id}', 'Notadd\Article\Controllers\ArticleController@show')->where('id', '[0-9]+');
-                    $this->app->make('router')->get($category->getRouting(), function() use ($category) {
+                    $this->getRouter()->get($category->getRouting() . '/{id}', 'Notadd\Article\Controllers\ArticleController@show')->where('id', '[0-9]+');
+                    $this->getRouter()->get($category->getRouting(), function() use ($category) {
                         return $this->app->call('Notadd\Category\Controllers\CategoryController@show', ['id' => $category->getId()]);
                     });
                 }
             }
         });
-        $this->app->make('router')->group(['namespace' => 'Notadd\Category\Controllers'], function () {
-            $this->app->make('router')->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
-                $this->app->make('router')->resource('category', 'CategoryController');
-                $this->app->make('router')->post('category/{id}/status', 'CategoryController@status');
+        $this->getRouter()->group(['namespace' => 'Notadd\Category\Controllers'], function () {
+            $this->getRouter()->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+                $this->getRouter()->resource('category', 'CategoryController');
+                $this->getRouter()->post('category/{id}/status', 'CategoryController@status');
             });
-            $this->app->make('router')->resource('category', 'CategoryController');
+            $this->getRouter()->resource('category', 'CategoryController');
         });
-        $this->app->make('events')->subscribe(BeforeCategoryDelete::class);
+        $this->getEvents()->subscribe(BeforeCategoryDelete::class);
     }
     /**
      * @return void

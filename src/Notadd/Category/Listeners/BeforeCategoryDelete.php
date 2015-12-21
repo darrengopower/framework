@@ -10,9 +10,15 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Notadd\Article\Models\Article;
 use Notadd\Category\Events\BeforeCategoryDelete as BeforeCategoryDeleteEvent;
 class BeforeCategoryDelete {
+    /**
+     * @param \Illuminate\Contracts\Events\Dispatcher $dispatcher
+     */
     public function subscribe(Dispatcher $dispatcher) {
         $dispatcher->listen(BeforeCategoryDeleteEvent::class, [$this, 'onDelete']);
     }
+    /**
+     * @param \Notadd\Category\Events\BeforeCategoryDelete $event
+     */
     public function onDelete(BeforeCategoryDeleteEvent $event) {
         $category = $event->getCategory();
         Article::whereCategoryId($category->id)->delete();

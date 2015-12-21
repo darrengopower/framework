@@ -7,11 +7,15 @@
  */
 namespace Notadd\Foundation\Extension;
 use Illuminate\Support\ServiceProvider;
-use Notadd\Foundation\Extension\ExtensionManager;
+use Notadd\Foundation\Traits\InjectExtensionTrait;
 use Symfony\Component\Finder\Finder;
 class ExtensionServiceProvider extends ServiceProvider {
+    use InjectExtensionTrait;
+    /**
+     * @return void
+     */
     public function boot() {
-        $extension_dir = $this->app->make('extension')->getExtensionsDir();
+        $extension_dir = $this->getExtension()->getExtensionsDir();
         if($this->app->make('files')->isDirectory($extension_dir)) {
             foreach(Finder::create()->in($extension_dir)->directories()->depth(0) as $dir) {
                 if(file_exists($file = $dir . '/bootstrap.php')) {

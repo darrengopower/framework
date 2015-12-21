@@ -8,8 +8,14 @@
 namespace Notadd\Editor;
 use Illuminate\Support\ServiceProvider;
 class EditorServiceProvider extends ServiceProvider {
+    /**
+     * @return void
+     */
     public function boot() {
     }
+    /**
+     * @return void
+     */
     public function register() {
         $this->app->singleton('editor', Editor::class);
         $this->app->singleton('editor.ueditor', '');

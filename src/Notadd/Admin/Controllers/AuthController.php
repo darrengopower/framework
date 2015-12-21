@@ -10,10 +10,16 @@ use Notadd\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Notadd\Foundation\Auth\Models\User;
 class AuthController extends AbstractAdminController {
     use AuthenticatesAndRegistersUsers;
+    /**
+     * @var array
+     */
     protected $middleware = [
         'guest.admin' => ['except' => 'getLogout']
     ];
     protected $loginPath = 'admin/login';
+    /**
+     * @var string
+     */
     protected $redirectPath = 'admin';
     /**
      * @param array $data
@@ -40,7 +46,7 @@ class AuthController extends AbstractAdminController {
     }
     /**
      * @param array $data
-     * @return mixed
+     * @return \Illuminate\Validation\Validator
      */
     protected function validator(array $data) {
         return $this->app->make('validator')->make($data, [

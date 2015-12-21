@@ -28,7 +28,6 @@ class TableCommand extends Command {
      */
     protected $composer;
     /**
-     * Create a new queue job table command instance.
      * @param \Illuminate\Filesystem\Filesystem $files
      * @param \Notadd\Foundation\Composer\Composer $composer
      */
@@ -38,7 +37,6 @@ class TableCommand extends Command {
         $this->composer = $composer;
     }
     /**
-     * Execute the console command.
      * @return void
      */
     public function fire() {
@@ -57,7 +55,6 @@ class TableCommand extends Command {
         $this->composer->dumpAutoloads();
     }
     /**
-     * Create a base migration file for the table.
      * @param string $table
      * @return string
      */

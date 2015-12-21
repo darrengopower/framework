@@ -8,8 +8,14 @@
 namespace Notadd\Foundation\SearchEngine;
 use Illuminate\Support\ServiceProvider;
 class SearchEngineServiceProvider extends ServiceProvider {
+    /**
+     * @return void
+     */
     public function boot() {
     }
+    /**
+     * @return void
+     */
     public function register() {
         $this->app->singleton('searchengine.optimization', Optimization::class);
     }

@@ -24,24 +24,24 @@ class PageController extends AbstractAdminController {
     /**
      * @param $id
      * @param \Illuminate\Http\Request $request
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function delete($id, Request $request) {
         $request->isMethod('post') && Page::onlyTrashed()->find($id)->forceDelete();
-        return $this->app->make('redirect')->to('admin/page');
+        return $this->redirect->to('admin/page');
     }
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id) {
         $page = Page::find($id);
         $page->delete();
-        return $this->app->make('redirect')->back();
+        return $this->redirect->back();
     }
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($id) {
         $crumb = [];
@@ -63,6 +63,10 @@ class PageController extends AbstractAdminController {
         $this->share('pages', $page->get());
         return $this->view('content.page.list');
     }
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\View
+     */
     public function move($id) {
         $crumb = [];
         Page::getCrumbMenu($id, $crumb);
@@ -74,6 +78,11 @@ class PageController extends AbstractAdminController {
         $this->share('list', $list);
         return $this->view('content.page.move');
     }
+    /**
+     * @param $id
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function moving($id, Request $request) {
         $page = Page::findOrFail($id);
         $page->update($request->all());
@@ -82,11 +91,11 @@ class PageController extends AbstractAdminController {
     /**
      * @param $id
      * @param \Illuminate\Http\Request $request
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function restore($id, Request $request) {
         $request->isMethod('post') && Page::onlyTrashed()->find($id)->restore();
-        return $this->app->make('redirect')->to('admin/page');
+        return $this->redirect->to('admin/page');
     }
     /**
      * @param $id
@@ -121,7 +130,7 @@ class PageController extends AbstractAdminController {
     /**
      * @param $id
      * @param \Illuminate\Http\Request $request
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function sorting($id, Request $request) {
         if(is_array($request->get('order')) && $request->get('order')) {
@@ -131,11 +140,11 @@ class PageController extends AbstractAdminController {
                 }
             }
         }
-        return $this->app->make('redirect')->back();
+        return $this->redirect->back();
     }
     /**
      * @param \Notadd\Page\Requests\PageCreateRequest $request
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(PageCreateRequest $request) {
         if($request->input('parent_id')) {
@@ -144,12 +153,12 @@ class PageController extends AbstractAdminController {
             }
         }
         Page::create($request->all());
-        return $this->app->make('redirect')->back();
+        return $this->redirect->back();
     }
     /**
      * @param \Notadd\Page\Requests\PageEditRequest $request
      * @param $id
-     * @return mixed
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function update(PageEditRequest $request, $id) {
         $page = Page::findOrFail($id);
@@ -160,9 +169,9 @@ class PageController extends AbstractAdminController {
         }
         $request->files->replace();
         if($page->update($request->all())) {
-            return $this->app->make('redirect')->to('admin/page/' . $id . '/edit');
+            return $this->redirect->to('admin/page/' . $id . '/edit');
         } else {
-            return $this->app->make('redirect')->back()->withInput()->withErrors('保存失败！');
+            return $this->redirect->back()->withInput()->withErrors('保存失败！');
         }
     }
 }

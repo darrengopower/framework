@@ -7,8 +7,17 @@
  */
 namespace Notadd\Foundation\Console;
 class DownCommand extends Command {
+    /**
+     * @var string
+     */
     protected $name = 'down';
+    /**
+     * @var string
+     */
     protected $description = 'Put the application into maintenance mode';
+    /**
+     * @return void
+     */
     public function fire() {
         touch($this->notadd->storagePath() . '/framework/down');
         $this->comment('Application is now in maintenance mode.');

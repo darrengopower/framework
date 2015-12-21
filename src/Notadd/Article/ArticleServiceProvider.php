@@ -7,19 +7,21 @@
  */
 namespace Notadd\Article;
 use Illuminate\Support\ServiceProvider;
+use Notadd\Foundation\Traits\InjectRouterTrait;
 class ArticleServiceProvider extends ServiceProvider {
+    use InjectRouterTrait;
     /**
      * @return void
      */
     public function boot() {
-        $this->app->make('router')->group(['namespace' => 'Notadd\Article\Controllers'], function () {
-            $this->app->make('router')->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
-                $this->app->make('router')->resource('article', 'ArticleController');
-                $this->app->make('router')->post('article/{id}/delete', 'ArticleController@delete');
-                $this->app->make('router')->post('article/{id}/restore', 'ArticleController@restore');
-                $this->app->make('router')->post('article/select', 'ArticleController@select');
+        $this->getRouter()->group(['namespace' => 'Notadd\Article\Controllers'], function () {
+            $this->getRouter()->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+                $this->getRouter()->resource('article', 'ArticleController');
+                $this->getRouter()->post('article/{id}/delete', 'ArticleController@delete');
+                $this->getRouter()->post('article/{id}/restore', 'ArticleController@restore');
+                $this->getRouter()->post('article/select', 'ArticleController@select');
             });
-            $this->app->make('router')->resource('article', 'ArticleController');
+            $this->getRouter()->resource('article', 'ArticleController');
         });
     }
     /**

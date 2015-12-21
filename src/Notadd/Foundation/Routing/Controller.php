@@ -8,28 +8,57 @@
 namespace Notadd\Foundation\Routing;
 use BadMethodCallException;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Routing\Controller as IlluminateController;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Str;
+use Notadd\Foundation\Auth\Access\AuthorizesRequests;
 use Notadd\Foundation\Bus\DispatchesJobs;
+use Notadd\Foundation\SearchEngine\Optimization;
 use Notadd\Foundation\Validation\ValidatesRequests;
+use Notadd\Setting\Factory as SettingFactory;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 abstract class Controller extends IlluminateController {
-    use DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     /**
      * @var \Illuminate\Contracts\Foundation\Application
      */
     protected $app;
+    /**
+     * @var \Illuminate\Events\Dispatcher
+     */
+    protected $events;
+    /**
+     * @var \Illuminate\Routing\Redirector
+     */
+    protected $redirect;
+    /**
+     * @var \Notadd\Setting\Factory
+     */
+    protected $setting;
+    /**
+     * @var \Notadd\Foundation\SearchEngine\Optimization
+     */
+    protected $seo;
     /**
      * @var \Illuminate\Contracts\View\Factory
      */
     protected $view;
     /**
      * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Events\Dispatcher $events
+     * @param \Illuminate\Routing\Redirector $redirect
+     * @param \Notadd\Setting\Factory $setting
+     * @param \Notadd\Foundation\SearchEngine\Optimization $seo
      * @param \Illuminate\Contracts\View\Factory $view
      */
-    public function __construct(Application $app, Factory $view) {
+    public function __construct(Application $app, Dispatcher $events, Redirector $redirect, SettingFactory $setting, Optimization $seo, ViewFactory $view) {
         $this->app = $app;
+        $this->events = $events;
+        $this->redirect = $redirect;
+        $this->setting = $setting;
+        $this->seo = $seo;
         $this->view = $view;
     }
     public function getCommand($command) {

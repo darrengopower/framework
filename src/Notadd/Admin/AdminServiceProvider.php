@@ -7,35 +7,39 @@
  */
 namespace Notadd\Admin;
 use Illuminate\Support\ServiceProvider;
+use Notadd\Foundation\Traits\InjectConfigTrait;
+use Notadd\Foundation\Traits\InjectRequestTrait;
+use Notadd\Foundation\Traits\InjectRouterTrait;
 class AdminServiceProvider extends ServiceProvider {
+    use InjectConfigTrait, InjectRequestTrait, InjectRouterTrait;
     /**
      * @return void
      */
     public function boot() {
         $this->initAdminConfig();
         $this->loadViewsFrom(realpath($this->app->basePath() . '/../template/admin/views'), 'admin');
-        $this->app->make('router')->group(['namespace' => 'Notadd\Admin\Controllers'], function () {
-            $this->app->make('router')->group(['prefix' => 'admin'], function () {
-                $this->app->make('router')->get('login', 'AuthController@getLogin');
-                $this->app->make('router')->post('login', 'AuthController@postLogin');
-                $this->app->make('router')->get('logout', 'AuthController@getLogout');
-                $this->app->make('router')->get('register', 'AuthController@getRegister');
-                $this->app->make('router')->post('register', 'AuthController@postRegister');
-                $this->app['router']->controllers(['password' => 'PasswordController']);
+        $this->getRouter()->group(['namespace' => 'Notadd\Admin\Controllers'], function () {
+            $this->getRouter()->group(['prefix' => 'admin'], function () {
+                $this->getRouter()->get('login', 'AuthController@getLogin');
+                $this->getRouter()->post('login', 'AuthController@postLogin');
+                $this->getRouter()->get('logout', 'AuthController@getLogout');
+                $this->getRouter()->get('register', 'AuthController@getRegister');
+                $this->getRouter()->post('register', 'AuthController@postRegister');
+                $this->getRouter()->controllers(['password' => 'PasswordController']);
             });
-            $this->app->make('router')->group(['middleware' => 'auth.admin', 'prefix' => 'admin'], function () {
-                $this->app->make('router')->get('/', 'AdminController@init');
+            $this->getRouter()->group(['middleware' => 'auth.admin', 'prefix' => 'admin'], function () {
+                $this->getRouter()->get('/', 'AdminController@init');
             });
         });
-        if($this->app->make('request')->is('admin*')) {
-            $menu = $this->app->make('config')->get('admin');
+        if($this->getRequest()->is('admin*')) {
+            $menu = $this->getConfig()->get('admin');
             foreach($menu as $top_key => $top) {
                 if(isset($top['sub'])) {
                     foreach($top['sub'] as $one_key => $one) {
                         if(isset($one['sub'])) {
                             $active = false;
                             foreach((array)$one['active'] as $rule) {
-                                if($this->app->make('request')->is($rule)) {
+                                if($this->getRequest()->is($rule)) {
                                     $active = true;
                                 }
                             }
@@ -45,7 +49,7 @@ class AdminServiceProvider extends ServiceProvider {
                                 $menu[$top_key]['sub'][$one_key]['active'] = '';
                             }
                         } else {
-                            if($this->app->make('request')->is($one['active'])) {
+                            if($this->getRequest()->is($one['active'])) {
                                 $menu[$top_key]['sub'][$one_key]['active'] = 'active';
                             } else {
                                 $menu[$top_key]['sub'][$one_key]['active'] = '';
@@ -54,11 +58,14 @@ class AdminServiceProvider extends ServiceProvider {
                     }
                 }
             }
-            $this->app->make('config')->set('admin', $menu);
+            $this->getConfig()->set('admin', $menu);
         }
     }
+    /**
+     * @return void
+     */
     public function initAdminConfig() {
-        $this->app->make('config')->set('admin', [
+        $this->getConfig()->set('admin', [
             [
                 'title' => '概略导航',
                 'active' => 'admin',

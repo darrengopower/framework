@@ -10,9 +10,12 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800">
     <link rel="stylesheet" href="{{ asset('themes/admin/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('themes/admin/css/bootstrap.min.css') }}">
+    @css('admin::less.layout.bootstrap.bootstrap')
+    @css('admin::css.default.admin.main')
+    @css('admin::css.extend.admin.main')
     @yield('admin-css')
     <link rel="stylesheet" href="{{ asset('themes/admin/css/main.css') }}">
-    <script src="{{ asset('themes/admin/js/matchMedia.js') }}"></script>
+    @output('css')
 </head>
 <body class="app {{ $admin_theme }}">
 <header class="site-head clearfix" id="site-head">
@@ -97,7 +100,7 @@
             </form>
         </div>
         <nav class="site-nav clearfix" role="navigation" data-toggle="nav-accordion">
-            @foreach(app('config')->get('admin') as $top)
+            @foreach(config('admin') as $top)
                 <div class="nav-title panel-heading"><i>{{ $top['title'] }}</i></div>
                 @if($top['sub'])
                     <ul class="list-unstyled nav-list">
@@ -174,7 +177,7 @@
     <div class="content-container" id="content">@yield('content')</div>
     <footer id="site-foot" class="site-foot clearfix">
         <p class="left">&copy; Copyright 2015 <strong>iBenchu.org</strong>, All rights reserved.</p>
-        <p class="right">{{ app('config')->get('app.version') }}</p>
+        <p class="right">{{ config('app.version') }}</p>
     </footer>
 </div>
 <script src="{{ asset('themes/admin/js/jquery-2.1.3.min.js') }}"></script>

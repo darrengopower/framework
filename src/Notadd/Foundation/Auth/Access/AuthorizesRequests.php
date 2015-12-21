@@ -17,7 +17,7 @@ trait AuthorizesRequests {
      */
     public function authorize($ability, $arguments = []) {
         list($ability, $arguments) = $this->parseAbilityAndArguments($ability, $arguments);
-        if(!app(Gate::class)->check($ability, $arguments)) {
+        if(!$this->app->make(Gate::class)->check($ability, $arguments)) {
             throw $this->createGateUnauthorizedException($ability, $arguments);
         }
     }

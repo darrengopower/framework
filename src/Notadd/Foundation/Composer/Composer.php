@@ -10,12 +10,10 @@ use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 class Composer {
     /**
-     * The filesystem instance.
      * @var \Illuminate\Filesystem\Filesystem
      */
     protected $files;
     /**
-     * The working path to regenerate from.
      * @var string
      */
     protected $workingPath;

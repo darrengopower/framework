@@ -7,39 +7,48 @@
  */
 namespace Notadd\Theme;
 use Illuminate\Support\ServiceProvider;
+use Notadd\Foundation\Traits\InjectBladeTrait;
+use Notadd\Foundation\Traits\InjectCookieTrait;
+use Notadd\Foundation\Traits\InjectEventsTrait;
+use Notadd\Foundation\Traits\InjectRequestTrait;
+use Notadd\Foundation\Traits\InjectRouterTrait;
+use Notadd\Foundation\Traits\InjectSettingTrait;
+use Notadd\Foundation\Traits\InjectThemeTrait;
+use Notadd\Foundation\Traits\InjectViewTrait;
 class ThemeServiceProvider extends ServiceProvider {
+    use InjectBladeTrait, InjectCookieTrait, InjectEventsTrait, InjectSettingTrait, InjectRequestTrait, InjectRouterTrait, InjectThemeTrait, InjectViewTrait;
     /**
      * @return void
      */
     public function boot() {
-        $this->app->make('router')->group(['namespace' => 'Notadd\Theme\Controllers'], function () {
-            $this->app->make('router')->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
-                $this->app->make('router')->post('theme/cookie', function() {
-                    $default = $this->app->make('request')->input('theme');
-                    $this->app->make('cookie')->queue($this->app->make('cookie')->forever('admin-theme', $default));
+        $this->getRouter()->group(['namespace' => 'Notadd\Theme\Controllers'], function () {
+            $this->getRouter()->group(['middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+                $this->getRouter()->post('theme/cookie', function() {
+                    $default = $this->getRequest()->input('theme');
+                    $this->getCookie()->queue($this->getCookie()->forever('admin-theme', $default));
                 });
-                $this->app->make('router')->resource('theme', 'ThemeController');
+                $this->getRouter()->resource('theme', 'ThemeController');
             });
         });
-        $default = $this->app->make('setting')->get('site.theme', 'default');
-        $this->app->make('events')->listen('router.matched', function () use ($default) {
-            $list = $this->app->make('theme')->getThemeList();
-            foreach($list as $theme) {
+        $default = $this->getSetting()->get('site.theme', 'default');
+        $this->getEvents()->listen('router.matched', function () use ($default) {
+            $this->getView()->share('__theme', $this->getTheme());
+            $this->getTheme()->getThemeList()->each(function(Theme $theme) use($default) {
                 $alias = $theme->getAlias();
                 if($alias == $default) {
                     $this->loadViewsFrom($theme->getViewPath(), 'themes');
                 }
                 $this->loadViewsFrom($theme->getViewPath(), $alias);
-                $this->publishes([
-                    $theme->getCssPath() => public_path('themes/' . $alias . '/css'),
-                    $theme->getFontPath() => public_path('themes/' . $alias . '/fonts'),
-                    $theme->getJsPath() => public_path('themes/' . $alias . '/js'),
-                    $theme->getImagePath() => public_path('themes/' . $alias . '/images'),
-                ], $alias);
-            }
+            });
         });
-        $this->app->make('events')->listen('kernel.handled', function () use ($default) {
-            $this->app->make('theme')->publishAssets();
+        $this->getBlade()->directive('css', function($expression) {
+            return "<?php \$__theme->registerCss{$expression}; ?>";
+        });
+        $this->getBlade()->directive('js', function($expression) {
+            return "<?php \$__theme->registerJs{$expression}; ?>";
+        });
+        $this->getBlade()->directive('output', function($expression) {
+            return "<?php echo \$__theme->outputInBlade{$expression}; ?>";
         });
     }
     /**
@@ -54,6 +63,12 @@ class ThemeServiceProvider extends ServiceProvider {
     public function register() {
         $this->app->singleton('theme', function () {
             return $this->app->make(Factory::class);
+        });
+        $this->app->singleton('theme.finder', function () {
+            return $this->app->make(FileFinder::class);
+        });
+        $this->app->singleton('theme.material', function() {
+            return $this->app->make(Material::class);
         });
     }
 }

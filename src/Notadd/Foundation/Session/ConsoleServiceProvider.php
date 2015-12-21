@@ -9,6 +9,9 @@ namespace Notadd\Foundation\Session;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\Session\Console\SessionTableCommand;
 class ConsoleServiceProvider extends ServiceProvider {
+    /**
+     * @var bool
+     */
     protected $defer = true;
     /**
      * @return void

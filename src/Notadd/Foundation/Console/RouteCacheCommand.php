@@ -15,10 +15,17 @@ class RouteCacheCommand extends Command {
      * @var \Illuminate\Filesystem\Filesystem
      */
     protected $files;
+    /**
+     * RouteCacheCommand constructor.
+     * @param \Illuminate\Filesystem\Filesystem $files
+     */
     public function __construct(Filesystem $files) {
         parent::__construct();
         $this->files = $files;
     }
+    /**
+     * @return void
+     */
     public function fire() {
         $this->call('route:clear');
         $routes = $this->getFreshApplicationRoutes();
@@ -31,11 +38,19 @@ class RouteCacheCommand extends Command {
         $this->files->put($this->notadd->getCachedRoutesPath(), $this->buildRouteCacheFile($routes));
         $this->info('Routes cached successfully!');
     }
+    /**
+     * @return mixed
+     */
     protected function getFreshApplicationRoutes() {
         $app = require $this->notadd->basePath() . '/bootstrap/app.php';
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
         return $app['router']->getRoutes();
     }
+    /**
+     * @param \Illuminate\Routing\RouteCollection $routes
+     * @return mixed
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     */
     protected function buildRouteCacheFile(RouteCollection $routes) {
         $stub = $this->files->get(__DIR__ . '/stubs/routes.stub');
         return str_replace('{{routes}}', base64_encode(serialize($routes)), $stub);

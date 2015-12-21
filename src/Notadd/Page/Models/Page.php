@@ -28,10 +28,18 @@ class Page extends Model {
         'order_id',
         'view_count',
     ];
+    /**
+     * @return int
+     */
     public function countSubPages() {
         $count = parent::whereParentId($this->attributes['id'])->count();
         return $count ? $count : 0;
     }
+    /**
+     * @param $parent_id
+     * @param $crumb
+     * @return mixed
+     */
     public static function getCrumbMenu($parent_id, &$crumb) {
         if($parent_id == 0) {
             return $crumb;
@@ -43,15 +51,24 @@ class Page extends Model {
             }
         }
     }
+    /**
+     * @return static
+     */
     public function getTemplateList() {
         $templates = Collection::make();
         $templates->put('default::page.default', '默认模板');
         static::$dispatcher->fire(new GetTemplateList($templates));
         return $templates;
     }
+    /**
+     * @return bool
+     */
     public function hasParent() {
         return $this->getAttribute('parent_id') && parent::whereId($this->getAttribute('parent_id'))->count();
     }
+    /**
+     * @return \Notadd\Foundation\Database\Eloquent\Relations\BelongsTo
+     */
     public function parent() {
         return $this->belongsTo(Page::class, 'parent_id');
     }

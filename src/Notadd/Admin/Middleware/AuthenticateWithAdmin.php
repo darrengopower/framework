@@ -10,7 +10,6 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 class AuthenticateWithAdmin {
     /**
-     * The Guard implementation.
      * @var Guard
      */
     protected $auth;
@@ -21,7 +20,6 @@ class AuthenticateWithAdmin {
         $this->auth = $auth;
     }
     /**
-     * Handle an incoming request.
      * @param \Illuminate\Http\Request $request
      * @param \Closure $next
      * @return mixed

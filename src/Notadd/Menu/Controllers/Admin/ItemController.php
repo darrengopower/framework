@@ -14,7 +14,7 @@ use Notadd\Menu\Requests\MenuCreateRequest;
 class ItemController extends AbstractAdminController {
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id) {
         $menu = Menu::findOrFail($id);
@@ -23,7 +23,7 @@ class ItemController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($id) {
         $crumb = [];
@@ -35,7 +35,7 @@ class ItemController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Contracts\View\View
      */
     public function show($id) {
         $crumb = [];
@@ -51,7 +51,7 @@ class ItemController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function status($id) {
         $item = Menu::findOrFail($id);
@@ -60,7 +60,7 @@ class ItemController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Contracts\View\View
      */
     public function sort($id) {
         $crumb = [];
@@ -75,8 +75,8 @@ class ItemController extends AbstractAdminController {
     }
     /**
      * @param $id
-     * @param Request $request
-     * @return mixed
+     * @param \Notadd\Menu\Controllers\Admin\Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function sorting($id, Request $request) {
         if(is_array($request->get('order')) && $request->get('order')) {
@@ -90,8 +90,8 @@ class ItemController extends AbstractAdminController {
         return $this->redirect->back();
     }
     /**
-     * @param MenuCreateRequest $request
-     * @return mixed
+     * @param \Notadd\Menu\Requests\MenuCreateRequest $request
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function store(MenuCreateRequest $request) {
         $menu = new Menu();
@@ -102,9 +102,9 @@ class ItemController extends AbstractAdminController {
         }
     }
     /**
-     * @param MenuCreateRequest $request
+     * @param \Notadd\Menu\Requests\MenuCreateRequest $request
      * @param $id
-     * @return mixed
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function update(MenuCreateRequest $request, $id) {
         $menu = Menu::findOrFail($id);

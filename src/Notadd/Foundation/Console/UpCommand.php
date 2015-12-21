@@ -7,8 +7,17 @@
  */
 namespace Notadd\Foundation\Console;
 class UpCommand extends Command {
+    /**
+     * @var string
+     */
     protected $name = 'up';
+    /**
+     * @var string
+     */
     protected $description = 'Bring the application out of maintenance mode';
+    /**
+     * @return void
+     */
     public function fire() {
         @unlink($this->notadd->storagePath() . '/framework/down');
         $this->info('Application is now live.');

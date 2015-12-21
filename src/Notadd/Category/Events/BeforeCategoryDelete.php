@@ -9,12 +9,25 @@ namespace Notadd\Category\Events;
 use Illuminate\Contracts\Foundation\Application;
 use Notadd\Category\Models\Category;
 class BeforeCategoryDelete {
-    private $app;
+    /**
+     * @var \Illuminate\Contracts\Foundation\Application
+     */
+    private $application;
+    /**
+     * @var \Notadd\Category\Models\Category
+     */
     private $category;
-    public function __construct(Application $app, Category $category) {
-        $this->app = $app;
+    /**
+     * @param \Illuminate\Contracts\Foundation\Application $application
+     * @param \Notadd\Category\Models\Category $category
+     */
+    public function __construct(Application $application, Category $category) {
+        $this->application = $application;
         $this->category = $category;
     }
+    /**
+     * @return \Notadd\Category\Models\Category
+     */
     public function getCategory() {
         return $this->category;
     }

@@ -8,13 +8,26 @@
 namespace Notadd\Foundation\Console;
 use Illuminate\Filesystem\Filesystem;
 class ConfigClearCommand extends Command {
+    /**
+     * @var string
+     */
     protected $name = 'config:clear';
+    /**
+     * @var string
+     */
     protected $description = 'Remove the configuration cache file';
     protected $files;
+    /**
+     * ConfigClearCommand constructor.
+     * @param \Illuminate\Filesystem\Filesystem $files
+     */
     public function __construct(Filesystem $files) {
         parent::__construct();
         $this->files = $files;
     }
+    /**
+     * @return void
+     */
     public function fire() {
         $this->files->delete($this->notadd->getCachedConfigPath());
         $this->info('Configuration cache cleared!');

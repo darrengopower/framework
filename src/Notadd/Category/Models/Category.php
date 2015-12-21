@@ -32,6 +32,9 @@ class Category extends Model {
         'extend_id',
         'extend_type',
     ];
+    /**
+     * @var string
+     */
     protected $showTemplate = 'default::category.show';
     /**
      * @var array
@@ -90,6 +93,10 @@ class Category extends Model {
             $collections = $collections->merge($data);
         }
     }
+    /**
+     * @param string $key
+     * @return mixed|static
+     */
     public function getAdminTemplate($key = '') {
         $templates = Collection::make();
         $templates->put('edit', 'admin::content.category.edit');
@@ -100,6 +107,10 @@ class Category extends Model {
             return $templates;
         }
     }
+    /**
+     * @param string $key
+     * @return mixed|static
+     */
     public function getArticleTemplate($key = '') {
         $templates = Collection::make();
         $templates->put('create', 'admin::content.article.create');
@@ -112,9 +123,15 @@ class Category extends Model {
             return $templates;
         }
     }
+    /**
+     * @return string
+     */
     public function getShowTemplate() {
         return $this->showTemplate;
     }
+    /**
+     * @param $template
+     */
     public function setShowTemplate($template) {
         $this->showTemplate = $template;
     }
@@ -127,6 +144,9 @@ class Category extends Model {
         static::$dispatcher->fire(new GetCategoryTypes($this, $types));
         return $types;
     }
+    /**
+     * @return bool
+     */
     public function hasParent() {
         return $this->getAttribute('parent_id') && parent::whereId($this->getAttribute('parent_id'))->count();
     }

@@ -10,16 +10,16 @@ use Illuminate\Support\Collection;
 use Notadd\Category\Models\Category;
 class GetCategoryTypes {
     /**
-     * @var Category
+     * @var \Notadd\Category\Models\Category
      */
     private $category;
     /**
-     * @var Collection
+     * @var \Illuminate\Support\Collection
      */
     private $types;
     /**
-     * @param Category $category
-     * @param Collection $types
+     * @param \Notadd\Category\Models\Category $category
+     * @param \Illuminate\Support\Collection $types
      */
     public function __construct(Category $category, Collection $types) {
         $this->category = $category;

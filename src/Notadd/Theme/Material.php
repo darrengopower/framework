@@ -11,6 +11,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Notadd\Theme\Contracts\Material as MaterialContract;
 class Material implements MaterialContract {
+    protected $compiler;
     /**
      * @var \Illuminate\Support\Collection
      */
@@ -68,10 +69,16 @@ class Material implements MaterialContract {
      */
     protected $request;
     /**
+     * @var \Notadd\Theme\Factory
+     */
+    protected $theme;
+    /**
+     * @param \Notadd\Theme\Compiler $compiler
      * @param \Notadd\Theme\FileFinder $finder
      * @param \Illuminate\Http\Request $request
      */
-    public function __construct(FileFinder $finder, Request $request) {
+    public function __construct(Compiler $compiler, FileFinder $finder, Request $request) {
+        $this->compiler = $compiler;
         $this->defaultCssMaterial = new Collection();
         $this->defaultJsMaterial = new Collection();
         $this->defaultLessMaterial = new Collection();
@@ -87,19 +94,53 @@ class Material implements MaterialContract {
         $this->layoutSassMaterial = new Collection();
         $this->request = $request;
     }
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     protected function collectingStyleMaterial() {
-        $cssMaterials = $this->layoutCssMaterial->merge($this->defaultCssMaterial)->merge($this->extendCssMaterial);
-        $lessMaterials = $this->layoutLessMaterial->merge($this->defaultLessMaterial)->merge($this->extendLessMaterial);
-        $sassMaterials = $this->layoutSassMaterial->merge($this->defaultSassMaterial)->merge($this->extendSassMaterial);
-        dd($lessMaterials);
+        $layout = $this->layoutLessMaterial->merge($this->layoutSassMaterial)->merge($this->layoutCssMaterial);
+        $default = $this->defaultLessMaterial->merge($this->defaultSassMaterial)->merge($this->defaultCssMaterial);
+        $extend = $this->extendLessMaterial->merge($this->extendSassMaterial)->merge($this->extendCssMaterial);
+        $layout->each(function($value) {
+            $path = $this->findPath($value);
+            $type = $this->findType($value);
+            $this->compileStyle($path, $type);
+        });
+    }
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    protected function collectingScriptMaterial() {
+        $jsMaterials = $this->layoutJsMaterial->merge($this->defaultJsMaterial)->merge($this->extendJsMaterial);
+    }
+    /**
+     * @param string $file
+     * @param string $type
+     * @return string
+     */
+    protected function compileStyle($file, $type) {
+        $content = '';
+        if($file !== false) {
+            switch($type) {
+                case 'css':
+                    $content = $this->compiler->compileCss($file);
+                    break;
+                case 'less':
+                    $content = $this->compiler->compileLess($file);
+                    break;
+                case 'sass':
+                    $content = $this->compiler->compileSass($file);
+                    break;
+            }
+        }
+        return $content;
     }
     /**
      * @param $path
      * @return string
      */
     public function findHint($path) {
-        $length = strpos($path, '::');
-        return Str::substr($path, 0, $length);
+        return Str::substr($path, 0, strpos($path, '::'));
     }
     /**
      * @param $path
@@ -109,6 +150,44 @@ class Material implements MaterialContract {
         $first = strpos($path, '.') + 1;
         $second = strpos($path, '.', $first);
         return str_replace(Str::substr($path, $second), '', Str::substr($path, $first));
+    }
+    /**
+     * @param $path
+     * @return bool|string
+     */
+    protected function findPath($path) {
+        $hint = $this->findHint($path);
+        $theme = $this->theme->getTheme($hint);
+        $type = $this->findType($path);
+        $folder = '';
+        switch($type) {
+            case 'css':
+                $folder = $theme->getCssPath();
+                break;
+            case 'js':
+                $folder = $theme->getJsPath();
+                break;
+            case 'less':
+                $folder = $theme->getLessPath();
+                break;
+            case 'sass':
+                $folder = $theme->getSassPath();
+                break;
+        }
+        $location = $this->findLocation($path);
+        $file = $folder . DIRECTORY_SEPARATOR . str_replace('.', DIRECTORY_SEPARATOR, str_replace($hint . '::' . $type . '.' . $location . '.', '', $path)) . '.' . $type;
+        if(file_exists($file)) {
+            return $file;
+        } else {
+            return false;
+        }
+    }
+    /**
+     * @param $path
+     * @return string
+     */
+    protected function findType($path) {
+        return str_replace(Str::substr($path, strpos($path, '.')), '', Str::substr($path, strpos($path, '::') + 2));
     }
     /**
      * @return string
@@ -179,5 +258,11 @@ class Material implements MaterialContract {
                 $this->layoutSassMaterial->push($path);
                 break;
         }
+    }
+    /**
+     * @param \Notadd\Theme\Factory $theme
+     */
+    public function setTheme($theme) {
+        $this->theme = $theme;
     }
 }

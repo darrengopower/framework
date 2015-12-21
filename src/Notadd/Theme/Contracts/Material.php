@@ -7,13 +7,15 @@
  */
 namespace Notadd\Theme\Contracts;
 use Illuminate\Http\Request;
+use Notadd\Theme\Compiler;
 use Notadd\Theme\FileFinder as ThemeFileFinder;
 interface Material {
     /**
+     * @param \Notadd\Theme\Compiler $compiler
      * @param \Notadd\Theme\FileFinder $finder
      * @param \Illuminate\Http\Request $request
      */
-    public function __construct(ThemeFileFinder $finder, Request $request);
+    public function __construct(Compiler $compiler, ThemeFileFinder $finder, Request $request);
     /**
      * @return string
      */

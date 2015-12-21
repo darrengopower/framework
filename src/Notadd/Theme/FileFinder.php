@@ -43,7 +43,7 @@ class FileFinder implements FileFinderContract {
     /**
      * @return array
      */
-    protected function getViewHints() {
+    public function getViewHints() {
         return $this->view->getFinder()->getHints();
     }
 }

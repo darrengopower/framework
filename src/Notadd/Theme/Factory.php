@@ -50,6 +50,7 @@ class Factory implements FactoryContract {
         $this->files = $files;
         $this->finder = $finder;
         $this->material = $material;
+        $this->material->setTheme($this);
         $this->buildThemeList();
     }
     /**
@@ -67,6 +68,7 @@ class Factory implements FactoryContract {
         $list->put('default', $default);
         $admin = new Theme('后台模板', 'admin');
         $admin->useCssPath(realpath($this->application->frameworkPath() . '/less'));
+        $admin->useLessPath(realpath($this->application->frameworkPath() . '/less'));
         $admin->useFontPath(realpath($this->application->frameworkPath() . '/fonts'));
         $admin->useImagePath(realpath($this->application->frameworkPath() . '/images/admin'));
         $admin->useJsPath(realpath($this->application->frameworkPath() . '/js'));

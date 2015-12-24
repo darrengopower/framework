@@ -6,6 +6,7 @@
  * @datetime 2015-12-21 15:55
  */
 namespace Notadd\Theme;
+use Illuminate\Contracts\Foundation\Application;
 use Leafo\ScssPhp\Compiler as SassCompiler;
 use Less_Parser as LessCompiler;
 /**
@@ -27,10 +28,12 @@ class Compiler {
     protected $sass;
     /**
      * Compiler constructor.
+     * @param \Illuminate\Contracts\Foundation\Application $application
      */
-    public function __construct() {
+    public function __construct(Application $application) {
         $this->js = '';
         $this->less = new LessCompiler([
+            'cache_dir' => $application->storagePath() . DIRECTORY_SEPARATOR . 'less',
             'compress' => true,
             'strictMath' => true
         ]);

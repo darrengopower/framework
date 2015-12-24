@@ -6,18 +6,26 @@
  * @datetime 2015-12-20 15:42
  */
 namespace Notadd\Theme;
+use Carbon\Carbon;
+use Illuminate\Cache\CacheManager;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Notadd\Theme\Contracts\Material as MaterialContract;
 class Material implements MaterialContract {
     /**
-     * @var \Notadd\Foundation\Application
+     * @var \Illuminate\Contracts\Foundation\Application
      */
     protected $application;
+    /**
+     * @var \Illuminate\Cache\CacheManager
+     */
+    protected $cache;
     /**
      * @var \Notadd\Theme\Compiler
      */
@@ -38,6 +46,10 @@ class Material implements MaterialContract {
      * @var \Illuminate\Support\Collection
      */
     protected $defaultSassMaterial;
+    /**
+     * @var \Illuminate\Events\Dispatcher
+     */
+    protected $dispatcher;
     /**
      * @var \Illuminate\Support\Collection
      */
@@ -91,20 +103,25 @@ class Material implements MaterialContract {
      */
     protected $url;
     /**
-     * @param Application $application
+     * Material constructor.
+     * @param \Illuminate\Contracts\Foundation\Application $application
+     * @param \Illuminate\Cache\CacheManager $cache
      * @param \Notadd\Theme\Compiler $compiler
+     * @param \Illuminate\Events\Dispatcher $dispatcher
      * @param \Illuminate\Filesystem\Filesystem $files
      * @param \Notadd\Theme\FileFinder $finder
      * @param \Illuminate\Http\Request $request
      * @param \Illuminate\Routing\UrlGenerator $url
      */
-    public function __construct(Application $application, Compiler $compiler, Filesystem $files, FileFinder $finder, Request $request, UrlGenerator $url) {
+    public function __construct(Application $application, CacheManager $cache, Compiler $compiler, Dispatcher $dispatcher, Filesystem $files, FileFinder $finder, Request $request, UrlGenerator $url) {
         $this->application = $application;
+        $this->cache = $cache;
         $this->compiler = $compiler;
         $this->defaultCssMaterial = new Collection();
         $this->defaultJsMaterial = new Collection();
         $this->defaultLessMaterial = new Collection();
         $this->defaultSassMaterial = new Collection();
+        $this->dispatcher = $dispatcher;
         $this->extendCssMaterial = new Collection();
         $this->extendJsMaterial = new Collection();
         $this->extendLessMaterial = new Collection();
@@ -122,25 +139,32 @@ class Material implements MaterialContract {
      * @return \Illuminate\Support\Collection
      */
     protected function compileStyleMaterial() {
-        $layout = $this->layoutLessMaterial->merge($this->layoutSassMaterial)->merge($this->layoutCssMaterial);
-        $default = $this->defaultLessMaterial->merge($this->defaultSassMaterial)->merge($this->defaultCssMaterial);
-        $extend = $this->extendLessMaterial->merge($this->extendSassMaterial)->merge($this->extendCssMaterial);
-        $files = new Collection();
-        $materials = new Collection();
-        $layout->merge($default)->merge($extend)->each(function($value) use($files) {
-            $files->push($this->findPath($value));
-        });
         $path = md5($this->request->path());
-        $dictionary = new Collection();
-        $dictionary->push($this->application->publicPath());
-        $dictionary->push('cache');
-        $dictionary = $this->pathSplit($path, '2,2,2,2,2,2', $dictionary);
-        $dictionary = $dictionary->implode(DIRECTORY_SEPARATOR);
-        if(!$this->files->isDirectory($dictionary)) {
-            $this->files->makeDirectory($dictionary, '0755', true);
-        }
-        $file = $dictionary . DIRECTORY_SEPARATOR . Str::substr($path, 12, 20) . '.css';
-        file_put_contents($file, $this->compileStyle($files));
+        $this->dispatcher->listen('kernel.handled', function() use($path) {
+            $dictionary = new Collection();
+            $dictionary->push($this->application->publicPath());
+            $dictionary->push('cache');
+            $dictionary = $this->pathSplit($path, '2,2,2,2,2,2', $dictionary);
+            $dictionary = $dictionary->implode(DIRECTORY_SEPARATOR);
+            $file = $dictionary . DIRECTORY_SEPARATOR . Str::substr($path, 12, 20) . '.css';
+            $key = 'cache.style.' . $path;
+            if(!$this->files->exists($file) || (!$this->cache->has($key) && $this->application->inDebugMode())) {
+                if(!$this->files->isDirectory($dictionary)) {
+                    $this->files->makeDirectory($dictionary, '0755', true);
+                }
+                $layout = $this->layoutLessMaterial->merge($this->layoutSassMaterial)->merge($this->layoutCssMaterial);
+                $default = $this->defaultLessMaterial->merge($this->defaultSassMaterial)->merge($this->defaultCssMaterial);
+                $extend = $this->extendLessMaterial->merge($this->extendSassMaterial)->merge($this->extendCssMaterial);
+                $files = new Collection();
+                $layout->merge($default)->merge($extend)->each(function($value) use($files) {
+                    $files->push($this->findPath($value));
+                });
+                $content = $this->compileStyle($files);
+                $expires = Carbon::now()->addMinutes(10);
+                $this->cache->put($key, $content, $expires);
+                file_put_contents($file, $content);
+            }
+        });
         return $this->pathSplit($path, '2,2,2,2,2,2,20', Collection::make([
             'cache'
         ]))->implode('/') . '.css';
@@ -148,8 +172,40 @@ class Material implements MaterialContract {
     /**
      * @return \Illuminate\Support\Collection
      */
-    protected function collectingScriptMaterial() {
-        $jsMaterials = $this->layoutJsMaterial->merge($this->defaultJsMaterial)->merge($this->extendJsMaterial);
+    protected function compileScriptMaterial() {
+        $path = md5($this->request->path());
+        $this->dispatcher->listen('kernel.handled', function() use($path) {
+            $dictionary = new Collection();
+            $dictionary->push($this->application->publicPath());
+            $dictionary->push('cache');
+            $dictionary = $this->pathSplit($path, '2,2,2,2,2,2', $dictionary);
+            $dictionary = $dictionary->implode(DIRECTORY_SEPARATOR);
+            if(!$this->files->isDirectory($dictionary)) {
+                $this->files->makeDirectory($dictionary, '0755', true);
+            }
+            $file = $dictionary . DIRECTORY_SEPARATOR . Str::substr($path, 12, 20) . '.js';
+            $key = 'cache.script.' . $path;
+            if(!$this->files->exists($file) || (!$this->cache->has($key) && $this->application->inDebugMode())) {
+                $files = new Collection();
+                $this->layoutJsMaterial->merge($this->defaultJsMaterial)->merge($this->extendJsMaterial)->each(function($value) use($files) {
+                    $files->push($this->findPath($value));
+                });
+                $content = $this->compileScript($files);
+                $expires = Carbon::now()->addMinutes(10);
+                $this->cache->put($key, $content, $expires);
+                file_put_contents($file, $content);
+            }
+        });
+        return $this->pathSplit($path, '2,2,2,2,2,2,20', Collection::make([
+            'cache'
+        ]))->implode('/') . '.css';
+    }
+    /**
+     * @param \Illuminate\Support\Collection $files
+     * @return string
+     */
+    protected function compileScript($files) {
+        return $this->compiler->compileJs($files);
     }
     /**
      * @param \Illuminate\Support\Collection $files
@@ -223,7 +279,8 @@ class Material implements MaterialContract {
      * @return string
      */
     public function outputJsInBlade() {
-        return '';
+        $path = $this->compileScriptMaterial();
+        return '<script src="' . $this->url->asset($path) . '"></script>';
     }
     /**
      * @param string $path
@@ -263,6 +320,17 @@ class Material implements MaterialContract {
      * @return void
      */
     public function registerJsMaterial($path) {
+        switch($this->findLocation($path)) {
+            case 'default':
+                $this->defaultJsMaterial->push($path);
+                break;
+            case 'extend':
+                $this->extendJsMaterial->push($path);
+                break;
+            case 'layout':
+                $this->layoutJsMaterial->push($path);
+                break;
+        }
     }
     /**
      * @param string $path

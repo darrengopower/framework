@@ -7,8 +7,13 @@
  */
 namespace Notadd\Setting;
 use Exception;
+use Illuminate\Cache\CacheManager;
 use Illuminate\Contracts\Foundation\Application;
 use Notadd\Setting\Models\Setting;
+/**
+ * Class Factory
+ * @package Notadd\Setting
+ */
 class Factory {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
@@ -22,9 +27,14 @@ class Factory {
      * @var string
      */
     private $cache_key = 'notadd_setting';
-    public function __construct(Application $application) {
+    /**
+     * Factory constructor.
+     * @param \Illuminate\Contracts\Foundation\Application $application
+     * @param \Illuminate\Cache\CacheManager $cache
+     */
+    public function __construct(Application $application, CacheManager $cache) {
         $this->application = $application;
-        $this->cache = $application->make('cache');
+        $this->cache = $cache;
     }
     /**
      * @param $key

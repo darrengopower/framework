@@ -179,7 +179,12 @@
 <script src="{{ asset('themes/admin/js/jquery-2.1.3.min.js') }}"></script>
 <script src="{{ asset('themes/admin/js/perfect-scrollbar.jquery.min.js') }}"></script>
 <script src="{{ asset('themes/admin/js/bootstrap.min.js') }}"></script>
+@js('admin::js.layout.jquery.jquery')
+@js('admin::js.layout.perfect-scrollbar.jquery')
+@js('admin::js.layout.bootstrap.bootstrap')
+@js('admin::js.default.admin.app')
 @yield('admin-js')
 <script src="{{ asset('themes/admin/js/app.js') }}"></script>
+@output('js')
 </body>
 </html>

@@ -6,16 +6,26 @@
  * @datetime 2015-12-20 15:39
  */
 namespace Notadd\Theme\Contracts;
+use Illuminate\Cache\CacheManager;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
+use Illuminate\Routing\UrlGenerator;
 use Notadd\Theme\Compiler;
 use Notadd\Theme\FileFinder as ThemeFileFinder;
 interface Material {
     /**
+     * @param \Illuminate\Contracts\Foundation\Application $application
+     * @param \Illuminate\Cache\CacheManager $cache
      * @param \Notadd\Theme\Compiler $compiler
+     * @param \Illuminate\Events\Dispatcher $dispatcher
+     * @param \Illuminate\Filesystem\Filesystem $files
      * @param \Notadd\Theme\FileFinder $finder
      * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Routing\UrlGenerator $url
      */
-    public function __construct(Compiler $compiler, ThemeFileFinder $finder, Request $request);
+    public function __construct(Application $application, CacheManager $cache, Compiler $compiler, Dispatcher $dispatcher, Filesystem $files, ThemeFileFinder $finder, Request $request, UrlGenerator $url);
     /**
      * @return string
      */

@@ -7,14 +7,10 @@
     <meta name="author" content="iBenchu.net">
     <meta name="keywords" content="iBenchu">
     <meta name="description" content="iBenchu CMS内容管理系统">
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800">
-    <link rel="stylesheet" href="{{ asset('themes/admin/css/font-awesome.css') }}">
-    <link rel="stylesheet" href="{{ asset('themes/admin/css/bootstrap.min.css') }}">
     @css('admin::less.layout.bootstrap.bootstrap')
+    @css('admin::less.layout.font-awesome.font-awesome')
     @css('admin::css.default.admin.main')
-    @css('admin::css.extend.admin.main')
     @yield('admin-css')
-    <link rel="stylesheet" href="{{ asset('themes/admin/css/main.css') }}">
     @output('css')
 </head>
 <body class="app {{ $admin_theme }}">
@@ -183,7 +179,12 @@
 <script src="{{ asset('themes/admin/js/jquery-2.1.3.min.js') }}"></script>
 <script src="{{ asset('themes/admin/js/perfect-scrollbar.jquery.min.js') }}"></script>
 <script src="{{ asset('themes/admin/js/bootstrap.min.js') }}"></script>
+@js('admin::js.layout.jquery.jquery')
+@js('admin::js.layout.perfect-scrollbar.jquery')
+@js('admin::js.layout.bootstrap.bootstrap')
+@js('admin::js.default.admin.app')
 @yield('admin-js')
 <script src="{{ asset('themes/admin/js/app.js') }}"></script>
+@output('js')
 </body>
 </html>

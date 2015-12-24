@@ -555,6 +555,12 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         return file_exists($this->storagePath() . '/framework/notadd/installed');
     }
     /**
+     * @return bool
+     */
+    public function inDebugMode() {
+        return file_exists($this->storagePath() . '/framework/notadd/debug');
+    }
+    /**
      * @param int $code
      * @param string $message
      * @param array $headers

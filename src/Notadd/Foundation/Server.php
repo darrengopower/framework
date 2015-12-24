@@ -96,7 +96,7 @@ class Server {
                 'locale' => 'en',
                 'fallback_locale' => 'en',
                 'key' => 'GERojpSdTnQQbr77s5iXIa1c7Ne7NO4d',
-                'cipher' => MCRYPT_RIJNDAEL_128,
+                'cipher' => 'AES-256-CBC',
                 'log' => 'daily'
             ],
             'auth' => [

@@ -88,6 +88,7 @@ class AdminServiceProvider extends ServiceProvider {
                         'active' => [
                             'admin/site*',
                             'admin/seo*',
+                            'admin/third',
                         ],
                         'icon'  => 'fa-cogs',
                         'sub' => [
@@ -101,6 +102,11 @@ class AdminServiceProvider extends ServiceProvider {
                                 'active' => 'admin/seo*',
                                 'url' => 'admin/seo',
                             ],
+                            [
+                                'title' => '第三方登录',
+                                'active' => 'admin/third*',
+                                'url' => 'admin/third',
+                            ]
                         ]
                     ],
                     [

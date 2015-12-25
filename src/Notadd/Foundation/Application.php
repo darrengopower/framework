@@ -7,8 +7,8 @@
  */
 namespace Notadd\Foundation;
 use Closure;
+use Notadd\Auth\AuthServiceProvider;
 use RuntimeException;
-use Illuminate\Auth\AuthServiceProvider;
 use Illuminate\Auth\Passwords\PasswordResetServiceProvider;
 use Illuminate\Broadcasting\BroadcastServiceProvider;
 use Illuminate\Bus\BusServiceProvider;

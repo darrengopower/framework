@@ -14,7 +14,12 @@ class AuthController extends AbstractAdminController {
      * @var array
      */
     protected $middleware = [
-        'guest.admin' => ['except' => 'getLogout']
+        'guest.admin' => [
+            'except' => [
+                'getLogout',
+                'getPassword'
+            ]
+        ]
     ];
     /**
      * @var string
@@ -44,6 +49,9 @@ class AuthController extends AbstractAdminController {
      */
     public function getLogin() {
         return $this->view('auth.login');
+    }
+    public function getPassword() {
+        return $this->view('auth.password');
     }
     /**
      * @return \Illuminate\Contracts\View\View

@@ -81,11 +81,11 @@
             -->
             <li class="dropdown">
                 <a href class="user-profile" data-toggle="dropdown">
-                    <img src="http://my.ruanmei.com/images/upload/avatars/000/01/58/86_60.jpg" alt="N">
+                    <img src="{{ asset('static/admin/avatar.jpg') }}" alt="N">
                 </a>
                 <div class="panel panel-default dropdown-menu">
                     <div class="panel-footer clearfix">
-                        <a href="{{ url() }}" class="btn btn-warning btn-sm left">重置密码</a>
+                        <a href="{{ url('admin/password') }}" class="btn btn-warning btn-sm left">重置密码</a>
                         <a href="{{ url('admin/logout') }}" class="btn btn-danger btn-sm right">退出登陆</a>
                     </div>
                 </div>

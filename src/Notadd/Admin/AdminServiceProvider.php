@@ -29,6 +29,7 @@ class AdminServiceProvider extends ServiceProvider {
             });
             $this->getRouter()->group(['middleware' => 'auth.admin', 'prefix' => 'admin'], function () {
                 $this->getRouter()->get('/', 'AdminController@init');
+                $this->getRouter()->get('password', 'AuthController@getPassword');
             });
         });
         if($this->getRequest()->is('admin*')) {

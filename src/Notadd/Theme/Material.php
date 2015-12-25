@@ -139,33 +139,33 @@ class Material implements MaterialContract {
      * @return \Illuminate\Support\Collection
      */
     protected function compileStyleMaterial() {
-        $path = md5($this->request->path());
-        $this->dispatcher->listen('kernel.handled', function() use($path) {
+        $layout = $this->layoutLessMaterial->merge($this->layoutSassMaterial)->merge($this->layoutCssMaterial);
+        $default = $this->defaultLessMaterial->merge($this->defaultSassMaterial)->merge($this->defaultCssMaterial);
+        $extend = $this->extendLessMaterial->merge($this->extendSassMaterial)->merge($this->extendCssMaterial);
+        $files = new Collection();
+        $layout->merge($default)->merge($extend)->each(function($value) use($files) {
+            $files->push($this->findPath($value));
+        });
+        $code = md5($files);
+        $this->dispatcher->listen('kernel.handled', function() use($code, $files) {
             $dictionary = new Collection();
             $dictionary->push($this->application->publicPath());
             $dictionary->push('cache');
-            $dictionary = $this->pathSplit($path, '2,2,2,2,2,2', $dictionary);
+            $dictionary = $this->pathSplit($code, '2,2,2,2,2,2', $dictionary);
             $dictionary = $dictionary->implode(DIRECTORY_SEPARATOR);
-            $file = $dictionary . DIRECTORY_SEPARATOR . Str::substr($path, 12, 20) . '.css';
-            $key = 'cache.style.' . $path;
+            $file = $dictionary . DIRECTORY_SEPARATOR . Str::substr($code, 12, 20) . '.css';
+            $key = 'cache.style.' . $code;
             if(!$this->files->exists($file) || (!$this->cache->has($key) && $this->application->inDebugMode())) {
                 if(!$this->files->isDirectory($dictionary)) {
                     $this->files->makeDirectory($dictionary, '0755', true);
                 }
-                $layout = $this->layoutLessMaterial->merge($this->layoutSassMaterial)->merge($this->layoutCssMaterial);
-                $default = $this->defaultLessMaterial->merge($this->defaultSassMaterial)->merge($this->defaultCssMaterial);
-                $extend = $this->extendLessMaterial->merge($this->extendSassMaterial)->merge($this->extendCssMaterial);
-                $files = new Collection();
-                $layout->merge($default)->merge($extend)->each(function($value) use($files) {
-                    $files->push($this->findPath($value));
-                });
                 $content = $this->compileStyle($files);
                 $expires = Carbon::now()->addMinutes(10);
                 $this->cache->put($key, $content, $expires);
                 file_put_contents($file, $content);
             }
         });
-        return $this->pathSplit($path, '2,2,2,2,2,2,20', Collection::make([
+        return $this->pathSplit($code, '2,2,2,2,2,2,20', Collection::make([
             'cache'
         ]))->implode('/') . '.css';
     }
@@ -173,32 +173,32 @@ class Material implements MaterialContract {
      * @return \Illuminate\Support\Collection
      */
     protected function compileScriptMaterial() {
-        $path = md5($this->request->path());
-        $this->dispatcher->listen('kernel.handled', function() use($path) {
+        $files = new Collection();
+        $this->layoutJsMaterial->merge($this->defaultJsMaterial)->merge($this->extendJsMaterial)->each(function($value) use($files) {
+            $files->push($this->findPath($value));
+        });
+        $code = md5($files);
+        $this->dispatcher->listen('kernel.handled', function() use($code, $files) {
             $dictionary = new Collection();
             $dictionary->push($this->application->publicPath());
             $dictionary->push('cache');
-            $dictionary = $this->pathSplit($path, '2,2,2,2,2,2', $dictionary);
+            $dictionary = $this->pathSplit($code, '2,2,2,2,2,2', $dictionary);
             $dictionary = $dictionary->implode(DIRECTORY_SEPARATOR);
             if(!$this->files->isDirectory($dictionary)) {
                 $this->files->makeDirectory($dictionary, '0755', true);
             }
-            $file = $dictionary . DIRECTORY_SEPARATOR . Str::substr($path, 12, 20) . '.js';
-            $key = 'cache.script.' . $path;
+            $file = $dictionary . DIRECTORY_SEPARATOR . Str::substr($code, 12, 20) . '.js';
+            $key = 'cache.script.' . $code;
             if(!$this->files->exists($file) || (!$this->cache->has($key) && $this->application->inDebugMode())) {
-                $files = new Collection();
-                $this->layoutJsMaterial->merge($this->defaultJsMaterial)->merge($this->extendJsMaterial)->each(function($value) use($files) {
-                    $files->push($this->findPath($value));
-                });
                 $content = $this->compileScript($files);
                 $expires = Carbon::now()->addMinutes(10);
                 $this->cache->put($key, $content, $expires);
                 file_put_contents($file, $content);
             }
         });
-        return $this->pathSplit($path, '2,2,2,2,2,2,20', Collection::make([
+        return $this->pathSplit($code, '2,2,2,2,2,2,20', Collection::make([
             'cache'
-        ]))->implode('/') . '.css';
+        ]))->implode('/') . '.js';
     }
     /**
      * @param \Illuminate\Support\Collection $files

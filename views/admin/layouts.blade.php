@@ -25,6 +25,7 @@
             <li>
                 <a href="{{ url() }}" target="_blank"> <i class="fa fa-external-link"></i> </a>
             </li>
+            <!--
             <li>
                 <a href="#" data-toggle="sidebar"> <i class="fa fa-tasks"></i> </a>
                 <div class="floating-sidebar">
@@ -77,11 +78,17 @@
                     </div>
                 </div>
             </li>
+            -->
             <li class="dropdown">
-                <a href class="user-profile dropdown-toggle">
-                    <img src="{{ asset('uploads/image/20150513/1431511494149062.jpg') }}" alt="admin-pic">
+                <a href class="user-profile" data-toggle="dropdown">
+                    <img src="http://my.ruanmei.com/images/upload/avatars/000/01/58/86_60.jpg" alt="N">
                 </a>
-                <div class="panel panel-default dropdown-menu"></div>
+                <div class="panel panel-default dropdown-menu">
+                    <div class="panel-footer clearfix">
+                        <a href="{{ url() }}" class="btn btn-warning btn-sm left">重置密码</a>
+                        <a href="{{ url('admin/logout') }}" class="btn btn-danger btn-sm right">退出登陆</a>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
@@ -176,15 +183,11 @@
         <p class="right">{{ config('app.version') }}</p>
     </footer>
 </div>
-<script src="{{ asset('themes/admin/js/jquery-2.1.3.min.js') }}"></script>
-<script src="{{ asset('themes/admin/js/perfect-scrollbar.jquery.min.js') }}"></script>
-<script src="{{ asset('themes/admin/js/bootstrap.min.js') }}"></script>
 @js('admin::js.layout.jquery.jquery')
 @js('admin::js.layout.perfect-scrollbar.jquery')
 @js('admin::js.layout.bootstrap.bootstrap')
-@js('admin::js.default.admin.app')
 @yield('admin-js')
-<script src="{{ asset('themes/admin/js/app.js') }}"></script>
+@js('admin::js.default.admin.app')
 @output('js')
 </body>
 </html>

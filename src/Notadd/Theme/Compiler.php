@@ -9,6 +9,7 @@ namespace Notadd\Theme;
 use Illuminate\Contracts\Foundation\Application;
 use Leafo\ScssPhp\Compiler as SassCompiler;
 use Less_Parser as LessCompiler;
+use MatthiasMullie\Minify\JS as JsCompiler;
 /**
  * Class Compiler
  * @package Notadd\Theme
@@ -31,7 +32,7 @@ class Compiler {
      * @param \Illuminate\Contracts\Foundation\Application $application
      */
     public function __construct(Application $application) {
-        $this->js = '';
+        $this->js = new JsCompiler();
         $this->less = new LessCompiler([
             'cache_dir' => $application->storagePath() . DIRECTORY_SEPARATOR . 'less',
             'compress' => true,
@@ -40,11 +41,14 @@ class Compiler {
         $this->sass = new SassCompiler();
     }
     /**
-     * @param string $file
+     * @param \Illuminate\Support\Collection $files
      * @return string
      */
-    public function compileJs($file) {
-        return '';
+    public function compileJs($files) {
+        $files->each(function($value) {
+            $this->js->add($value);
+        });
+        return $this->js->execute();
     }
     /**
      * @param \Illuminate\Support\Collection $files

@@ -149,9 +149,9 @@
     </div>
 @endsection
 @section('admin-css')
-    <link rel="stylesheet" href="{{ asset('themes/admin/css/bootstrap-colorpicker.min.css') }}">
+    @css('admin::less.default.bootstrap-colorpicker')
 @endsection
 @section('admin-js')
-    <script src="{{ asset('themes/admin/js/jquery.uploadPreview.js') }}"></script>
-    <script src="{{ asset('themes/admin/js/bootstrap-colorpicker.min.js') }}"></script>
+    @js('admin::js.default.upload-preview')
+    @js('admin::js.default.bootstrap-colorpicker')
 @endsection

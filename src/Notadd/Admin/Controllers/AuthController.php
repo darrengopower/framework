@@ -16,7 +16,14 @@ class AuthController extends AbstractAdminController {
     protected $middleware = [
         'guest.admin' => ['except' => 'getLogout']
     ];
+    /**
+     * @var string
+     */
     protected $loginPath = 'admin/login';
+    /**
+     * @var string
+     */
+    protected $redirectAfterLogout = 'admin';
     /**
      * @var string
      */

@@ -28,6 +28,12 @@ class Category {
         $this->model = CategoryModel::findOrFail($id);
     }
     /**
+     * @return string
+     */
+    public function getDescription() {
+        return $this->model->getAttribute('seo_description');
+    }
+    /**
      * @return int
      */
     public function getId() {
@@ -68,6 +74,12 @@ class Category {
             $list->prepend($parent);
             $this->getLoopParent($list, $parent);
         }
+    }
+    /**
+     * @return string
+     */
+    public function getKeywords() {
+        return $this->model->getAttribute('seo_keyword');
     }
     /**
      * @return \Notadd\Category\Models\Category

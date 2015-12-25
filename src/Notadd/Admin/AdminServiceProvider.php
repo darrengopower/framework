@@ -7,11 +7,13 @@
  */
 namespace Notadd\Admin;
 use Illuminate\Support\ServiceProvider;
+use Notadd\Admin\Events\GetAdminMenu;
 use Notadd\Foundation\Traits\InjectConfigTrait;
+use Notadd\Foundation\Traits\InjectEventsTrait;
 use Notadd\Foundation\Traits\InjectRequestTrait;
 use Notadd\Foundation\Traits\InjectRouterTrait;
 class AdminServiceProvider extends ServiceProvider {
-    use InjectConfigTrait, InjectRequestTrait, InjectRouterTrait;
+    use InjectConfigTrait, InjectEventsTrait, InjectRequestTrait, InjectRouterTrait;
     /**
      * @return void
      */
@@ -32,42 +34,45 @@ class AdminServiceProvider extends ServiceProvider {
                 $this->getRouter()->get('password', 'AuthController@getPassword');
             });
         });
-        if($this->getRequest()->is('admin*')) {
-            $menu = $this->getConfig()->get('admin');
-            foreach($menu as $top_key => $top) {
-                if(isset($top['sub'])) {
-                    foreach($top['sub'] as $one_key => $one) {
-                        if(isset($one['sub'])) {
-                            $active = false;
-                            foreach((array)$one['active'] as $rule) {
-                                if($this->getRequest()->is($rule)) {
-                                    $active = true;
+        $this->getEvents()->listen('router.matched', function () {
+            $this->getEvents()->fire(new GetAdminMenu($this->app, $this->getConfig()));
+            if($this->getRequest()->is('admin*')) {
+                $menu = $this->getConfig()->get('admin');
+                foreach($menu as $top_key => $top) {
+                    if(isset($top['sub'])) {
+                        foreach($top['sub'] as $one_key => $one) {
+                            if(isset($one['sub'])) {
+                                $active = false;
+                                foreach((array)$one['active'] as $rule) {
+                                    if($this->getRequest()->is($rule)) {
+                                        $active = true;
+                                    }
                                 }
-                            }
-                            if($active) {
-                                $menu[$top_key]['sub'][$one_key]['active'] = 'open';
+                                if($active) {
+                                    $menu[$top_key]['sub'][$one_key]['active'] = 'open';
+                                } else {
+                                    $menu[$top_key]['sub'][$one_key]['active'] = '';
+                                }
                             } else {
-                                $menu[$top_key]['sub'][$one_key]['active'] = '';
-                            }
-                        } else {
-                            if($this->getRequest()->is($one['active'])) {
-                                $menu[$top_key]['sub'][$one_key]['active'] = 'active';
-                            } else {
-                                $menu[$top_key]['sub'][$one_key]['active'] = '';
+                                if($this->getRequest()->is($one['active'])) {
+                                    $menu[$top_key]['sub'][$one_key]['active'] = 'active';
+                                } else {
+                                    $menu[$top_key]['sub'][$one_key]['active'] = '';
+                                }
                             }
                         }
                     }
                 }
+                $this->getConfig()->set('admin', $menu);
             }
-            $this->getConfig()->set('admin', $menu);
-        }
+        });
     }
     /**
      * @return void
      */
     public function initAdminConfig() {
         $this->getConfig()->set('admin', [
-            [
+            'general' => [
                 'title' => '概略导航',
                 'active' => 'admin',
                 'sub' => [
@@ -79,11 +84,11 @@ class AdminServiceProvider extends ServiceProvider {
                     ]
                 ]
             ],
-            [
+            'group' => [
                 'title' => '组件导航',
                 'active' => '',
                 'sub' => [
-                    [
+                    'config' => [
                         'title' => '网站管理',
                         'active' => [
                             'admin/site*',
@@ -109,13 +114,13 @@ class AdminServiceProvider extends ServiceProvider {
                             ]
                         ]
                     ],
-                    [
+                    'menu' => [
                         'title' => '菜单管理',
                         'active' => 'admin/menu*',
                         'url'   => 'admin/menu',
                         'icon'  => 'fa-paper-plane',
                     ],
-                    [
+                    'content' => [
                         'title' => '内容管理',
                         'active' => [
                             'admin/category*',
@@ -140,14 +145,9 @@ class AdminServiceProvider extends ServiceProvider {
                                 'active' => 'admin/page*',
                                 'url' => 'admin/page',
                             ],
-                            /*[
-                                'title' => '回收站',
-                                'active' => 'admin/recycle*',
-                                'url' => 'admin/recycle',
-                            ],*/
                         ]
                     ],
-                    [
+                    'group' => [
                         'title' => '组件管理',
                         'active' => [
                             'admin/theme*',
@@ -161,16 +161,6 @@ class AdminServiceProvider extends ServiceProvider {
                                 'active' => 'admin/theme*',
                                 'url' => 'admin/theme',
                             ],
-                            /*[
-                                'title' => '幻灯片',
-                                'active' => 'admin/flash*',
-                                'url' => 'admin/flash',
-                            ],
-                            [
-                                'title' => '广告位',
-                                'active' => 'admin/ad*',
-                                'url' => 'admin/ad',
-                            ],*/
                         ]
                     ],
                 ]

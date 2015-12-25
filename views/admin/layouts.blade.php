@@ -9,8 +9,8 @@
     <meta name="description" content="iBenchu CMS内容管理系统">
     @css('admin::less.layout.bootstrap.bootstrap')
     @css('admin::less.layout.font-awesome.font-awesome')
-    @css('admin::css.default.admin.main')
     @yield('admin-css')
+    @css('admin::css.default.admin')
     @output('css')
 </head>
 <body class="app {{ $admin_theme }}">
@@ -25,60 +25,6 @@
             <li>
                 <a href="{{ url() }}" target="_blank"> <i class="fa fa-external-link"></i> </a>
             </li>
-            <!--
-            <li>
-                <a href="#" data-toggle="sidebar"> <i class="fa fa-tasks"></i> </a>
-                <div class="floating-sidebar">
-                    <div class="ongoing-tasks">
-                        <h3 class="small title mb30">Ongoing Tasks</h3>
-                        <ul class="list-unstyled mb15 clearfix">
-                            <li>
-                                <div class="clearfix mb10">
-                                    <small class="left">App Upload</small>
-                                    <small class="right">80%</small>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="clearfix mb10">
-                                    <small class="left">Creating Assets</small>
-                                    <small class="right">50%</small>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="clearfix mb10">
-                                    <small class="left">New UI 2.0</small>
-                                    <small class="right">90%</small>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="stats">
-                        <h3 class="small title mb15">Transaction</h3>
-                        <ul class="list-unstyled clearfix mb15">
-                            <li class="clearfix">
-                                <i class="fa fa-paypal left bg-primary"></i>
-                                <div class="info">
-                                    <strong>Send to Elli at 4:00 pm</strong> <span>$3000</span>
-                                </div>
-                            </li>
-                            <li class="clearfix">
-                                <i class="fa fa-bitcoin left bg-warning"></i>
-                                <div class="info">
-                                    <strong>Received from Salman at 12:00 pm</strong> <span>B 35000</span>
-                                </div>
-                            </li>
-                            <li class="clearfix">
-                                <i class="fa fa-gittip left bg-info"></i>
-                                <div class="info">
-                                    <strong>Donate to gittip</strong>
-                                    <span>$500</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            -->
             <li class="dropdown">
                 <a href class="user-profile" data-toggle="dropdown">
                     <img src="{{ asset('static/admin/avatar.jpg') }}" alt="N">

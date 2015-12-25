@@ -34,13 +34,13 @@
                                                 <input name="_method" type="hidden" value="DELETE">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="btn-group">
-                                                    <a class="btn btn-primary btn-sm" href="{{ url('admin/page/' . $page->id) }}">
+                                                    <a class="btn btn-primary btn-xs" href="{{ url('admin/page/' . $page->id) }}">
                                                         <i class="fa fa-search-plus"></i>子页管理
                                                         <span class="badge" title="该分类下子级页面数量">{{ $page->countSubPages() }}</span>
                                                     </a>
-                                                    <a class="btn btn-success btn-sm" href="{{ url('admin/page/' . $page->id . '/edit') }}"><i class="fa fa-edit"></i>编辑 </a>
-                                                    <a class="btn btn-info btn-sm" href="{{ url('admin/page/' . $page->id . '/move') }}"><i class="fa fa-arrows"></i>移动</a>
-                                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i>删除</button>
+                                                    <a class="btn btn-success btn-xs" href="{{ url('admin/page/' . $page->id . '/edit') }}"><i class="fa fa-edit"></i>编辑 </a>
+                                                    <a class="btn btn-info btn-xs" href="{{ url('admin/page/' . $page->id . '/move') }}"><i class="fa fa-arrows"></i>移动</a>
+                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>删除</button>
                                                 </div>
                                             </form>
                                         </td>

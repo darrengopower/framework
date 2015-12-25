@@ -1,5 +1,6 @@
-.btn-sm .badge {
+.btn-xs .badge {
     padding: 1px 5px;
+    top: -2px;
 }
 .page-notification .btn {
     margin-bottom: 5px;

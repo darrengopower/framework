@@ -41,6 +41,11 @@ class ThemeServiceProvider extends ServiceProvider {
                 $this->loadViewsFrom($theme->getViewPath(), $alias);
             });
         });
+        $this->getEvents()->listen('kernel.handled', function() {
+            if($this->app->inDebugMode()) {
+                $this->app->make('Illuminate\Contracts\Console\Kernel')->call('view:clear');
+            }
+        });
         $this->getBlade()->directive('css', function($expression) {
             return "<?php \$__theme->registerCss{$expression}; ?>";
         });

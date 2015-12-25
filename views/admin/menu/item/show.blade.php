@@ -17,18 +17,18 @@
                         <div class="panel-heading mb20"><i>分组：{{ $group->title }}</i></div>
                         <table class="table table-hover">
                             <thead>
-                            <tr>
-                                <th class="col-md-3">菜单名称</th>
-                                <th class="col-md-3">菜单链接</th>
-                                <th class="col-md-2">是否开启</th>
-                                <th class="col-md-4">操作</th>
-                            </tr>
+                                <tr>
+                                    <th class="col-md-3">菜单名称</th>
+                                    <th class="col-md-3">菜单链接</th>
+                                    <th class="col-md-2">是否开启</th>
+                                    <th class="col-md-4">操作</th>
+                                </tr>
                             </thead>
                             <tbody>
                             @foreach($items as $item)
                                 <tr>
                                     <td>
-                                        <strong>{{ $item->title }}</strong><span class="badge ml10" title="子级菜单数量">{{ $item->countSubMenu() }}</span>
+                                        <strong>{{ $item->title }}</strong>
                                     </td>
                                     <td>{{ $item->link }}</td>
                                     <td>
@@ -51,7 +51,7 @@
                                             <input name="_method" type="hidden" value="DELETE">
                                             <div class="btn-group">
                                                 <a class="btn btn-primary btn-xs" href="{{ url('admin/menu/item/' . $item->id . '') }}">
-                                                    <i class="fa fa-search-plus"></i>子级分类 </a>
+                                                    <i class="fa fa-search-plus"></i>子级分类<span class="badge" title="子级菜单数量">{{ $item->countSubMenu() }}</span></a>
                                                 <a class="btn btn-success btn-xs" href="{{ url('admin/menu/item/' . $item->id . '/edit') }}">
                                                     <i class="fa fa-edit"></i>编辑菜单 </a>
                                                 <button class="btn btn-danger btn-xs" type="submit">

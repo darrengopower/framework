@@ -25,7 +25,7 @@
                             @foreach($items as $item)
                                 <tr>
                                     <td>
-                                        <strong>{{ $item->title }}</strong><span class="badge ml10" title="子级菜单数量">{{ $item->countSubMenu() }}</span>
+                                        <strong>{{ $item->title }}</strong>
                                     </td>
                                     <td>{{ $item->link }}</td>
                                     <td>
@@ -48,7 +48,7 @@
                                             <input name="_method" type="hidden" value="DELETE">
                                             <div class="btn-group">
                                                 <a class="btn btn-primary btn-xs" href="{{ url('admin/menu/item/' . $item->id . '') }}">
-                                                    <i class="fa fa-search-plus"></i>子级菜单 </a>
+                                                    <i class="fa fa-search-plus"></i>子级菜单<span class="badge" title="子级菜单数量">{{ $item->countSubMenu() }}</span></a>
                                                 <a class="btn btn-success btn-xs" href="{{ url('admin/menu/item/' . $item->id . '/edit') }}">
                                                     <i class="fa fa-edit"></i>编辑菜单 </a>
                                                 <button class="btn btn-danger btn-xs" type="submit">

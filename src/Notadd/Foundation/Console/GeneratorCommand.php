@@ -104,7 +104,7 @@ abstract class GeneratorCommand extends Command {
      */
     protected function replaceNamespace(&$stub, $name) {
         $stub = str_replace('DummyNamespace', $this->getNamespace($name), $stub);
-        $stub = str_replace('DummyRootNamespace', $this->laravel->getNamespace(), $stub);
+        $stub = str_replace('DummyRootNamespace', $this->notadd->getNamespace(), $stub);
         return $this;
     }
     /**

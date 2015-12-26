@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Routing\Redirector;
 use Notadd\Foundation\Routing\Controller;
+use Notadd\Foundation\SearchEngine\Optimization;
 use Notadd\Install\Requests\InstallRequest;
 use Notadd\Setting\Factory as SettingFactory;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -30,10 +31,11 @@ class InstallController extends Controller {
      * @param \Illuminate\Events\Dispatcher $events
      * @param \Illuminate\Routing\Redirector $redirect
      * @param \Notadd\Setting\Factory $setting
+     * @param \Notadd\Foundation\SearchEngine\Optimization $seo
      * @param \Illuminate\Contracts\View\Factory $view
      */
-    public function __construct(Application $app, Dispatcher $events, Redirector $redirect, SettingFactory $setting, ViewFactory $view) {
-        parent::__construct($app, $events, $redirect, $setting, $view);
+    public function __construct(Application $app, Dispatcher $events, Redirector $redirect, SettingFactory $setting, Optimization $seo, ViewFactory $view) {
+        parent::__construct($app, $events, $redirect, $setting, $seo, $view);
         $this->command = $this->getCommand('install');
     }
     /**

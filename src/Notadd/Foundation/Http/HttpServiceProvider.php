@@ -18,8 +18,6 @@ class HttpServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
-        //注册搜索引擎优化服务提供者
-        $this->app->register(SearchEngineServiceProvider::class);
         $this->getRouter()->get('/', function() {
             $home = $this->getSetting()->get('site.home', 'default');
             $page_id = 0;

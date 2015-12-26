@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Routing\Controller;
+use Notadd\Foundation\SearchEngine\Optimization;
 use Notadd\Setting\Factory as SettingFactory;
 class AbstractAdminController extends Controller {
     /**
@@ -29,10 +30,12 @@ class AbstractAdminController extends Controller {
      * @param \Illuminate\Routing\Redirector $redirect
      * @param \Illuminate\Http\Request $request
      * @param \Notadd\Setting\Factory $setting
+     * @param \Notadd\Foundation\SearchEngine\Optimization $seo
      * @param \Illuminate\Contracts\View\Factory $view
+     * @internal param \Illuminate\Http\Request $request
      */
-    public function __construct(Application $app, Dispatcher $events, Redirector $redirect, Request $request, SettingFactory $setting, ViewFactory $view) {
-        parent::__construct($app, $events, $redirect, $setting, $view);
+    public function __construct(Application $app, Dispatcher $events, Redirector $redirect, Request $request, SettingFactory $setting, Optimization $seo, ViewFactory $view) {
+        parent::__construct($app, $events, $redirect, $setting, $seo, $view);
         $this->session = $app->make('session');
         $this->share('admin_theme', $request->cookie('admin-theme'));
     }

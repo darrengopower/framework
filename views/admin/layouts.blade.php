@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>@yield('title') - 后台 - {{ app('setting')->get('site.company', 'iBenchu CMS')  }}内容管理系统</title>
+    <title>@yield('title') - 后台 - {{ setting('site.company', 'iBenchu CMS')  }}内容管理系统</title>
     <meta name="author" content="iBenchu.net">
     <meta name="keywords" content="iBenchu">
     <meta name="description" content="iBenchu CMS内容管理系统">
@@ -16,7 +16,7 @@
 <body class="app {{ $admin_theme }}">
 <header class="site-head clearfix" id="site-head">
     <div class="nav-head">
-        <a href="{{ url('admin') }}" class="site-logo"><span>{{ app('setting')->get('site.company', 'iBenchu CMS')  }}</span>&nbsp;内容管理系统</a>
+        <a href="{{ url('admin') }}" class="site-logo"><span>{{ setting('site.company', 'iBenchu CMS')  }}</span>&nbsp;内容管理系统</a>
         <span class="nav-trigger fa fa-outdent hidden-xs" data-toggle="nav-min"></span>
         <span class="nav-trigger fa fa-navicon visible-xs" data-toggle="off-canvas"></span>
     </div>

@@ -8,6 +8,7 @@
 namespace Notadd\Foundation;
 use Closure;
 use Notadd\Auth\AuthServiceProvider;
+use Notadd\Foundation\SearchEngine\SearchEngineServiceProvider;
 use RuntimeException;
 use Illuminate\Auth\Passwords\PasswordResetServiceProvider;
 use Illuminate\Broadcasting\BroadcastServiceProvider;
@@ -325,6 +326,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         $this->register(FormRequestServiceProvider::class);
         $this->register(ExtensionServiceProvider::class);
         $this->register(SettingServiceProvider::class);
+        $this->register(SearchEngineServiceProvider::class);
     }
     /**
      * @param \Illuminate\Support\ServiceProvider|string $provider

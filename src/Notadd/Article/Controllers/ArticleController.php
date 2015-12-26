@@ -14,7 +14,7 @@ class ArticleController extends Controller {
      */
     public function show($id) {
         $article = new Article($id);
-        $this->app->make('events')->fire(new OnArticleShow($this->app, $this->view, $article));
+        $this->events->fire(new OnArticleShow($this->app, $this->view, $article));
         $this->share('title', $article->getTitle());
         $this->share('content', $article->getContent());
         $this->share('category', $article->getCategory());

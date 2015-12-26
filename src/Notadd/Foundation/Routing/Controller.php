@@ -50,17 +50,20 @@ abstract class Controller extends IlluminateController {
      * @param \Illuminate\Events\Dispatcher $events
      * @param \Illuminate\Routing\Redirector $redirect
      * @param \Notadd\Setting\Factory $setting
-     * @param \Notadd\Foundation\SearchEngine\Optimization $seo
      * @param \Illuminate\Contracts\View\Factory $view
      */
-    public function __construct(Application $app, Dispatcher $events, Redirector $redirect, SettingFactory $setting, Optimization $seo, ViewFactory $view) {
+    public function __construct(Application $app, Dispatcher $events, Redirector $redirect, SettingFactory $setting, ViewFactory $view) {
         $this->app = $app;
         $this->events = $events;
         $this->redirect = $redirect;
         $this->setting = $setting;
-        $this->seo = $seo;
+        $this->seo = $app->make('searchengine.optimization');
         $this->view = $view;
     }
+    /**
+     * @param string $command
+     * @return \Notadd\Foundation\Console\Command
+     */
     public function getCommand($command) {
         return $this->app->make('Illuminate\Contracts\Console\Kernel')->find($command);
     }

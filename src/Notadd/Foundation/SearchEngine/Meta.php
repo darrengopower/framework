@@ -26,10 +26,10 @@ class Meta {
         $this->keywords = '{sitename}';
     }
     /**
-     * @return static
+     * @return \Illuminate\Support\Collection
      */
     public function getData() {
-        $data = Collection::make();
+        $data = new Collection();
         $data->put('title', $this->title);
         $data->put('description', $this->description);
         $data->put('keywords', $this->keywords);

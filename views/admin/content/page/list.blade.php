@@ -16,11 +16,11 @@
                         <div class="panel-heading mb20"><i>页面管理</i></div>
                         <table class="table table-hover">
                             <thead>
-                            <tr>
-                                <th class="col-md-5">页面标题</td>
-                                <th class="col-md-3">创建时间</td>
-                                <th class="col-md-4">操作</td>
-                            </tr>
+                                <tr>
+                                    <th class="col-md-5">页面标题</td>
+                                    <th class="col-md-3">创建时间</td>
+                                    <th class="col-md-4">操作</td>
+                                </tr>
                             </thead>
                             <tbody>
                                 @foreach($pages as $page)

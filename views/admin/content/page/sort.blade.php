@@ -27,7 +27,9 @@
                                     </li>
                                 @endforeach
                             </ul>
-                            <button type="submit" class="btn btn-primary mb20 mr20 mt20 right">提交</button>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary mb20 mr20 mt20" style="width: 80%;">提交</button>
+                            </div>
                         </form>
                     </div>
                 </div>

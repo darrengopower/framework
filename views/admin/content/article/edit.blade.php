@@ -59,7 +59,7 @@
                             @endif
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary right">提交</button>
+                                    <button type="submit" class="btn btn-primary" style="width: 100%;">提交</button>
                                 </div>
                             </div>
                         </div>

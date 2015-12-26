@@ -47,9 +47,9 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6 col-md-offset-3">
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary mb20 mt20">提交</button>
+                                        <button type="submit" class="btn btn-primary mb20 mt20" style="width: 100%;">提交</button>
                                     </div>
                                 </div>
                             </div>

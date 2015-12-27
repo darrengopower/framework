@@ -5,17 +5,38 @@
  * @copyright (c) 2015, iBenchu.org
  * @datetime 2015-12-01 20:00
  */
-namespace Notadd\Foundation\Cache;
+namespace Notadd\Cache;
 use Illuminate\Cache\CacheManager;
-use Illuminate\Cache\Console\ClearCommand;
 use Illuminate\Cache\MemcachedConnector;
 use Illuminate\Support\ServiceProvider;
-use Notadd\Foundation\Cache\Console\CacheTableCommand;
+use Notadd\Cache\Console\CacheTableCommand;
+use Notadd\Cache\Console\ClearCommand;
+use Notadd\Foundation\Traits\InjectRouterTrait;
+/**
+ * Class CacheServiceProvider
+ * @package Notadd\Cache
+ */
 class CacheServiceProvider extends ServiceProvider {
+    use InjectRouterTrait;
     /**
      * @var bool
      */
     protected $defer = true;
+    /**
+     * @return void
+     */
+    public function boot() {
+        $this->getRouter()->group([
+            'middleware' => 'auth.admin',
+            'namespace' => 'Notadd\Cache\Controllers\Admin',
+            'prefix' => 'admin'
+        ], function () {
+            $this->getRouter()->get('cache', 'CacheController@index');
+            $this->getRouter()->post('cache', 'CacheController@clearCache');
+            $this->getRouter()->post('cache/static', 'CacheController@clearStatic');
+            $this->getRouter()->post('cache/view', 'CacheController@clearView');
+        });
+    }
     /**
      * @return void
      */

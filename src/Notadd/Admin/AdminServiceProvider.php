@@ -91,9 +91,10 @@ class AdminServiceProvider extends ServiceProvider {
                     'config' => [
                         'title' => '网站管理',
                         'active' => [
-                            'admin/site*',
+                            'admin/cache*',
                             'admin/seo*',
-                            'admin/third',
+                            'admin/site*',
+                            'admin/third*',
                         ],
                         'icon'  => 'fa-cogs',
                         'sub' => [
@@ -106,6 +107,11 @@ class AdminServiceProvider extends ServiceProvider {
                                 'title' => 'SEO设置',
                                 'active' => 'admin/seo*',
                                 'url' => 'admin/seo',
+                            ],
+                            [
+                                'title' => '缓存管理',
+                                'active' => 'admin/cache*',
+                                'url' => 'admin/cache',
                             ],
                             [
                                 'title' => '第三方登录',

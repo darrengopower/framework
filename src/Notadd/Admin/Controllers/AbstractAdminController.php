@@ -15,6 +15,10 @@ use Illuminate\Support\Str;
 use Notadd\Foundation\Routing\Controller;
 use Notadd\Foundation\SearchEngine\Optimization;
 use Notadd\Setting\Factory as SettingFactory;
+/**
+ * Class AbstractAdminController
+ * @package Notadd\Admin\Controllers
+ */
 class AbstractAdminController extends Controller {
     /**
      * @var \Illuminate\Routing\Redirector
@@ -25,6 +29,7 @@ class AbstractAdminController extends Controller {
      */
     protected $session;
     /**
+     * AbstractAdminController constructor.
      * @param \Illuminate\Contracts\Foundation\Application $app
      * @param \Illuminate\Events\Dispatcher $events
      * @param \Illuminate\Routing\Redirector $redirect
@@ -32,7 +37,6 @@ class AbstractAdminController extends Controller {
      * @param \Notadd\Setting\Factory $setting
      * @param \Notadd\Foundation\SearchEngine\Optimization $seo
      * @param \Illuminate\Contracts\View\Factory $view
-     * @internal param \Illuminate\Http\Request $request
      */
     public function __construct(Application $app, Dispatcher $events, Redirector $redirect, Request $request, SettingFactory $setting, Optimization $seo, ViewFactory $view) {
         parent::__construct($app, $events, $redirect, $setting, $seo, $view);

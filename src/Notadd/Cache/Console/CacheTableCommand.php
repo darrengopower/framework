@@ -5,7 +5,7 @@
  * @copyright (c) 2015, iBenchu.org
  * @datetime 2015-12-01 19:58
  */
-namespace Notadd\Foundation\Cache\Console;
+namespace Notadd\Cache\Console;
 use Illuminate\Filesystem\Filesystem;
 use Notadd\Foundation\Composer\Composer;
 use Notadd\Foundation\Console\Command;

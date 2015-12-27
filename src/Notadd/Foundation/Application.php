@@ -35,7 +35,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Events\EventServiceProvider;
 use Illuminate\Routing\RoutingServiceProvider;
-use Notadd\Foundation\Cache\CacheServiceProvider;
+use Notadd\Cache\CacheServiceProvider;
 use Notadd\Foundation\Composer\ComposerServiceProvider;
 use Notadd\Foundation\Console\ConsoleServiceProvider;
 use Notadd\Foundation\Console\ConsoleSupportServiceProvider;

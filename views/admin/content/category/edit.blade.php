@@ -8,6 +8,7 @@
             @foreach($crumbs as $crumb)
                 <li><a href="{{ url('admin/category/' . $crumb->id) }}">{{ $crumb->title }}</a></li>
             @endforeach
+            <li><a href="{{ url('admin/category/' . $category->id . '/edit') }}">编辑分类：{{ $category->title }}</a></li>
         </ol>
         <div class="page-wrap">
             <div class="row">

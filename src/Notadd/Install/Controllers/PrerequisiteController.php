@@ -9,6 +9,10 @@ namespace Notadd\Install\Controllers;
 use Notadd\Foundation\Routing\Controller;
 use Notadd\Install\Contracts\Prerequisite;
 use Psr\Http\Message\ServerRequestInterface;
+/**
+ * Class PrerequisiteController
+ * @package Notadd\Install\Controllers
+ */
 class PrerequisiteController extends Controller {
     /**
      * @param \Psr\Http\Message\ServerRequestInterface $request

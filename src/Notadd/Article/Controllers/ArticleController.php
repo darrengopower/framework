@@ -7,6 +7,10 @@ namespace Notadd\Article\Controllers;
 use Notadd\Article\Article;
 use Notadd\Article\Events\OnArticleShow;
 use Notadd\Foundation\Routing\Controller;
+/**
+ * Class ArticleController
+ * @package Notadd\Article\Controllers
+ */
 class ArticleController extends Controller {
     /**
      * @param int $id

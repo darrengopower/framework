@@ -4,7 +4,7 @@
     <div class="page clearfix">
         <ol class="breadcrumb breadcrumb-small">
             <li>后台首页</li>
-            <li class="active"><a href="{{ url('admin/menu')}}">菜单分组管理</a></li>
+            <li class="active"><a href="{{ url('admin/menu')}}">菜单管理</a></li>
         </ol>
         <div class="page-wrap">
             <div class="row">

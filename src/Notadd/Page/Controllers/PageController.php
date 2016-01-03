@@ -7,6 +7,10 @@ namespace Notadd\Page\Controllers;
 use Notadd\Foundation\Routing\Controller;
 use Notadd\Page\Events\OnPageShow;
 use Notadd\Page\Page;
+/**
+ * Class PageController
+ * @package Notadd\Page\Controllers
+ */
 class PageController extends Controller {
     /**
      * @param $id

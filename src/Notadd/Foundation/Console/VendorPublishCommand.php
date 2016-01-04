@@ -11,6 +11,10 @@ use Illuminate\Support\ServiceProvider;
 use League\Flysystem\MountManager;
 use League\Flysystem\Filesystem as Flysystem;
 use League\Flysystem\Adapter\Local as LocalAdapter;
+/**
+ * Class VendorPublishCommand
+ * @package Notadd\Foundation\Console
+ */
 class VendorPublishCommand extends Command {
     /**
      * @var \Illuminate\Filesystem\Filesystem
@@ -27,6 +31,7 @@ class VendorPublishCommand extends Command {
      */
     protected $description = 'Publish any publishable assets from vendor packages';
     /**
+     * VendorPublishCommand constructor.
      * @param \Illuminate\Filesystem\Filesystem $files
      */
     public function __construct(Filesystem $files) {

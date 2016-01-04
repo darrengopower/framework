@@ -14,6 +14,10 @@ use Illuminate\Support\Str;
 use Notadd\Foundation\Database\Eloquent\Relations\Relation;
 use Notadd\Foundation\Database\Query\Builder as QueryBuilder;
 use Notadd\Foundation\Database\Query\Expression;
+/**
+ * Class Builder
+ * @package Notadd\Foundation\Database\Eloquent
+ */
 class Builder {
     /**
      * @var \Notadd\Foundation\Database\Query\Builder
@@ -51,6 +55,7 @@ class Builder {
         'sum',
     ];
     /**
+     * Builder constructor.
      * @param \Notadd\Foundation\Database\Query\Builder $query
      */
     public function __construct(QueryBuilder $query) {

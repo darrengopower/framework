@@ -12,6 +12,10 @@ use Notadd\Foundation\SearchEngine\SearchEngineServiceProvider;
 use Notadd\Foundation\Traits\InjectRouterTrait;
 use Notadd\Foundation\Traits\InjectSettingTrait;
 use Notadd\Page\Models\Page;
+/**
+ * Class HttpServiceProvider
+ * @package Notadd\Foundation\Http
+ */
 class HttpServiceProvider extends ServiceProvider {
     use InjectSettingTrait, InjectRouterTrait;
     /**

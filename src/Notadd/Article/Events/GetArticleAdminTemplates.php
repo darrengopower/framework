@@ -8,18 +8,23 @@
 namespace Notadd\Article\Events;
 use Illuminate\Support\Collection;
 use Notadd\Category\Models\Category;
+/**
+ * Class GetArticleAdminTemplates
+ * @package Notadd\Article\Events
+ */
 class GetArticleAdminTemplates {
     /**
-     * @var Category
+     * @var \Notadd\Category\Models\Category
      */
     private $category;
     /**
-     * @var Collection
+     * @var \Illuminate\Support\Collection
      */
     private $templates;
     /**
-     * @param Category $category
-     * @param Collection $templates
+     * GetArticleAdminTemplates constructor.
+     * @param \Notadd\Category\Models\Category $category
+     * @param \Illuminate\Support\Collection $templates
      */
     public function __construct(Category $category, Collection $templates) {
         $this->category = $category;

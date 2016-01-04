@@ -11,6 +11,10 @@ use Illuminate\Support\Str;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Session\TokenMismatchException;
 use Symfony\Component\HttpFoundation\Cookie;
+/**
+ * Class VerifyCsrfToken
+ * @package Notadd\Foundation\Http\Middleware
+ */
 class VerifyCsrfToken {
     /**
      * @var \Illuminate\Contracts\Encryption\Encrypter

@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Traits;
 use Illuminate\Container\Container;
+/**
+ * Class InjectRequestTrait
+ * @package Notadd\Foundation\Traits
+ */
 trait InjectRequestTrait {
     /**
      * @var \Illuminate\Http\Request

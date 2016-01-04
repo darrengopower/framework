@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Traits;
 use Illuminate\Container\Container;
+/**
+ * Class InjectEventsTrait
+ * @package Notadd\Foundation\Traits
+ */
 trait InjectEventsTrait {
     /**
      * @var \Illuminate\Events\Dispatcher

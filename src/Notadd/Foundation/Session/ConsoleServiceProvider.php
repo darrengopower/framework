@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Session;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\Session\Console\SessionTableCommand;
+/**
+ * Class ConsoleServiceProvider
+ * @package Notadd\Foundation\Session
+ */
 class ConsoleServiceProvider extends ServiceProvider {
     /**
      * @var bool

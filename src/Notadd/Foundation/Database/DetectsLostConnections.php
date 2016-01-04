@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Database;
 use Exception;
 use Illuminate\Support\Str;
+/**
+ * Class DetectsLostConnections
+ * @package Notadd\Foundation\Database
+ */
 trait DetectsLostConnections {
     /**
      * @param \Exception $e

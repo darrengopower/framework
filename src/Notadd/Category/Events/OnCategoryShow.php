@@ -7,6 +7,10 @@ namespace Notadd\Category\Events;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Notadd\Category\Models\Category;
+/**
+ * Class OnCategoryShow
+ * @package Notadd\Category\Events
+ */
 class OnCategoryShow {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
@@ -21,6 +25,7 @@ class OnCategoryShow {
      */
     private $category;
     /**
+     * OnCategoryShow constructor.
      * @param \Illuminate\Contracts\Foundation\Application $application
      * @param \Illuminate\Contracts\View\Factory $view
      * @param \Notadd\Category\Models\Category $category

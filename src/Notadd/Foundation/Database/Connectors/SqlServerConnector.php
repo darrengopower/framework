@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Database\Connectors;
 use Illuminate\Support\Arr;
 use PDO;
+/**
+ * Class SqlServerConnector
+ * @package Notadd\Foundation\Database\Connectors
+ */
 class SqlServerConnector extends Connector implements ConnectorInterface {
     /**
      * @var array

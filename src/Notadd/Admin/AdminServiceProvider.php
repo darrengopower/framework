@@ -12,6 +12,10 @@ use Notadd\Foundation\Traits\InjectConfigTrait;
 use Notadd\Foundation\Traits\InjectEventsTrait;
 use Notadd\Foundation\Traits\InjectRequestTrait;
 use Notadd\Foundation\Traits\InjectRouterTrait;
+/**
+ * Class AdminServiceProvider
+ * @package Notadd\Admin
+ */
 class AdminServiceProvider extends ServiceProvider {
     use InjectConfigTrait, InjectEventsTrait, InjectRequestTrait, InjectRouterTrait;
     /**

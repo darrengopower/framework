@@ -7,6 +7,10 @@
  */
 namespace Notadd\Menu\Requests;
 use Notadd\Foundation\Http\FormRequest;
+/**
+ * Class MenuGroupEditRequest
+ * @package Notadd\Menu\Requests
+ */
 class MenuGroupEditRequest extends FormRequest {
     /**
      * @return bool

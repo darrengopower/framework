@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Database\Console\Migrations;
 use Notadd\Foundation\Database\Migrations\Migrator;
 use Symfony\Component\Console\Input\InputOption;
+/**
+ * Class StatusCommand
+ * @package Notadd\Foundation\Database\Console\Migrations
+ */
 class StatusCommand extends BaseCommand {
     /**
      * @var string
@@ -22,8 +26,8 @@ class StatusCommand extends BaseCommand {
      */
     protected $migrator;
     /**
+     * StatusCommand constructor.
      * @param \Notadd\Foundation\Database\Migrations\Migrator $migrator
-     * @return \Notadd\Foundation\Database\Console\Migrations\StatusCommand
      */
     public function __construct(Migrator $migrator) {
         parent::__construct();

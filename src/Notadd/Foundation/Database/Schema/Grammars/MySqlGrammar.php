@@ -9,6 +9,10 @@ namespace Notadd\Foundation\Database\Schema\Grammars;
 use Illuminate\Support\Fluent;
 use Notadd\Foundation\Database\Connection;
 use Notadd\Foundation\Database\Schema\Blueprint;
+/**
+ * Class MySqlGrammar
+ * @package Notadd\Foundation\Database\Schema\Grammars
+ */
 class MySqlGrammar extends Grammar {
     /**
      * @var array

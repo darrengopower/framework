@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Console;
 use Illuminate\Filesystem\Filesystem;
+/**
+ * Class ConfigCacheCommand
+ * @package Notadd\Foundation\Console
+ */
 class ConfigCacheCommand extends Command {
     /**
      * @var string

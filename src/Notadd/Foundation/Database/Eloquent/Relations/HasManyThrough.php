@@ -11,6 +11,10 @@ use Notadd\Foundation\Database\Eloquent\Collection;
 use Notadd\Foundation\Database\Eloquent\Model;
 use Notadd\Foundation\Database\Eloquent\ModelNotFoundException;
 use Notadd\Foundation\Database\Query\Expression;
+/**
+ * Class HasManyThrough
+ * @package Notadd\Foundation\Database\Eloquent\Relations
+ */
 class HasManyThrough extends Relation {
     /**
      * @var \Notadd\Foundation\Database\Eloquent\Model
@@ -29,6 +33,7 @@ class HasManyThrough extends Relation {
      */
     protected $localKey;
     /**
+     * HasManyThrough constructor.
      * @param \Notadd\Foundation\Database\Eloquent\Builder $query
      * @param \Notadd\Foundation\Database\Eloquent\Model $farParent
      * @param \Notadd\Foundation\Database\Eloquent\Model $parent

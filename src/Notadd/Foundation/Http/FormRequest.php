@@ -15,6 +15,10 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exception\HttpResponseException;
 use Illuminate\Validation\ValidatesWhenResolvedTrait;
 use Illuminate\Contracts\Validation\ValidatesWhenResolved;
+/**
+ * Class FormRequest
+ * @package Notadd\Foundation\Http
+ */
 class FormRequest extends Request implements ValidatesWhenResolved {
     use ValidatesWhenResolvedTrait;
     /**

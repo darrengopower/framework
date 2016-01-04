@@ -6,6 +6,10 @@
  * @datetime 2015-12-06 13:15
  */
 namespace Notadd\Foundation\Database;
+/**
+ * Interface ConnectionResolverInterface
+ * @package Notadd\Foundation\Database
+ */
 interface ConnectionResolverInterface {
     /**
      * @param string $name

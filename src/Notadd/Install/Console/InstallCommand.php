@@ -14,6 +14,10 @@ use Notadd\Foundation\Console\Command;
 use Notadd\Foundation\Database\Migrations\DatabaseMigrationRepository;
 use Notadd\Install\Requests\InstallRequest;
 use PDO;
+/**
+ * Class InstallCommand
+ * @package Notadd\Install\Console
+ */
 class InstallCommand extends Command {
     /**
      * @var \Illuminate\Contracts\Config\Repository
@@ -44,6 +48,7 @@ class InstallCommand extends Command {
      */
     protected $setting;
     /**
+     * InstallCommand constructor.
      * @param \Illuminate\Contracts\Foundation\Application $application
      * @param \Illuminate\Filesystem\Filesystem $filesystem
      */

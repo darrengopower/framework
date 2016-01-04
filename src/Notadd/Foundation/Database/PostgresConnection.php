@@ -10,6 +10,10 @@ use Doctrine\DBAL\Driver\PDOPgSql\Driver as DoctrineDriver;
 use Notadd\Foundation\Database\Query\Processors\PostgresProcessor;
 use Notadd\Foundation\Database\Query\Grammars\PostgresGrammar as QueryGrammar;
 use Notadd\Foundation\Database\Schema\Grammars\PostgresGrammar as SchemaGrammar;
+/**
+ * Class PostgresConnection
+ * @package Notadd\Foundation\Database
+ */
 class PostgresConnection extends Connection {
     /**
      * @return \Notadd\Foundation\Database\Query\Grammars\PostgresGrammar

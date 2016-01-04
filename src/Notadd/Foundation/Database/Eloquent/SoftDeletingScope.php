@@ -6,6 +6,10 @@
  * @datetime 2015-12-06 13:49
  */
 namespace Notadd\Foundation\Database\Eloquent;
+/**
+ * Class SoftDeletingScope
+ * @package Notadd\Foundation\Database\Eloquent
+ */
 class SoftDeletingScope implements ScopeInterface {
     /**
      * @var array

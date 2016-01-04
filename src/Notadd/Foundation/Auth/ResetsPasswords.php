@@ -9,6 +9,10 @@ namespace Notadd\Foundation\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Message;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+/**
+ * Class ResetsPasswords
+ * @package Notadd\Foundation\Auth
+ */
 trait ResetsPasswords {
     /**
      * @return \Illuminate\Http\Response

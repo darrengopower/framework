@@ -9,6 +9,10 @@ namespace Notadd\Foundation\Database\Console\Migrations;
 use Notadd\Foundation\Console\Command;
 use Notadd\Foundation\Database\Migrations\Migrator;
 use Symfony\Component\Console\Input\InputOption;
+/**
+ * Class RollbackCommand
+ * @package Notadd\Foundation\Database\Console\Migrations
+ */
 class RollbackCommand extends Command {
     /**
      * @var string
@@ -23,6 +27,7 @@ class RollbackCommand extends Command {
      */
     protected $migrator;
     /**
+     * RollbackCommand constructor.
      * @param \Notadd\Foundation\Database\Migrations\Migrator $migrator
      */
     public function __construct(Migrator $migrator) {

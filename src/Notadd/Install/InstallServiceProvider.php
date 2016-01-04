@@ -14,6 +14,10 @@ use Notadd\Install\Prerequisites\Composite;
 use Notadd\Install\Prerequisites\PhpExtensions;
 use Notadd\Install\Prerequisites\PhpVersion;
 use Notadd\Install\Prerequisites\WritablePaths;
+/**
+ * Class InstallServiceProvider
+ * @package Notadd\Install
+ */
 class InstallServiceProvider extends ServiceProvider {
     use InjectRouterTrait;
     /**

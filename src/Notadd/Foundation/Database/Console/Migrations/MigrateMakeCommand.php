@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Database\Console\Migrations;
 use Notadd\Foundation\Composer\Composer;
 use Notadd\Foundation\Database\Migrations\MigrationCreator;
+/**
+ * Class MigrateMakeCommand
+ * @package Notadd\Foundation\Database\Console\Migrations
+ */
 class MigrateMakeCommand extends BaseCommand {
     /**
      * @var string
@@ -29,6 +33,7 @@ class MigrateMakeCommand extends BaseCommand {
      */
     protected $composer;
     /**
+     * MigrateMakeCommand constructor.
      * @param \Notadd\Foundation\Database\Migrations\MigrationCreator $creator
      * @param \Notadd\Foundation\Composer\Composer $composer
      */

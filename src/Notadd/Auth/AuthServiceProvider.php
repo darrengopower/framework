@@ -14,6 +14,10 @@ use Illuminate\Support\ServiceProvider;
 use Notadd\Auth\Social\SocialManager;
 use Notadd\Foundation\Traits\InjectRouterTrait;
 use Notadd\Foundation\Traits\InjectSettingTrait;
+/**
+ * Class AuthServiceProvider
+ * @package Notadd\Auth
+ */
 class AuthServiceProvider extends ServiceProvider {
     use InjectRouterTrait, InjectSettingTrait;
     /**

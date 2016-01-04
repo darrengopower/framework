@@ -9,6 +9,10 @@ namespace Notadd\Foundation\Bootstrap;
 use Illuminate\Log\Writer;
 use Monolog\Logger as Monolog;
 use Illuminate\Contracts\Foundation\Application;
+/**
+ * Class ConfigureLogging
+ * @package Notadd\Foundation\Bootstrap
+ */
 class ConfigureLogging {
     /**
      * @param \Illuminate\Contracts\Foundation\Application $app

@@ -17,6 +17,10 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Notadd\Theme\Contracts\Material as MaterialContract;
+/**
+ * Class Material
+ * @package Notadd\Theme
+ */
 class Material implements MaterialContract {
     /**
      * @var \Illuminate\Contracts\Foundation\Application

@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Database;
 use Closure;
+/**
+ * Interface ConnectionInterface
+ * @package Notadd\Foundation\Database
+ */
 interface ConnectionInterface {
     /**
      * @param string $table

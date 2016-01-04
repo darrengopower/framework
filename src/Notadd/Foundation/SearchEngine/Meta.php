@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\SearchEngine;
 use Illuminate\Support\Collection;
+/**
+ * Class Meta
+ * @package Notadd\Foundation\SearchEngine
+ */
 class Meta {
     /**
      * @var string
@@ -20,6 +24,9 @@ class Meta {
      * @var string
      */
     private $keywords;
+    /**
+     * Meta constructor.
+     */
     public function __construct() {
         $this->title = '{sitename}';
         $this->description = '{sitename}';

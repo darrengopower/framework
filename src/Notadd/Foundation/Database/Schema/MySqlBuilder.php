@@ -6,6 +6,10 @@
  * @datetime 2015-12-06 19:28
  */
 namespace Notadd\Foundation\Database\Schema;
+/**
+ * Class MySqlBuilder
+ * @package Notadd\Foundation\Database\Schema
+ */
 class MySqlBuilder extends Builder {
     /**
      * @param string $table

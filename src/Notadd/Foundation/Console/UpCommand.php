@@ -6,6 +6,10 @@
  * @datetime 2015-12-01 16:25
  */
 namespace Notadd\Foundation\Console;
+/**
+ * Class UpCommand
+ * @package Notadd\Foundation\Console
+ */
 class UpCommand extends Command {
     /**
      * @var string

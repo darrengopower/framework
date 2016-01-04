@@ -20,6 +20,10 @@ use Notadd\Foundation\SearchEngine\Optimization;
 use Notadd\Foundation\Validation\ValidatesRequests;
 use Notadd\Setting\Factory as SettingFactory;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+/**
+ * Class Controller
+ * @package Notadd\Foundation\Routing
+ */
 abstract class Controller extends IlluminateController {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     /**
@@ -51,6 +55,7 @@ abstract class Controller extends IlluminateController {
      */
     protected $view;
     /**
+     * Controller constructor.
      * @param \Illuminate\Contracts\Foundation\Application $app
      * @param \Illuminate\Events\Dispatcher $events
      * @param \Illuminate\Contracts\Logging\Log $log

@@ -11,6 +11,10 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Notadd\Foundation\Database\Eloquent\Model;
+/**
+ * Class User
+ * @package Notadd\Foundation\Auth\Models
+ */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
     use Authenticatable, CanResetPassword;
     /**

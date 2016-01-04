@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Database\Eloquent;
 use RuntimeException;
+/**
+ * Class ModelNotFoundException
+ * @package Notadd\Foundation\Database\Eloquent
+ */
 class ModelNotFoundException extends RuntimeException {
     /**
      * @var string

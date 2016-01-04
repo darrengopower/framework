@@ -9,6 +9,10 @@ namespace Notadd\Auth\Social\Providers;
 use Notadd\Auth\Social\Contracts\AccessToken as AccessTokenContract;
 use Notadd\Auth\Social\Contracts\Provider as ProviderContract;
 use Notadd\Auth\Social\User;
+/**
+ * Class LinkedinProvider
+ * @package Notadd\Auth\Social\Providers
+ */
 class LinkedinProvider extends Provider implements ProviderContract {
     /**
      * @var array

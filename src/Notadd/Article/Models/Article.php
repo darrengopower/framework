@@ -10,6 +10,10 @@ use Illuminate\Support\Str;
 use Notadd\Category\Models\Category;
 use Notadd\Foundation\Database\Eloquent\Model;
 use Notadd\Foundation\Database\Eloquent\SoftDeletes;
+/**
+ * Class Article
+ * @package Notadd\Article\Models
+ */
 class Article extends Model {
     use SoftDeletes;
     /**
@@ -86,9 +90,15 @@ class Article extends Model {
         $id = $this->whereCategoryId($this->attributes['category_id'])->where('id', '<', $this->attributes['id'])->max('id');
         return $this->find($id);
     }
+    /**
+     * @return string
+     */
     public function getShowTemplate() {
         return $this->showTemplate;
     }
+    /**
+     * @param $template
+     */
     public function setShowTemplate($template) {
         $this->showTemplate = $template;
     }

@@ -7,5 +7,9 @@
  */
 namespace Notadd\Auth\Social\Exceptions;
 use InvalidArgumentException;
+/**
+ * Class InvalidStateException
+ * @package Notadd\Auth\Social\Exceptions
+ */
 class InvalidStateException extends InvalidArgumentException {
 }

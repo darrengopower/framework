@@ -7,6 +7,10 @@
  */
 namespace Notadd\Article\Requests;
 use Notadd\Foundation\Http\FormRequest;
+/**
+ * Class ArticleCreateRequest
+ * @package Notadd\Article\Requests
+ */
 class ArticleCreateRequest extends FormRequest {
     /**
      * @return bool

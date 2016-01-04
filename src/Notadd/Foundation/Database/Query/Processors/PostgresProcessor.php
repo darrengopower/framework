@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Database\Query\Processors;
 use Notadd\Foundation\Database\Query\Builder;
+/**
+ * Class PostgresProcessor
+ * @package Notadd\Foundation\Database\Query\Processors
+ */
 class PostgresProcessor extends Processor {
     /**
      * @param \Notadd\Foundation\Database\Query\Builder $query

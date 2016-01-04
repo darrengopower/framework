@@ -10,6 +10,10 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Composer\Composer;
 use Notadd\Foundation\Console\Command;
+/**
+ * Class TableCommand
+ * @package Notadd\Foundation\Queue\Console
+ */
 class TableCommand extends Command {
     /**
      * @var string
@@ -28,6 +32,7 @@ class TableCommand extends Command {
      */
     protected $composer;
     /**
+     * TableCommand constructor.
      * @param \Illuminate\Filesystem\Filesystem $files
      * @param \Notadd\Foundation\Composer\Composer $composer
      */

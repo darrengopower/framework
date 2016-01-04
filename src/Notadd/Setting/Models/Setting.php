@@ -7,5 +7,9 @@
  */
 namespace Notadd\Setting\Models;
 use Notadd\Foundation\Database\Eloquent\Model;
+/**
+ * Class Setting
+ * @package Notadd\Setting\Models
+ */
 class Setting extends Model {
 }

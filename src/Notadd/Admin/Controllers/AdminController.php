@@ -6,6 +6,10 @@
  * @datetime 2015-10-30 10:58
  */
 namespace Notadd\Admin\Controllers;
+/**
+ * Class AdminController
+ * @package Notadd\Admin\Controllers
+ */
 class AdminController extends AbstractAdminController {
     /**
      * @return \Illuminate\Contracts\View\View

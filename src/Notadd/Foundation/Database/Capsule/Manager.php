@@ -13,6 +13,10 @@ use Notadd\Foundation\Database\Connectors\ConnectionFactory;
 use Notadd\Foundation\Database\DatabaseManager;
 use Notadd\Foundation\Database\Eloquent\Model as Eloquent;
 use PDO;
+/**
+ * Class Manager
+ * @package Notadd\Foundation\Database\Capsule
+ */
 class Manager {
     use CapsuleManagerTrait;
     /**
@@ -20,6 +24,7 @@ class Manager {
      */
     protected $manager;
     /**
+     * Manager constructor.
      * @param \Illuminate\Container\Container|null $container
      */
     public function __construct(Container $container = null) {

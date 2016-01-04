@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Console;
 use Illuminate\Filesystem\Filesystem;
+/**
+ * Class RouteClearCommand
+ * @package Notadd\Foundation\Console
+ */
 class RouteClearCommand extends Command {
     /**
      * @var string

@@ -6,6 +6,10 @@
  * @datetime 2015-12-06 19:13
  */
 namespace Notadd\Foundation\Database\Query\Processors;
+/**
+ * Class MySqlProcessor
+ * @package Notadd\Foundation\Database\Query\Processors
+ */
 class MySqlProcessor extends Processor {
     /**
      * @param array $results

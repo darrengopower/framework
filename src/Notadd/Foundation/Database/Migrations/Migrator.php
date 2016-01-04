@@ -10,6 +10,10 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Database\ConnectionResolverInterface as Resolver;
+/**
+ * Class Migrator
+ * @package Notadd\Foundation\Database\Migrations
+ */
 class Migrator {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
@@ -36,6 +40,7 @@ class Migrator {
      */
     protected $notes = [];
     /**
+     * Migrator constructor.
      * @param \Illuminate\Contracts\Foundation\Application $application
      * @param \Notadd\Foundation\Database\Migrations\MigrationRepositoryInterface $repository
      * @param \Notadd\Foundation\Database\ConnectionResolverInterface $resolver

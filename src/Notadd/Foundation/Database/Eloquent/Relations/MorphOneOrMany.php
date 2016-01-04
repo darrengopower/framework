@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Database\Eloquent\Relations;
 use Notadd\Foundation\Database\Eloquent\Builder;
 use Notadd\Foundation\Database\Eloquent\Model;
+/**
+ * Class MorphOneOrMany
+ * @package Notadd\Foundation\Database\Eloquent\Relations
+ */
 abstract class MorphOneOrMany extends HasOneOrMany {
     /**
      * @var string
@@ -18,6 +22,7 @@ abstract class MorphOneOrMany extends HasOneOrMany {
      */
     protected $morphClass;
     /**
+     * MorphOneOrMany constructor.
      * @param \Notadd\Foundation\Database\Eloquent\Builder $query
      * @param \Notadd\Foundation\Database\Eloquent\Model $parent
      * @param string $type

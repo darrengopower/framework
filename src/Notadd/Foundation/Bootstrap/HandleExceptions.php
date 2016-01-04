@@ -12,6 +12,10 @@ use Illuminate\Contracts\Foundation\Application;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Debug\Exception\FatalErrorException;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
+/**
+ * Class HandleExceptions
+ * @package Notadd\Foundation\Bootstrap
+ */
 class HandleExceptions {
     /**
      * @var \Illuminate\Contracts\Foundation\Application

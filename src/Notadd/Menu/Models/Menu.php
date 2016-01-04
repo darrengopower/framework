@@ -11,6 +11,10 @@ use Notadd\Article\Models\Article;
 use Notadd\Category\Models\Category;
 use Notadd\Foundation\Database\Eloquent\Collection;
 use Notadd\Foundation\Database\Eloquent\Model;
+/**
+ * Class Menu
+ * @package Notadd\Menu\Models
+ */
 class Menu extends Model {
     /**
      * @var array

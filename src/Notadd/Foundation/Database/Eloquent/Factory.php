@@ -9,12 +9,17 @@ namespace Notadd\Foundation\Database\Eloquent;
 use ArrayAccess;
 use Faker\Generator as Faker;
 use Symfony\Component\Finder\Finder;
+/**
+ * Class Factory
+ * @package Notadd\Foundation\Database\Eloquent
+ */
 class Factory implements ArrayAccess {
     /**
      * @var \Faker\Generator
      */
     protected $faker;
     /**
+     * Factory constructor.
      * @param \Faker\Generator $faker
      */
     public function __construct(Faker $faker) {

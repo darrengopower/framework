@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\SearchEngine;
 use Illuminate\Support\ServiceProvider;
+/**
+ * Class SearchEngineServiceProvider
+ * @package Notadd\Foundation\SearchEngine
+ */
 class SearchEngineServiceProvider extends ServiceProvider {
     /**
      * @return void

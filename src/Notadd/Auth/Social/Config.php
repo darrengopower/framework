@@ -8,12 +8,17 @@
 namespace Notadd\Auth\Social;
 use ArrayAccess;
 use InvalidArgumentException;
+/**
+ * Class Config
+ * @package Notadd\Auth\Social
+ */
 class Config implements ArrayAccess {
     /**
      * @var array
      */
     protected $config;
     /**
+     * Config constructor.
      * @param array $config
      */
     public function __construct(array $config) {

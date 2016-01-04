@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Database\Query\Grammars;
 use Notadd\Foundation\Database\Grammar as BaseGrammar;
 use Notadd\Foundation\Database\Query\Builder;
+/**
+ * Class Grammar
+ * @package Notadd\Foundation\Database\Query\Grammars
+ */
 class Grammar extends BaseGrammar {
     /**
      * @var array

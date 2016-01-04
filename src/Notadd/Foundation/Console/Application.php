@@ -14,6 +14,10 @@ use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\BufferedOutput;
+/**
+ * Class Application
+ * @package Notadd\Foundation\Console
+ */
 class Application extends SymfonyApplication implements ApplicationContract {
     /**
      * @var \Illuminate\Contracts\Container\Container
@@ -24,9 +28,10 @@ class Application extends SymfonyApplication implements ApplicationContract {
      */
     protected $lastOutput;
     /**
+     * Application constructor.
      * @param \Illuminate\Contracts\Container\Container $laravel
      * @param \Illuminate\Contracts\Events\Dispatcher $events
-     * @param string $version
+     * @param $version
      */
     public function __construct(Container $laravel, Dispatcher $events, $version) {
         parent::__construct('Notadd Framework', $version);

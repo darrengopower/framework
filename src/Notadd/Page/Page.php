@@ -8,6 +8,10 @@
 namespace Notadd\Page;
 use Illuminate\Support\Collection;
 use Notadd\Page\Models\Page as PageModel;
+/**
+ * Class Page
+ * @package Notadd\Page
+ */
 class Page {
     /**
      * @var int
@@ -18,6 +22,7 @@ class Page {
      */
     protected $model;
     /**
+     * Page constructor.
      * @param $id
      */
     public function __construct($id) {

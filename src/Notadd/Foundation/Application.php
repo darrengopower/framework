@@ -49,6 +49,10 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+/**
+ * Class Application
+ * @package Notadd\Foundation
+ */
 class Application extends Container implements ApplicationContract, HttpKernelInterface {
     /**
      * @var string
@@ -104,6 +108,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      */
     protected $namespace = null;
     /**
+     * Application constructor.
      * @param string|null $basePath
      */
     public function __construct($basePath = null) {

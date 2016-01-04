@@ -7,6 +7,10 @@
  */
 namespace Notadd\Editor;
 use Illuminate\Support\ServiceProvider;
+/**
+ * Class EditorServiceProvider
+ * @package Notadd\Editor
+ */
 class EditorServiceProvider extends ServiceProvider {
     /**
      * @return void

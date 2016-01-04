@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Traits;
 use Illuminate\Container\Container;
+/**
+ * Class InjectExtensionTrait
+ * @package Notadd\Foundation\Traits
+ */
 trait InjectExtensionTrait {
     /**
      * @var \Notadd\Foundation\Extension\ExtensionManager

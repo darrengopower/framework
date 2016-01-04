@@ -9,6 +9,10 @@ namespace Notadd\Foundation\Session\Console;
 use Illuminate\Filesystem\Filesystem;
 use Notadd\Foundation\Composer\Composer;
 use Notadd\Foundation\Console\Command;
+/**
+ * Class SessionTableCommand
+ * @package Notadd\Foundation\Session\Console
+ */
 class SessionTableCommand extends Command {
     /**
      * @var string
@@ -27,6 +31,7 @@ class SessionTableCommand extends Command {
      */
     protected $composer;
     /**
+     * SessionTableCommand constructor.
      * @param \Illuminate\Filesystem\Filesystem $files
      * @param \Notadd\Foundation\Composer\Composer $composer
      */

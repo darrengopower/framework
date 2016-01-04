@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Bus;
 use ArrayAccess;
+/**
+ * Class DispatchesJobs
+ * @package Notadd\Foundation\Bus
+ */
 trait DispatchesJobs {
     /**
      * @param mixed $job

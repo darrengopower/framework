@@ -10,6 +10,10 @@ use Closure;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Application;
+/**
+ * Class MigrationCreator
+ * @package Notadd\Foundation\Database\Migrations
+ */
 class MigrationCreator {
     /**
      * @var \Notadd\Foundation\Application
@@ -24,6 +28,7 @@ class MigrationCreator {
      */
     protected $postCreate = [];
     /**
+     * MigrationCreator constructor.
      * @param \Notadd\Foundation\Application $application
      * @param \Illuminate\Filesystem\Filesystem $files
      */

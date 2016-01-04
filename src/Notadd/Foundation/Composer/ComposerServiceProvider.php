@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Composer;
 use Illuminate\Support\ServiceProvider;
+/**
+ * Class ComposerServiceProvider
+ * @package Notadd\Foundation\Composer
+ */
 class ComposerServiceProvider extends ServiceProvider {
     /**
      * @var bool

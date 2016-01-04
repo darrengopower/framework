@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Database\Migrations;
 use Notadd\Foundation\Database\ConnectionResolverInterface as Resolver;
+/**
+ * Class DatabaseMigrationRepository
+ * @package Notadd\Foundation\Database\Migrations
+ */
 class DatabaseMigrationRepository implements MigrationRepositoryInterface {
     /**
      * @var \Notadd\Foundation\Database\ConnectionResolverInterface
@@ -21,6 +25,7 @@ class DatabaseMigrationRepository implements MigrationRepositoryInterface {
      */
     protected $connection;
     /**
+     * DatabaseMigrationRepository constructor.
      * @param \Notadd\Foundation\Database\ConnectionResolverInterface $resolver
      * @param string $table
      */

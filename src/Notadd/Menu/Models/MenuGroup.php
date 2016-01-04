@@ -7,6 +7,10 @@
  */
 namespace Notadd\Menu\Models;
 use Notadd\Foundation\Database\Eloquent\Model;
+/**
+ * Class MenuGroup
+ * @package Notadd\Menu\Models
+ */
 class MenuGroup extends Model {
     /**
      * @var array

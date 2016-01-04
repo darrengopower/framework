@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Database\Query\Grammars;
 use Notadd\Foundation\Database\Query\Builder;
+/**
+ * Class SqlServerGrammar
+ * @package Notadd\Foundation\Database\Query\Grammars
+ */
 class SqlServerGrammar extends Grammar {
     /**
      * @var array

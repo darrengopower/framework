@@ -6,11 +6,14 @@
  * @datetime 2015-11-10 14:51:12
  */
 namespace Notadd\Category;
-
 use Illuminate\Support\Collection;
 use Notadd\Article\Article;
 use Notadd\Article\Models\Article as ArticleModel;
 use Notadd\Category\Models\Category as CategoryModel;
+/**
+ * Class Category
+ * @package Notadd\Category
+ */
 class Category {
     /**
      * @var int
@@ -21,6 +24,7 @@ class Category {
      */
     private $model;
     /**
+     * Category constructor.
      * @param $id
      */
     public function __construct($id) {

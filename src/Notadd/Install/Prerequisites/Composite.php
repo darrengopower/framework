@@ -7,13 +7,18 @@
  */
 namespace Notadd\Install\Prerequisites;
 use Notadd\Install\Contracts\Prerequisite as PrerequisiteContract;
+/**
+ * Class Composite
+ * @package Notadd\Install\Prerequisites
+ */
 class Composite implements PrerequisiteContract {
     /**
      * @var array
      */
     protected $prerequisites = [];
     /**
-     * @param \Notadd\Install\Contracts\Prerequisite| $first
+     * Composite constructor.
+     * @param \Notadd\Install\Contracts\Prerequisite $first
      */
     public function __construct(PrerequisiteContract $first) {
         foreach(func_get_args() as $prerequisite) {

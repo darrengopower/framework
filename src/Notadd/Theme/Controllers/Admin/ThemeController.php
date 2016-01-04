@@ -5,6 +5,10 @@
  */
 namespace Notadd\Theme\Controllers\Admin;
 use Notadd\Admin\Controllers\AbstractAdminController;
+/**
+ * Class ThemeController
+ * @package Notadd\Theme\Controllers\Admin
+ */
 class ThemeController extends AbstractAdminController {
     /**
      * @return \Illuminate\Contracts\View\View

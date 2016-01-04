@@ -9,6 +9,10 @@ namespace Notadd\Foundation\Validation;
 use Illuminate\Contracts\Validation\ValidatesWhenResolved;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Factory;
+/**
+ * Class ValidationServiceProvider
+ * @package Notadd\Foundation\Validation
+ */
 class ValidationServiceProvider extends ServiceProvider {
     /**
      * @return void

@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Bootstrap;
 use Illuminate\Contracts\Foundation\Application;
+/**
+ * Class BootProviders
+ * @package Notadd\Foundation\Bootstrap
+ */
 class BootProviders {
     /**
      * @param \Illuminate\Contracts\Foundation\Application $app

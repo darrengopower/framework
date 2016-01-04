@@ -8,6 +8,10 @@
 namespace Notadd\Menu;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\Traits\InjectRouterTrait;
+/**
+ * Class MenuServiceProvider
+ * @package Notadd\Menu
+ */
 class MenuServiceProvider extends ServiceProvider {
     use InjectRouterTrait;
     /**

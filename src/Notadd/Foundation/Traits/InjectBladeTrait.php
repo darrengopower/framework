@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Traits;
 use Illuminate\Container\Container;
+/**
+ * Class InjectBladeTrait
+ * @package Notadd\Foundation\Traits
+ */
 trait InjectBladeTrait {
     /**
      * @var \Illuminate\View\Compilers\BladeCompiler

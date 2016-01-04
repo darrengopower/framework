@@ -18,6 +18,10 @@ use Illuminate\Contracts\Console\Kernel as KernelContract;
 use Illuminate\Contracts\Foundation\Application;
 use Notadd\Foundation\Console\Application as Artisan;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
+/**
+ * Class Kernel
+ * @package Notadd\Foundation\Console
+ */
 class Kernel implements KernelContract {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
@@ -46,6 +50,7 @@ class Kernel implements KernelContract {
         BootProviders::class,
     ];
     /**
+     * Kernel constructor.
      * @param \Illuminate\Contracts\Foundation\Application $app
      * @param \Illuminate\Contracts\Events\Dispatcher $events
      */

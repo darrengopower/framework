@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Console;
 use Illuminate\Support\ServiceProvider;
+/**
+ * Class ConsoleServiceProvider
+ * @package Notadd\Foundation\Console
+ */
 class ConsoleServiceProvider extends ServiceProvider {
     /**
      * @var bool

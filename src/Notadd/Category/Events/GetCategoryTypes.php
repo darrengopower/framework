@@ -8,6 +8,10 @@
 namespace Notadd\Category\Events;
 use Illuminate\Support\Collection;
 use Notadd\Category\Models\Category;
+/**
+ * Class GetCategoryTypes
+ * @package Notadd\Category\Events
+ */
 class GetCategoryTypes {
     /**
      * @var \Notadd\Category\Models\Category
@@ -18,6 +22,7 @@ class GetCategoryTypes {
      */
     private $types;
     /**
+     * GetCategoryTypes constructor.
      * @param \Notadd\Category\Models\Category $category
      * @param \Illuminate\Support\Collection $types
      */

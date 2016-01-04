@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Database\Schema\Grammars;
 use Illuminate\Support\Fluent;
 use Notadd\Foundation\Database\Schema\Blueprint;
+/**
+ * Class SqlServerGrammar
+ * @package Notadd\Foundation\Database\Schema\Grammars
+ */
 class SqlServerGrammar extends Grammar {
     /**
      * @var array

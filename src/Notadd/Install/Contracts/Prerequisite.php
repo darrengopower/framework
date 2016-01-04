@@ -6,6 +6,10 @@
  * @datetime 2015-10-18 17:59
  */
 namespace Notadd\Install\Contracts;
+/**
+ * Interface Prerequisite
+ * @package Notadd\Install\Contracts
+ */
 interface Prerequisite {
     /**
      * @return mixed

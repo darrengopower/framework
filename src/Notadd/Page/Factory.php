@@ -13,6 +13,10 @@ use Illuminate\Support\Collection;
 use Notadd\Article\Models\Article;
 use Notadd\Article\Models\ArticleRecommend;
 use Notadd\Page\Models\Page as Model;
+/**
+ * Class Factory
+ * @package Notadd\Page
+ */
 class Factory {
     /**
      * @var \Illuminate\Contracts\Config\Repository
@@ -27,6 +31,7 @@ class Factory {
      */
     protected $view;
     /**
+     * Factory constructor.
      * @param \Illuminate\Contracts\Config\Repository $config
      * @param \Illuminate\Filesystem\Filesystem $file
      * @param \Illuminate\Contracts\View\Factory $view

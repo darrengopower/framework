@@ -9,6 +9,10 @@ namespace Notadd\Foundation\Database\Eloquent\Relations;
 use Illuminate\Support\Arr;
 use Notadd\Foundation\Database\Eloquent\Builder;
 use Notadd\Foundation\Database\Eloquent\Model;
+/**
+ * Class MorphToMany
+ * @package Notadd\Foundation\Database\Eloquent\Relations
+ */
 class MorphToMany extends BelongsToMany {
     /**
      * @var string
@@ -23,6 +27,7 @@ class MorphToMany extends BelongsToMany {
      */
     protected $inverse;
     /**
+     * MorphToMany constructor.
      * @param \Notadd\Foundation\Database\Eloquent\Builder $query
      * @param \Notadd\Foundation\Database\Eloquent\Model $parent
      * @param string $name

@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Traits;
 use Illuminate\Container\Container;
+/**
+ * Class InjectThemeTrait
+ * @package Notadd\Foundation\Traits
+ */
 trait InjectThemeTrait {
     /**
      * @var \Notadd\Theme\Factory

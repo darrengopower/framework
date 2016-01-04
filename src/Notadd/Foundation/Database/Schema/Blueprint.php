@@ -10,6 +10,10 @@ use Closure;
 use Illuminate\Support\Fluent;
 use Notadd\Foundation\Database\Connection;
 use Notadd\Foundation\Database\Schema\Grammars\Grammar;
+/**
+ * Class Blueprint
+ * @package Notadd\Foundation\Database\Schema
+ */
 class Blueprint {
     /**
      * @var string
@@ -39,6 +43,7 @@ class Blueprint {
      */
     public $temporary = false;
     /**
+     * Blueprint constructor.
      * @param string $table
      * @param \Closure|null $callback
      */

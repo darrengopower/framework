@@ -6,6 +6,10 @@
  * @datetime 2015-12-06 01:51
  */
 namespace Notadd\Foundation\Database\Connectors;
+/**
+ * Interface ConnectorInterface
+ * @package Notadd\Foundation\Database\Connectors
+ */
 interface ConnectorInterface {
     /**
      * @param array $config

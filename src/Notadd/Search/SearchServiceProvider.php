@@ -7,6 +7,10 @@
  */
 namespace Notadd\Search;
 use Illuminate\Support\ServiceProvider;
+/**
+ * Class SearchServiceProvider
+ * @package Notadd\Search
+ */
 class SearchServiceProvider extends ServiceProvider {
     /**
      * @return void

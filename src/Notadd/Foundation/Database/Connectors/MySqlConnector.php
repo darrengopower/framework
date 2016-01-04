@@ -6,6 +6,10 @@
  * @datetime 2015-12-06 01:54
  */
 namespace Notadd\Foundation\Database\Connectors;
+/**
+ * Class MySqlConnector
+ * @package Notadd\Foundation\Database\Connectors
+ */
 class MySqlConnector extends Connector implements ConnectorInterface {
     /**
      * @param array $config

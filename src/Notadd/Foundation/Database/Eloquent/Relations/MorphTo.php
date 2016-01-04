@@ -9,6 +9,10 @@ namespace Notadd\Foundation\Database\Eloquent\Relations;
 use Notadd\Foundation\Database\Eloquent\Builder;
 use Notadd\Foundation\Database\Eloquent\Collection;
 use Notadd\Foundation\Database\Eloquent\Model;
+/**
+ * Class MorphTo
+ * @package Notadd\Foundation\Database\Eloquent\Relations
+ */
 class MorphTo extends BelongsTo {
     /**
      * @var string
@@ -27,6 +31,7 @@ class MorphTo extends BelongsTo {
      */
     protected $withTrashed = false;
     /**
+     * MorphTo constructor.
      * @param \Notadd\Foundation\Database\Eloquent\Builder $query
      * @param \Notadd\Foundation\Database\Eloquent\Model $parent
      * @param string $foreignKey

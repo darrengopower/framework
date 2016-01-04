@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Auth\Access;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+/**
+ * Class AuthorizesRequests
+ * @package Notadd\Foundation\Auth\Access
+ */
 trait AuthorizesRequests {
     /**
      * @param mixed $ability

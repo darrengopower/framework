@@ -8,6 +8,10 @@
 namespace Notadd\Admin\Controllers;
 use Notadd\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Notadd\Foundation\Auth\Models\User;
+/**
+ * Class AuthController
+ * @package Notadd\Admin\Controllers
+ */
 class AuthController extends AbstractAdminController {
     use AuthenticatesAndRegistersUsers;
     /**
@@ -50,6 +54,9 @@ class AuthController extends AbstractAdminController {
     public function getLogin() {
         return $this->view('auth.login');
     }
+    /**
+     * @return \Illuminate\Contracts\View\View
+     */
     public function getPassword() {
         return $this->view('auth.password');
     }

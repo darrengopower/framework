@@ -6,6 +6,10 @@
  * @datetime 2015-12-01 16:12
  */
 namespace Notadd\Foundation\Console;
+/**
+ * Class DownCommand
+ * @package Notadd\Foundation\Console
+ */
 class DownCommand extends Command {
     /**
      * @var string

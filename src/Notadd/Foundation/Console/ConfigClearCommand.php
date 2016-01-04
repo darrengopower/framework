@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Console;
 use Illuminate\Filesystem\Filesystem;
+/**
+ * Class ConfigClearCommand
+ * @package Notadd\Foundation\Console
+ */
 class ConfigClearCommand extends Command {
     /**
      * @var string

@@ -9,6 +9,10 @@ namespace Notadd\Auth\Social\Providers;
 use Notadd\Auth\Social\Contracts\AccessToken as AccessTokenContract;
 use Notadd\Auth\Social\Contracts\Provider as ProviderContract;
 use Notadd\Auth\Social\User;
+/**
+ * Class DoubanProvider
+ * @package Notadd\Auth\Social\Providers
+ */
 class DoubanProvider extends Provider implements ProviderContract {
     /**
      * @param string $state

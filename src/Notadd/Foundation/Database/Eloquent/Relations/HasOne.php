@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Database\Eloquent\Relations;
 use Notadd\Foundation\Database\Eloquent\Collection;
+/**
+ * Class HasOne
+ * @package Notadd\Foundation\Database\Eloquent\Relations
+ */
 class HasOne extends HasOneOrMany {
     /**
      * @return mixed

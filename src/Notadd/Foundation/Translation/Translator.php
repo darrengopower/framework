@@ -11,6 +11,10 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\NamespacedItemResolver;
 use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\TranslatorInterface;
+/**
+ * Class Translator
+ * @package Notadd\Foundation\Translation
+ */
 class Translator extends NamespacedItemResolver implements TranslatorInterface {
     /**
      * @var \Notadd\Foundation\Translation\LoaderInterface
@@ -29,6 +33,7 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface {
      */
     protected $loaded = [];
     /**
+     * Translator constructor.
      * @param \Notadd\Foundation\Translation\LoaderInterface $loader
      * @param string $locale
      */

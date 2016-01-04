@@ -9,6 +9,10 @@ namespace Notadd\Foundation\Database;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\Database\Console\Seeds\SeedCommand;
 use Notadd\Foundation\Database\Console\Seeds\SeederMakeCommand;
+/**
+ * Class SeedServiceProvider
+ * @package Notadd\Foundation\Database
+ */
 class SeedServiceProvider extends ServiceProvider {
     /**
      * Indicates if loading of the provider is deferred.

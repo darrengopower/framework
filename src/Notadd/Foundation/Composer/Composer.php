@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Composer;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
+/**
+ * Class Composer
+ * @package Notadd\Foundation\Composer
+ */
 class Composer {
     /**
      * @var \Illuminate\Filesystem\Filesystem
@@ -18,8 +22,9 @@ class Composer {
      */
     protected $workingPath;
     /**
+     * Composer constructor.
      * @param \Illuminate\Filesystem\Filesystem $files
-     * @param string $workingPath
+     * @param null $workingPath
      */
     public function __construct(Filesystem $files, $workingPath = null) {
         $this->files = $files;

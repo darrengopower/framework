@@ -6,6 +6,10 @@
  * @datetime 2015-12-06 13:48
  */
 namespace Notadd\Foundation\Database\Eloquent;
+/**
+ * Class SoftDeletes
+ * @package Notadd\Foundation\Database\Eloquent
+ */
 trait SoftDeletes {
     /**
      * @var bool

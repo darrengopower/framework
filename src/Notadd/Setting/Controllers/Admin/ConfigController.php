@@ -10,6 +10,10 @@ use Notadd\Admin\Controllers\AbstractAdminController;
 use Notadd\Page\Models\Page;
 use Notadd\Setting\Requests\SeoRequest;
 use Notadd\Setting\Requests\SiteRequest;
+/**
+ * Class ConfigController
+ * @package Notadd\Setting\Controllers\Admin
+ */
 class ConfigController extends AbstractAdminController {
     /**
      * @return \Illuminate\Contracts\View\View

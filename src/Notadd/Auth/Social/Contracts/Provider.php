@@ -6,6 +6,10 @@
  * @datetime 2015-12-13 18:39
  */
 namespace Notadd\Auth\Social\Contracts;
+/**
+ * Interface Provider
+ * @package Notadd\Auth\Social\Contracts
+ */
 interface Provider {
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse

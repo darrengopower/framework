@@ -9,6 +9,10 @@ namespace Notadd\Cache\Console;
 use Illuminate\Filesystem\Filesystem;
 use Notadd\Foundation\Composer\Composer;
 use Notadd\Foundation\Console\Command;
+/**
+ * Class CacheTableCommand
+ * @package Notadd\Cache\Console
+ */
 class CacheTableCommand extends Command {
     /**
      * @var string
@@ -27,8 +31,9 @@ class CacheTableCommand extends Command {
      */
     protected $composer;
     /**
+     * CacheTableCommand constructor.
      * @param \Illuminate\Filesystem\Filesystem $files
-     * @param \Notadd\Foundation\Composer\Composer
+     * @param \Notadd\Foundation\Composer\Composer $composer
      */
     public function __construct(Filesystem $files, Composer $composer) {
         parent::__construct();

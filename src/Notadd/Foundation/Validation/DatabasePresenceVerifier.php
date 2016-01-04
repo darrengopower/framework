@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Validation;
 use Illuminate\Validation\PresenceVerifierInterface;
 use Notadd\Foundation\Database\ConnectionResolverInterface;
+/**
+ * Class DatabasePresenceVerifier
+ * @package Notadd\Foundation\Validation
+ */
 class DatabasePresenceVerifier implements PresenceVerifierInterface {
     /**
      * @var \Notadd\Foundation\Database\ConnectionResolverInterface
@@ -18,7 +22,8 @@ class DatabasePresenceVerifier implements PresenceVerifierInterface {
      */
     protected $connection = null;
     /**
-     * @param  \Notadd\Foundation\Database\ConnectionResolverInterface $db
+     * DatabasePresenceVerifier constructor.
+     * @param \Notadd\Foundation\Database\ConnectionResolverInterface $db
      */
     public function __construct(ConnectionResolverInterface $db) {
         $this->db = $db;

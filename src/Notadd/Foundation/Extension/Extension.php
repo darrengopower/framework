@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Extension;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
+/**
+ * Class Extension
+ * @package Notadd\Foundation\Extension
+ */
 abstract class Extension extends ServiceProvider {
     /**
      * @return void

@@ -13,6 +13,10 @@ use Notadd\Foundation\Database\Query\Grammars\SqlServerGrammar as QueryGrammar;
 use Notadd\Foundation\Database\Query\Processors\SqlServerProcessor;
 use Notadd\Foundation\Database\Schema\Grammars\SqlServerGrammar as SchemaGrammar;
 use Throwable;
+/**
+ * Class SqlServerConnection
+ * @package Notadd\Foundation\Database
+ */
 class SqlServerConnection extends Connection {
     /**
      * @param \Closure $callback

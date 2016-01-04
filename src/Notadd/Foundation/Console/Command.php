@@ -19,6 +19,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
+/**
+ * Class Command
+ * @package Notadd\Foundation\Console
+ */
 class Command extends SymfonyCommand {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
@@ -44,6 +48,9 @@ class Command extends SymfonyCommand {
      * @var string
      */
     protected $description;
+    /**
+     * Command constructor.
+     */
     public function __construct() {
         if(isset($this->signature)) {
             $this->configureUsingFluentDefinition();

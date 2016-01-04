@@ -6,6 +6,10 @@
  * @datetime 2015-12-06 19:29
  */
 namespace Notadd\Foundation\Database;
+/**
+ * Class ConnectionResolver
+ * @package Notadd\Foundation\Database
+ */
 class ConnectionResolver implements ConnectionResolverInterface {
     /**
      * @var array

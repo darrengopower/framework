@@ -8,6 +8,10 @@
 namespace Notadd\Article;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\Traits\InjectRouterTrait;
+/**
+ * Class ArticleServiceProvider
+ * @package Notadd\Article
+ */
 class ArticleServiceProvider extends ServiceProvider {
     use InjectRouterTrait;
     /**

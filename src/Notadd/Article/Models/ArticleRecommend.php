@@ -7,6 +7,10 @@
  */
 namespace Notadd\Article\Models;
 use Notadd\Foundation\Database\Eloquent\Model;
+/**
+ * Class ArticleRecommend
+ * @package Notadd\Article\Models
+ */
 class ArticleRecommend extends Model {
     /**
      * @var array

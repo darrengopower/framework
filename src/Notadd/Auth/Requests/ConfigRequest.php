@@ -7,6 +7,10 @@
  */
 namespace Notadd\Auth\Requests;
 use Notadd\Foundation\Http\FormRequest;
+/**
+ * Class ConfigRequest
+ * @package Notadd\Auth\Requests
+ */
 class ConfigRequest extends FormRequest{
     /**
      * @return bool

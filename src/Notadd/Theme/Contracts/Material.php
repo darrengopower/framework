@@ -14,8 +14,13 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\UrlGenerator;
 use Notadd\Theme\Compiler;
 use Notadd\Theme\FileFinder as ThemeFileFinder;
+/**
+ * Interface Material
+ * @package Notadd\Theme\Contracts
+ */
 interface Material {
     /**
+     * Material constructor.
      * @param \Illuminate\Contracts\Foundation\Application $application
      * @param \Illuminate\Cache\CacheManager $cache
      * @param \Notadd\Theme\Compiler $compiler

@@ -7,5 +7,9 @@
  */
 namespace Notadd\Foundation\Database\Eloquent;
 use RuntimeException;
+/**
+ * Class MassAssignmentException
+ * @package Notadd\Foundation\Database\Eloquent
+ */
 class MassAssignmentException extends RuntimeException {
 }

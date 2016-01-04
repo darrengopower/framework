@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Database\Query\Grammars;
 use Notadd\Foundation\Database\Query\Builder;
+/**
+ * Class PostgresGrammar
+ * @package Notadd\Foundation\Database\Query\Grammars
+ */
 class PostgresGrammar extends Grammar {
     /**
      * @var array

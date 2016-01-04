@@ -18,6 +18,10 @@ use InvalidArgumentException;
 use Notadd\Foundation\Database\ConnectionInterface;
 use Notadd\Foundation\Database\Query\Grammars\Grammar;
 use Notadd\Foundation\Database\Query\Processors\Processor;
+/**
+ * Class Builder
+ * @package Notadd\Foundation\Database\Query
+ */
 class Builder {
     use Macroable {
         __call as macroCall;
@@ -153,6 +157,7 @@ class Builder {
      */
     protected $useWritePdo = false;
     /**
+     * Builder constructor.
      * @param \Notadd\Foundation\Database\ConnectionInterface $connection
      * @param \Notadd\Foundation\Database\Query\Grammars\Grammar $grammar
      * @param \Notadd\Foundation\Database\Query\Processors\Processor $processor

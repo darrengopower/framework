@@ -11,9 +11,14 @@ use JsonSerializable;
 use Notadd\Auth\Social\Contracts\AccessToken as AccessTokenContract;
 use Notadd\Auth\Social\Contracts\User as UserContract;
 use Notadd\Auth\Social\Traits\AttributeTrait;
+/**
+ * Class User
+ * @package Notadd\Auth\Social
+ */
 class User implements UserContract, ArrayAccess, JsonSerializable {
     use AttributeTrait;
     /**
+     * User constructor.
      * @param array $attributes
      */
     public function __construct(array $attributes) {

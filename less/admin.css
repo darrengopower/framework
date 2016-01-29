@@ -3791,7 +3791,7 @@ body {
     height: calc(100% - 46px)
 }
 .page-auth {
-    background: url("/static/admin/background.png") repeat;
+    background: url("/statics/admin/images/background.png") repeat;
 }
 .page-auth .site-logo {
     text-transform: uppercase;

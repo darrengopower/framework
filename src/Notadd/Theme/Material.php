@@ -161,7 +161,7 @@ class Material implements MaterialContract {
             $key = 'cache.style.' . $code;
             if(!$this->files->exists($file) || (!$this->cache->has($key) && $this->application->inDebugMode())) {
                 if(!$this->files->isDirectory($dictionary)) {
-                    $this->files->makeDirectory($dictionary, '0755', true);
+                    $this->files->makeDirectory($dictionary, 0755, true, true);
                 }
                 $content = $this->compileStyle($files);
                 $expires = Carbon::now()->addMinutes(10);
@@ -189,7 +189,7 @@ class Material implements MaterialContract {
             $dictionary = $this->pathSplit($code, '2,2,2,2,2,2', $dictionary);
             $dictionary = $dictionary->implode(DIRECTORY_SEPARATOR);
             if(!$this->files->isDirectory($dictionary)) {
-                $this->files->makeDirectory($dictionary, '0755', true);
+                $this->files->makeDirectory($dictionary, 0755, true, true);
             }
             $file = $dictionary . DIRECTORY_SEPARATOR . Str::substr($code, 12, 20) . '.js';
             $key = 'cache.script.' . $code;

@@ -27,7 +27,7 @@
             </li>
             <li class="dropdown">
                 <a href class="user-profile" data-toggle="dropdown">
-                    <img src="{{ asset('static/admin/avatar.jpg') }}" alt="N">
+                    <img src="{{ asset('statics/admin/images/avatar.jpg') }}" alt="N">
                 </a>
                 <div class="panel panel-default dropdown-menu">
                     <div class="panel-footer clearfix">

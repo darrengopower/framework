@@ -36,7 +36,6 @@ class CacheController extends AbstractAdminController {
      * @param \Notadd\Setting\Factory $setting
      * @param \Notadd\Foundation\SearchEngine\Optimization $seo
      * @param \Illuminate\Contracts\View\Factory $view
-     * @internal param \Notadd\Foundation\Console\Kernel $artisan
      */
     public function __construct(Application $app, Kernel $artisan, Dispatcher $events, Log $log, Redirector $redirect, Request $request, SettingFactory $setting, Optimization $seo, ViewFactory $view) {
         parent::__construct($app, $events, $log, $redirect, $request, $setting, $seo, $view);
@@ -59,6 +58,7 @@ class CacheController extends AbstractAdminController {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function clearStatic() {
+        $this->artisan->call('static:clear');
         return $this->redirect->back();
     }
     /**

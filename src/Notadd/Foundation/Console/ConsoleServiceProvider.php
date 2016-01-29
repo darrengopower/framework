@@ -27,6 +27,7 @@ class ConsoleServiceProvider extends ServiceProvider {
         'RouteCache' => 'command.route.cache',
         'RouteClear' => 'command.route.clear',
         'RouteList' => 'command.route.list',
+        'StaticClear' => 'command.static.clear',
         'Up' => 'command.up',
         'VendorPublish' => 'command.vendor.publish',
         'ViewClear' => 'command.view.clear',
@@ -98,6 +99,14 @@ class ConsoleServiceProvider extends ServiceProvider {
     protected function registerRouteListCommand() {
         $this->app->singleton('command.route.list', function ($app) {
             return new RouteListCommand($app['router']);
+        });
+    }
+    /**
+     * @return void
+     */
+    protected function registerStaticClearCommand() {
+        $this->app->singleton('command.static.clear', function ($app) {
+            return new StaticClearCommand($app['files']);
         });
     }
     /**

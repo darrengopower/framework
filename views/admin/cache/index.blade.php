@@ -14,10 +14,10 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th class="col-md-4"></td>
-                                    <th class="col-md-2">类型</td>
-                                    <th class="col-md-2">操作</td>
-                                    <th class="col-md-4"></th>
+                                    <th class="col-md-3"></td>
+                                    <th class="col-md-3">类型</td>
+                                    <th class="col-md-3">操作</td>
+                                    <th class="col-md-3"></th>
                                 </tr>
                             </thead>
                             <tbody>

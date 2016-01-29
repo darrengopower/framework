@@ -8,7 +8,6 @@
 namespace Notadd\Foundation\Http;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Notadd\Foundation\SearchEngine\SearchEngineServiceProvider;
 use Notadd\Foundation\Traits\InjectRouterTrait;
 use Notadd\Foundation\Traits\InjectSettingTrait;
 use Notadd\Page\Models\Page;

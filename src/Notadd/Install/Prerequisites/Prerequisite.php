@@ -7,6 +7,10 @@
  */
 namespace Notadd\Install\Prerequisites;
 use Notadd\Install\Contracts\Prerequisite as PrerequisiteContract;
+/**
+ * Class Prerequisite
+ * @package Notadd\Install\Prerequisites
+ */
 abstract class Prerequisite implements PrerequisiteContract {
     /**
      * @var array

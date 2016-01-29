@@ -9,6 +9,10 @@ namespace Notadd\Theme;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\Factory as ViewFactory;
 use Notadd\Theme\Contracts\FileFinder as FileFinderContract;
+/**
+ * Class FileFinder
+ * @package Notadd\Theme
+ */
 class FileFinder implements FileFinderContract {
     /**
      * @var \Illuminate\Filesystem\Filesystem
@@ -19,6 +23,7 @@ class FileFinder implements FileFinderContract {
      */
     protected $view;
     /**
+     * FileFinder constructor.
      * @param \Illuminate\Filesystem\Filesystem $files
      * @param \Illuminate\View\Factory $view
      */

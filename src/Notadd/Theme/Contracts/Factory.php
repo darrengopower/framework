@@ -6,6 +6,10 @@
  * @datetime 2015-12-18 14:34
  */
 namespace Notadd\Theme\Contracts;
+/**
+ * Interface Factory
+ * @package Notadd\Theme\Contracts
+ */
 interface Factory {
     /**
      * @return mixed

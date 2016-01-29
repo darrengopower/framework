@@ -9,6 +9,10 @@ namespace Notadd\Foundation\Database\Console\Seeds;
 use Illuminate\Filesystem\Filesystem;
 use Notadd\Foundation\Composer\Composer;
 use Notadd\Foundation\Console\GeneratorCommand;
+/**
+ * Class SeederMakeCommand
+ * @package Notadd\Foundation\Database\Console\Seeds
+ */
 class SeederMakeCommand extends GeneratorCommand {
     /**
      * @var string
@@ -27,6 +31,7 @@ class SeederMakeCommand extends GeneratorCommand {
      */
     protected $composer;
     /**
+     * SeederMakeCommand constructor.
      * @param \Illuminate\Filesystem\Filesystem $files
      * @param \Notadd\Foundation\Composer\Composer $composer
      */

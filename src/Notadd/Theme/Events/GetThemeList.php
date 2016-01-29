@@ -10,6 +10,10 @@ use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Collection;
 use Notadd\Theme\Theme;
+/**
+ * Class GetThemeList
+ * @package Notadd\Theme\Events
+ */
 class GetThemeList {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
@@ -20,6 +24,7 @@ class GetThemeList {
      */
     private $list;
     /**
+     * GetThemeList constructor.
      * @param \Illuminate\Contracts\Foundation\Application $app
      * @param \Illuminate\Support\Collection $list
      */

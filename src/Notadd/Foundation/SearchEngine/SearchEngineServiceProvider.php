@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\SearchEngine;
 use Illuminate\Support\ServiceProvider;
+/**
+ * Class SearchEngineServiceProvider
+ * @package Notadd\Foundation\SearchEngine
+ */
 class SearchEngineServiceProvider extends ServiceProvider {
     /**
      * @return void
@@ -17,6 +21,8 @@ class SearchEngineServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->app->singleton('searchengine.optimization', Optimization::class);
+        $this->app->singleton(Optimization::class, function() {
+            return new Optimization($this->app, $this->app->make('setting'), $this->app->make('view'));
+        });
     }
 }

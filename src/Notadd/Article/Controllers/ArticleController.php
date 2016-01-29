@@ -7,6 +7,10 @@ namespace Notadd\Article\Controllers;
 use Notadd\Article\Article;
 use Notadd\Article\Events\OnArticleShow;
 use Notadd\Foundation\Routing\Controller;
+/**
+ * Class ArticleController
+ * @package Notadd\Article\Controllers
+ */
 class ArticleController extends Controller {
     /**
      * @param int $id
@@ -14,7 +18,7 @@ class ArticleController extends Controller {
      */
     public function show($id) {
         $article = new Article($id);
-        $this->app->make('events')->fire(new OnArticleShow($this->app, $this->view, $article));
+        $this->events->fire(new OnArticleShow($this->app, $this->view, $article));
         $this->share('title', $article->getTitle());
         $this->share('content', $article->getContent());
         $this->share('category', $article->getCategory());

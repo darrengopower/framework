@@ -11,6 +11,10 @@ use InvalidArgumentException;
 use Notadd\Auth\Social\Contracts\Factory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+/**
+ * Class SocialManager
+ * @package Notadd\Auth\Social
+ */
 class SocialManager implements Factory {
     /**
      * @var \Notadd\Auth\Social\Config
@@ -43,6 +47,7 @@ class SocialManager implements Factory {
      */
     protected $drivers = [];
     /**
+     * SocialManager constructor.
      * @param array $config
      * @param \Symfony\Component\HttpFoundation\Request|null $request
      */

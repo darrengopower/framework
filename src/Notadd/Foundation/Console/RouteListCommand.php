@@ -13,6 +13,10 @@ use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 use Notadd\Foundation\Routing\Controller;
 use Symfony\Component\Console\Input\InputOption;
+/**
+ * Class RouteListCommand
+ * @package Notadd\Foundation\Console
+ */
 class RouteListCommand extends Command {
     /**
      * @var string
@@ -42,6 +46,7 @@ class RouteListCommand extends Command {
         'Middleware'
     ];
     /**
+     * RouteListCommand constructor.
      * @param \Illuminate\Routing\Router $router
      */
     public function __construct(Router $router) {

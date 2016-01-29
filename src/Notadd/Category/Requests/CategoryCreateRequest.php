@@ -7,6 +7,10 @@
  */
 namespace Notadd\Category\Requests;
 use Notadd\Foundation\Http\FormRequest;
+/**
+ * Class CategoryCreateRequest
+ * @package Notadd\Category\Requests
+ */
 class CategoryCreateRequest extends FormRequest {
     /**
      * @return bool

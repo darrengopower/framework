@@ -6,6 +6,10 @@
  * @datetime 2015-12-06 02:05
  */
 namespace Notadd\Foundation\Database\Query;
+/**
+ * Class Expression
+ * @package Notadd\Foundation\Database\Query
+ */
 class Expression {
     /**
      * @var mixed

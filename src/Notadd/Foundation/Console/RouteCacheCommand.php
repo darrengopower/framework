@@ -8,8 +8,18 @@
 namespace Notadd\Foundation\Console;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Routing\RouteCollection;
+/**
+ * Class RouteCacheCommand
+ * @package Notadd\Foundation\Console
+ */
 class RouteCacheCommand extends Command {
+    /**
+     * @var string
+     */
     protected $name = 'route:cache';
+    /**
+     * @var string
+     */
     protected $description = 'Create a route cache file for faster route registration';
     /**
      * @var \Illuminate\Filesystem\Filesystem

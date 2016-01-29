@@ -9,6 +9,10 @@ namespace Notadd\Foundation\Console;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
+/**
+ * Class GeneratorCommand
+ * @package Notadd\Foundation\Console
+ */
 abstract class GeneratorCommand extends Command {
     /**
      * @var \Illuminate\Filesystem\Filesystem
@@ -19,6 +23,7 @@ abstract class GeneratorCommand extends Command {
      */
     protected $type;
     /**
+     * GeneratorCommand constructor.
      * @param \Illuminate\Filesystem\Filesystem $files
      */
     public function __construct(Filesystem $files) {
@@ -104,7 +109,7 @@ abstract class GeneratorCommand extends Command {
      */
     protected function replaceNamespace(&$stub, $name) {
         $stub = str_replace('DummyNamespace', $this->getNamespace($name), $stub);
-        $stub = str_replace('DummyRootNamespace', $this->laravel->getNamespace(), $stub);
+        $stub = str_replace('DummyRootNamespace', $this->notadd->getNamespace(), $stub);
         return $this;
     }
     /**

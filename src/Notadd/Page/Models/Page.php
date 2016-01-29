@@ -10,6 +10,10 @@ use Illuminate\Support\Collection;
 use Notadd\Foundation\Database\Eloquent\Model;
 use Notadd\Foundation\Database\Eloquent\SoftDeletes;
 use Notadd\Page\Events\GetTemplateList;
+/**
+ * Class Page
+ * @package Notadd\Page\Models
+ */
 class Page extends Model {
     use SoftDeletes;
     /**

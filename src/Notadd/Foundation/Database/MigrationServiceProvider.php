@@ -17,6 +17,10 @@ use Notadd\Foundation\Database\Console\Migrations\StatusCommand;
 use Notadd\Foundation\Database\Migrations\DatabaseMigrationRepository;
 use Notadd\Foundation\Database\Migrations\MigrationCreator;
 use Notadd\Foundation\Database\Migrations\Migrator;
+/**
+ * Class MigrationServiceProvider
+ * @package Notadd\Foundation\Database
+ */
 class MigrationServiceProvider extends ServiceProvider {
     protected $defer = true;
     public function boot() {

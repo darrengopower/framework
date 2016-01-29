@@ -6,6 +6,10 @@
  * @datetime 2015-10-18 18:07
  */
 namespace Notadd\Install\Prerequisites;
+/**
+ * Class PhpVersion
+ * @package Notadd\Install\Prerequisites
+ */
 class PhpVersion extends Prerequisite {
     /**
      * @return void

@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Http\Middleware;
 use Closure;
 use Illuminate\Http\Exception\PostTooLargeException;
+/**
+ * Class VerifyPostSize
+ * @package Notadd\Foundation\Http\Middleware
+ */
 class VerifyPostSize {
     /**
      * @param \Illuminate\Http\Request $request

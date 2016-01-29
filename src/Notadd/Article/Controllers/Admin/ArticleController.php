@@ -14,6 +14,10 @@ use Notadd\Article\Models\ArticleRecommend;
 use Notadd\Article\Requests\ArticleCreateRequest;
 use Notadd\Article\Requests\ArticleEditRequest;
 use Notadd\Category\Models\Category;
+/**
+ * Class ArticleController
+ * @package Notadd\Article\Controllers\Admin
+ */
 class ArticleController extends AbstractAdminController {
     /**
      * @param \Illuminate\Http\Request $request

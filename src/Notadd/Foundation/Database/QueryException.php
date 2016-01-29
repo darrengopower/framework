@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Database;
 use PDOException;
+/**
+ * Class QueryException
+ * @package Notadd\Foundation\Database
+ */
 class QueryException extends PDOException {
     /**
      * @var string

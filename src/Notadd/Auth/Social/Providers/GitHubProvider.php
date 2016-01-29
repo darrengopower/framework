@@ -10,6 +10,10 @@ use Exception;
 use Notadd\Auth\Social\Contracts\AccessToken as AccessTokenContract;
 use Notadd\Auth\Social\Contracts\Provider as ProviderContract;
 use Notadd\Auth\Social\User;
+/**
+ * Class GitHubProvider
+ * @package Notadd\Auth\Social\Providers
+ */
 class GitHubProvider extends Provider implements ProviderContract {
     /**
      * @var array

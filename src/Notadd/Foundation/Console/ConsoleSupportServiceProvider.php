@@ -15,6 +15,10 @@ use Notadd\Foundation\Database\MigrationServiceProvider;
 use Notadd\Foundation\Database\SeedServiceProvider;
 use Notadd\Foundation\Queue\ConsoleServiceProvider as QueueConsoleServiceProvider;
 use Notadd\Foundation\Session\ConsoleServiceProvider as SessionConsoleServiceProvider;
+/**
+ * Class ConsoleSupportServiceProvider
+ * @package Notadd\Foundation\Console
+ */
 class ConsoleSupportServiceProvider extends AggregateServiceProvider {
     /**
      * @var bool

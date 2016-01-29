@@ -9,6 +9,10 @@ namespace Notadd\Foundation\Extension;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\Traits\InjectExtensionTrait;
 use Symfony\Component\Finder\Finder;
+/**
+ * Class ExtensionServiceProvider
+ * @package Notadd\Foundation\Extension
+ */
 class ExtensionServiceProvider extends ServiceProvider {
     use InjectExtensionTrait;
     /**

@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Traits;
 use Illuminate\Container\Container;
+/**
+ * Class InjectCookieTrait
+ * @package Notadd\Foundation\Traits
+ */
 trait InjectCookieTrait {
     /**
      * @var \Illuminate\Cookie\CookieJar

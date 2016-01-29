@@ -33,6 +33,10 @@ use Notadd\Foundation\Database\Eloquent\Relations\MorphToMany;
 use Notadd\Foundation\Database\Eloquent\Relations\BelongsToMany;
 use Notadd\Foundation\Database\Eloquent\Relations\HasManyThrough;
 use Notadd\Foundation\Database\Query\Builder as QueryBuilder;
+/**
+ * Class Model
+ * @package Notadd\Foundation\Database\Eloquent
+ */
 abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializable, QueueableEntity, UrlRoutable {
     /**
      * @var string
@@ -171,6 +175,7 @@ abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializab
      */
     const UPDATED_AT = 'updated_at';
     /**
+     * Model constructor.
      * @param array $attributes
      */
     public function __construct(array $attributes = []) {

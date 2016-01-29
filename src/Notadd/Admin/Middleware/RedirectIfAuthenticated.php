@@ -9,23 +9,27 @@ namespace Notadd\Admin\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\UrlGenerator;
+/**
+ * Class RedirectIfAuthenticated
+ * @package Notadd\Admin\Middleware
+ */
 class RedirectIfAuthenticated {
     /**
-     * @var Guard
+     * @var \Illuminate\Contracts\Auth\Guard
      */
     protected $auth;
     /**
-     * @param Guard $auth
+     * RedirectIfAuthenticated constructor.
+     * @param \Illuminate\Contracts\Auth\Guard $auth
      */
     public function __construct(Guard $auth) {
         $this->auth = $auth;
     }
     /**
-     * @param Request $request
+     * @param $request
      * @param \Closure $next
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function handle($request, Closure $next) {
         if($this->auth->check()) {

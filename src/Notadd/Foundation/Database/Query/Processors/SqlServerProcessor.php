@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Database\Query\Processors;
 use Notadd\Foundation\Database\Query\Builder;
+/**
+ * Class SqlServerProcessor
+ * @package Notadd\Foundation\Database\Query\Processors
+ */
 class SqlServerProcessor extends Processor {
     /**
      * @param \Notadd\Foundation\Database\Query\Builder $query

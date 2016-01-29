@@ -13,6 +13,10 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Console\Application as ConsoleApplication;
 use Symfony\Component\Debug\ExceptionHandler as SymfonyDisplayer;
 use Illuminate\Contracts\Debug\ExceptionHandler as ExceptionHandlerContract;
+/**
+ * Class Handler
+ * @package Notadd\Foundation\Exceptions
+ */
 class Handler implements ExceptionHandlerContract {
     /**
      * @var \Psr\Log\LoggerInterface

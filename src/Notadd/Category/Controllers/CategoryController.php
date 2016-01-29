@@ -7,6 +7,10 @@ namespace Notadd\Category\Controllers;
 use Notadd\Category\Category;
 use Notadd\Category\Events\OnCategoryShow;
 use Notadd\Foundation\Routing\Controller;
+/**
+ * Class CategoryController
+ * @package Notadd\Category\Controllers
+ */
 class CategoryController extends Controller {
     /**
      * @return \Illuminate\Contracts\View\View
@@ -21,6 +25,9 @@ class CategoryController extends Controller {
     public function show($id) {
         $category = new Category($id);
         $this->events->fire(new OnCategoryShow($this->app, $this->view, $category->getModel()));
+        $this->seo->setTitleMeta($category->getTitle() . ' - {sitename}');
+        $this->seo->setDescriptionMeta($category->getDescription());
+        $this->seo->setKeywordsMeta($category->getKeywords());
         $this->share('category', $category->getModel());
         $this->share('name', $category->getTitle());
         $this->share('list', $category->getList());

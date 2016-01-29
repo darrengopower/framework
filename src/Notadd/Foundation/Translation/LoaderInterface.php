@@ -6,6 +6,10 @@
  * @datetime 2015-12-05 00:08
  */
 namespace Notadd\Foundation\Translation;
+/**
+ * Interface LoaderInterface
+ * @package Notadd\Foundation\Translation
+ */
 interface LoaderInterface {
     /**
      * @param string $locale

@@ -12,6 +12,10 @@ use Notadd\Admin\Controllers\AbstractAdminController;
 use Notadd\Page\Models\Page;
 use Notadd\Page\Requests\PageCreateRequest;
 use Notadd\Page\Requests\PageEditRequest;
+/**
+ * Class PageController
+ * @package Notadd\Page\Controllers\Admin
+ */
 class PageController extends AbstractAdminController {
     /**
      * @return \Illuminate\Contracts\View\View

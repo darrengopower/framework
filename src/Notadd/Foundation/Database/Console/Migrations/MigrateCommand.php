@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Database\Console\Migrations;
 use Notadd\Foundation\Database\Migrations\Migrator;
 use Symfony\Component\Console\Input\InputOption;
+/**
+ * Class MigrateCommand
+ * @package Notadd\Foundation\Database\Console\Migrations
+ */
 class MigrateCommand extends BaseCommand {
     /**
      * @var string
@@ -22,6 +26,7 @@ class MigrateCommand extends BaseCommand {
      */
     protected $migrator;
     /**
+     * MigrateCommand constructor.
      * @param \Notadd\Foundation\Database\Migrations\Migrator $migrator
      */
     public function __construct(Migrator $migrator) {

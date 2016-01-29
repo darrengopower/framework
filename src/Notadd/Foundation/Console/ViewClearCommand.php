@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Console;
 use Illuminate\Filesystem\Filesystem;
+/**
+ * Class ViewClearCommand
+ * @package Notadd\Foundation\Console
+ */
 class ViewClearCommand extends Command {
     /**
      * @var string
@@ -21,6 +25,7 @@ class ViewClearCommand extends Command {
      */
     protected $files;
     /**
+     * ViewClearCommand constructor.
      * @param \Illuminate\Filesystem\Filesystem $files
      */
     public function __construct(Filesystem $files) {
@@ -31,7 +36,7 @@ class ViewClearCommand extends Command {
      * @return void
      */
     public function fire() {
-        $views = $this->files->glob($this->laravel['config']['view.compiled'] . '/*');
+        $views = $this->files->glob($this->notadd['config']['view.compiled'] . '/*');
         foreach($views as $view) {
             $this->files->delete($view);
         }

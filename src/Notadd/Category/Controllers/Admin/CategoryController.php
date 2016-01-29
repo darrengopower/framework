@@ -11,6 +11,10 @@ use Notadd\Category\Events\BeforeCategoryDelete;
 use Notadd\Category\Models\Category;
 use Notadd\Category\Requests\CategoryCreateRequest;
 use Notadd\Category\Requests\CategoryEditRequest;
+/**
+ * Class CategoryController
+ * @package Notadd\Category\Controllers\Admin
+ */
 class CategoryController extends AbstractAdminController {
     /**
      * @param $id

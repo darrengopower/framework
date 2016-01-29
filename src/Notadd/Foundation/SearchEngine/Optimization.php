@@ -9,33 +9,45 @@ namespace Notadd\Foundation\SearchEngine;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Collection;
 use Illuminate\View\Factory;
+use Notadd\Setting\Factory as SettingFactory;
+/**
+ * Class Optimization
+ * @package Notadd\Foundation\SearchEngine
+ */
 class Optimization {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
      */
     private $app;
     /**
-     * @var \Illuminate\View\Factory
+     * @var \Illuminate\Support\Collection
      */
-    private $view;
+    private $code;
     /**
      * @var \Notadd\Foundation\SearchEngine\Meta
      */
     private $meta;
     /**
-     * @var static
+     * @var \Notadd\Setting\Factory
      */
-    private $code;
+    private $setting;
     /**
+     * @var \Illuminate\View\Factory
+     */
+    private $view;
+    /**
+     * Optimization constructor.
      * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Notadd\Setting\Factory $setting
      * @param \Illuminate\View\Factory $view
      */
-    public function __construct(Application $app, Factory $view) {
+    public function __construct(Application $app, SettingFactory $setting, Factory $view) {
         $this->app = $app;
         $this->view = $view;
-        $this->code = Collection::make();
-        $this->code->put('{sitename}', $this->app->make('setting')->get('seo.title', 'Notadd CMS'));
+        $this->code = new Collection();
         $this->meta = new Meta();
+        $this->setting = $setting;
+        $this->code->put('{sitename}', $this->setting->get('seo.title', 'Notadd CMS'));
     }
     /**
      * @param string $key

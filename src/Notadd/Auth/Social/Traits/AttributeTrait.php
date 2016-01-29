@@ -6,6 +6,10 @@
  * @datetime 2015-12-13 18:47
  */
 namespace Notadd\Auth\Social\Traits;
+/**
+ * Class AttributeTrait
+ * @package Notadd\Auth\Social\Traits
+ */
 trait AttributeTrait {
     /**
      * @var array

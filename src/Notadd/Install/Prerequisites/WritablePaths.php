@@ -6,6 +6,10 @@
  * @datetime 2015-10-18 18:08
  */
 namespace Notadd\Install\Prerequisites;
+/**
+ * Class WritablePaths
+ * @package Notadd\Install\Prerequisites
+ */
 class WritablePaths extends Prerequisite {
     /**
      * @return void

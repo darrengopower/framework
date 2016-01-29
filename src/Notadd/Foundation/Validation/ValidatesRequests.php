@@ -10,6 +10,10 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Exception\HttpResponseException;
+/**
+ * Class ValidatesRequests
+ * @package Notadd\Foundation\Validation
+ */
 trait ValidatesRequests {
     /**
      * @var string

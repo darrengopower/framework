@@ -8,6 +8,7 @@
             @foreach($crumbs as $crumb)
                 <li><a href="{{ url('admin/category/' . $crumb->id) }}">{{ $crumb->title }}</a></li>
             @endforeach
+            <li><a href="{{ url('admin/category/' . $category->id . '/edit') }}">编辑分类：{{ $category->title }}</a></li>
         </ol>
         <div class="page-wrap">
             <div class="row">
@@ -138,7 +139,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label"></label>
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn btn-primary right">提交</button>
+                                    <button type="submit" class="btn btn-primary" style="width: 100%;">提交</button>
                                 </div>
                             </div>
                         </form>
@@ -149,9 +150,9 @@
     </div>
 @endsection
 @section('admin-css')
-    <link rel="stylesheet" href="{{ asset('themes/admin/css/bootstrap-colorpicker.min.css') }}">
+    @css('admin::less.default.bootstrap-colorpicker')
 @endsection
 @section('admin-js')
-    <script src="{{ asset('themes/admin/js/jquery.uploadPreview.js') }}"></script>
-    <script src="{{ asset('themes/admin/js/bootstrap-colorpicker.min.js') }}"></script>
+    @js('admin::js.default.upload-preview')
+    @js('admin::js.default.bootstrap-colorpicker')
 @endsection

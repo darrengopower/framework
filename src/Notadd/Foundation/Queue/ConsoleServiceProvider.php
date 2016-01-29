@@ -13,6 +13,10 @@ use Illuminate\Queue\Console\RetryCommand;
 use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\Queue\Console\FailedTableCommand;
 use Notadd\Foundation\Queue\Console\TableCommand;
+/**
+ * Class ConsoleServiceProvider
+ * @package Notadd\Foundation\Queue
+ */
 class ConsoleServiceProvider extends ServiceProvider {
     /**
      * @var bool

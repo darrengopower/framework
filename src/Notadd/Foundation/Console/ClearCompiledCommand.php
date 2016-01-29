@@ -6,6 +6,10 @@
  * @datetime 2015-12-01 16:00
  */
 namespace Notadd\Foundation\Console;
+/**
+ * Class ClearCompiledCommand
+ * @package Notadd\Foundation\Console
+ */
 class ClearCompiledCommand extends Command {
     /**
      * @var string

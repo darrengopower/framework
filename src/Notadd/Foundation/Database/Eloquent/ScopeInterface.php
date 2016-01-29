@@ -6,6 +6,10 @@
  * @datetime 2015-12-06 13:47
  */
 namespace Notadd\Foundation\Database\Eloquent;
+/**
+ * Interface ScopeInterface
+ * @package Notadd\Foundation\Database\Eloquent
+ */
 interface ScopeInterface {
     /**
      * @param \Notadd\Foundation\Database\Eloquent\Builder $builder

@@ -10,6 +10,10 @@ use Illuminate\Support\ServiceProvider;
 use Notadd\Foundation\Http\FormRequest;
 use Notadd\Foundation\Traits\InjectEventsTrait;
 use Symfony\Component\HttpFoundation\Request;
+/**
+ * Class FormRequestServiceProvider
+ * @package Notadd\Foundation\Http
+ */
 class FormRequestServiceProvider extends ServiceProvider {
     use InjectEventsTrait;
     /**

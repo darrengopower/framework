@@ -29,6 +29,10 @@ use Notadd\Page\PageServiceProvider;
 use Notadd\Theme\ThemeServiceProvider;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
+/**
+ * Class Server
+ * @package Notadd\Foundation
+ */
 class Server {
     /**
      * @var \Notadd\Foundation\Application
@@ -39,6 +43,7 @@ class Server {
      */
     private $path;
     /**
+     * Server constructor.
      * @param $path
      */
     public function __construct($path) {

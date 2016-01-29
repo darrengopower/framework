@@ -25,6 +25,10 @@ use Notadd\Foundation\Http\Middleware\CheckForMaintenanceMode;
 use Notadd\Foundation\Http\Middleware\VerifyCsrfToken;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 use Throwable;
+/**
+ * Class Kernel
+ * @package Notadd\Foundation\Http
+ */
 class Kernel implements KernelContract {
     /**
      * @var \Illuminate\Contracts\Foundation\Application

@@ -7,8 +7,9 @@
  */
 namespace Notadd\Foundation;
 use Closure;
+use Notadd\Auth\AuthServiceProvider;
+use Notadd\Foundation\SearchEngine\SearchEngineServiceProvider;
 use RuntimeException;
-use Illuminate\Auth\AuthServiceProvider;
 use Illuminate\Auth\Passwords\PasswordResetServiceProvider;
 use Illuminate\Broadcasting\BroadcastServiceProvider;
 use Illuminate\Bus\BusServiceProvider;
@@ -34,7 +35,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Events\EventServiceProvider;
 use Illuminate\Routing\RoutingServiceProvider;
-use Notadd\Foundation\Cache\CacheServiceProvider;
+use Notadd\Cache\CacheServiceProvider;
 use Notadd\Foundation\Composer\ComposerServiceProvider;
 use Notadd\Foundation\Console\ConsoleServiceProvider;
 use Notadd\Foundation\Console\ConsoleSupportServiceProvider;
@@ -48,6 +49,10 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+/**
+ * Class Application
+ * @package Notadd\Foundation
+ */
 class Application extends Container implements ApplicationContract, HttpKernelInterface {
     /**
      * @var string
@@ -103,6 +108,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      */
     protected $namespace = null;
     /**
+     * Application constructor.
      * @param string|null $basePath
      */
     public function __construct($basePath = null) {
@@ -325,6 +331,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         $this->register(FormRequestServiceProvider::class);
         $this->register(ExtensionServiceProvider::class);
         $this->register(SettingServiceProvider::class);
+        $this->register(SearchEngineServiceProvider::class);
     }
     /**
      * @param \Illuminate\Support\ServiceProvider|string $provider

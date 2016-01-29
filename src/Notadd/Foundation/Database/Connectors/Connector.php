@@ -10,6 +10,10 @@ use Exception;
 use Illuminate\Support\Arr;
 use Notadd\Foundation\Database\DetectsLostConnections;
 use PDO;
+/**
+ * Class Connector
+ * @package Notadd\Foundation\Database\Connectors
+ */
 class Connector {
     use DetectsLostConnections;
     /**

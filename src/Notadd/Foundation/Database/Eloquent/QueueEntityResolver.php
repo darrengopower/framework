@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Database\Eloquent;
 use Illuminate\Contracts\Queue\EntityNotFoundException;
 use Illuminate\Contracts\Queue\EntityResolver as EntityResolverContract;
+/**
+ * Class QueueEntityResolver
+ * @package Notadd\Foundation\Database\Eloquent
+ */
 class QueueEntityResolver implements EntityResolverContract {
     /**
      * @param string $type

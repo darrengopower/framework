@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Auth\Access;
 use Illuminate\Contracts\Auth\Access\Gate;
+/**
+ * Class Authorizable
+ * @package Notadd\Foundation\Auth\Access
+ */
 trait Authorizable {
     /**
      * @param string $ability

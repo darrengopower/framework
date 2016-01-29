@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Translation;
 use Illuminate\Support\ServiceProvider;
+/**
+ * Class TranslationServiceProvider
+ * @package Notadd\Foundation\Translation
+ */
 class TranslationServiceProvider extends ServiceProvider {
     /**
      * @var bool

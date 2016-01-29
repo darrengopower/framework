@@ -10,6 +10,10 @@ use GuzzleHttp\ClientInterface;
 use Notadd\Auth\Social\Contracts\AccessToken as AccessTokenContract;
 use Notadd\Auth\Social\Contracts\Provider as ProviderContract;
 use Notadd\Auth\Social\User;
+/**
+ * Class GoogleProvider
+ * @package Notadd\Auth\Social\Providers
+ */
 class GoogleProvider extends Provider implements ProviderContract {
     /**
      * @var string

@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Database\Connectors;
 use PDO;
+/**
+ * Class PostgresConnector
+ * @package Notadd\Foundation\Database\Connectors
+ */
 class PostgresConnector extends Connector implements ConnectorInterface {
     /**
      * @var array

@@ -5,13 +5,18 @@
  */
 namespace Notadd\Page\Events;
 use Illuminate\Support\Collection;
+/**
+ * Class GetTemplateList
+ * @package Notadd\Page\Events
+ */
 class GetTemplateList {
     /**
      * @var Collection
      */
     private $templates;
     /**
-     * @param Collection $templates
+     * GetTemplateList constructor.
+     * @param \Illuminate\Support\Collection $templates
      */
     public function __construct(Collection $templates) {
         $this->templates = $templates;

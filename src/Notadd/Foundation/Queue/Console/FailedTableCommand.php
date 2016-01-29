@@ -10,6 +10,10 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Composer\Composer;
 use Notadd\Foundation\Console\Command;
+/**
+ * Class FailedTableCommand
+ * @package Notadd\Foundation\Queue\Console
+ */
 class FailedTableCommand extends Command {
     /**
      * @var string
@@ -28,7 +32,7 @@ class FailedTableCommand extends Command {
      */
     protected $composer;
     /**
-     * Create a new failed queue jobs table command instance.
+     * FailedTableCommand constructor.
      * @param \Illuminate\Filesystem\Filesystem $files
      * @param \Notadd\Foundation\Composer\Composer $composer
      */

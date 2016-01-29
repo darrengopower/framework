@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>@yield('title') - 后台 - {{ app('setting')->get('site.company', 'iBenchu CMS')  }}内容管理系统</title>
+    <title>@yield('title') - 后台 - {{ setting('site.company', 'iBenchu CMS')  }}内容管理系统</title>
     <meta name="author" content="iBenchu.net">
     <meta name="keywords" content="iBenchu">
     <meta name="description" content="iBenchu CMS内容管理系统">
     @css('admin::less.layout.bootstrap.bootstrap')
     @css('admin::less.layout.font-awesome.font-awesome')
-    @css('admin::css.default.admin.main')
     @yield('admin-css')
+    @css('admin::css.default.admin')
     @output('css')
 </head>
 <body class="app {{ $admin_theme }}">
 <header class="site-head clearfix" id="site-head">
     <div class="nav-head">
-        <a href="{{ url('admin') }}" class="site-logo"><span>{{ app('setting')->get('site.company', 'iBenchu CMS')  }}</span>&nbsp;内容管理系统</a>
+        <a href="{{ url('admin') }}" class="site-logo"><span>{{ setting('site.company', 'iBenchu CMS')  }}</span>&nbsp;内容管理系统</a>
         <span class="nav-trigger fa fa-outdent hidden-xs" data-toggle="nav-min"></span>
         <span class="nav-trigger fa fa-navicon visible-xs" data-toggle="off-canvas"></span>
     </div>
@@ -25,63 +25,16 @@
             <li>
                 <a href="{{ url() }}" target="_blank"> <i class="fa fa-external-link"></i> </a>
             </li>
-            <li>
-                <a href="#" data-toggle="sidebar"> <i class="fa fa-tasks"></i> </a>
-                <div class="floating-sidebar">
-                    <div class="ongoing-tasks">
-                        <h3 class="small title mb30">Ongoing Tasks</h3>
-                        <ul class="list-unstyled mb15 clearfix">
-                            <li>
-                                <div class="clearfix mb10">
-                                    <small class="left">App Upload</small>
-                                    <small class="right">80%</small>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="clearfix mb10">
-                                    <small class="left">Creating Assets</small>
-                                    <small class="right">50%</small>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="clearfix mb10">
-                                    <small class="left">New UI 2.0</small>
-                                    <small class="right">90%</small>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="stats">
-                        <h3 class="small title mb15">Transaction</h3>
-                        <ul class="list-unstyled clearfix mb15">
-                            <li class="clearfix">
-                                <i class="fa fa-paypal left bg-primary"></i>
-                                <div class="info">
-                                    <strong>Send to Elli at 4:00 pm</strong> <span>$3000</span>
-                                </div>
-                            </li>
-                            <li class="clearfix">
-                                <i class="fa fa-bitcoin left bg-warning"></i>
-                                <div class="info">
-                                    <strong>Received from Salman at 12:00 pm</strong> <span>B 35000</span>
-                                </div>
-                            </li>
-                            <li class="clearfix">
-                                <i class="fa fa-gittip left bg-info"></i>
-                                <div class="info">
-                                    <strong>Donate to gittip</strong>
-                                    <span>$500</span>
-                                </div>
-                            </li>
-                        </ul>
+            <li class="dropdown">
+                <a href class="user-profile" data-toggle="dropdown">
+                    <img src="{{ asset('statics/admin/images/avatar.jpg') }}" alt="N">
+                </a>
+                <div class="panel panel-default dropdown-menu">
+                    <div class="panel-footer clearfix">
+                        <a href="{{ url('admin/password') }}" class="btn btn-warning btn-sm left">重置密码</a>
+                        <a href="{{ url('admin/logout') }}" class="btn btn-danger btn-sm right">退出登陆</a>
                     </div>
                 </div>
-            </li>
-            <li class="dropdown">
-                <a href class="user-profile dropdown-toggle">
-                    <img src="{{ asset('uploads/image/20150513/1431511494149062.jpg') }}" alt="admin-pic">
-                </a>
-                <div class="panel panel-default dropdown-menu"></div>
             </li>
         </ul>
     </div>
@@ -176,15 +129,11 @@
         <p class="right">{{ config('app.version') }}</p>
     </footer>
 </div>
-<script src="{{ asset('themes/admin/js/jquery-2.1.3.min.js') }}"></script>
-<script src="{{ asset('themes/admin/js/perfect-scrollbar.jquery.min.js') }}"></script>
-<script src="{{ asset('themes/admin/js/bootstrap.min.js') }}"></script>
 @js('admin::js.layout.jquery.jquery')
 @js('admin::js.layout.perfect-scrollbar.jquery')
 @js('admin::js.layout.bootstrap.bootstrap')
-@js('admin::js.default.admin.app')
 @yield('admin-js')
-<script src="{{ asset('themes/admin/js/app.js') }}"></script>
+@js('admin::js.default.admin.app')
 @output('js')
 </body>
 </html>

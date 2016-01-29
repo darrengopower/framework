@@ -14,12 +14,17 @@ use Notadd\Foundation\Database\PostgresConnection;
 use Notadd\Foundation\Database\SQLiteConnection;
 use Notadd\Foundation\Database\SqlServerConnection;
 use PDO;
+/**
+ * Class ConnectionFactory
+ * @package Notadd\Foundation\Database\Connectors
+ */
 class ConnectionFactory {
     /**
      * @var \Illuminate\Contracts\Container\Container
      */
     protected $container;
     /**
+     * ConnectionFactory constructor.
      * @param \Illuminate\Contracts\Container\Container $container
      */
     public function __construct(Container $container) {

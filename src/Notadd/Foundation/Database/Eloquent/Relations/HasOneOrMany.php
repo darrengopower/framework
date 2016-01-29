@@ -10,6 +10,10 @@ use Notadd\Foundation\Database\Eloquent\Builder;
 use Notadd\Foundation\Database\Eloquent\Collection;
 use Notadd\Foundation\Database\Eloquent\Model;
 use Notadd\Foundation\Database\Query\Expression;
+/**
+ * Class HasOneOrMany
+ * @package Notadd\Foundation\Database\Eloquent\Relations
+ */
 abstract class HasOneOrMany extends Relation {
     /**
      * The foreign key of the parent model.
@@ -22,6 +26,7 @@ abstract class HasOneOrMany extends Relation {
      */
     protected $localKey;
     /**
+     * HasOneOrMany constructor.
      * @param \Notadd\Foundation\Database\Eloquent\Builder $query
      * @param \Notadd\Foundation\Database\Eloquent\Model $parent
      * @param string $foreignKey

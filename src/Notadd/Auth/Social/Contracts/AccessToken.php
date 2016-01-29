@@ -6,6 +6,10 @@
  * @datetime 2015-12-13 18:44
  */
 namespace Notadd\Auth\Social\Contracts;
+/**
+ * Interface AccessToken
+ * @package Notadd\Auth\Social\Contracts
+ */
 interface AccessToken {
     /**
      * @return string

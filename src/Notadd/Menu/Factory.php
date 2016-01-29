@@ -9,6 +9,10 @@ namespace Notadd\Menu;
 use Illuminate\Contracts\Foundation\Application;
 use Notadd\Menu\Models\Menu;
 use Notadd\Menu\Models\MenuGroup;
+/**
+ * Class Factory
+ * @package Notadd\Menu
+ */
 class Factory {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
@@ -19,6 +23,7 @@ class Factory {
      */
     protected $view;
     /**
+     * Factory constructor.
      * @param \Illuminate\Contracts\Foundation\Application $application
      * @param \Illuminate\Contracts\View\Factory $view
      */

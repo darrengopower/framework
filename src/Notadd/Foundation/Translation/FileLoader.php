@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Translation;
 use Illuminate\Filesystem\Filesystem;
+/**
+ * Class FileLoader
+ * @package Notadd\Foundation\Translation
+ */
 class FileLoader implements LoaderInterface {
     /**
      * @var \Illuminate\Filesystem\Filesystem
@@ -21,6 +25,7 @@ class FileLoader implements LoaderInterface {
      */
     protected $hints = [];
     /**
+     * FileLoader constructor.
      * @param \Illuminate\Filesystem\Filesystem $files
      * @param string $path
      */

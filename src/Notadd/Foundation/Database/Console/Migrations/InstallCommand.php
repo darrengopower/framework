@@ -9,6 +9,10 @@ namespace Notadd\Foundation\Database\Console\Migrations;
 use Notadd\Foundation\Console\Command;
 use Notadd\Foundation\Database\Migrations\MigrationRepositoryInterface;
 use Symfony\Component\Console\Input\InputOption;
+/**
+ * Class InstallCommand
+ * @package Notadd\Foundation\Database\Console\Migrations
+ */
 class InstallCommand extends Command {
     /**
      * @var string
@@ -23,6 +27,7 @@ class InstallCommand extends Command {
      */
     protected $repository;
     /**
+     * InstallCommand constructor.
      * @param \Notadd\Foundation\Database\Migrations\MigrationRepositoryInterface $repository
      */
     public function __construct(MigrationRepositoryInterface $repository) {

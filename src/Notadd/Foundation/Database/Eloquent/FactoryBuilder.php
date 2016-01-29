@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Database\Eloquent;
 use Faker\Generator as Faker;
 use InvalidArgumentException;
+/**
+ * Class FactoryBuilder
+ * @package Notadd\Foundation\Database\Eloquent
+ */
 class FactoryBuilder {
     /**
      * @var array
@@ -30,6 +34,7 @@ class FactoryBuilder {
      */
     protected $faker;
     /**
+     * FactoryBuilder constructor.
      * @param string $class
      * @param string $name
      * @param array $definitions

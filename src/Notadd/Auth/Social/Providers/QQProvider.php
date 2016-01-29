@@ -10,6 +10,10 @@ use Notadd\Auth\Social\AccessToken;
 use Notadd\Auth\Social\Contracts\AccessToken as AccessTokenContract;
 use Notadd\Auth\Social\Contracts\Provider as ProviderContract;
 use Notadd\Auth\Social\User;
+/**
+ * Class QQProvider
+ * @package Notadd\Auth\Social\Providers
+ */
 class QQProvider extends Provider implements ProviderContract {
     /**
      * @var string

@@ -6,6 +6,10 @@
  * @datetime 2015-12-18 15:15
  */
 namespace Notadd\Theme\Contracts;
+/**
+ * Interface FileFinder
+ * @package Notadd\Theme\Contracts
+ */
 interface FileFinder {
     /**
      * @param $path

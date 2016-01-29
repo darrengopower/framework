@@ -7,6 +7,10 @@
  */
 namespace Notadd\Setting\Requests;
 use Notadd\Foundation\Http\FormRequest;
+/**
+ * Class SeoRequest
+ * @package Notadd\Setting\Requests
+ */
 class SeoRequest extends FormRequest {
     /**
      * @return bool

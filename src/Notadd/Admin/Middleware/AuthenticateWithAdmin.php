@@ -8,21 +8,26 @@
 namespace Notadd\Admin\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+/**
+ * Class AuthenticateWithAdmin
+ * @package Notadd\Admin\Middleware
+ */
 class AuthenticateWithAdmin {
     /**
-     * @var Guard
+     * @var \Illuminate\Contracts\Auth\Guard
      */
     protected $auth;
     /**
-     * @param Guard $auth
+     * AuthenticateWithAdmin constructor.
+     * @param \Illuminate\Contracts\Auth\Guard $auth
      */
     public function __construct(Guard $auth) {
         $this->auth = $auth;
     }
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param $request
      * @param \Closure $next
-     * @return mixed
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function handle($request, Closure $next) {
         if($this->auth->guest()) {

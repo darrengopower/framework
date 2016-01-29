@@ -11,6 +11,10 @@ use Notadd\Foundation\Traits\InjectEventsTrait;
 use Notadd\Foundation\Traits\InjectRouterTrait;
 use Notadd\Foundation\Traits\InjectSettingTrait;
 use Notadd\Page\Models\Page as PageModel;
+/**
+ * Class PageServiceProvider
+ * @package Notadd\Page
+ */
 class PageServiceProvider extends ServiceProvider {
     use InjectEventsTrait, InjectSettingTrait, InjectRouterTrait;
     /**

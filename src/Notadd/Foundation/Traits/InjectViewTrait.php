@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Traits;
 use Illuminate\Container\Container;
+/**
+ * Class InjectViewTrait
+ * @package Notadd\Foundation\Traits
+ */
 trait InjectViewTrait {
     /**
      * @var \Illuminate\View\Factory

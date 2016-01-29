@@ -15,6 +15,10 @@ use Notadd\Foundation\Traits\InjectRouterTrait;
 use Notadd\Foundation\Traits\InjectSettingTrait;
 use Notadd\Foundation\Traits\InjectThemeTrait;
 use Notadd\Foundation\Traits\InjectViewTrait;
+/**
+ * Class ThemeServiceProvider
+ * @package Notadd\Theme
+ */
 class ThemeServiceProvider extends ServiceProvider {
     use InjectBladeTrait, InjectCookieTrait, InjectEventsTrait, InjectSettingTrait, InjectRequestTrait, InjectRouterTrait, InjectThemeTrait, InjectViewTrait;
     /**

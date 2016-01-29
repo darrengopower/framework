@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Database\Schema;
 use Closure;
 use Notadd\Foundation\Database\Connection;
+/**
+ * Class Builder
+ * @package Notadd\Foundation\Database\Schema
+ */
 class Builder {
     /**
      * @var \Notadd\Foundation\Database\Connection
@@ -22,6 +26,7 @@ class Builder {
      */
     protected $resolver;
     /**
+     * Builder constructor.
      * @param \Notadd\Foundation\Database\Connection $connection
      */
     public function __construct(Connection $connection) {

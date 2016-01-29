@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Database;
 use Illuminate\Console\Command;
 use Illuminate\Container\Container;
+/**
+ * Class Seeder
+ * @package Notadd\Foundation\Database
+ */
 class Seeder {
     /**
      * @var \Illuminate\Container\Container

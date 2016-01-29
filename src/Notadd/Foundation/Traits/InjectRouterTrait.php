@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Traits;
 use Illuminate\Container\Container;
+/**
+ * Class InjectRouterTrait
+ * @package Notadd\Foundation\Traits
+ */
 trait InjectRouterTrait {
     /**
      * @var \Illuminate\Routing\Router

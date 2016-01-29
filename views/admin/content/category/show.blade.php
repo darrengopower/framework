@@ -27,7 +27,6 @@
                                 <tr>
                                     <td>
                                         <a href="{{ url('category/' . $category->id) }}" target="_blank"><strong>{{ $category->title }}</strong></a>
-
                                     </td>
                                     <td>
                                         <form action="{{ url('admin/category/' . $category->id . '/status') }}" method="post">

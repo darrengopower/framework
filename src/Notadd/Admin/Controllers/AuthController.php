@@ -8,15 +8,31 @@
 namespace Notadd\Admin\Controllers;
 use Notadd\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Notadd\Foundation\Auth\Models\User;
+/**
+ * Class AuthController
+ * @package Notadd\Admin\Controllers
+ */
 class AuthController extends AbstractAdminController {
     use AuthenticatesAndRegistersUsers;
     /**
      * @var array
      */
     protected $middleware = [
-        'guest.admin' => ['except' => 'getLogout']
+        'guest.admin' => [
+            'except' => [
+                'getLogout',
+                'getPassword'
+            ]
+        ]
     ];
+    /**
+     * @var string
+     */
     protected $loginPath = 'admin/login';
+    /**
+     * @var string
+     */
+    protected $redirectAfterLogout = 'admin';
     /**
      * @var string
      */
@@ -37,6 +53,12 @@ class AuthController extends AbstractAdminController {
      */
     public function getLogin() {
         return $this->view('auth.login');
+    }
+    /**
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function getPassword() {
+        return $this->view('auth.password');
     }
     /**
      * @return \Illuminate\Contracts\View\View

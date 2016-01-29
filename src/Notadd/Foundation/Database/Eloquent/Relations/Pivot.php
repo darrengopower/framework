@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Database\Eloquent\Relations;
 use Notadd\Foundation\Database\Eloquent\Builder;
 use Notadd\Foundation\Database\Eloquent\Model;
+/**
+ * Class Pivot
+ * @package Notadd\Foundation\Database\Eloquent\Relations
+ */
 class Pivot extends Model {
     /**
      * @var \Notadd\Foundation\Database\Eloquent\Model
@@ -26,8 +30,9 @@ class Pivot extends Model {
      */
     protected $guarded = [];
     /**
+     * Pivot constructor.
      * @param \Notadd\Foundation\Database\Eloquent\Model $parent
-     * @param array $attributes
+     * @param string $attributes
      * @param string $table
      * @param bool $exists
      */

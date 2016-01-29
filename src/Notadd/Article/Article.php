@@ -9,13 +9,17 @@ namespace Notadd\Article;
 use Illuminate\Support\Str;
 use Notadd\Article\Models\Article as ArticleModel;
 use Notadd\Category\Category;
+/**
+ * Class Article
+ * @package Notadd\Article
+ */
 class Article {
     /**
-     * @var
+     * @var int
      */
     private $id;
     /**
-     * @var
+     * @var \Notadd\Article\Models\Article
      */
     private $model;
     /**
@@ -71,6 +75,9 @@ class Article {
         $path = $category->getRouting();
         return $path . '/' . $this->id;
     }
+    /**
+     * @return string
+     */
     public function getShowTemplate() {
         return $this->model->getShowTemplate();
     }

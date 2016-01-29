@@ -7,6 +7,10 @@
  */
 namespace Notadd\Page\Requests;
 use Notadd\Foundation\Http\FormRequest;
+/**
+ * Class PageEditRequest
+ * @package Notadd\Page\Requests
+ */
 class PageEditRequest extends FormRequest {
     /**
      * @return bool

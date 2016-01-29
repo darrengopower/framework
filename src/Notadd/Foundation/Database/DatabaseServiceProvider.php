@@ -13,6 +13,10 @@ use Notadd\Foundation\Database\Connectors\ConnectionFactory;
 use Notadd\Foundation\Database\Eloquent\Factory as EloquentFactory;
 use Notadd\Foundation\Database\Eloquent\Model;
 use Notadd\Foundation\Database\Eloquent\QueueEntityResolver;
+/**
+ * Class DatabaseServiceProvider
+ * @package Notadd\Foundation\Database
+ */
 class DatabaseServiceProvider extends ServiceProvider {
     /**
      * @return void

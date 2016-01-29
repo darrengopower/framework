@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Database\Query;
 use Closure;
 use InvalidArgumentException;
+/**
+ * Class JoinClause
+ * @package Notadd\Foundation\Database\Query
+ */
 class JoinClause {
     /**
      * @var string
@@ -26,6 +30,7 @@ class JoinClause {
      */
     public $bindings = [];
     /**
+     * JoinClause constructor.
      * @param string $type
      * @param string $table
      */

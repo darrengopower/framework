@@ -8,6 +8,7 @@
 use Illuminate\Support\Str;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Auth\Access\Gate;
+use Notadd\Foundation\SearchEngine\Optimization;
 if(!function_exists('abort')) {
     /**
      * @param int $code
@@ -306,6 +307,25 @@ if(!function_exists('public_path')) {
      */
     function public_path($path = '') {
         return app()->make('path.public') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+    }
+}
+if(!function_exists('seo')) {
+    /**
+     * @param string $meta
+     * @return string
+     */
+    function seo($meta) {
+        return app()->make(Optimization::class)->getData($meta);
+    }
+}
+if(!function_exists('setting')) {
+    /**
+     * @param string $key
+     * @param string $default
+     * @return string
+     */
+    function setting($key, $default = '') {
+        return app('setting')->get($key, $default);
     }
 }
 if(!function_exists('stubs_path')) {

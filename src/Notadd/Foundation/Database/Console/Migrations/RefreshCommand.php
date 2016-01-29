@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Database\Console\Migrations;
 use Notadd\Foundation\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
+/**
+ * Class RefreshCommand
+ * @package Notadd\Foundation\Database\Console\Migrations
+ */
 class RefreshCommand extends Command {
     /**
      * @var string

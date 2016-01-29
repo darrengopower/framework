@@ -19,6 +19,10 @@ use Notadd\Foundation\Database\Schema\Builder as SchemaBuilder;
 use PDO;
 use RuntimeException;
 use Throwable;
+/**
+ * Class Connection
+ * @package Notadd\Foundation\Database
+ */
 class Connection implements ConnectionInterface {
     use DetectsLostConnections;
     /**
@@ -86,6 +90,7 @@ class Connection implements ConnectionInterface {
      */
     protected $config = [];
     /**
+     * Connection constructor.
      * @param \PDO $pdo
      * @param string $database
      * @param string $tablePrefix

@@ -10,6 +10,10 @@ use Notadd\Foundation\Database\Eloquent\Builder;
 use Notadd\Foundation\Database\Eloquent\Collection;
 use Notadd\Foundation\Database\Eloquent\Model;
 use Notadd\Foundation\Database\Query\Expression;
+/**
+ * Class BelongsTo
+ * @package Notadd\Foundation\Database\Eloquent\Relations
+ */
 class BelongsTo extends Relation {
     /**
      * @var string
@@ -24,6 +28,7 @@ class BelongsTo extends Relation {
      */
     protected $relation;
     /**
+     * BelongsTo constructor.
      * @param \Notadd\Foundation\Database\Eloquent\Builder $query
      * @param \Notadd\Foundation\Database\Eloquent\Model $parent
      * @param string $foreignKey

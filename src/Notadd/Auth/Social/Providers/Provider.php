@@ -14,9 +14,13 @@ use Notadd\Auth\Social\Contracts\Provider as ProviderContract;
 use Notadd\Auth\Social\Exceptions\InvalidStateException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+/**
+ * Class Provider
+ * @package Notadd\Auth\Social\Providers
+ */
 abstract class Provider implements ProviderContract {
     /**
-     * @var Request
+     * @var \Symfony\Component\HttpFoundation\Request
      */
     protected $request;
     /**

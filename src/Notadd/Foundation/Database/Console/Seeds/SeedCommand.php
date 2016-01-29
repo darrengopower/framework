@@ -9,6 +9,10 @@ namespace Notadd\Foundation\Database\Console\Seeds;
 use Notadd\Foundation\Console\Command;
 use Notadd\Foundation\Database\ConnectionResolverInterface as Resolver;
 use Symfony\Component\Console\Input\InputOption;
+/**
+ * Class SeedCommand
+ * @package Notadd\Foundation\Database\Console\Seeds
+ */
 class SeedCommand extends Command {
     /**
      * @var string
@@ -23,6 +27,7 @@ class SeedCommand extends Command {
      */
     protected $resolver;
     /**
+     * SeedCommand constructor.
      * @param \Notadd\Foundation\Database\ConnectionResolverInterface $resolver
      */
     public function __construct(Resolver $resolver) {

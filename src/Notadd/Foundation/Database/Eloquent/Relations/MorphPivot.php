@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Database\Eloquent\Relations;
 use Notadd\Foundation\Database\Eloquent\Builder;
+/**
+ * Class MorphPivot
+ * @package Notadd\Foundation\Database\Eloquent\Relations
+ */
 class MorphPivot extends Pivot {
     /**
      * @var string

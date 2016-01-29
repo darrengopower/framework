@@ -6,6 +6,10 @@
  * @datetime 2015-12-06 19:14
  */
 namespace Notadd\Foundation\Database\Query\Processors;
+/**
+ * Class SQLiteProcessor
+ * @package Notadd\Foundation\Database\Query\Processors
+ */
 class SQLiteProcessor extends Processor {
     /**
      * @param array $results

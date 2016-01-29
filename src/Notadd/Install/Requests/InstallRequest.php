@@ -7,6 +7,10 @@
  */
 namespace Notadd\Install\Requests;
 use Notadd\Foundation\Http\FormRequest;
+/**
+ * Class InstallRequest
+ * @package Notadd\Install\Requests
+ */
 class InstallRequest extends FormRequest {
     /**
      * @return bool

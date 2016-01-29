@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Database\Connectors;
 use InvalidArgumentException;
+/**
+ * Class SQLiteConnector
+ * @package Notadd\Foundation\Database\Connectors
+ */
 class SQLiteConnector extends Connector implements ConnectorInterface {
     /**
      * @param array $config

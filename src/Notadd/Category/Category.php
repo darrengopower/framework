@@ -6,11 +6,14 @@
  * @datetime 2015-11-10 14:51:12
  */
 namespace Notadd\Category;
-
 use Illuminate\Support\Collection;
 use Notadd\Article\Article;
 use Notadd\Article\Models\Article as ArticleModel;
 use Notadd\Category\Models\Category as CategoryModel;
+/**
+ * Class Category
+ * @package Notadd\Category
+ */
 class Category {
     /**
      * @var int
@@ -21,11 +24,18 @@ class Category {
      */
     private $model;
     /**
+     * Category constructor.
      * @param $id
      */
     public function __construct($id) {
         $this->id = $id;
         $this->model = CategoryModel::findOrFail($id);
+    }
+    /**
+     * @return string
+     */
+    public function getDescription() {
+        return $this->model->getAttribute('seo_description');
     }
     /**
      * @return int
@@ -48,12 +58,12 @@ class Category {
             }
             $model = ArticleModel::whereIn('category_id', $list->toArray());
         }
-        $data = $model->get();
-        $list = Collection::make();
-        foreach($data as $value) {
-            $list->push(new Article($value->getAttribute('id')));
-        }
-        return $list;
+        $data = $model->paginate(15);;
+        //$list = Collection::make();
+        //foreach($data as $value) {
+        //    $list->push(new Article($value->getAttribute('id')));
+        //}
+        return $data;
     }
     /**
      * @param \Illuminate\Support\Collection $list
@@ -68,6 +78,12 @@ class Category {
             $list->prepend($parent);
             $this->getLoopParent($list, $parent);
         }
+    }
+    /**
+     * @return string
+     */
+    public function getKeywords() {
+        return $this->model->getAttribute('seo_keyword');
     }
     /**
      * @return \Notadd\Category\Models\Category

@@ -10,6 +10,10 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Notadd\Foundation\Database\Connectors\ConnectionFactory;
+/**
+ * Class DatabaseManager
+ * @package Notadd\Foundation\Database
+ */
 class DatabaseManager implements ConnectionResolverInterface {
     /**
      * @var \Notadd\Foundation\Application
@@ -28,7 +32,8 @@ class DatabaseManager implements ConnectionResolverInterface {
      */
     protected $extensions = [];
     /**
-     * @param \Notadd\Foundation\Application $app
+     * DatabaseManager constructor.
+     * @param $app
      * @param \Notadd\Foundation\Database\Connectors\ConnectionFactory $factory
      */
     public function __construct($app, ConnectionFactory $factory) {

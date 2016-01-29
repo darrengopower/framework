@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Database\Migrations;
 use Illuminate\Contracts\Foundation\Application;
+/**
+ * Class Migration
+ * @package Notadd\Foundation\Database\Migrations
+ */
 abstract class Migration {
     /**
      * @var string

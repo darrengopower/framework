@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Database\Query\Grammars;
 use Notadd\Foundation\Database\Query\Builder;
+/**
+ * Class SQLiteGrammar
+ * @package Notadd\Foundation\Database\Query\Grammars
+ */
 class SQLiteGrammar extends Grammar {
     /**
      * @var array

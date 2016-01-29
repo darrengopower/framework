@@ -12,6 +12,10 @@ use Notadd\Category\Listeners\BeforeCategoryDelete;
 use Notadd\Category\Models\Category as CategoryModel;
 use Notadd\Foundation\Traits\InjectEventsTrait;
 use Notadd\Foundation\Traits\InjectRouterTrait;
+/**
+ * Class CategoryServiceProvider
+ * @package Notadd\Category
+ */
 class CategoryServiceProvider extends ServiceProvider {
     use InjectEventsTrait, InjectRouterTrait;
     /**

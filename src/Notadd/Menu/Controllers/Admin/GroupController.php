@@ -12,6 +12,10 @@ use Notadd\Menu\Models\Menu;
 use Notadd\Menu\Models\MenuGroup;
 use Notadd\Menu\Requests\MenuGroupCreateRequest;
 use Notadd\Menu\Requests\MenuGroupEditRequest;
+/**
+ * Class GroupController
+ * @package Notadd\Menu\Controllers\Admin
+ */
 class GroupController extends AbstractAdminController {
     /**
      * @param $id

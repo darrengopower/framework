@@ -11,6 +11,10 @@ use InvalidArgumentException;
 use JsonSerializable;
 use Notadd\Auth\Social\Contracts\AccessToken as AccessTokenContract;
 use Notadd\Auth\Social\Traits\AttributeTrait;
+/**
+ * Class AccessToken
+ * @package Notadd\Auth\Social
+ */
 class AccessToken implements AccessTokenContract, ArrayAccess, JsonSerializable {
     use AttributeTrait;
     /**

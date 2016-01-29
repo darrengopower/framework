@@ -9,6 +9,10 @@ namespace Notadd\Article\Events;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Notadd\Article\Article;
+/**
+ * Class OnArticleShow
+ * @package Notadd\Article\Events
+ */
 class OnArticleShow {
     /**
      * @var \Illuminate\Contracts\Foundation\Application

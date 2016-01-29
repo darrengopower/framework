@@ -11,6 +11,10 @@ use Notadd\Foundation\Database\Query\Grammars\MySqlGrammar as QueryGrammar;
 use Notadd\Foundation\Database\Query\Processors\MySqlProcessor;
 use Notadd\Foundation\Database\Schema\Grammars\MySqlGrammar as SchemaGrammar;
 use Notadd\Foundation\Database\Schema\MySqlBuilder;
+/**
+ * Class MySqlConnection
+ * @package Notadd\Foundation\Database
+ */
 class MySqlConnection extends Connection {
     /**
      * @return \Notadd\Foundation\Database\Schema\MySqlBuilder

@@ -18,6 +18,10 @@ use Notadd\Foundation\Database\Grammar as BaseGrammar;
 use Notadd\Foundation\Database\Query\Expression;
 use Notadd\Foundation\Database\Schema\Blueprint;
 use RuntimeException;
+/**
+ * Class Grammar
+ * @package Notadd\Foundation\Database\Schema\Grammars
+ */
 abstract class Grammar extends BaseGrammar {
     /**
      * @param \Notadd\Foundation\Database\Schema\Blueprint $blueprint

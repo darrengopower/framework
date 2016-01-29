@@ -13,6 +13,10 @@ use Notadd\Foundation\Database\Eloquent\Collection;
 use Notadd\Foundation\Database\Eloquent\Model;
 use Notadd\Foundation\Database\Eloquent\ModelNotFoundException;
 use Notadd\Foundation\Database\Query\Expression;
+/**
+ * Class BelongsToMany
+ * @package Notadd\Foundation\Database\Eloquent\Relations
+ */
 class BelongsToMany extends Relation {
     /**
      * @var string
@@ -47,12 +51,13 @@ class BelongsToMany extends Relation {
      */
     protected $pivotUpdatedAt;
     /**
+     * BelongsToMany constructor.
      * @param \Notadd\Foundation\Database\Eloquent\Builder $query
      * @param \Notadd\Foundation\Database\Eloquent\Model $parent
      * @param string $table
      * @param string $foreignKey
      * @param string $otherKey
-     * @param string $relationName
+     * @param string null $relationName
      */
     public function __construct(Builder $query, Model $parent, $table, $foreignKey, $otherKey, $relationName = null) {
         $this->table = $table;

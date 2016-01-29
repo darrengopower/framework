@@ -6,6 +6,10 @@
  * @datetime 2015-12-06 19:00
  */
 namespace Notadd\Foundation\Database\Migrations;
+/**
+ * Interface MigrationRepositoryInterface
+ * @package Notadd\Foundation\Database\Migrations
+ */
 interface MigrationRepositoryInterface {
     /**
      * @return array

@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Cache\RateLimiter;
+/**
+ * Class ThrottlesLogins
+ * @package Notadd\Foundation\Auth
+ */
 trait ThrottlesLogins {
     /**
      * @param \Illuminate\Http\Request $request

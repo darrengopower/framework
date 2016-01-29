@@ -6,6 +6,10 @@
  * @datetime 2015-10-18 16:28
  */
 namespace Notadd\Foundation\Auth;
+/**
+ * Class RedirectsUsers
+ * @package Notadd\Foundation\Auth
+ */
 trait RedirectsUsers {
     /**
      * @return string

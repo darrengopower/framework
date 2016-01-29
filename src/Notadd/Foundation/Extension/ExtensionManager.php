@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Extension;
 use Illuminate\Contracts\Foundation\Application;
+/**
+ * Class ExtensionManager
+ * @package Notadd\Foundation\Extension
+ */
 class ExtensionManager {
     /**
      * @var \Illuminate\Contracts\Foundation\Application

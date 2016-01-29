@@ -10,6 +10,10 @@ use Doctrine\DBAL\Driver\PDOSqlite\Driver as DoctrineDriver;
 use Notadd\Foundation\Database\Query\Grammars\SQLiteGrammar as QueryGrammar;
 use Notadd\Foundation\Database\Query\Processors\SQLiteProcessor;
 use Notadd\Foundation\Database\Schema\Grammars\SQLiteGrammar as SchemaGrammar;
+/**
+ * Class SQLiteConnection
+ * @package Notadd\Foundation\Database
+ */
 class SQLiteConnection extends Connection {
     /**
      * @return \Notadd\Foundation\Database\Query\Grammars\SQLiteGrammar

@@ -8,47 +8,53 @@
         </ol>
         <div class="page-wrap">
             <div class="row">
-                @foreach($themes as $theme)
-                    <div class="col-md-4">
-                        <div class="panel panel-lined clearfix mb15">
-                            <div class="panel-heading mb20">
-                                <strong class="right">[{{ $theme->getAlias() }}]</strong><i>{{ $theme->getTitle() }}</i>
-                            </div>
-                            <div class="form-horizontal col-md-12">
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <img src="http://img.ithome.com/newsuploadfiles/2015/5/20150514_140710_220.jpg" class="img-responsive">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-12 text-center">
-                                        @if($theme->isDefault())
-                                            <form action="{{ url('admin/theme/' . $theme->getAlias()) }}" method="post">
-                                                <input type="hidden" name="_method" value="put">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <div class="btn-group">
-                                                    <button class="btn btn-info btn-sm">
-                                                        <i class="fa fa-check"></i>更新模板缓存
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        @else
-                                            <form action="{{ url('admin/theme/' . $theme->getAlias()) }}" method="post">
-                                                <input type="hidden" name="_method" value="put">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <div class="btn-group">
-                                                    <button class="btn btn-info btn-sm">
-                                                        <i class="fa fa-circle-o"></i>设为默认主题
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="col-md-12">
+                    <div class="panel panel-lined clearfix mb30">
+                        <div class="panel-heading mb20"><i>主题管理</i></div>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-5">分组名称</td>
+                                    <th class="col-md-3">分组别名</td>
+                                    <th class="col-md-4">操作</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($themes as $theme)
+                                    <tr>
+                                        <td>
+                                            <strong>{{ $theme->getTitle() }}</strong>
+                                        </td>
+                                        <td>{{ $theme->getAlias() }}</td>
+                                        <td>
+                                            @if($theme->isDefault())
+                                                <form action="{{ url('admin/theme/' . $theme->getAlias()) }}" method="post">
+                                                    <input type="hidden" name="_method" value="put">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-info btn-sm">
+                                                            <i class="fa fa-check"></i>更新模板缓存
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            @else
+                                                <form action="{{ url('admin/theme/' . $theme->getAlias()) }}" method="post">
+                                                    <input type="hidden" name="_method" value="put">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-info btn-sm">
+                                                            <i class="fa fa-circle-o"></i>设为默认主题
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
-                @endforeach
+                </div>
             </div>
         </div>
     </div>

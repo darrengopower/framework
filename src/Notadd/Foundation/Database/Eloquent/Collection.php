@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Database\Eloquent;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection as BaseCollection;
+/**
+ * Class Collection
+ * @package Notadd\Foundation\Database\Eloquent
+ */
 class Collection extends BaseCollection {
     /**
      * @param mixed $key

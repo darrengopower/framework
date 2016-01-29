@@ -12,6 +12,10 @@ use Notadd\Article\Models\Article;
 use Notadd\Category\Events\GetCategoryAdminTemplates;
 use Notadd\Category\Events\GetCategoryTypes;
 use Notadd\Foundation\Database\Eloquent\Model;
+/**
+ * Class Category
+ * @package Notadd\Category\Models
+ */
 class Category extends Model {
     /**
      * @var array

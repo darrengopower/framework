@@ -9,6 +9,10 @@ namespace Notadd\Category\Listeners;
 use Illuminate\Contracts\Events\Dispatcher;
 use Notadd\Article\Models\Article;
 use Notadd\Category\Events\BeforeCategoryDelete as BeforeCategoryDeleteEvent;
+/**
+ * Class BeforeCategoryDelete
+ * @package Notadd\Category\Listeners
+ */
 class BeforeCategoryDelete {
     /**
      * @param \Illuminate\Contracts\Events\Dispatcher $dispatcher

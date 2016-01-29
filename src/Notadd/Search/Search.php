@@ -6,5 +6,9 @@
  * @datetime 2015-11-21 14:48
  */
 namespace Notadd\Search;
+/**
+ * Class Search
+ * @package Notadd\Search
+ */
 class Search {
 }

@@ -6,6 +6,10 @@
  * @datetime 2015-12-06 02:04
  */
 namespace Notadd\Foundation\Database;
+/**
+ * Class Grammar
+ * @package Notadd\Foundation\Database
+ */
 abstract class Grammar {
     /**
      * @var string

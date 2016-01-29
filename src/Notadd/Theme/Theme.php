@@ -8,6 +8,10 @@
 namespace Notadd\Theme;
 use Illuminate\Container\Container;
 use Notadd\Theme\Contracts\Theme as ThemeContract;
+/**
+ * Class Theme
+ * @package Notadd\Theme
+ */
 class Theme implements ThemeContract {
     /**
      * @var \Notadd\Foundation\Application
@@ -54,6 +58,7 @@ class Theme implements ThemeContract {
      */
     private $viewPath;
     /**
+     * Theme constructor.
      * @param $title
      * @param $alias
      */

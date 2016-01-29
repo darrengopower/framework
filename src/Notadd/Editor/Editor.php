@@ -6,5 +6,9 @@
  * @datetime 2015-12-10 17:22
  */
 namespace Notadd\Editor;
+/**
+ * Class Editor
+ * @package Notadd\Editor
+ */
 class Editor {
 }

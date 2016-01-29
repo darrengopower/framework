@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Database\Eloquent\Relations;
 use Notadd\Foundation\Database\Eloquent\Collection;
+/**
+ * Class MorphOne
+ * @package Notadd\Foundation\Database\Eloquent\Relations
+ */
 class MorphOne extends MorphOneOrMany {
     /**
      * @return mixed

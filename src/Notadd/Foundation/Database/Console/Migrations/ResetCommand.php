@@ -9,6 +9,10 @@ namespace Notadd\Foundation\Database\Console\Migrations;
 use Notadd\Foundation\Console\Command;
 use Notadd\Foundation\Database\Migrations\Migrator;
 use Symfony\Component\Console\Input\InputOption;
+/**
+ * Class ResetCommand
+ * @package Notadd\Foundation\Database\Console\Migrations
+ */
 class ResetCommand extends Command {
     /**
      * The console command name.
@@ -26,6 +30,7 @@ class ResetCommand extends Command {
      */
     protected $migrator;
     /**
+     * ResetCommand constructor.
      * @param \Notadd\Foundation\Database\Migrations\Migrator $migrator
      */
     public function __construct(Migrator $migrator) {

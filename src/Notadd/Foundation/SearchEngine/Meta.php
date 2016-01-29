@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\SearchEngine;
 use Illuminate\Support\Collection;
+/**
+ * Class Meta
+ * @package Notadd\Foundation\SearchEngine
+ */
 class Meta {
     /**
      * @var string
@@ -20,16 +24,19 @@ class Meta {
      * @var string
      */
     private $keywords;
+    /**
+     * Meta constructor.
+     */
     public function __construct() {
         $this->title = '{sitename}';
         $this->description = '{sitename}';
         $this->keywords = '{sitename}';
     }
     /**
-     * @return static
+     * @return \Illuminate\Support\Collection
      */
     public function getData() {
-        $data = Collection::make();
+        $data = new Collection();
         $data->put('title', $this->title);
         $data->put('description', $this->description);
         $data->put('keywords', $this->keywords);

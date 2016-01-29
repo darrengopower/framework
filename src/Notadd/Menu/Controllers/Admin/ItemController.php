@@ -11,6 +11,10 @@ use Notadd\Admin\Controllers\AbstractAdminController;
 use Notadd\Menu\Models\Menu;
 use Notadd\Menu\Models\MenuGroup;
 use Notadd\Menu\Requests\MenuCreateRequest;
+/**
+ * Class ItemController
+ * @package Notadd\Menu\Controllers\Admin
+ */
 class ItemController extends AbstractAdminController {
     /**
      * @param $id

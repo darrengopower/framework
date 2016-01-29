@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Traits;
 use Illuminate\Container\Container;
+/**
+ * Class InjectConfigTrait
+ * @package Notadd\Foundation\Traits
+ */
 trait InjectConfigTrait {
     /**
      * @var \Illuminate\Config\Repository

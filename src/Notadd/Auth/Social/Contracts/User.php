@@ -6,6 +6,10 @@
  * @datetime 2015-12-13 18:40
  */
 namespace Notadd\Auth\Social\Contracts;
+/**
+ * Interface User
+ * @package Notadd\Auth\Social\Contracts
+ */
 interface User {
     /**
      * @return string

@@ -8,6 +8,10 @@
 namespace Notadd\Foundation\Bootstrap;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Foundation\Application;
+/**
+ * Class SetRequestForConsole
+ * @package Notadd\Foundation\Bootstrap
+ */
 class SetRequestForConsole {
     /**
      * @param \Illuminate\Contracts\Foundation\Application $app

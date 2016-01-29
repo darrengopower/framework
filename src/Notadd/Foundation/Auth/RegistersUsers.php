@@ -7,6 +7,10 @@
  */
 namespace Notadd\Foundation\Auth;
 use Illuminate\Http\Request;
+/**
+ * Class RegistersUsers
+ * @package Notadd\Foundation\Auth
+ */
 trait RegistersUsers {
     use RedirectsUsers;
     /**

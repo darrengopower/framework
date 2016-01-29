@@ -8,6 +8,10 @@
 namespace Notadd\Category\Events;
 use Illuminate\Contracts\Foundation\Application;
 use Notadd\Category\Models\Category;
+/**
+ * Class BeforeCategoryDelete
+ * @package Notadd\Category\Events
+ */
 class BeforeCategoryDelete {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
@@ -18,6 +22,7 @@ class BeforeCategoryDelete {
      */
     private $category;
     /**
+     * BeforeCategoryDelete constructor.
      * @param \Illuminate\Contracts\Foundation\Application $application
      * @param \Notadd\Category\Models\Category $category
      */

@@ -9,6 +9,10 @@ namespace Notadd\Page\Events;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Notadd\Page\Page;
+/**
+ * Class OnPageShow
+ * @package Notadd\Page\Events
+ */
 class OnPageShow {
     /**
      * @var \Illuminate\Contracts\Foundation\Application
@@ -23,6 +27,7 @@ class OnPageShow {
      */
     private $view;
     /**
+     * OnPageShow constructor.
      * @param \Illuminate\Contracts\Foundation\Application $app
      * @param \Illuminate\Contracts\View\Factory $view
      * @param \Notadd\Page\Page $page

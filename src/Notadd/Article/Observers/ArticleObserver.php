@@ -41,7 +41,10 @@ class ArticleObserver {
                 if(!$this->file->isDirectory(app_path($dictionary))) {
                     $this->file->makeDirectory(app_path($dictionary), 0777, true, true);
                 }
-                $thumbImage->move($dictionary, Str::substr($hash, 12, 20) . '.' . $thumbImage->getClientOriginalExtension());
+                $file = Str::substr($hash, 12, 20) . '.' . $thumbImage->getClientOriginalExtension();
+                if(!$this->file->exists($dictionary . DIRECTORY_SEPARATOR . $file)) {
+                    $thumbImage->move($dictionary, $file);
+                }
                 $article->setAttribute('thumb_image', $this->pathSplit($hash, '4,4,4,20', Collection::make([
                     'upload'
                 ]))->implode('/') . '.' . $thumbImage->getClientOriginalExtension());
@@ -72,7 +75,10 @@ class ArticleObserver {
                 if(!$this->file->isDirectory(app_path($dictionary))) {
                     $this->file->makeDirectory(app_path($dictionary), 0777, true, true);
                 }
-                $thumbImage->move($dictionary, Str::substr($hash, 12, 20) . '.' . $thumbImage->getClientOriginalExtension());
+                $file = Str::substr($hash, 12, 20) . '.' . $thumbImage->getClientOriginalExtension();
+                if(!$this->file->exists($dictionary . DIRECTORY_SEPARATOR . $file)) {
+                    $thumbImage->move($dictionary, $file);
+                }
                 $article->setAttribute('thumb_image', $this->pathSplit($hash, '4,4,4,20', Collection::make([
                     'upload'
                 ]))->implode('/') . '.' . $thumbImage->getClientOriginalExtension());
